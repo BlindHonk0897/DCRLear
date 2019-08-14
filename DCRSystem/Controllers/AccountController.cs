@@ -99,6 +99,8 @@ namespace DCRSystem.Controllers
                 var intBadge = System.Int32.Parse(model.BagdeNo).ToString();
                 user_vw usertemp = learUser.user_vw.Where(use => use.badge_no == intBadge ).FirstOrDefault();
                 var countEmployees = _EmployeesManager.Employees_Details.ToList();
+                var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper() == "ACTIVE (CURRENT)").ToList().Count();
+                var countNewlyEmployees = _EmployeesManager.newlyEmployees.ToList();
                 //var username = userrr.First_Name + " " + userrr.Last_Name;
 
                 FormsAuthentication.SetAuthCookie(usertemp.email, false);
@@ -112,6 +114,9 @@ namespace DCRSystem.Controllers
                 Session["UserId"] = user.BagdeNo;
                 Session["NumberOfEmployees"] = countEmployees.Count();
                 Session["NumberOfUnderEmployees"] = _EmployeesManager.Emp_Route.Where(emp => emp.Checker_1_ID == user.BagdeNo).ToList().Count();
+                Session["NumberOfNewlyEmployees"] = countNewlyEmployees.Count();
+                Session["NumberOfActiveEmployees"] = countActiveEmployees;
+                Session["NumberOfInactiveEmployees"] = countEmployees.Count() - countActiveEmployees;
                 if (userrr != null) { Session["UserPosition"] = userrr.Position; }
                 return RedirectToAction("Home", "Home");
             }

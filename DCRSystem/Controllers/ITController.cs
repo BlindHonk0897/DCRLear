@@ -481,7 +481,7 @@ namespace DCRSystem.Controllers
 
                 if (DateP == null || String.IsNullOrEmpty(DateP)) {
                     ModelState.AddModelError("", "Please provide date certified.");
-                    message += "Please provide date certified.";
+                    message += "Please provide date Re-certified.";
                 }
                 if (Code == "X") {
                     ModelState.AddModelError("", "Please choose certification code");

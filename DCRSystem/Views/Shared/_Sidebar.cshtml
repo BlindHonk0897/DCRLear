@@ -16,7 +16,7 @@
                         <a href="@Url.Action("Employee", "IT")"><i class="fa fa-users"></i> <span>Employees</span><small class="label pull-right bg-red">@Session["NumberOfEmployees"]</small></a>
                     </li>
                     <li class="@Url.IsLinkActive("NewlyEmployees", "IT")">
-                        <a href="@Url.Action("NewlyEmployees", "IT")"><i class="fa fa-users"></i> <span>Newly Employees</span><small class="label pull-right bg-aqua-gradient">@Session["NumberOfNewlyEmployees"]</small></a>
+                        <a href="@Url.Action("NewlyEmployees", "IT")"><i class="fa fa-users"></i> <span>Newly Employed</span><small class="label pull-right bg-aqua-gradient">@Session["NumberOfNewlyEmployees"]</small></a>
                     </li>
                     <li class="header"><i class="fa fa-filter"></i> <span><font color="#a64038">&nbsp;Filter Employees</font></span></li>
                     <li class="@Url.IsLinkActive("Active", "IT")">
