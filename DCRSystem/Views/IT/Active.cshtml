@@ -1,0 +1,64 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<DCRSystem.Models.Employees_Details>
+@{
+    ViewBag.Title = "Active";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form action="/IT/Active">
+    <h3><i class="fa fa-users"></i>&nbsp;<strong><font color="green">Active Employees</font></strong><small class="label pull-right bg-green-active"><input type="search" class="form-control" name="searchInput" placeholder="Search by Lastname" /></small></h3>
+</form>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-success">
+            <div class="box-body">
+                <table class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Position</th>
+                            <th>Cell</th>
+                            <th></th>
+                            <th>Action</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Employee_ID</td>
+                                <td>@item.Last_Name , @item.First_Name</td>
+                                <td>@item.Position</td>
+                                <td>@item.Cost_Center_Description</td>
+                                <td>
+                                    <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Active"  })" class="btn btn-success btn-sm" style="width:90px;"><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;<span>Details</span></a>
+                                </td>
+                                 <td>
+                                    <a href="@Url.Action("Certified","IT",new { id = item.Employee_ID,urlBack = "Active"  })" class="btn btn-success btn-sm" style="width:90px;"><i class="glyphicon glyphicon-chevron-down"></i>&nbsp;<span>Certified</span></a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("ReCertified","IT",new { id = item.Employee_ID,urlBack = "Active"  })" class="btn btn-success btn-sm" style="width:90px"><i class="glyphicon glyphicon-retweet"></i>&nbsp;<span>Re-Certified</span></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="clearfix">
+            <div class="hint-text" style="font-size: 18px!important;">Showing Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+            <ul class="pagination" style="float:right; font-size:20px;">
+                <li><a> @Html.PagedListPager(Model, page => Url.Action("Active", new { page }))</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+

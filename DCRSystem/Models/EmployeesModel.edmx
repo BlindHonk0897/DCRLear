@@ -1,0 +1,1100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="commonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Emp_Route">
+          <Key>
+            <PropertyRef Name="Employee ID" />
+          </Key>
+          <Property Name="Employee ID" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Employee Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Cost Center" Type="nvarchar" MaxLength="50" />
+          <Property Name="Checker 1 ID" Type="nvarchar" MaxLength="15" />
+          <Property Name="Checker 1 Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Checker 2 ID" Type="nvarchar" MaxLength="15" />
+          <Property Name="Checker 2 Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Approver ID" Type="nvarchar" MaxLength="15" />
+          <Property Name="Approver Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'common.dbo.Employees_Details' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Employees_Details">
+          <Key>
+            <PropertyRef Name="Employee ID" />
+            <PropertyRef Name="Last Name" />
+            <PropertyRef Name="First Name" />
+            <PropertyRef Name="Middle Name" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Address Street No" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="Cellphone" />
+            <PropertyRef Name="Email Address" />
+            <PropertyRef Name="SSS No" />
+            <PropertyRef Name="PhilHealth No" />
+            <PropertyRef Name="Bank Account No" />
+            <PropertyRef Name="TIN No" />
+            <PropertyRef Name="Tax Code" />
+            <PropertyRef Name="HDMF No" />
+            <PropertyRef Name="HDMF Fixed Contribution" />
+            <PropertyRef Name="SSS Fixed Contribution" />
+            <PropertyRef Name="PhilHealth Fixed Contribution" />
+            <PropertyRef Name="Contact Person" />
+            <PropertyRef Name="Contact Relation" />
+            <PropertyRef Name="Contact Address Street No" />
+            <PropertyRef Name="Contact Telephone" />
+            <PropertyRef Name="Cost Center Effectivity Date" />
+            <PropertyRef Name="Cost Center Code HRC" />
+            <PropertyRef Name="Hire Date" />
+            <PropertyRef Name="Regular Date" />
+            <PropertyRef Name="Location Code" />
+            <PropertyRef Name="Position Effectivity Date" />
+            <PropertyRef Name="Immediate Superior" />
+            <PropertyRef Name="Confidential" />
+            <PropertyRef Name="Shift Code" />
+            <PropertyRef Name="Height" />
+            <PropertyRef Name="Weight" />
+            <PropertyRef Name="Provincial Address Street No" />
+            <PropertyRef Name="Provincial Telephone" />
+            <PropertyRef Name="School Awards" />
+            <PropertyRef Name="PRC License No" />
+            <PropertyRef Name="Extension No" />
+            <PropertyRef Name="Anniversary" />
+            <PropertyRef Name="Nickname" />
+            <PropertyRef Name="Alternate Account Code" />
+            <PropertyRef Name="Wife Claim Exemption" />
+            <PropertyRef Name="Distinguishing Mark" />
+            <PropertyRef Name="Include in Payroll" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="Employee ID" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Last Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="First Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middle Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Maiden Name" Type="varchar" MaxLength="30" />
+          <Property Name="Birth Date" Type="char" MaxLength="10" />
+          <Property Name="Birth Place" Type="varchar" MaxLength="500" />
+          <Property Name="Age" Type="tinyint" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Civil Status" Type="char" MaxLength="10" />
+          <Property Name="Marriage Date" Type="char" MaxLength="10" />
+          <Property Name="Citizenship" Type="varchar" MaxLength="500" />
+          <Property Name="Religion" Type="varchar" MaxLength="10" />
+          <Property Name="Address Street No" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Address Barangay" Type="varchar" MaxLength="500" />
+          <Property Name="Address City" Type="varchar" MaxLength="500" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cellphone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Education Level" Type="varchar" MaxLength="500" />
+          <Property Name="School" Type="varchar" MaxLength="10" />
+          <Property Name="Course" Type="varchar" MaxLength="500" />
+          <Property Name="Blood Type" Type="varchar" MaxLength="500" />
+          <Property Name="SSS No" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="PhilHealth No" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Bank" Type="varchar" MaxLength="500" />
+          <Property Name="Bank Account No" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="TIN No" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Tax Code" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="HDMF No" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="HDMF Premium" Type="varchar" MaxLength="500" />
+          <Property Name="HDMF Fixed Contribution" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="SSS Premium" Type="varchar" MaxLength="500" />
+          <Property Name="SSS Fixed Contribution" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="PhilHealth Premium" Type="varchar" MaxLength="500" />
+          <Property Name="PhilHealth Fixed Contribution" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Contact Person" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contact Relation" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Contact Address Street No" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Contact Barangay" Type="varchar" MaxLength="500" />
+          <Property Name="Contact City" Type="varchar" MaxLength="500" />
+          <Property Name="Contact Telephone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cost Center Effectivity Date" Type="datetime" Nullable="false" />
+          <Property Name="Cost Center Code HRC" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Cost Center Code SAP" Type="varchar" MaxLength="12" />
+          <Property Name="Cost Center Description" Type="varchar" MaxLength="200" />
+          <Property Name="Employment Status" Type="varchar" MaxLength="500" />
+          <Property Name="Hire Date" Type="datetime" Nullable="false" />
+          <Property Name="Regular Date" Type="datetime" Nullable="false" />
+          <Property Name="Location Code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="500" />
+          <Property Name="Position Effectivity Date" Type="datetime" Nullable="false" />
+          <Property Name="Immediate Superior" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Payment Mode" Type="varchar" MaxLength="500" />
+          <Property Name="Payroll Type" Type="varchar" MaxLength="500" />
+          <Property Name="Job Status" Type="varchar" MaxLength="500" />
+          <Property Name="Confidential" Type="bit" Nullable="false" />
+          <Property Name="Shift Code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="WorkType" Type="varchar" MaxLength="500" />
+          <Property Name="WorkGroup" Type="varchar" MaxLength="500" />
+          <Property Name="Separation Notice Date" Type="char" MaxLength="10" />
+          <Property Name="Separation Code" Type="varchar" MaxLength="500" />
+          <Property Name="Separation Effectivity Date" Type="char" MaxLength="10" />
+          <Property Name="Cleared Date" Type="char" MaxLength="10" />
+          <Property Name="Probationary Date" Type="datetime" />
+          <Property Name="Employee Type" Type="varchar" MaxLength="500" />
+          <Property Name="Separation System Change" Type="datetime" />
+          <Property Name="Tax Rate Payroll Type" Type="char" MaxLength="1" />
+          <Property Name="Tax Rate Effectivity Date" Type="char" MaxLength="10" />
+          <Property Name="Tax Rate" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="Billing Payroll Type" Type="char" MaxLength="1" />
+          <Property Name="Billing Effectivity Date" Type="char" MaxLength="10" />
+          <Property Name="Billing Rate" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="Height" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Weight" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Provincial Address Street No" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Provincial Address Barangay" Type="varchar" MaxLength="500" />
+          <Property Name="Provincial Address City" Type="varchar" MaxLength="500" />
+          <Property Name="Provincial Telephone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="School Awards" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="PRC License No" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Extension No" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="Anniversary" Type="bit" Nullable="false" />
+          <Property Name="Nickname" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Alternate Account Code" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Wife Claim Exemption" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Shoes Size" Type="varchar" MaxLength="10" />
+          <Property Name="Shirt Size" Type="varchar" MaxLength="500" />
+          <Property Name="Hair Color" Type="varchar" MaxLength="500" />
+          <Property Name="Eye Color" Type="varchar" MaxLength="500" />
+          <Property Name="Distinguishing Mark" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Job Level" Type="varchar" MaxLength="500" />
+          <Property Name="Pay Class" Type="varchar" MaxLength="500" />
+          <Property Name="Include in Payroll" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="109" />
+          <Property Name="Adu_AccountName" Type="varchar" MaxLength="100" />
+          <Property Name="status" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Dept_Man" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'common.dbo.newlyEmployees' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="newlyEmployees">
+          <Key>
+            <PropertyRef Name="Employee ID" />
+            <PropertyRef Name="Last Name" />
+            <PropertyRef Name="First Name" />
+            <PropertyRef Name="Middle Name" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Address Street No" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="Cellphone" />
+            <PropertyRef Name="Email Address" />
+            <PropertyRef Name="SSS No" />
+            <PropertyRef Name="PhilHealth No" />
+            <PropertyRef Name="Bank Account No" />
+            <PropertyRef Name="TIN No" />
+            <PropertyRef Name="Tax Code" />
+            <PropertyRef Name="HDMF No" />
+            <PropertyRef Name="HDMF Fixed Contribution" />
+            <PropertyRef Name="SSS Fixed Contribution" />
+            <PropertyRef Name="PhilHealth Fixed Contribution" />
+            <PropertyRef Name="Contact Person" />
+            <PropertyRef Name="Contact Relation" />
+            <PropertyRef Name="Contact Address Street No" />
+            <PropertyRef Name="Contact Telephone" />
+            <PropertyRef Name="Cost Center Effectivity Date" />
+            <PropertyRef Name="Cost Center Code HRC" />
+            <PropertyRef Name="Hire Date" />
+            <PropertyRef Name="Regular Date" />
+            <PropertyRef Name="Location Code" />
+            <PropertyRef Name="Position Effectivity Date" />
+            <PropertyRef Name="Immediate Superior" />
+            <PropertyRef Name="Confidential" />
+            <PropertyRef Name="Shift Code" />
+            <PropertyRef Name="Height" />
+            <PropertyRef Name="Weight" />
+            <PropertyRef Name="Provincial Address Street No" />
+            <PropertyRef Name="Provincial Telephone" />
+            <PropertyRef Name="School Awards" />
+            <PropertyRef Name="PRC License No" />
+            <PropertyRef Name="Extension No" />
+            <PropertyRef Name="Anniversary" />
+            <PropertyRef Name="Nickname" />
+            <PropertyRef Name="Alternate Account Code" />
+            <PropertyRef Name="Wife Claim Exemption" />
+            <PropertyRef Name="Distinguishing Mark" />
+            <PropertyRef Name="Include in Payroll" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="Employee ID" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Last Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="First Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middle Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Maiden Name" Type="varchar" MaxLength="30" />
+          <Property Name="Birth Date" Type="char" MaxLength="10" />
+          <Property Name="Birth Place" Type="varchar" MaxLength="500" />
+          <Property Name="Age" Type="tinyint" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Civil Status" Type="char" MaxLength="10" />
+          <Property Name="Marriage Date" Type="char" MaxLength="10" />
+          <Property Name="Citizenship" Type="varchar" MaxLength="500" />
+          <Property Name="Religion" Type="varchar" MaxLength="10" />
+          <Property Name="Address Street No" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Address Barangay" Type="varchar" MaxLength="500" />
+          <Property Name="Address City" Type="varchar" MaxLength="500" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cellphone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Education Level" Type="varchar" MaxLength="500" />
+          <Property Name="School" Type="varchar" MaxLength="10" />
+          <Property Name="Course" Type="varchar" MaxLength="500" />
+          <Property Name="Blood Type" Type="varchar" MaxLength="500" />
+          <Property Name="SSS No" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="PhilHealth No" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Bank" Type="varchar" MaxLength="500" />
+          <Property Name="Bank Account No" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="TIN No" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Tax Code" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="HDMF No" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="HDMF Premium" Type="varchar" MaxLength="500" />
+          <Property Name="HDMF Fixed Contribution" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="SSS Premium" Type="varchar" MaxLength="500" />
+          <Property Name="SSS Fixed Contribution" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="PhilHealth Premium" Type="varchar" MaxLength="500" />
+          <Property Name="PhilHealth Fixed Contribution" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Contact Person" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contact Relation" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Contact Address Street No" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Contact Barangay" Type="varchar" MaxLength="500" />
+          <Property Name="Contact City" Type="varchar" MaxLength="500" />
+          <Property Name="Contact Telephone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cost Center Effectivity Date" Type="datetime" Nullable="false" />
+          <Property Name="Cost Center Code HRC" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Cost Center Code SAP" Type="varchar" MaxLength="12" />
+          <Property Name="Cost Center Description" Type="varchar" MaxLength="200" />
+          <Property Name="Employment Status" Type="varchar" MaxLength="500" />
+          <Property Name="Hire Date" Type="datetime" Nullable="false" />
+          <Property Name="Regular Date" Type="datetime" Nullable="false" />
+          <Property Name="Location Code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="500" />
+          <Property Name="Position Effectivity Date" Type="datetime" Nullable="false" />
+          <Property Name="Immediate Superior" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Payment Mode" Type="varchar" MaxLength="500" />
+          <Property Name="Payroll Type" Type="varchar" MaxLength="500" />
+          <Property Name="Job Status" Type="varchar" MaxLength="500" />
+          <Property Name="Confidential" Type="bit" Nullable="false" />
+          <Property Name="Shift Code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="WorkType" Type="varchar" MaxLength="500" />
+          <Property Name="WorkGroup" Type="varchar" MaxLength="500" />
+          <Property Name="Separation Notice Date" Type="char" MaxLength="10" />
+          <Property Name="Separation Code" Type="varchar" MaxLength="500" />
+          <Property Name="Separation Effectivity Date" Type="char" MaxLength="10" />
+          <Property Name="Cleared Date" Type="char" MaxLength="10" />
+          <Property Name="Probationary Date" Type="datetime" />
+          <Property Name="Employee Type" Type="varchar" MaxLength="500" />
+          <Property Name="Separation System Change" Type="datetime" />
+          <Property Name="Tax Rate Payroll Type" Type="char" MaxLength="1" />
+          <Property Name="Tax Rate Effectivity Date" Type="char" MaxLength="10" />
+          <Property Name="Tax Rate" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="Billing Payroll Type" Type="char" MaxLength="1" />
+          <Property Name="Billing Effectivity Date" Type="char" MaxLength="10" />
+          <Property Name="Billing Rate" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="Height" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Weight" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Provincial Address Street No" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Provincial Address Barangay" Type="varchar" MaxLength="500" />
+          <Property Name="Provincial Address City" Type="varchar" MaxLength="500" />
+          <Property Name="Provincial Telephone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="School Awards" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="PRC License No" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Extension No" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="Anniversary" Type="bit" Nullable="false" />
+          <Property Name="Nickname" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Alternate Account Code" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Wife Claim Exemption" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Shoes Size" Type="varchar" MaxLength="10" />
+          <Property Name="Shirt Size" Type="varchar" MaxLength="500" />
+          <Property Name="Hair Color" Type="varchar" MaxLength="500" />
+          <Property Name="Eye Color" Type="varchar" MaxLength="500" />
+          <Property Name="Distinguishing Mark" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Job Level" Type="varchar" MaxLength="500" />
+          <Property Name="Pay Class" Type="varchar" MaxLength="500" />
+          <Property Name="Include in Payroll" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="109" />
+          <Property Name="Adu_AccountName" Type="varchar" MaxLength="100" />
+          <Property Name="status" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Dept_Man" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityContainer Name="commonModelStoreContainer">
+          <EntitySet Name="Emp_Route" EntityType="Self.Emp_Route" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees_Details" EntityType="Self.Employees_Details" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Employees_Details].[Employee ID] AS [Employee ID], 
+    [Employees_Details].[Last Name] AS [Last Name], 
+    [Employees_Details].[First Name] AS [First Name], 
+    [Employees_Details].[Middle Name] AS [Middle Name], 
+    [Employees_Details].[Maiden Name] AS [Maiden Name], 
+    [Employees_Details].[Birth Date] AS [Birth Date], 
+    [Employees_Details].[Birth Place] AS [Birth Place], 
+    [Employees_Details].[Age] AS [Age], 
+    [Employees_Details].[Gender] AS [Gender], 
+    [Employees_Details].[Civil Status] AS [Civil Status], 
+    [Employees_Details].[Marriage Date] AS [Marriage Date], 
+    [Employees_Details].[Citizenship] AS [Citizenship], 
+    [Employees_Details].[Religion] AS [Religion], 
+    [Employees_Details].[Address Street No] AS [Address Street No], 
+    [Employees_Details].[Address Barangay] AS [Address Barangay], 
+    [Employees_Details].[Address City] AS [Address City], 
+    [Employees_Details].[Telephone] AS [Telephone], 
+    [Employees_Details].[Cellphone] AS [Cellphone], 
+    [Employees_Details].[Email Address] AS [Email Address], 
+    [Employees_Details].[Education Level] AS [Education Level], 
+    [Employees_Details].[School] AS [School], 
+    [Employees_Details].[Course] AS [Course], 
+    [Employees_Details].[Blood Type] AS [Blood Type], 
+    [Employees_Details].[SSS No] AS [SSS No], 
+    [Employees_Details].[PhilHealth No] AS [PhilHealth No], 
+    [Employees_Details].[Bank] AS [Bank], 
+    [Employees_Details].[Bank Account No] AS [Bank Account No], 
+    [Employees_Details].[TIN No] AS [TIN No], 
+    [Employees_Details].[Tax Code] AS [Tax Code], 
+    [Employees_Details].[HDMF No] AS [HDMF No], 
+    [Employees_Details].[HDMF Premium] AS [HDMF Premium], 
+    [Employees_Details].[HDMF Fixed Contribution] AS [HDMF Fixed Contribution], 
+    [Employees_Details].[SSS Premium] AS [SSS Premium], 
+    [Employees_Details].[SSS Fixed Contribution] AS [SSS Fixed Contribution], 
+    [Employees_Details].[PhilHealth Premium] AS [PhilHealth Premium], 
+    [Employees_Details].[PhilHealth Fixed Contribution] AS [PhilHealth Fixed Contribution], 
+    [Employees_Details].[Contact Person] AS [Contact Person], 
+    [Employees_Details].[Contact Relation] AS [Contact Relation], 
+    [Employees_Details].[Contact Address Street No] AS [Contact Address Street No], 
+    [Employees_Details].[Contact Barangay] AS [Contact Barangay], 
+    [Employees_Details].[Contact City] AS [Contact City], 
+    [Employees_Details].[Contact Telephone] AS [Contact Telephone], 
+    [Employees_Details].[Cost Center Effectivity Date] AS [Cost Center Effectivity Date], 
+    [Employees_Details].[Cost Center Code HRC] AS [Cost Center Code HRC], 
+    [Employees_Details].[Cost Center Code SAP] AS [Cost Center Code SAP], 
+    [Employees_Details].[Cost Center Description] AS [Cost Center Description], 
+    [Employees_Details].[Employment Status] AS [Employment Status], 
+    [Employees_Details].[Hire Date] AS [Hire Date], 
+    [Employees_Details].[Regular Date] AS [Regular Date], 
+    [Employees_Details].[Location Code] AS [Location Code], 
+    [Employees_Details].[Position] AS [Position], 
+    [Employees_Details].[Position Effectivity Date] AS [Position Effectivity Date], 
+    [Employees_Details].[Immediate Superior] AS [Immediate Superior], 
+    [Employees_Details].[Payment Mode] AS [Payment Mode], 
+    [Employees_Details].[Payroll Type] AS [Payroll Type], 
+    [Employees_Details].[Job Status] AS [Job Status], 
+    [Employees_Details].[Confidential] AS [Confidential], 
+    [Employees_Details].[Shift Code] AS [Shift Code], 
+    [Employees_Details].[WorkType] AS [WorkType], 
+    [Employees_Details].[WorkGroup] AS [WorkGroup], 
+    [Employees_Details].[Separation Notice Date] AS [Separation Notice Date], 
+    [Employees_Details].[Separation Code] AS [Separation Code], 
+    [Employees_Details].[Separation Effectivity Date] AS [Separation Effectivity Date], 
+    [Employees_Details].[Cleared Date] AS [Cleared Date], 
+    [Employees_Details].[Probationary Date] AS [Probationary Date], 
+    [Employees_Details].[Employee Type] AS [Employee Type], 
+    [Employees_Details].[Separation System Change] AS [Separation System Change], 
+    [Employees_Details].[Tax Rate Payroll Type] AS [Tax Rate Payroll Type], 
+    [Employees_Details].[Tax Rate Effectivity Date] AS [Tax Rate Effectivity Date], 
+    [Employees_Details].[Tax Rate] AS [Tax Rate], 
+    [Employees_Details].[Billing Payroll Type] AS [Billing Payroll Type], 
+    [Employees_Details].[Billing Effectivity Date] AS [Billing Effectivity Date], 
+    [Employees_Details].[Billing Rate] AS [Billing Rate], 
+    [Employees_Details].[Height] AS [Height], 
+    [Employees_Details].[Weight] AS [Weight], 
+    [Employees_Details].[Provincial Address Street No] AS [Provincial Address Street No], 
+    [Employees_Details].[Provincial Address Barangay] AS [Provincial Address Barangay], 
+    [Employees_Details].[Provincial Address City] AS [Provincial Address City], 
+    [Employees_Details].[Provincial Telephone] AS [Provincial Telephone], 
+    [Employees_Details].[School Awards] AS [School Awards], 
+    [Employees_Details].[PRC License No] AS [PRC License No], 
+    [Employees_Details].[Extension No] AS [Extension No], 
+    [Employees_Details].[Anniversary] AS [Anniversary], 
+    [Employees_Details].[Nickname] AS [Nickname], 
+    [Employees_Details].[Alternate Account Code] AS [Alternate Account Code], 
+    [Employees_Details].[Wife Claim Exemption] AS [Wife Claim Exemption], 
+    [Employees_Details].[Shoes Size] AS [Shoes Size], 
+    [Employees_Details].[Shirt Size] AS [Shirt Size], 
+    [Employees_Details].[Hair Color] AS [Hair Color], 
+    [Employees_Details].[Eye Color] AS [Eye Color], 
+    [Employees_Details].[Distinguishing Mark] AS [Distinguishing Mark], 
+    [Employees_Details].[Job Level] AS [Job Level], 
+    [Employees_Details].[Pay Class] AS [Pay Class], 
+    [Employees_Details].[Include in Payroll] AS [Include in Payroll], 
+    [Employees_Details].[Email] AS [Email], 
+    [Employees_Details].[Adu_AccountName] AS [Adu_AccountName], 
+    [Employees_Details].[status] AS [status], 
+    [Employees_Details].[Dept_Man] AS [Dept_Man]
+    FROM [dbo].[Employees_Details] AS [Employees_Details]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="newlyEmployees" EntityType="Self.newlyEmployees" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [newlyEmployees].[Employee ID] AS [Employee ID], 
+    [newlyEmployees].[Last Name] AS [Last Name], 
+    [newlyEmployees].[First Name] AS [First Name], 
+    [newlyEmployees].[Middle Name] AS [Middle Name], 
+    [newlyEmployees].[Maiden Name] AS [Maiden Name], 
+    [newlyEmployees].[Birth Date] AS [Birth Date], 
+    [newlyEmployees].[Birth Place] AS [Birth Place], 
+    [newlyEmployees].[Age] AS [Age], 
+    [newlyEmployees].[Gender] AS [Gender], 
+    [newlyEmployees].[Civil Status] AS [Civil Status], 
+    [newlyEmployees].[Marriage Date] AS [Marriage Date], 
+    [newlyEmployees].[Citizenship] AS [Citizenship], 
+    [newlyEmployees].[Religion] AS [Religion], 
+    [newlyEmployees].[Address Street No] AS [Address Street No], 
+    [newlyEmployees].[Address Barangay] AS [Address Barangay], 
+    [newlyEmployees].[Address City] AS [Address City], 
+    [newlyEmployees].[Telephone] AS [Telephone], 
+    [newlyEmployees].[Cellphone] AS [Cellphone], 
+    [newlyEmployees].[Email Address] AS [Email Address], 
+    [newlyEmployees].[Education Level] AS [Education Level], 
+    [newlyEmployees].[School] AS [School], 
+    [newlyEmployees].[Course] AS [Course], 
+    [newlyEmployees].[Blood Type] AS [Blood Type], 
+    [newlyEmployees].[SSS No] AS [SSS No], 
+    [newlyEmployees].[PhilHealth No] AS [PhilHealth No], 
+    [newlyEmployees].[Bank] AS [Bank], 
+    [newlyEmployees].[Bank Account No] AS [Bank Account No], 
+    [newlyEmployees].[TIN No] AS [TIN No], 
+    [newlyEmployees].[Tax Code] AS [Tax Code], 
+    [newlyEmployees].[HDMF No] AS [HDMF No], 
+    [newlyEmployees].[HDMF Premium] AS [HDMF Premium], 
+    [newlyEmployees].[HDMF Fixed Contribution] AS [HDMF Fixed Contribution], 
+    [newlyEmployees].[SSS Premium] AS [SSS Premium], 
+    [newlyEmployees].[SSS Fixed Contribution] AS [SSS Fixed Contribution], 
+    [newlyEmployees].[PhilHealth Premium] AS [PhilHealth Premium], 
+    [newlyEmployees].[PhilHealth Fixed Contribution] AS [PhilHealth Fixed Contribution], 
+    [newlyEmployees].[Contact Person] AS [Contact Person], 
+    [newlyEmployees].[Contact Relation] AS [Contact Relation], 
+    [newlyEmployees].[Contact Address Street No] AS [Contact Address Street No], 
+    [newlyEmployees].[Contact Barangay] AS [Contact Barangay], 
+    [newlyEmployees].[Contact City] AS [Contact City], 
+    [newlyEmployees].[Contact Telephone] AS [Contact Telephone], 
+    [newlyEmployees].[Cost Center Effectivity Date] AS [Cost Center Effectivity Date], 
+    [newlyEmployees].[Cost Center Code HRC] AS [Cost Center Code HRC], 
+    [newlyEmployees].[Cost Center Code SAP] AS [Cost Center Code SAP], 
+    [newlyEmployees].[Cost Center Description] AS [Cost Center Description], 
+    [newlyEmployees].[Employment Status] AS [Employment Status], 
+    [newlyEmployees].[Hire Date] AS [Hire Date], 
+    [newlyEmployees].[Regular Date] AS [Regular Date], 
+    [newlyEmployees].[Location Code] AS [Location Code], 
+    [newlyEmployees].[Position] AS [Position], 
+    [newlyEmployees].[Position Effectivity Date] AS [Position Effectivity Date], 
+    [newlyEmployees].[Immediate Superior] AS [Immediate Superior], 
+    [newlyEmployees].[Payment Mode] AS [Payment Mode], 
+    [newlyEmployees].[Payroll Type] AS [Payroll Type], 
+    [newlyEmployees].[Job Status] AS [Job Status], 
+    [newlyEmployees].[Confidential] AS [Confidential], 
+    [newlyEmployees].[Shift Code] AS [Shift Code], 
+    [newlyEmployees].[WorkType] AS [WorkType], 
+    [newlyEmployees].[WorkGroup] AS [WorkGroup], 
+    [newlyEmployees].[Separation Notice Date] AS [Separation Notice Date], 
+    [newlyEmployees].[Separation Code] AS [Separation Code], 
+    [newlyEmployees].[Separation Effectivity Date] AS [Separation Effectivity Date], 
+    [newlyEmployees].[Cleared Date] AS [Cleared Date], 
+    [newlyEmployees].[Probationary Date] AS [Probationary Date], 
+    [newlyEmployees].[Employee Type] AS [Employee Type], 
+    [newlyEmployees].[Separation System Change] AS [Separation System Change], 
+    [newlyEmployees].[Tax Rate Payroll Type] AS [Tax Rate Payroll Type], 
+    [newlyEmployees].[Tax Rate Effectivity Date] AS [Tax Rate Effectivity Date], 
+    [newlyEmployees].[Tax Rate] AS [Tax Rate], 
+    [newlyEmployees].[Billing Payroll Type] AS [Billing Payroll Type], 
+    [newlyEmployees].[Billing Effectivity Date] AS [Billing Effectivity Date], 
+    [newlyEmployees].[Billing Rate] AS [Billing Rate], 
+    [newlyEmployees].[Height] AS [Height], 
+    [newlyEmployees].[Weight] AS [Weight], 
+    [newlyEmployees].[Provincial Address Street No] AS [Provincial Address Street No], 
+    [newlyEmployees].[Provincial Address Barangay] AS [Provincial Address Barangay], 
+    [newlyEmployees].[Provincial Address City] AS [Provincial Address City], 
+    [newlyEmployees].[Provincial Telephone] AS [Provincial Telephone], 
+    [newlyEmployees].[School Awards] AS [School Awards], 
+    [newlyEmployees].[PRC License No] AS [PRC License No], 
+    [newlyEmployees].[Extension No] AS [Extension No], 
+    [newlyEmployees].[Anniversary] AS [Anniversary], 
+    [newlyEmployees].[Nickname] AS [Nickname], 
+    [newlyEmployees].[Alternate Account Code] AS [Alternate Account Code], 
+    [newlyEmployees].[Wife Claim Exemption] AS [Wife Claim Exemption], 
+    [newlyEmployees].[Shoes Size] AS [Shoes Size], 
+    [newlyEmployees].[Shirt Size] AS [Shirt Size], 
+    [newlyEmployees].[Hair Color] AS [Hair Color], 
+    [newlyEmployees].[Eye Color] AS [Eye Color], 
+    [newlyEmployees].[Distinguishing Mark] AS [Distinguishing Mark], 
+    [newlyEmployees].[Job Level] AS [Job Level], 
+    [newlyEmployees].[Pay Class] AS [Pay Class], 
+    [newlyEmployees].[Include in Payroll] AS [Include in Payroll], 
+    [newlyEmployees].[Email] AS [Email], 
+    [newlyEmployees].[Adu_AccountName] AS [Adu_AccountName], 
+    [newlyEmployees].[status] AS [status], 
+    [newlyEmployees].[Dept_Man] AS [Dept_Man]
+    FROM [dbo].[newlyEmployees] AS [newlyEmployees]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="commonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employees_Details">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Middle_Name" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Address_Street_No" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="Cellphone" />
+            <PropertyRef Name="Email_Address" />
+            <PropertyRef Name="SSS_No" />
+            <PropertyRef Name="PhilHealth_No" />
+            <PropertyRef Name="Bank_Account_No" />
+            <PropertyRef Name="TIN_No" />
+            <PropertyRef Name="Tax_Code" />
+            <PropertyRef Name="HDMF_No" />
+            <PropertyRef Name="HDMF_Fixed_Contribution" />
+            <PropertyRef Name="SSS_Fixed_Contribution" />
+            <PropertyRef Name="PhilHealth_Fixed_Contribution" />
+            <PropertyRef Name="Contact_Person" />
+            <PropertyRef Name="Contact_Relation" />
+            <PropertyRef Name="Contact_Address_Street_No" />
+            <PropertyRef Name="Contact_Telephone" />
+            <PropertyRef Name="Cost_Center_Effectivity_Date" />
+            <PropertyRef Name="Cost_Center_Code_HRC" />
+            <PropertyRef Name="Hire_Date" />
+            <PropertyRef Name="Regular_Date" />
+            <PropertyRef Name="Location_Code" />
+            <PropertyRef Name="Position_Effectivity_Date" />
+            <PropertyRef Name="Immediate_Superior" />
+            <PropertyRef Name="Confidential" />
+            <PropertyRef Name="Shift_Code" />
+            <PropertyRef Name="Height" />
+            <PropertyRef Name="Weight" />
+            <PropertyRef Name="Provincial_Address_Street_No" />
+            <PropertyRef Name="Provincial_Telephone" />
+            <PropertyRef Name="School_Awards" />
+            <PropertyRef Name="PRC_License_No" />
+            <PropertyRef Name="Extension_No" />
+            <PropertyRef Name="Anniversary" />
+            <PropertyRef Name="Nickname" />
+            <PropertyRef Name="Alternate_Account_Code" />
+            <PropertyRef Name="Wife_Claim_Exemption" />
+            <PropertyRef Name="Distinguishing_Mark" />
+            <PropertyRef Name="Include_in_Payroll" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="Employee_ID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middle_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Maiden_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Birth_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Birth_Place" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Byte" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Civil_Status" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Marriage_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Citizenship" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Religion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Street_No" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address_Barangay" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Address_City" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cellphone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Education_Level" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="School" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Course" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Blood_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SSS_No" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhilHealth_No" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bank" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Bank_Account_No" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIN_No" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tax_Code" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="HDMF_No" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HDMF_Premium" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="HDMF_Fixed_Contribution" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="SSS_Premium" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SSS_Fixed_Contribution" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="PhilHealth_Premium" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PhilHealth_Fixed_Contribution" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Contact_Person" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact_Relation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact_Address_Street_No" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact_Barangay" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_City" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cost_Center_Effectivity_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Cost_Center_Code_HRC" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cost_Center_Code_SAP" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Cost_Center_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Employment_Status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Hire_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Regular_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Location_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Position_Effectivity_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Immediate_Superior" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Payment_Mode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Payroll_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Job_Status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Confidential" Type="Boolean" Nullable="false" />
+          <Property Name="Shift_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WorkType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="WorkGroup" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Separation_Notice_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Separation_Code" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Separation_Effectivity_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Cleared_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Probationary_Date" Type="DateTime" Precision="3" />
+          <Property Name="Employee_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Separation_System_Change" Type="DateTime" Precision="3" />
+          <Property Name="Tax_Rate_Payroll_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Tax_Rate_Effectivity_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Tax_Rate" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="Billing_Payroll_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Billing_Effectivity_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Billing_Rate" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="Height" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Weight" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Provincial_Address_Street_No" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Provincial_Address_Barangay" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Provincial_Address_City" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Provincial_Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="School_Awards" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRC_License_No" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Extension_No" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Anniversary" Type="Boolean" Nullable="false" />
+          <Property Name="Nickname" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Alternate_Account_Code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Wife_Claim_Exemption" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Shoes_Size" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Shirt_Size" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Hair_Color" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Eye_Color" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Distinguishing_Mark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Job_Level" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pay_Class" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Include_in_Payroll" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="109" FixedLength="false" Unicode="false" />
+          <Property Name="Adu_AccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dept_Man" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="commonEmployeesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees_Details" EntityType="Self.Employees_Details" />
+          <EntitySet Name="Emp_Route" EntityType="commonModel.Emp_Route" />
+          <EntitySet Name="newlyEmployees" EntityType="commonModel.newlyEmployee" />
+        </EntityContainer>
+        <EntityType Name="Emp_Route">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+          </Key>
+          <Property Name="Employee_ID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Employee_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Cost_Center" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Checker_1_ID" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Checker_1_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Checker_2_ID" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Checker_2_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Approver_ID" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Approver_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="newlyEmployee">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Middle_Name" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="Address_Street_No" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="Cellphone" />
+            <PropertyRef Name="Email_Address" />
+            <PropertyRef Name="SSS_No" />
+            <PropertyRef Name="PhilHealth_No" />
+            <PropertyRef Name="Bank_Account_No" />
+            <PropertyRef Name="TIN_No" />
+            <PropertyRef Name="Tax_Code" />
+            <PropertyRef Name="HDMF_No" />
+            <PropertyRef Name="HDMF_Fixed_Contribution" />
+            <PropertyRef Name="SSS_Fixed_Contribution" />
+            <PropertyRef Name="PhilHealth_Fixed_Contribution" />
+            <PropertyRef Name="Contact_Person" />
+            <PropertyRef Name="Contact_Relation" />
+            <PropertyRef Name="Contact_Address_Street_No" />
+            <PropertyRef Name="Contact_Telephone" />
+            <PropertyRef Name="Cost_Center_Effectivity_Date" />
+            <PropertyRef Name="Cost_Center_Code_HRC" />
+            <PropertyRef Name="Hire_Date" />
+            <PropertyRef Name="Regular_Date" />
+            <PropertyRef Name="Location_Code" />
+            <PropertyRef Name="Position_Effectivity_Date" />
+            <PropertyRef Name="Immediate_Superior" />
+            <PropertyRef Name="Confidential" />
+            <PropertyRef Name="Shift_Code" />
+            <PropertyRef Name="Height" />
+            <PropertyRef Name="Weight" />
+            <PropertyRef Name="Provincial_Address_Street_No" />
+            <PropertyRef Name="Provincial_Telephone" />
+            <PropertyRef Name="School_Awards" />
+            <PropertyRef Name="PRC_License_No" />
+            <PropertyRef Name="Extension_No" />
+            <PropertyRef Name="Anniversary" />
+            <PropertyRef Name="Nickname" />
+            <PropertyRef Name="Alternate_Account_Code" />
+            <PropertyRef Name="Wife_Claim_Exemption" />
+            <PropertyRef Name="Distinguishing_Mark" />
+            <PropertyRef Name="Include_in_Payroll" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="Employee_ID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Middle_Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Maiden_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Birth_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Birth_Place" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Byte" Nullable="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Civil_Status" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Marriage_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Citizenship" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Religion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Street_No" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Barangay" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Address_City" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cellphone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Education_Level" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="School" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Course" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Blood_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SSS_No" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="PhilHealth_No" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Bank" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Bank_Account_No" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TIN_No" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Tax_Code" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="HDMF_No" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="HDMF_Premium" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="HDMF_Fixed_Contribution" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="SSS_Premium" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SSS_Fixed_Contribution" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="PhilHealth_Premium" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PhilHealth_Fixed_Contribution" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+          <Property Name="Contact_Person" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_Relation" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_Address_Street_No" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_Barangay" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_City" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_Telephone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cost_Center_Effectivity_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Cost_Center_Code_HRC" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Cost_Center_Code_SAP" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Cost_Center_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Employment_Status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Hire_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Regular_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Location_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Position_Effectivity_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Immediate_Superior" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Payment_Mode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Payroll_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Job_Status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Confidential" Type="Boolean" Nullable="false" />
+          <Property Name="Shift_Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="WorkType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="WorkGroup" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Separation_Notice_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Separation_Code" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Separation_Effectivity_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Cleared_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Probationary_Date" Type="DateTime" Precision="3" />
+          <Property Name="Employee_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Separation_System_Change" Type="DateTime" Precision="3" />
+          <Property Name="Tax_Rate_Payroll_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Tax_Rate_Effectivity_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Tax_Rate" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="Billing_Payroll_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Billing_Effectivity_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Billing_Rate" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="Height" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Provincial_Address_Street_No" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Provincial_Address_Barangay" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Provincial_Address_City" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Provincial_Telephone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="School_Awards" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PRC_License_No" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Extension_No" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Anniversary" Type="Boolean" Nullable="false" />
+          <Property Name="Nickname" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Alternate_Account_Code" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Wife_Claim_Exemption" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Shoes_Size" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Shirt_Size" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Hair_Color" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Eye_Color" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Distinguishing_Mark" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Job_Level" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pay_Class" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Include_in_Payroll" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="109" FixedLength="false" Unicode="false" />
+          <Property Name="Adu_AccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Dept_Man" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="commonModelStoreContainer" CdmEntityContainer="commonEmployeesEntities">
+          <EntitySetMapping Name="Employees_Details">
+            <EntityTypeMapping TypeName="commonModel.Employees_Details">
+              <MappingFragment StoreEntitySet="Employees_Details">
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee ID" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle Name" />
+                <ScalarProperty Name="Maiden_Name" ColumnName="Maiden Name" />
+                <ScalarProperty Name="Birth_Date" ColumnName="Birth Date" />
+                <ScalarProperty Name="Birth_Place" ColumnName="Birth Place" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Civil_Status" ColumnName="Civil Status" />
+                <ScalarProperty Name="Marriage_Date" ColumnName="Marriage Date" />
+                <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Address_Street_No" ColumnName="Address Street No" />
+                <ScalarProperty Name="Address_Barangay" ColumnName="Address Barangay" />
+                <ScalarProperty Name="Address_City" ColumnName="Address City" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email Address" />
+                <ScalarProperty Name="Education_Level" ColumnName="Education Level" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Blood_Type" ColumnName="Blood Type" />
+                <ScalarProperty Name="SSS_No" ColumnName="SSS No" />
+                <ScalarProperty Name="PhilHealth_No" ColumnName="PhilHealth No" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="Bank_Account_No" ColumnName="Bank Account No" />
+                <ScalarProperty Name="TIN_No" ColumnName="TIN No" />
+                <ScalarProperty Name="Tax_Code" ColumnName="Tax Code" />
+                <ScalarProperty Name="HDMF_No" ColumnName="HDMF No" />
+                <ScalarProperty Name="HDMF_Premium" ColumnName="HDMF Premium" />
+                <ScalarProperty Name="HDMF_Fixed_Contribution" ColumnName="HDMF Fixed Contribution" />
+                <ScalarProperty Name="SSS_Premium" ColumnName="SSS Premium" />
+                <ScalarProperty Name="SSS_Fixed_Contribution" ColumnName="SSS Fixed Contribution" />
+                <ScalarProperty Name="PhilHealth_Premium" ColumnName="PhilHealth Premium" />
+                <ScalarProperty Name="PhilHealth_Fixed_Contribution" ColumnName="PhilHealth Fixed Contribution" />
+                <ScalarProperty Name="Contact_Person" ColumnName="Contact Person" />
+                <ScalarProperty Name="Contact_Relation" ColumnName="Contact Relation" />
+                <ScalarProperty Name="Contact_Address_Street_No" ColumnName="Contact Address Street No" />
+                <ScalarProperty Name="Contact_Barangay" ColumnName="Contact Barangay" />
+                <ScalarProperty Name="Contact_City" ColumnName="Contact City" />
+                <ScalarProperty Name="Contact_Telephone" ColumnName="Contact Telephone" />
+                <ScalarProperty Name="Cost_Center_Effectivity_Date" ColumnName="Cost Center Effectivity Date" />
+                <ScalarProperty Name="Cost_Center_Code_HRC" ColumnName="Cost Center Code HRC" />
+                <ScalarProperty Name="Cost_Center_Code_SAP" ColumnName="Cost Center Code SAP" />
+                <ScalarProperty Name="Cost_Center_Description" ColumnName="Cost Center Description" />
+                <ScalarProperty Name="Employment_Status" ColumnName="Employment Status" />
+                <ScalarProperty Name="Hire_Date" ColumnName="Hire Date" />
+                <ScalarProperty Name="Regular_Date" ColumnName="Regular Date" />
+                <ScalarProperty Name="Location_Code" ColumnName="Location Code" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Position_Effectivity_Date" ColumnName="Position Effectivity Date" />
+                <ScalarProperty Name="Immediate_Superior" ColumnName="Immediate Superior" />
+                <ScalarProperty Name="Payment_Mode" ColumnName="Payment Mode" />
+                <ScalarProperty Name="Payroll_Type" ColumnName="Payroll Type" />
+                <ScalarProperty Name="Job_Status" ColumnName="Job Status" />
+                <ScalarProperty Name="Confidential" ColumnName="Confidential" />
+                <ScalarProperty Name="Shift_Code" ColumnName="Shift Code" />
+                <ScalarProperty Name="WorkType" ColumnName="WorkType" />
+                <ScalarProperty Name="WorkGroup" ColumnName="WorkGroup" />
+                <ScalarProperty Name="Separation_Notice_Date" ColumnName="Separation Notice Date" />
+                <ScalarProperty Name="Separation_Code" ColumnName="Separation Code" />
+                <ScalarProperty Name="Separation_Effectivity_Date" ColumnName="Separation Effectivity Date" />
+                <ScalarProperty Name="Cleared_Date" ColumnName="Cleared Date" />
+                <ScalarProperty Name="Probationary_Date" ColumnName="Probationary Date" />
+                <ScalarProperty Name="Employee_Type" ColumnName="Employee Type" />
+                <ScalarProperty Name="Separation_System_Change" ColumnName="Separation System Change" />
+                <ScalarProperty Name="Tax_Rate_Payroll_Type" ColumnName="Tax Rate Payroll Type" />
+                <ScalarProperty Name="Tax_Rate_Effectivity_Date" ColumnName="Tax Rate Effectivity Date" />
+                <ScalarProperty Name="Tax_Rate" ColumnName="Tax Rate" />
+                <ScalarProperty Name="Billing_Payroll_Type" ColumnName="Billing Payroll Type" />
+                <ScalarProperty Name="Billing_Effectivity_Date" ColumnName="Billing Effectivity Date" />
+                <ScalarProperty Name="Billing_Rate" ColumnName="Billing Rate" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Provincial_Address_Street_No" ColumnName="Provincial Address Street No" />
+                <ScalarProperty Name="Provincial_Address_Barangay" ColumnName="Provincial Address Barangay" />
+                <ScalarProperty Name="Provincial_Address_City" ColumnName="Provincial Address City" />
+                <ScalarProperty Name="Provincial_Telephone" ColumnName="Provincial Telephone" />
+                <ScalarProperty Name="School_Awards" ColumnName="School Awards" />
+                <ScalarProperty Name="PRC_License_No" ColumnName="PRC License No" />
+                <ScalarProperty Name="Extension_No" ColumnName="Extension No" />
+                <ScalarProperty Name="Anniversary" ColumnName="Anniversary" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="Alternate_Account_Code" ColumnName="Alternate Account Code" />
+                <ScalarProperty Name="Wife_Claim_Exemption" ColumnName="Wife Claim Exemption" />
+                <ScalarProperty Name="Shoes_Size" ColumnName="Shoes Size" />
+                <ScalarProperty Name="Shirt_Size" ColumnName="Shirt Size" />
+                <ScalarProperty Name="Hair_Color" ColumnName="Hair Color" />
+                <ScalarProperty Name="Eye_Color" ColumnName="Eye Color" />
+                <ScalarProperty Name="Distinguishing_Mark" ColumnName="Distinguishing Mark" />
+                <ScalarProperty Name="Job_Level" ColumnName="Job Level" />
+                <ScalarProperty Name="Pay_Class" ColumnName="Pay Class" />
+                <ScalarProperty Name="Include_in_Payroll" ColumnName="Include in Payroll" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Adu_AccountName" ColumnName="Adu_AccountName" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Dept_Man" ColumnName="Dept_Man" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emp_Route">
+            <EntityTypeMapping TypeName="commonModel.Emp_Route">
+              <MappingFragment StoreEntitySet="Emp_Route">
+                <ScalarProperty Name="Approver_Name" ColumnName="Approver Name" />
+                <ScalarProperty Name="Approver_ID" ColumnName="Approver ID" />
+                <ScalarProperty Name="Checker_2_Name" ColumnName="Checker 2 Name" />
+                <ScalarProperty Name="Checker_2_ID" ColumnName="Checker 2 ID" />
+                <ScalarProperty Name="Checker_1_Name" ColumnName="Checker 1 Name" />
+                <ScalarProperty Name="Checker_1_ID" ColumnName="Checker 1 ID" />
+                <ScalarProperty Name="Cost_Center" ColumnName="Cost Center" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee Name" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="newlyEmployees">
+            <EntityTypeMapping TypeName="commonModel.newlyEmployee">
+              <MappingFragment StoreEntitySet="newlyEmployees">
+                <ScalarProperty Name="Dept_Man" ColumnName="Dept_Man" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Adu_AccountName" ColumnName="Adu_AccountName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Include_in_Payroll" ColumnName="Include in Payroll" />
+                <ScalarProperty Name="Pay_Class" ColumnName="Pay Class" />
+                <ScalarProperty Name="Job_Level" ColumnName="Job Level" />
+                <ScalarProperty Name="Distinguishing_Mark" ColumnName="Distinguishing Mark" />
+                <ScalarProperty Name="Eye_Color" ColumnName="Eye Color" />
+                <ScalarProperty Name="Hair_Color" ColumnName="Hair Color" />
+                <ScalarProperty Name="Shirt_Size" ColumnName="Shirt Size" />
+                <ScalarProperty Name="Shoes_Size" ColumnName="Shoes Size" />
+                <ScalarProperty Name="Wife_Claim_Exemption" ColumnName="Wife Claim Exemption" />
+                <ScalarProperty Name="Alternate_Account_Code" ColumnName="Alternate Account Code" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="Anniversary" ColumnName="Anniversary" />
+                <ScalarProperty Name="Extension_No" ColumnName="Extension No" />
+                <ScalarProperty Name="PRC_License_No" ColumnName="PRC License No" />
+                <ScalarProperty Name="School_Awards" ColumnName="School Awards" />
+                <ScalarProperty Name="Provincial_Telephone" ColumnName="Provincial Telephone" />
+                <ScalarProperty Name="Provincial_Address_City" ColumnName="Provincial Address City" />
+                <ScalarProperty Name="Provincial_Address_Barangay" ColumnName="Provincial Address Barangay" />
+                <ScalarProperty Name="Provincial_Address_Street_No" ColumnName="Provincial Address Street No" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Billing_Rate" ColumnName="Billing Rate" />
+                <ScalarProperty Name="Billing_Effectivity_Date" ColumnName="Billing Effectivity Date" />
+                <ScalarProperty Name="Billing_Payroll_Type" ColumnName="Billing Payroll Type" />
+                <ScalarProperty Name="Tax_Rate" ColumnName="Tax Rate" />
+                <ScalarProperty Name="Tax_Rate_Effectivity_Date" ColumnName="Tax Rate Effectivity Date" />
+                <ScalarProperty Name="Tax_Rate_Payroll_Type" ColumnName="Tax Rate Payroll Type" />
+                <ScalarProperty Name="Separation_System_Change" ColumnName="Separation System Change" />
+                <ScalarProperty Name="Employee_Type" ColumnName="Employee Type" />
+                <ScalarProperty Name="Probationary_Date" ColumnName="Probationary Date" />
+                <ScalarProperty Name="Cleared_Date" ColumnName="Cleared Date" />
+                <ScalarProperty Name="Separation_Effectivity_Date" ColumnName="Separation Effectivity Date" />
+                <ScalarProperty Name="Separation_Code" ColumnName="Separation Code" />
+                <ScalarProperty Name="Separation_Notice_Date" ColumnName="Separation Notice Date" />
+                <ScalarProperty Name="WorkGroup" ColumnName="WorkGroup" />
+                <ScalarProperty Name="WorkType" ColumnName="WorkType" />
+                <ScalarProperty Name="Shift_Code" ColumnName="Shift Code" />
+                <ScalarProperty Name="Confidential" ColumnName="Confidential" />
+                <ScalarProperty Name="Job_Status" ColumnName="Job Status" />
+                <ScalarProperty Name="Payroll_Type" ColumnName="Payroll Type" />
+                <ScalarProperty Name="Payment_Mode" ColumnName="Payment Mode" />
+                <ScalarProperty Name="Immediate_Superior" ColumnName="Immediate Superior" />
+                <ScalarProperty Name="Position_Effectivity_Date" ColumnName="Position Effectivity Date" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Location_Code" ColumnName="Location Code" />
+                <ScalarProperty Name="Regular_Date" ColumnName="Regular Date" />
+                <ScalarProperty Name="Hire_Date" ColumnName="Hire Date" />
+                <ScalarProperty Name="Employment_Status" ColumnName="Employment Status" />
+                <ScalarProperty Name="Cost_Center_Description" ColumnName="Cost Center Description" />
+                <ScalarProperty Name="Cost_Center_Code_SAP" ColumnName="Cost Center Code SAP" />
+                <ScalarProperty Name="Cost_Center_Code_HRC" ColumnName="Cost Center Code HRC" />
+                <ScalarProperty Name="Cost_Center_Effectivity_Date" ColumnName="Cost Center Effectivity Date" />
+                <ScalarProperty Name="Contact_Telephone" ColumnName="Contact Telephone" />
+                <ScalarProperty Name="Contact_City" ColumnName="Contact City" />
+                <ScalarProperty Name="Contact_Barangay" ColumnName="Contact Barangay" />
+                <ScalarProperty Name="Contact_Address_Street_No" ColumnName="Contact Address Street No" />
+                <ScalarProperty Name="Contact_Relation" ColumnName="Contact Relation" />
+                <ScalarProperty Name="Contact_Person" ColumnName="Contact Person" />
+                <ScalarProperty Name="PhilHealth_Fixed_Contribution" ColumnName="PhilHealth Fixed Contribution" />
+                <ScalarProperty Name="PhilHealth_Premium" ColumnName="PhilHealth Premium" />
+                <ScalarProperty Name="SSS_Fixed_Contribution" ColumnName="SSS Fixed Contribution" />
+                <ScalarProperty Name="SSS_Premium" ColumnName="SSS Premium" />
+                <ScalarProperty Name="HDMF_Fixed_Contribution" ColumnName="HDMF Fixed Contribution" />
+                <ScalarProperty Name="HDMF_Premium" ColumnName="HDMF Premium" />
+                <ScalarProperty Name="HDMF_No" ColumnName="HDMF No" />
+                <ScalarProperty Name="Tax_Code" ColumnName="Tax Code" />
+                <ScalarProperty Name="TIN_No" ColumnName="TIN No" />
+                <ScalarProperty Name="Bank_Account_No" ColumnName="Bank Account No" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="PhilHealth_No" ColumnName="PhilHealth No" />
+                <ScalarProperty Name="SSS_No" ColumnName="SSS No" />
+                <ScalarProperty Name="Blood_Type" ColumnName="Blood Type" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="Education_Level" ColumnName="Education Level" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email Address" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Address_City" ColumnName="Address City" />
+                <ScalarProperty Name="Address_Barangay" ColumnName="Address Barangay" />
+                <ScalarProperty Name="Address_Street_No" ColumnName="Address Street No" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+                <ScalarProperty Name="Marriage_Date" ColumnName="Marriage Date" />
+                <ScalarProperty Name="Civil_Status" ColumnName="Civil Status" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Birth_Place" ColumnName="Birth Place" />
+                <ScalarProperty Name="Birth_Date" ColumnName="Birth Date" />
+                <ScalarProperty Name="Maiden_Name" ColumnName="Maiden Name" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

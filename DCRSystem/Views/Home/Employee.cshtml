@@ -1,0 +1,153 @@
+﻿
+@model DCRSystem.CustomViewModel.EmployeesViewModel
+@{
+    ViewBag.Title = "Employee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/select2/css/select2.min.css")
+@using WebHelpers.Mvc5
+
+<div class="row">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#example1").DataTable();
+        });
+    </script>
+    <div class="col-md-3">
+        <a class="btn btn-danger btn-block margin-bottom">Employees</a>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Type</h3>
+                <div class="box-tools">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <a href="@Url.Action("Employee", "Home")">
+                            <i class="fa fa-inbox"></i> Inbox
+                            <span class="label label-primary pull-right">12</span>
+                        </a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
+                    <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
+                    <li>
+                        <a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+                    @using (Html.BeginForm("AddPlanReCertification", "Home", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "", autocomplete = "off" }))
+                    {
+                        <li>
+                            @Html.DropDownList("Employees", null, "", new { @class = "chosen-select",@name = "Badge", style = "width:300px;" })
+                            @Html.ValidationMessageFor(model => model.Employees)
+                        </li>
+
+                        <li>
+                            <label>Minimal</label>
+                            <select class="form-control select2" name="Employee" style="width: 100%;">
+                                <option selected="selected">Alabama</option>
+                                @foreach(var i in ViewBag.Employees1)
+                                {
+                                <option value="@i.Employee_ID">@i.First_Name , @i.Last_Name</option>
+                                }
+                            </select>
+                        </li>
+                      <li>
+                        <input type="datetime" name="DatePlan" placeholder="Input Date Here" />
+                      </li>
+                      <li>
+                        <input type="submit" id="SubmitButton" value="ADD PLAN RE-Certification" />
+                      </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Labels</h3>
+                <div class="box-tools">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="box box-danger">
+            <div class="box-header with-border">
+                <h3 class="box-title">Employees</h3>
+                @*<div class="box-tools pull-right">
+                        <div class="has-feedback">
+                            <input type="text" class="form-control input-sm" placeholder="Search Mail">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>*@
+            </div>
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Present Function</th>
+                            <th>Cell</th>
+                            <th>Supervisor</th>
+                            <th>Team Leader</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @*@foreach(var i in ViewBag.Employees1)
+                       {
+                        <tr>
+                            <td>@i.First_Name , @i.Last_Name</td>
+                            <td>@i.Position</td>
+                            <td>Wala pa</td>
+                            <td>Wala ap</td>
+                            <td>Wala pa</td>
+                        </tr>
+                       }*@
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Present Function</th>
+                            <th>Cell</th>
+                            <th>Supervisor</th>
+                            <th>Team Leader</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="box-footer no-padding">
+                <div class="mailbox-controls">
+                    <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                        <i class="fa fa-square-o"></i>
+                    </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+                    </div>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                    <div class="pull-right">
+                        1-50/200
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

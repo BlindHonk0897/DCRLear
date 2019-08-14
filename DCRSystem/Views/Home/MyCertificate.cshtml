@@ -1,0 +1,440 @@
+﻿
+@{
+    ViewBag.Title = "MyCertificate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using WebHelpers.Mvc5
+@Styles.Render("~/Bundles/css")
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title">Legend: </h4>
+            </div>
+            <div class="box-body">
+                <div id="external-events">
+                    <div class="external-event bg-green-active">Recent Certification </div>
+                    <div class="external-event bg-orange-active"> Certificatied</div>
+                    <div class="external-event bg-blue-active"> Re-Certified </div>
+                    <div class="external-event bg-black-active">Not Certified </div>
+                    @*<div class="external-event bg-light-blue">Work on UI design</div>*@
+                    @*<div class="checkbox">
+                            <label for="drop-remove">
+                                <input type="checkbox" id="drop-remove">
+                                remove after drop
+                            </label>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Progress:</h3>
+
+            </div>
+            <div class="box-body no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a>
+                            <p><b> Skills Certified: <code>5 out of 26</code></b></p>
+                            <div class="progress progress-xs active">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <p><b> Skills Re-Certified: <code>5 out of 26</code></b></p>
+                            <div class="progress progress-xs active">
+                                <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <p><b> % Age : <code> 11%</code></b></p>
+                            <div class="progress progress-xs active">
+                                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <p><b>Skills Points : <code> 20</code></b></p>
+                            <div class="progress progress-xs active">
+                                <div class="progress-bar progress-bar-aqua progress-bar-striped" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="box box-primary">
+            <div class="box-body no-padding">
+                <div id="calendar">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>LTWE</th>
+                                <th>AIRBAG</th>
+                                <th>FA</th>
+                                <th>ET</th>
+                                <th>LT</th>
+                                <th>VS</th>
+                                <th>TWR</th>
+                                <th>LMX</th>
+                                <th>PA</th>
+                                <th>WT</th>
+                                <th>LI</th>
+                                <th>FT</th>
+                                <th>SPW</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span data-toggle="tooltip" title="12/23/2018" class="badge bg-orange-active">
+                                        <i class="glyphicon glyphicon-check"></i>
+                                    </span>
+                                    &nbsp;
+                                    &nbsp;
+                                    <span data-toggle="tooltip" title="12/23/2018" class="badge bg-blue-active">
+                                        <i class="glyphicon glyphicon-check"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="12/23/2018" class="badge bg-orange-active">
+                                        <i class="glyphicon glyphicon-check"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="12/23/2018" class="badge bg-orange-active">
+                                        <i class="glyphicon glyphicon-check"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="12/23/2018" class="badge bg-orange-active">
+                                        <i class="glyphicon glyphicon-check"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="box box-primary">
+            <div class="box-body no-padding">
+                <div id="calendar">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>MT</th>
+                                <th>MCS/CS</th>
+                                <th>CC/TC</th>
+                                <th>MO</th>
+                                <th>D/PS</th>
+                                <th>MH</th>
+                                <th>QA</th>
+                                <th>CU</th>
+                                <th>C/TI</th>
+                                <th>UO</th>
+                                <th>TA</th>
+                                <th>TL</th>
+                                <th>TDS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="12/23/2018" class="badge bg-green-gradient">
+                                        <i class="glyphicon glyphicon-check"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="12/23/2018" class="badge bg-orange-active">
+                                        <i class="glyphicon glyphicon-check"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span data-toggle="tooltip" title="Not yet taken" class="badge bg-black-gradient">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9" style="margin-top:2px">
+        <div class="box box-danger">
+
+        </div>
+    </div>
+    <div class="col-md-9" style="margin-top:2px">
+        <div class="box box-success">
+            <div class="box-body no-padding">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box box-solid">
+                            <div class="box-header with-border">
+                                <h4 class="box-title"><b>Certification Legend:</b> </h4>
+                            </div>
+                            <div class="box-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Certification Code</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box box-solid">
+                            <div class="box-header with-border">
+                                <h4 class="box-title"><b>Certification Legend:</b> </h4>
+                            </div>
+                            <div class="box-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Certification Code</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                        <tr>
+                                            <td>LWTE</td>
+                                            <td>Certified Wedge Terminal Extraction</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

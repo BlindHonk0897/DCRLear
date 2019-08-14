@@ -1,0 +1,233 @@
+﻿@model DCRSystem.CustomViewModel.EmployeeModel
+@{
+    ViewBag.Title = "MyCertificate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(window).on('load', function () {
+        document.getElementById('SC').style.width = @ViewBag.SkillsCertifiedPercentage + "%";
+        document.getElementById('SRC').style.width = @ViewBag.SkillsReCertifiedPercentage + "%";
+
+    });
+</script>
+<div class="row">
+    <div class="col-md-3">
+        <div class="box box-primary">
+            <div class="box-body box-profile">
+                <img class="profile-user-img img-responsive img-circle" src="~/Content/img/user.svg" alt="User profile picture">
+                <h3 class="profile-username text-center">@Model.Employee.Last_Name , @Model.Employee.First_Name</h3>
+                <p class="text-muted text-center">@Model.Employee.Position</p>
+                <a href="#" class="btn btn-primary btn-block"><b>Employee Details</b></a>
+            </div>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title">Legend: </h4>
+            </div>
+            <div class="box-body">
+                <div id="external-events">
+                    <div class="external-event bg-green-active">Recent Certification </div>
+                    <div class="external-event bg-orange-active"> Certified</div>
+                    <div class="external-event bg-blue-active"> Re-Certified </div>
+                    <div class="external-event bg-black-active">Not Certified </div>
+                </div>
+            </div>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                 <h6 class="box-title"><marquee direction="right"><strong>Progress:</strong></marquee></h6>
+            </div>
+            <div class="box-body no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a>
+                            <p><b> Skills Certified: <code>@Model.TotalCertifications.Count() out of @Model.Certifications.Count()</code></b></p>
+                            <div class="progress progress-xs active">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" id="SC" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </div>
+                            <p><b> % Age : <code> @ViewBag.SkillsCertifiedPercentage%</code></b></p>
+                            <p><b>Skills Points : <code> 20</code></b></p>
+                        </a>
+                    </li>
+                    <hr style="width: 100%; color: black; height: 1px; background-color:palevioletred;" />
+                    <hr style="width: 100%; color: black; height: 1px; background-color:palevioletred;" />
+                    <li>
+                        <a>
+                            <p><b> Skills Re-Certified: <code>@ViewBag.TotalReCertified out of @Model.TotalCertifications.Count()</code></b></p>
+                            <div class="progress progress-xs active">
+                                <div class="progress-bar progress-bar-danger progress-bar-striped" id="SRC" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </div>
+                            <p><b> % Age : <code> @ViewBag.SkillsReCertifiedPercentage%</code></b></p>
+                            <p><b>Skills Points : <code> 20</code></b></p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="box box-primary">
+            <div class="box-body no-padding">
+                <div id="calendar">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                @for (int i = 0; i < Model.Certifications.Count() / 2; i++)
+                                {
+                                    <th>@Model.Certifications.ElementAt(i).Code</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = 0; i < Model.MyCertifications.Count() / 2; i++)
+                                {
+                                    <td>
+                                        @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
+                                        {
+                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateCertified" class="badge bg-orange-active">
+                                                <i class="glyphicon glyphicon-check"></i>
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span data-toggle="tooltip" title="Not yet Certified" class="badge bg-black-gradient">
+                                                <i class="glyphicon glyphicon-question-sign"></i>
+                                            </span>
+                                        }
+                                        &nbsp;
+                                        &nbsp;
+                                        @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
+                                        {
+                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateRecertified" class="badge bg-blue-active">
+                                                <i class="glyphicon glyphicon-check"></i>
+                                            </span>
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="box box-primary">
+            <div class="box-body no-padding">
+                <div id="calendar">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                @for (int i = (Model.Certifications.Count() / 2); i < Model.Certifications.Count(); i++)
+                                {
+                                    <th>@Model.Certifications.ElementAt(i).Code</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @for (int i = (Model.MyCertifications.Count() / 2); i < Model.MyCertifications.Count(); i++)
+                                {
+                                    <td>
+                                        @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
+                                        {
+                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateCertified" class="badge bg-orange-active">
+                                                <i class="glyphicon glyphicon-check"></i>
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span data-toggle="tooltip" title="Not yet Certified" class="badge bg-black-gradient">
+                                                <i class="glyphicon glyphicon-question-sign"></i>
+                                            </span>
+                                        }
+                                        &nbsp;
+                                        &nbsp;
+                                        @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
+                                        {
+                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateRecertified" class="badge bg-blue-active">
+                                                <i class="glyphicon glyphicon-check"></i>
+                                            </span>
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9" style="margin-top:1px">
+        <div class="box box-danger">
+
+        </div>
+    </div>
+    <div class="col-md-9" style="margin-top:1px">
+        <div class="box box-success">
+            <div class="box-body no-padding">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box box-solid">
+                            <div class="box-header with-border">
+                                <h4 class="box-title"><b>Certification Legend:</b> </h4>
+                            </div>
+                            <div class="box-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Certification Code</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model.Certifications.Count() / 2; i++)
+                                        {
+                                            <tr>
+                                                <td><strong>@Model.Certifications.ElementAt(i).Code</strong></td>
+                                                <td>@Model.Certifications.ElementAt(i).Description</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box box-solid">
+                            <div class="box-header with-border">
+                                <h4 class="box-title"><b>Certification Legend:</b> </h4>
+                            </div>
+                            <div class="box-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Certification Code</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = (Model.Certifications.Count() / 2); i < Model.Certifications.Count(); i++)
+                                        {
+                                            <tr>
+                                                <td><strong>@Model.Certifications.ElementAt(i).Code</strong></td>
+                                                <td>@Model.Certifications.ElementAt(i).Description</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

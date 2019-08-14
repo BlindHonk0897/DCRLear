@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ModalMessage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            $('#myModal').modal('show');
+        });
+    </script>
+    <div>
+        @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>*@
+        <!-- Modal -->
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="@Url.Action("Employee", "IT")" class="close">&times;</a>
+                        <h4 class="modal-title">Certification Status</h4>
+                    </div>
+                    <div class="modal-body modal-success">
+                        @*@if (ViewBag.typeMessage == "RED")
+                        {*@
+                            @*<font color="red">*@<h3>@ViewBag.message</h3>@*</font>*@
+                        @*}
+                        else
+                        {*@
+                            @*<font color="green"><h3>@ViewBag.message</h3></font>*@
+                        @*}*@
+                    </div>
+                    <div class="modal-footer">
+                        <a href="@Url.Action("Employee", "IT")" class="btn btn-default" >Ok</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

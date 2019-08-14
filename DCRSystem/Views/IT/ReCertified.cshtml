@@ -1,0 +1,93 @@
+﻿@model DCRSystem.CustomViewModel.EmployeeModel
+@{
+    ViewBag.Title = "ReCertified";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js'></script>
+<link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css'
+      media="screen" />
+<!-- Bootstrap -->
+<!-- Bootstrap DatePicker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
+@*<a href="@Url.Action("Employee", "IT")" class="" style="padding-top:0px;color:brown"><h5><i class="fa fa-arrow-left"></i>&nbsp;<span>Back</span></h5></a>*@
+<script type="text/javascript">
+    $(function () {
+        $('#SelectedDate').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            format: "mm/dd/yyyy",
+            language: "tr"
+        });
+    });
+</script>
+@*<a href="@Url.Action("Employee", "IT")" class="" style="padding-top:0px;color:brown"><h5><i class="fa fa-arrow-left"></i>&nbsp;<span>Back</span></h5></a>*@
+@using (Html.BeginForm("PostReCertified", "IT", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "", autocomplete = "off" }))
+{
+    <div class="row">
+        <div class="col-md-3">
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-circle" src="~/Content/img/user.svg" alt="User profile picture">
+                    <h3 class="profile-username text-center">@Model.Employee.Last_Name , @Model.Employee.First_Name</h3>
+                    <p class="text-muted text-center">@Model.Employee.Position</p>
+                    <a href="#" class="btn btn-primary btn-block"><b>Choosen Employee To Re-Certified</b></a>
+                </div>
+            </div>
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Re-Certification Details</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <input type="text" name="Employee" value="@Model.Employee.Employee_ID" hidden />
+                        <input type="text" name="URLBACK" value="@ViewBag.URLBack" hidden />
+                        <label>Available Re-Certification:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-codepen"></i>
+                            </div>
+                            <select class="form-control select2" name="Code" style="width: 100%;">
+                                @if (Model.AvailableReCertifications.Count() > 0)
+                                {
+                                    <option selected="selected" value="X">-- Select Here --</option>
+                                }
+                                else
+                                {
+                                    <option selected="selected" value="X"><code>NO Availble for Re-Certification</code></option>
+                                }
+
+
+                                @foreach (var i in Model.AvailableReCertifications)
+                                {
+                                    <option value="@i.CertificationCode">@i.CertificationCode</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Input Date Re-Certified:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            @*<input type="text" name="DateReCertified" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>*@
+                            <input readonly id="SelectedDate" class="form-control" name="DateReCertified" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                            <input type="button" class="pull-right btn btn-danger" onclick="@("window.location.href='" + @Url.Action(ViewBag.URLBack, "IT") + "'");" value="Cancel">
+                        </div>                      
+                    </div>
+                    <div class="form-group">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

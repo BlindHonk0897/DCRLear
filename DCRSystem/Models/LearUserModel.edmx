@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="gatepassUserViewModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'gatepass.dbo.user_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="user_vw">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="badge_no" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="useraccess" />
+            <PropertyRef Name="supervisor" />
+            <PropertyRef Name="is_active" />
+            <PropertyRef Name="created_by" />
+            <PropertyRef Name="created_date" />
+            <PropertyRef Name="updated_by" />
+            <PropertyRef Name="updated_date" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="badge_no" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="200" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="useraccess" Type="int" Nullable="false" />
+          <Property Name="supervisor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="is_active" Type="bit" Nullable="false" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="created_date" Type="datetime" Nullable="false" />
+          <Property Name="updated_by" Type="nvarchar" MaxLength="7" Nullable="false" />
+          <Property Name="updated_date" Type="datetime" Nullable="false" />
+          <Property Name="transferPlant" Type="nvarchar" MaxLength="50" />
+          <Property Name="Employee_Password" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'gatepass.dbo.users_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="users_vw">
+          <Key>
+            <PropertyRef Name="Employee ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Middle Name" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="Badge_No" Type="int" />
+          <Property Name="Employee ID" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="82" Nullable="false" />
+          <Property Name="Middle Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="109" />
+          <Property Name="Adu_AccountName" Type="varchar" MaxLength="100" />
+          <Property Name="Department Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="Department Desc" Type="nvarchar" MaxLength="100" />
+          <Property Name="Plant" Type="nvarchar" MaxLength="10" />
+          <Property Name="Plant Desc" Type="nvarchar" MaxLength="100" />
+          <Property Name="status" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="Position" Type="varchar" MaxLength="500" />
+          <Property Name="Approver ID" Type="nvarchar" MaxLength="15" />
+          <Property Name="Approver Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="15" />
+          <Property Name="Employee_Password" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityContainer Name="gatepassUserViewModelStoreContainer">
+          <EntitySet Name="user_vw" EntityType="Self.user_vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [user_vw].[id] AS [id], 
+    [user_vw].[badge_no] AS [badge_no], 
+    [user_vw].[username] AS [username], 
+    [user_vw].[password] AS [password], 
+    [user_vw].[firstname] AS [firstname], 
+    [user_vw].[lastname] AS [lastname], 
+    [user_vw].[email] AS [email], 
+    [user_vw].[useraccess] AS [useraccess], 
+    [user_vw].[supervisor] AS [supervisor], 
+    [user_vw].[is_active] AS [is_active], 
+    [user_vw].[created_by] AS [created_by], 
+    [user_vw].[created_date] AS [created_date], 
+    [user_vw].[updated_by] AS [updated_by], 
+    [user_vw].[updated_date] AS [updated_date], 
+    [user_vw].[transferPlant] AS [transferPlant], 
+    [user_vw].[Employee_Password] AS [Employee_Password]
+    FROM [dbo].[user_vw] AS [user_vw]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="users_vw" EntityType="Self.users_vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [users_vw].[Badge_No] AS [Badge_No], 
+    [users_vw].[Employee ID] AS [Employee ID], 
+    [users_vw].[Name] AS [Name], 
+    [users_vw].[Middle Name] AS [Middle Name], 
+    [users_vw].[Email] AS [Email], 
+    [users_vw].[Adu_AccountName] AS [Adu_AccountName], 
+    [users_vw].[Department Code] AS [Department Code], 
+    [users_vw].[Department Desc] AS [Department Desc], 
+    [users_vw].[Plant] AS [Plant], 
+    [users_vw].[Plant Desc] AS [Plant Desc], 
+    [users_vw].[status] AS [status], 
+    [users_vw].[is_active] AS [is_active], 
+    [users_vw].[Position] AS [Position], 
+    [users_vw].[Approver ID] AS [Approver ID], 
+    [users_vw].[Approver Name] AS [Approver Name], 
+    [users_vw].[Manager] AS [Manager], 
+    [users_vw].[Employee_Password] AS [Employee_Password]
+    FROM [dbo].[users_vw] AS [users_vw]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="gatepassUserViewModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="user_vw">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="badge_no" />
+            <PropertyRef Name="username" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="useraccess" />
+            <PropertyRef Name="supervisor" />
+            <PropertyRef Name="is_active" />
+            <PropertyRef Name="created_by" />
+            <PropertyRef Name="created_date" />
+            <PropertyRef Name="updated_by" />
+            <PropertyRef Name="updated_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="badge_no" Type="String" MaxLength="7" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="useraccess" Type="Int32" Nullable="false" />
+          <Property Name="supervisor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
+          <Property Name="created_by" Type="String" MaxLength="7" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="created_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updated_by" Type="String" MaxLength="7" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="updated_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="transferPlant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Employee_Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="gatepassEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="user_vw" EntityType="Self.user_vw" />
+          <EntitySet Name="users_vw" EntityType="gatepassUserViewModel.users_vw" />
+        </EntityContainer>
+        <EntityType Name="users_vw">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Middle_Name" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="Badge_No" Type="Int32" />
+          <Property Name="Employee_ID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="82" FixedLength="false" Unicode="false" />
+          <Property Name="Middle_Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="109" FixedLength="false" Unicode="false" />
+          <Property Name="Adu_AccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Department_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Department_Desc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Plant" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Plant_Desc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="Position" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Approver_ID" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Approver_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Employee_Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="gatepassUserViewModelStoreContainer" CdmEntityContainer="gatepassEntities">
+          <EntitySetMapping Name="user_vw">
+            <EntityTypeMapping TypeName="gatepassUserViewModel.user_vw">
+              <MappingFragment StoreEntitySet="user_vw">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="badge_no" ColumnName="badge_no" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="useraccess" ColumnName="useraccess" />
+                <ScalarProperty Name="supervisor" ColumnName="supervisor" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+                <ScalarProperty Name="transferPlant" ColumnName="transferPlant" />
+                <ScalarProperty Name="Employee_Password" ColumnName="Employee_Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users_vw">
+            <EntityTypeMapping TypeName="gatepassUserViewModel.users_vw">
+              <MappingFragment StoreEntitySet="users_vw">
+                <ScalarProperty Name="Employee_Password" ColumnName="Employee_Password" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Approver_Name" ColumnName="Approver Name" />
+                <ScalarProperty Name="Approver_ID" ColumnName="Approver ID" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Plant_Desc" ColumnName="Plant Desc" />
+                <ScalarProperty Name="Plant" ColumnName="Plant" />
+                <ScalarProperty Name="Department_Desc" ColumnName="Department Desc" />
+                <ScalarProperty Name="Department_Code" ColumnName="Department Code" />
+                <ScalarProperty Name="Adu_AccountName" ColumnName="Adu_AccountName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle Name" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee ID" />
+                <ScalarProperty Name="Badge_No" ColumnName="Badge_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

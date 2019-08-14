@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNet.Identity
+<header class="main-header">
+    @* BEGIN Logo *@
+    <a href="@Url.Action("Home", "Home")" class="logo">
+        @* Mini logo for sidebar 50x50 pixels *@
+        @*<span class="logo-mini"><b>A</b>LT</span>*@
+        <span class="logo-mini"><img src="~/Content/img/lear.png" style="height:50px;" /></span>
+        @* Logo for regular state and mobile devices *@
+        @*<span class="logo-lg"><b>Admin</b>LTE</span>*@
+        <span class="logo-lg"><b>D C R System </b></span>
+    </a>
+    @* END Logo *@
+    @* BEGIN Header *@
+    <nav class="navbar navbar-static-top" role="navigation">
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                @* BEGIN User Account Menu *@
+                @if (Session["UserRole"]!= null || Session["UserPosition"]!= null)
+                {
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            @*<img src="~/Content/img/user.jpg" class="user-image" alt="User Image">*@
+                            <i class="glyphicon glyphicon-user"></i>
+                            <span class="hidden-xs">@User.Identity.GetUserName()</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="~/Content/img/user.svg" class="img-circle" alt="User Image">
+
+                                <p>
+                                    @User.Identity.GetUserName() - @Session["UserPosition"] 
+                                    @*<small>Member since Jul. 2019</small>*@
+                                </p>
+                            </li>
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                    @* END User Account Menu *@
+               </ul>
+        </div>
+    </nav>
+</header>
