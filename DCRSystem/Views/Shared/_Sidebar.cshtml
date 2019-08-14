@@ -11,19 +11,19 @@
                     <li class="header"></li>
                     <li class="@Url.IsLinkActive("Home", "Home")">
                         <a href="@Url.Action("Home", "Home")"><i class="fa fa-home"></i> <span>Home</span></a>
-                    </li>                  
+                    </li>
                     <li class="@Url.IsLinkActive("Employee", "IT")">
                         <a href="@Url.Action("Employee", "IT")"><i class="fa fa-users"></i> <span>Employees</span><small class="label pull-right bg-red">@Session["NumberOfEmployees"]</small></a>
                     </li>
                     <li class="@Url.IsLinkActive("NewlyEmployees", "IT")">
                         <a href="@Url.Action("NewlyEmployees", "IT")"><i class="fa fa-users"></i> <span>Newly Employees</span><small class="label pull-right bg-aqua-gradient">@Session["NumberOfNewlyEmployees"]</small></a>
-                    </li>                 
+                    </li>
                     <li class="header"><i class="fa fa-filter"></i> <span><font color="#a64038">&nbsp;Filter Employees</font></span></li>
                     <li class="@Url.IsLinkActive("Active", "IT")">
-                       <a href="@Url.Action("Active", "IT")"><i class="fa fa-circle text-green"></i> <span>Active</span><small class="label pull-right bg-green-active">@Session["NumberOfActiveEmployees"]</small></a>
+                        <a href="@Url.Action("Active", "IT")"><i class="fa fa-circle text-green"></i> <span>Active</span><small class="label pull-right bg-green-active">@Session["NumberOfActiveEmployees"]</small></a>
                     </li>
                     <li class="@Url.IsLinkActive("Inactive", "IT")">
-                        <a href="@Url.Action("Inactive", "IT")"><i class="fa fa-circle text-bold"></i> <span>Inactive</span><small class="label pull-right bg-gray-active">@Session["NumberOfInactiveEmployees"]</small></a>                 
+                        <a href="@Url.Action("Inactive", "IT")"><i class="fa fa-circle text-bold"></i> <span>Inactive</span><small class="label pull-right bg-gray-active">@Session["NumberOfInactiveEmployees"]</small></a>
                     </li>
                 </ul>
                 @* END Menu *@
@@ -73,4 +73,8 @@
             </section>
         </aside>
     }
+}
+else
+{
+    Response.Redirect("/Account/LogOut");
 }

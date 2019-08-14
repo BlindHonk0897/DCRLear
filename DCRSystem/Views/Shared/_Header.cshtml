@@ -18,7 +18,7 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 @* BEGIN User Account Menu *@
-                @if (Session["UserRole"]!= null || Session["UserPosition"]!= null)
+                @if (Session["UserRole"] != null || Session["UserPosition"] != null)
                 {
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -31,7 +31,7 @@
                                 <img src="~/Content/img/user.svg" class="img-circle" alt="User Image">
 
                                 <p>
-                                    @User.Identity.GetUserName() - @Session["UserPosition"] 
+                                    @User.Identity.GetUserName() - @Session["UserPosition"]
                                     @*<small>Member since Jul. 2019</small>*@
                                 </p>
                             </li>
@@ -50,8 +50,8 @@
                         </ul>
                     </li>
                 }
-                    @* END User Account Menu *@
-               </ul>
+                @* END User Account Menu *@
+            </ul>
         </div>
     </nav>
 </header>

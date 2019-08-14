@@ -480,17 +480,26 @@ namespace DCRSystem.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             FormsAuthentication.SignOut();
             Session["User"] = "";
-            Session["RoleUser"] ="";
+            Session["RoleUser"] = null;
             Session["UserId"] = "";
             Session["UserPosition"] = "";
             Session["NumberOfEmployees"] = "";
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult LogOut()
+        {
+          
+            return RedirectToAction("LogOff","Account");
         }
 
         //
