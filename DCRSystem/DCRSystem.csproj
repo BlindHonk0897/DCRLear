@@ -516,6 +516,9 @@
     <Content Include="Content\img\icheck\yellow%402x.png" />
     <Content Include="Content\img\icheck\yellow.png" />
     <Content Include="Content\img\lear.png" />
+    <Content Include="Content\img\LearHome.png" />
+    <Content Include="Content\img\LearHome1.png" />
+    <Content Include="Content\img\LearHome2.png" />
     <Content Include="Content\img\LEARM.png" />
     <Content Include="Content\img\LEARM2.png" />
     <Content Include="Content\img\LEARM3.png" />

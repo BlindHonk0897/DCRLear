@@ -503,8 +503,13 @@ namespace DCRSystem.Controllers
         [AllowAnonymous]
         public ActionResult LogOut()
         {
-            HttpAntiForgeryException htm = new HttpAntiForgeryException();
-            return RedirectToAction("LogOff","Account",FormMethod.Post);
+            FormsAuthentication.SignOut();
+            Session["User"] = "";
+            Session["RoleUser"] = null;
+            Session["UserId"] = "";
+            Session["UserPosition"] = "";
+            Session["NumberOfEmployees"] = "";
+            return RedirectToAction("Login", "Account");
         }
 
         //
