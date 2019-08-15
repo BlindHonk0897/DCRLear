@@ -833,6 +833,7 @@
     <Content Include="Views\Approver\Employees.cshtml" />
     <Content Include="Views\Approver\MyCertificate.cshtml" />
     <Content Include="Views\Approver\Details.cshtml" />
+    <Content Include="Views\IT\Testing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,270 +14,233 @@
 @using (Html.BeginForm("PostCertified", "IT", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "", autocomplete = "off" }))
 {
     <div class="row">
-        <div class="col-md-3">
-            <div class="box box-primary">
-                <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="~/Content/img/user.svg" alt="User profile picture">
-                    <h3 class="profile-username text-center">@Model.Employee.Last_Name , @Model.Employee.First_Name</h3>
-                    <p class="text-muted text-center">@Model.Employee.Position</p>
-                    <a href="#" class="btn btn-primary btn-block"><b>Choosen Employee</b></a>
-                </div>
-            </div>
-            <br />
-            <div class="box box-danger">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Certification Details</h3>
-                </div>
-                <div class="box-body">
-                    <div class="form-group">
-                        <input type="text" name="Employee" value="@Model.Employee.Employee_ID" hidden />
-                        <input type="text" name="URLBACK" value="@ViewBag.URLBack" hidden />
-                        <label>Choose Type of Certification:</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-codepen"></i>
-                            </div>
-                            <select class="form-control select2" name="Code" style="width: 100%;">
-                                <option selected="selected" value="X">-- Select Here --</option>
-                                @foreach (var i in Model.ImNotCertified)
-                                {
-                                    <option value="@i.Code">@i.Code</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Date Certified:</label>
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            @*<input type="text" name="DateCertified" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>*@
-                            <input readonly id="SelectedDate" class="form-control" name="DateCertified" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="submit" class="btn btn-primary" value="Submit">
-                            <input type="button" class="pull-right btn btn-danger" onclick="@("window.location.href='" + @Url.Action(ViewBag.URLBack, "IT") + "'");" value="Cancel">
-                        </div>
-                    </div>
-                    <div class="form-group">
+        <div class="col-md-4" style="background-color:transparent;color:transparent">
+            <div class="box-comments box-widget widget-user" style="background-color:transparent;color:transparent;">
+                <div class="widget-user-header bg-transparent" style="background-color:transparent">
 
+                </div>
+                <div class="widget-user-image">
+
+                </div>
+                <div class="box-footer" style="background-color:transparent;color:transparent">
+                    <div class="row" style="background-color:transparent;color:transparent">
+                        <div class="col-sm-4 border-right">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 border-right">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        @*<div class="col-md-9">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Inbox</h3>
-                        <div class="box-tools pull-right">
-                            <div class="has-feedback">
-                                <input type="text" class="form-control input-sm" placeholder="Search Mail">
-                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        <div class="col-md-4">
+            <div class="box box-widget widget-user">
+                <div class="widget-user-header bg-aqua-active">
+                    <h3 class="widget-user-username">@Model.Employee.Last_Name , @Model.Employee.First_Name</h3>
+                    <h5 class="widget-user-desc">@Model.Employee.Position</h5>
+                </div>
+                <div class="widget-user-image">
+                    <img class="img-circle" src="~/Content/img/user.svg" alt="User Avatar">
+                </div>
+                <div class="box-footer" style="background-color:transparent">
+                    <div class="row">
+                        <div class="col-sm-4 border-right">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 border-right">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text">Choosen Employee</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="box-body no-padding">
-                        <div class="mailbox-controls">
-                            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
-                                <i class="fa fa-square-o"></i>
-                            </button>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" style="background-color:transparent;color:transparent">
+            <div class="box-comments box-widget widget-user" style="background-color:transparent;color:transparent">
+                <div class="widget-user-header bg-transparent" style="background-color:transparent">
+                    <h3 class="widget-user-username"></h3>
+                    <h5 class="widget-user-desc"></h5>
+                </div>
+                <div class="widget-user-image">
+
+                </div>
+                <div class="box-footer" style="background-color:transparent;color:transparent">
+                    <div class="row" style="background-color:transparent;color:transparent">
+                        <div class="col-sm-4 border-right">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
                             </div>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                            <div class="pull-right">
-                                1-50/200
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                        </div>
+                        <div class="col-sm-4 border-right">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1" style="background-color:transparent;color:transparent">
+            <div class="box-comments box-widget widget-user" style="background-color:transparent;color:transparent;">
+                <div class="widget-user-header bg-transparent" style="background-color:transparent">
+
+                </div>
+                <div class="widget-user-image">
+
+                </div>
+                <div class="box-footer" style="background-color:transparent;color:transparent">
+                    <div class="row" style="background-color:transparent;color:transparent">
+                        <div class="col-sm-4 border-right">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 border-right">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"></h3>
+                    <div class="box-tools col-xs-pull-9">
+                        <div class="has-feedback">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <div class="mailbox-controls">
+                    </div>
+                    <div class="table-responsive mailbox-messages">
+                        <div class="box-body box-profile">
+                            <h1 class="profile-username text-center"><font size="30">Certification</font></h1>
+                        </div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <input type="text" name="Employee" value="@Model.Employee.Employee_ID" hidden />
+                                <input type="text" name="URLBACK" value="@ViewBag.URLBack" hidden />
+                                <label>Choose Type of Certification:</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-codepen"></i>
+                                    </div>
+                                    <select class="form-control select2" name="Code" style="width: 100%;">
+                                        <option selected="selected" value="X">-- Select Here --</option>
+                                        @foreach (var i in Model.ImNotCertified)
+                                        {
+                                            <option value="@i.Code">@i.Code</option>
+                                        }
+                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="table-responsive mailbox-messages">
-                            <table class="table table-hover table-striped">
-                                <tbody>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">5 mins ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">28 mins ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">11 hours ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">15 hours ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">Yesterday</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">2 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">2 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">2 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">2 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">2 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">4 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"></td>
-                                        <td class="mailbox-date">12 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">12 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">14 days ago</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                        <td class="mailbox-name"><a href="@Url.Action("Read", "Mailbox")">Alexander Pierce</a></td>
-                                        <td class="mailbox-subject">
-                                            <b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                        </td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                        <td class="mailbox-date">15 days ago</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="box-footer no-padding">
-                        <div class="mailbox-controls">
-                            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
-                                <i class="fa fa-square-o"></i>
-                            </button>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                            </div>
-                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                            <div class="pull-right">
-                                1-50/200
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                            <div class="form-group">
+                                <label>Date Certified:</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @*<input type="text" name="DateCertified" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>*@
+                                    <input readonly id="SelectedDate" class="form-control" name="DateCertified" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>*@
+                <div class="box-footer no-padding">
+                    <div class="mailbox-controls">
+                        <button type="submit" class="btn btn-primary btn-sm checkbox-toggle">
+                            <i class="fa fa-share"></i>&nbsp;<span>Submit</span>
+                        </button>
+                        <div class="pull-right">
+                            <button type="button" onclick="@("window.location.href='" + @Url.Action(ViewBag.URLBack, "IT") + "'")" ; class="btn btn-danger btn-sm checkbox-toggle">
+                                <i class="fa fa-close"></i>&nbsp;<span>Cancel</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1" style="background-color:transparent;color:transparent">
+            <div class="box-comments box-widget widget-user" style="background-color:transparent;color:transparent">
+                <div class="widget-user-header bg-transparent" style="background-color:transparent">
+                    <h3 class="widget-user-username"></h3>
+                    <h5 class="widget-user-desc"></h5>
+                </div>
+                <div class="widget-user-image">
+
+                </div>
+                <div class="box-footer" style="background-color:transparent;color:transparent">
+                    <div class="row" style="background-color:transparent;color:transparent">
+                        <div class="col-sm-4 border-right">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 border-right">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="description-block">
+                                <h5 class="description-header"></h5>
+                                <span class="description-text"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 }
 @section ViewSpecificJavascript{

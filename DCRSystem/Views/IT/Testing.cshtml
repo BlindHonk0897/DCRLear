@@ -1,15 +1,14 @@
-﻿@model DCRSystem.CustomViewModel.EmployeeModel
+﻿
 @{
-    ViewBag.Title = "ReCertified";
+    ViewBag.Title = "Testing";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+
 <!-- Bootstrap -->
 <!-- Bootstrap DatePicker -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
-
 @using (Html.BeginForm("PostReCertified", "IT", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "", autocomplete = "off" }))
 {
     <div class="row">
@@ -47,7 +46,7 @@
         </div>
         <div class="col-md-4">
             <div class="box box-widget widget-user">
-                <div class="widget-user-header bg-red-gradient">
+                <div class="widget-user-header bg-aqua-active">
                     <h3 class="widget-user-username">@Model.Employee.Last_Name , @Model.Employee.First_Name</h3>
                     <h5 class="widget-user-desc">@Model.Employee.Position</h5>
                 </div>
@@ -160,7 +159,7 @@
                     </div>
                     <div class="table-responsive mailbox-messages">
                         <div class="box-body box-profile">
-                            <h1 class="profile-username text-center"><font size="30">Re-Certification</font></h1>
+                            <h1 class="profile-username text-center"><font size="30">Certification</font></h1>
                         </div>
                         <div class="box-body">
                             <div class="form-group">
@@ -196,7 +195,7 @@
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     @*<input type="text" name="DateCertified" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>*@
-                                    <input readonly id="SelectedDate" class="form-control" name="DateReCertified" />
+                                    <input readonly id="SelectedDate" class="form-control" name="DateCertified" />
                                 </div>
                             </div>
                         </div>
@@ -251,6 +250,7 @@
         </div>
     </div>
 }
+
 @section ViewSpecificJavascript{
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
@@ -265,3 +265,5 @@
         });
     </script>
 }
+
+

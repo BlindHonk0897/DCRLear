@@ -629,5 +629,10 @@ namespace DCRSystem.Controllers
             return View(mode);
         }
 
+        [HttpGet]
+        public ActionResult Testing()
+        {
+            return View();
+        }
     }
 }
