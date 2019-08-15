@@ -41,6 +41,22 @@ namespace DCRSystem
                 .Include("~/Content/plugins/pace/css/pace.min.css")
                 .Include("~/Content/select2/css/select2.css")
                 .Include("~/Content/select2/css/select2.min.css"));
+               
+
+            bundles.Add(new StyleBundle("~/Bundles/login-css")
+                .Include("~/Content/css/font-awesome.min.css")
+                .Include("~/Content/css/login-main.css"));
+
+
+            bundles.Add(new ScriptBundle("~/Bundles/login-js")
+                .Include("~/Scripts/jquery-{version}.js")
+                .Include("~/Scripts/popper.min.js")
+                .Include("~/Scripts/bootstrap.min.js")
+                .Include("~/Scripts/main.js")
+                .Include("~/Scripts/pace.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                       "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/Bundles/js")
                 .Include("~/Content/js/plugins/jquery/jquery-3.3.1.js")
@@ -62,6 +78,7 @@ namespace DCRSystem
                 .Include("~/Scripts/Widgets/Widgets-menu.js")
                 .Include("~/Content/select2/js")
                 .Include("~/Scripts/Forms/Advanced"));
+           
 
 #if DEBUG
             BundleTable.EnableOptimizations = false;
