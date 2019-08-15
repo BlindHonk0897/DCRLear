@@ -3,14 +3,7 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    $(window).on('load', function () {
-        document.getElementById('SC').style.width = @ViewBag.SkillsCertifiedPercentage + "%";
-        document.getElementById('SRC').style.width = @ViewBag.SkillsReCertifiedPercentage + "%";
-    });
-</script>
+
 <a href="@Url.Action(ViewBag.URLBack, "Approver",new {id = Session["UserId"] })" class="" style="padding-top:0px;color:brown"><h5><i class="fa fa-arrow-left"></i>&nbsp;<span>Go-To-List </span></h5></a>
 <div class="row">
     <div class="col-md-3">
@@ -231,5 +224,15 @@
         </div>
     </div>
 </div>
+@section ViewSpecificJavascript{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+    <script type="text/javascript">
+    $(window).on('load', function () {
+        document.getElementById('SC').style.width = @ViewBag.SkillsCertifiedPercentage + "%";
+        document.getElementById('SRC').style.width = @ViewBag.SkillsReCertifiedPercentage + "%";
+    });
+    </script>
+}
 
 

@@ -3,16 +3,7 @@
     ViewBag.Title = "MyCertificate";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    $(window).on('load', function () {
-        document.getElementById('SC').style.width = @ViewBag.SkillsCertifiedPercentage + "%";
-        document.getElementById('SRC').style.width = @ViewBag.SkillsReCertifiedPercentage + "%";
 
-    });
-</script>
 <div class="row">
     <div class="col-md-3">
         <div class="box box-primary">
@@ -38,7 +29,7 @@
         </div>
         <div class="box box-solid">
             <div class="box-header with-border">
-                 <h6 class="box-title"><marquee direction="right"><strong>Progress:</strong></marquee></h6>
+                <h6 class="box-title"><marquee direction="right"><strong>Progress:</strong></marquee></h6>
             </div>
             <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
@@ -232,3 +223,13 @@
         </div>
     </div>
 </div>
+@section ViewSpecificJavascript{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+    <script type="text/javascript">
+    $(window).on('load', function () {
+        document.getElementById('SC').style.width = @ViewBag.SkillsCertifiedPercentage + "%";
+        document.getElementById('SRC').style.width = @ViewBag.SkillsReCertifiedPercentage + "%";
+    });
+    </script>
+}

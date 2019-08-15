@@ -769,6 +769,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\pace\pace.js" />
+    <Content Include="Scripts\Styling\ajax-3.3.1-jquery.min.js" />
+    <Content Include="Scripts\Styling\bootstrap.3.3.7.boostrap.min.js" />
     <Content Include="Scripts\Tables\Data-menu.js" />
     <Content Include="Scripts\Tables\Data.js" />
     <Content Include="Scripts\Tables\Simple-menu.js" />

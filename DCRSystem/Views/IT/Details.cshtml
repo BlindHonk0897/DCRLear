@@ -3,14 +3,7 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    $(window).on('load', function () {
-        document.getElementById('SC').style.width = @ViewBag.SkillsCertifiedPercentage + "%";
-        document.getElementById('SRC').style.width = @ViewBag.SkillsReCertifiedPercentage + "%";
-    });
-</script>
+
 <a href="@Url.Action(ViewBag.URLBack, "IT")" class="" style="padding-top:0px;color:brown"><h5><i class="fa fa-arrow-left"></i>&nbsp;<span>Go-To-List </span></h5></a>
 <div class="row">
     <div class="col-md-3">
@@ -51,7 +44,7 @@
                             </div>
                             <p><b> % Age : <code> @ViewBag.SkillsCertifiedPercentage%</code></b></p>
                             <p><b>Skills Points : <code> 20</code></b></p>
-                        </a>  
+                        </a>
                     </li>
                     <hr style="width: 100%; color: black; height: 1px; background-color:palevioletred;" />
                     <hr style="width: 100%; color: black; height: 1px; background-color:palevioletred;" />
@@ -88,28 +81,28 @@
                             <tr>
                                 @for (int i = 0; i < Model.MyCertifications.Count() / 2; i++)
                                 {
-                                <td>
-                                    @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
-                                    {
-                                        <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateCertified" class="badge bg-orange-active">
-                                            <i class="glyphicon glyphicon-check"></i>
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span data-toggle="tooltip" title="Not yet Certified" class="badge bg-black-gradient">
-                                            <i class="glyphicon glyphicon-question-sign"></i>
-                                        </span>
-                                    }
-                                    &nbsp;
-                                    &nbsp;
-                                    @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
-                                    {
-                                        <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateRecertified" class="badge bg-blue-active">
-                                            <i class="glyphicon glyphicon-check"></i>
-                                        </span>
-                                    }
-                                </td>
+                                    <td>
+                                        @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
+                                        {
+                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateCertified" class="badge bg-orange-active">
+                                                <i class="glyphicon glyphicon-check"></i>
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span data-toggle="tooltip" title="Not yet Certified" class="badge bg-black-gradient">
+                                                <i class="glyphicon glyphicon-question-sign"></i>
+                                            </span>
+                                        }
+                                        &nbsp;
+                                        &nbsp;
+                                        @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
+                                        {
+                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateRecertified" class="badge bg-blue-active">
+                                                <i class="glyphicon glyphicon-check"></i>
+                                            </span>
+                                        }
+                                    </td>
                                 }
                             </tr>
                         </tbody>
@@ -132,31 +125,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                             <tr>
+                            <tr>
                                 @for (int i = (Model.MyCertifications.Count() / 2); i < Model.MyCertifications.Count(); i++)
                                 {
-                                <td>
-                                    @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
-                                    {
-                                        <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateCertified" class="badge bg-orange-active">
-                                            <i class="glyphicon glyphicon-check"></i>
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span data-toggle="tooltip" title="Not yet Certified" class="badge bg-black-gradient">
-                                            <i class="glyphicon glyphicon-question-sign"></i>
-                                        </span>
-                                    }
-                                    &nbsp;
-                                    &nbsp;
-                                    @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
-                                    {
-                                        <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateRecertified" class="badge bg-blue-active">
-                                            <i class="glyphicon glyphicon-check"></i>
-                                        </span>
-                                    }
-                                </td>
+                                    <td>
+                                        @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
+                                        {
+                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateCertified" class="badge bg-orange-active">
+                                                <i class="glyphicon glyphicon-check"></i>
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span data-toggle="tooltip" title="Not yet Certified" class="badge bg-black-gradient">
+                                                <i class="glyphicon glyphicon-question-sign"></i>
+                                            </span>
+                                        }
+                                        &nbsp;
+                                        &nbsp;
+                                        @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
+                                        {
+                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateRecertified" class="badge bg-blue-active">
+                                                <i class="glyphicon glyphicon-check"></i>
+                                            </span>
+                                        }
+                                    </td>
                                 }
                             </tr>
                         </tbody>
@@ -231,5 +224,14 @@
         </div>
     </div>
 </div>
-
+@section ViewSpecificJavascript{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+    <script type="text/javascript">
+    $(window).on('load', function () {
+        document.getElementById('SC').style.width = @ViewBag.SkillsCertifiedPercentage + "%";
+        document.getElementById('SRC').style.width = @ViewBag.SkillsReCertifiedPercentage + "%";
+    });
+    </script>
+}
 
