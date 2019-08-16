@@ -506,6 +506,7 @@ namespace DCRSystem.Controllers
                     empModel.Employee = employee;
                     empModel.Certifications = ldcr.Certifications.OrderBy(l => l.Code).ToList();
                     empModel.TotalCertifications = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderBy(cr => cr.CertificationCode).ToList();
+                    empModel.CurrentCertification = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderByDescending(cr => cr.DateCertified).FirstOrDefault();
                     double SKP = (Convert.ToDouble(empModel.TotalCertifications.Count() )/ Convert.ToDouble(empModel.Certifications.Count()+2)) *(100);
                     if (!Double.IsNaN(SKP))
                     {

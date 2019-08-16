@@ -11,20 +11,14 @@
                 <img class="profile-user-img img-responsive img-circle" src="~/Content/img/user.svg" alt="User profile picture">
                 <h3 class="profile-username text-center">@Model.Employee.Last_Name , @Model.Employee.First_Name</h3>
                 <p class="text-muted text-center">@Model.Employee.Position</p>
-                <a href="#" class="btn btn-primary btn-block"><b>Employee Details</b></a>
-            </div>
-        </div>
-        <div class="box box-solid">
-            <div class="box-header with-border">
-                <h4 class="box-title">Legend: </h4>
-            </div>
-            <div class="box-body">
-                <div id="external-events">
-                    <div class="external-event bg-green-active">Recent Certification </div>
-                    <div class="external-event bg-orange-active"> Certified</div>
-                    <div class="external-event bg-blue-active"> Re-Certified </div>
-                    <div class="external-event bg-black-active">Not Certified </div>
-                </div>
+                @if (Model.Employee.Job_Status == "ACTIVE (CURRENT)")
+                {
+                    <a href="#" class="btn btn-primary btn-block"><b>@Model.Employee.Job_Status</b></a>
+                }
+                else
+                {
+                    <a href="#" class="btn btn-danger btn-block"><b>@Model.Employee.Job_Status</b></a>
+                }
             </div>
         </div>
         <div class="box box-solid">
@@ -63,158 +57,161 @@
             </div>
         </div>
     </div>
-    <div class="col-md-9">
-        <div class="box box-primary">
-            <div class="box-body no-padding">
-                <div id="calendar">
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                            <tr>
+    <div class="col-lg-9 connectedSortable">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs pull-right">
+                <li><a href="#second-tab" data-toggle="tab" id="Page2">Page2</a></li>
+                <li class="active"><a href="#first-tab" data-toggle="tab" id="Page1">Page 1</a></li>
+                <li class="pull-left header"><i class="fa fa-inbox"></i><strong>Employee Details</strong></li>
+            </ul>
+            <div class="tab-content no-padding">
+                <div class="chart tab-pane active" id="first-tab" style="position: relative; height: 570px;">
+                    <div class="table-responsive mailbox-messages">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Certification Code</th>
+                                    <th>Description</th>
+                                    <th>Date Certified</th>
+                                    <th>Date Re-Certified</th>
+                                    <th>Current Certification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 @for (int i = 0; i < Model.Certifications.Count() / 2; i++)
                                 {
-                                    <th>@Model.Certifications.ElementAt(i).Code</th>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                @for (int i = 0; i < Model.MyCertifications.Count() / 2; i++)
-                                {
-                                    <td>
+                                    <tr>
+                                        <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
+                                        <td>- @Model.Certifications.ElementAt(i).Description</td>
                                         @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
                                         {
-                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateCertified" class="badge bg-orange-active">
-                                                <i class="glyphicon glyphicon-check"></i>
-                                            </span>
+                                            <td class="mailbox-star"><i class="fa fa-star text-yellow"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateCertified</td>
                                         }
                                         else
                                         {
-                                            <span data-toggle="tooltip" title="Not yet Certified" class="badge bg-black-gradient">
-                                                <i class="glyphicon glyphicon-question-sign"></i>
-                                            </span>
+                                            <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
                                         }
-                                        &nbsp;
-                                        &nbsp;
                                         @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
                                         {
-                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateRecertified" class="badge bg-blue-active">
-                                                <i class="glyphicon glyphicon-check"></i>
-                                            </span>
-                                        }
-                                    </td>
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-9">
-        <div class="box box-primary">
-            <div class="box-body no-padding">
-                <div id="calendar">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                @for (int i = (Model.Certifications.Count() / 2); i < Model.Certifications.Count(); i++)
-                                {
-                                    <th>@Model.Certifications.ElementAt(i).Code</th>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                @for (int i = (Model.MyCertifications.Count() / 2); i < Model.MyCertifications.Count(); i++)
-                                {
-                                    <td>
-                                        @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
-                                        {
-                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateCertified" class="badge bg-orange-active">
-                                                <i class="glyphicon glyphicon-check"></i>
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <span data-toggle="tooltip" title="Not yet Certified" class="badge bg-black-gradient">
-                                                <i class="glyphicon glyphicon-question-sign"></i>
-                                            </span>
-                                        }
-                                        &nbsp;
-                                        &nbsp;
-                                        @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
-                                        {
-                                            <span data-toggle="tooltip" title="@Model.MyCertifications.ElementAt(i).DateRecertified" class="badge bg-blue-active">
-                                                <i class="glyphicon glyphicon-check"></i>
-                                            </span>
-                                        }
-                                    </td>
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-9" style="margin-top:1px">
-        <div class="box box-danger">
+                                            <td class="mailbox-star"><i class="fa fa-star text-blue"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateRecertified</td>
 
-        </div>
-    </div>
-    <div class="col-md-9" style="margin-top:1px">
-        <div class="box box-success">
-            <div class="box-body no-padding">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="box box-solid">
-                            <div class="box-header with-border">
-                                <h4 class="box-title"><b>Certification Legend:</b> </h4>
-                            </div>
-                            <div class="box-body">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Certification Code</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @for (int i = 0; i < Model.Certifications.Count() / 2; i++)
-                                        {
-                                            <tr>
-                                                <td><strong>@Model.Certifications.ElementAt(i).Code</strong></td>
-                                                <td>@Model.Certifications.ElementAt(i).Description</td>
-                                            </tr>
                                         }
-                                    </tbody>
-                                </table>
+                                        else
+                                        {
+                                            <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
+                                        }
+                                        @if (Model.CurrentCertification != null)
+                                        {
+                                            if (Model.CurrentCertification.CertificationCode == Model.MyCertifications.ElementAt(i).CertificationCode)
+                                            {
+                                                <td class="mailbox-attachment"><i class="fa fa-star text-green"></i>&nbsp;@Model.MyCertifications.ElementAt(i).CertificationCode -@Model.MyCertifications.ElementAt(i).DateCertified</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="mailbox-attachment"></td>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <td class="mailbox-attachment"></td>
+                                        }
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="box-footer no-padding">
+                            <div class="mailbox-controls">
+                                <a href="@Url.Action("MyCertificate", "Approver",new {id = Model.Employee.Employee_ID})" class="btn btn-default btn-sm checkbox-toggle">
+                                    <i class="fa fa-refresh fa-spin"></i>
+                                </a>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-star text-yellow"></i>&nbsp; Certified</button>
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-star text-blue"></i>&nbsp; Re-Certified</button>
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-star text-green"></i>&nbsp; Current Certification</button>
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-star text-black"></i>&nbsp; Not yet Certified</button>
+                                </div>
+
+                                <div class="pull-right">
+                                    <div class="btn-group">
+                                        <button onclick="moveLeft()" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="box box-solid">
-                            <div class="box-header with-border">
-                                <h4 class="box-title"><b>Certification Legend:</b> </h4>
-                            </div>
-                            <div class="box-body">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Certification Code</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @for (int i = (Model.Certifications.Count() / 2); i < Model.Certifications.Count(); i++)
+                </div>
+                <div class="chart tab-pane" id="second-tab" style="position: relative; height: 570px;">
+                    <div class="table-responsive mailbox-messages">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Certification Code</th>
+                                    <th>Description</th>
+                                    <th>Date Certified</th>
+                                    <th>Date Re-Certified</th>
+                                    <th>Current Certification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = (Model.Certifications.Count() / 2); i < Model.Certifications.Count(); i++)
+                                {
+                                    <tr>
+                                        <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
+                                        <td>- @Model.Certifications.ElementAt(i).Description</td>
+                                        @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
                                         {
-                                            <tr>
-                                                <td><strong>@Model.Certifications.ElementAt(i).Code</strong></td>
-                                                <td>@Model.Certifications.ElementAt(i).Description</td>
-                                            </tr>
+                                            <td class="mailbox-star"><i class="fa fa-star text-yellow"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateCertified</td>
                                         }
-                                    </tbody>
-                                </table>
+                                        else
+                                        {
+                                            <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
+                                        }
+                                        @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
+                                        {
+                                            <td class="mailbox-star"><i class="fa fa-star text-blue"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateRecertified</td>
+
+                                        }
+                                        else
+                                        {
+                                            <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
+                                        }
+                                        @if (Model.CurrentCertification != null)
+                                        {
+                                            if (Model.CurrentCertification.CertificationCode == Model.MyCertifications.ElementAt(i).CertificationCode)
+                                            {
+                                                <td class="mailbox-attachment"><i class="fa fa-star text-green"></i>&nbsp;@Model.MyCertifications.ElementAt(i).CertificationCode -@Model.MyCertifications.ElementAt(i).DateCertified</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="mailbox-attachment"></td>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <td class="mailbox-attachment"></td>
+                                        }
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <div class="box-footer no-padding">
+                            <div class="mailbox-controls">
+                                <a href="@Url.Action("MyCertificate", "Approver",new {id = Model.Employee.Employee_ID})" class="btn btn-default btn-sm checkbox-toggle">
+                                    <i class="fa fa-refresh fa-spin"></i>
+                                </a>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-star text-yellow"></i>&nbsp; Certified</button>
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-star text-blue"></i>&nbsp; Re-Certified</button>
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-star text-green"></i>&nbsp; Current Certification</button>
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-star text-black"></i>&nbsp; Not yet Certified</button>
+                                </div>
+                                <div class="pull-right">
+                                    <div class="btn-group">
+                                        <button onclick="backRight()" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -230,6 +227,13 @@
     $(window).on('load', function () {
         document.getElementById('SC').style.width = @ViewBag.SkillsCertifiedPercentage + "%";
         document.getElementById('SRC').style.width = @ViewBag.SkillsReCertifiedPercentage + "%";
-    });
+        });
+        function backRight() {
+            $('#Page1').click();
+        }
+        function moveLeft() {
+            $('#Page2').click();
+        }
     </script>
 }
+

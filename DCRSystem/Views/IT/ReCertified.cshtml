@@ -166,7 +166,7 @@
                             <div class="form-group">
                                 <input type="text" name="Employee" value="@Model.Employee.Employee_ID" hidden />
                                 <input type="text" name="URLBACK" value="@ViewBag.URLBack" hidden />
-                                <label>Choose Type of Certification:</label>
+                                <label>Choose Code for Re-Certification:</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-codepen"></i>
@@ -184,13 +184,13 @@
 
                                         @foreach (var i in Model.AvailableReCertifications)
                                         {
-                                            <option value="@i.CertificationCode">@i.CertificationCode</option>
+                                            <option value="@i.CertificationCode">@i.CertificationCode </option>
                                         }
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Date Certified:</label>
+                                <label>Date Re-Certified:</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>

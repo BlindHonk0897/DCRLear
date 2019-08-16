@@ -4,7 +4,7 @@
     ViewBag.Title = "NewlyEmployees";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<form action="/IT/Employee">
+<form action="/IT/NewlyEmployees">
     <h3><i class="fa fa-users"></i>&nbsp;<strong><font color="sky-blue">Newly Employed</font></strong><small class="label pull-right bg-aqua-active"><input type="search" class="form-control" name="searchInput" placeholder="Search by Lastname" /></small></h3>
 </form>
 <div class="row">
@@ -26,21 +26,39 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>@item.Employee_ID</td>
-                                <td>@item.Last_Name , @item.First_Name</td>
-                                <td>@item.Position</td>
-                                <td>@item.Cost_Center_Description</td>
+                        <tr>
+                            <td>@item.Employee_ID</td>
+                            <td>@item.Last_Name , @item.First_Name</td>
+                            <td>@item.Position</td>
+                            <td>@item.Cost_Center_Description</td>
+                            <td>
+                                <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "NewlyEmployees" })" class="btn btn-microsoft btn-sm" style="width:90px;"><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;<span>Details</span></a>
+                            </td>
+                            @*<td>
+                                <a href="@Url.Action("Certified","IT",new { id = item.Employee_ID,urlBack = "NewlyEmployees" })" class="btn btn-bitbucket btn-sm" style="width:90px;"><i class="glyphicon glyphicon-chevron-down"></i>&nbsp;<span>Certified</span></a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("ReCertified","IT",new { id = item.Employee_ID,urlBack = "NewlyEmployees" })" class="btn btn-facebook btn-sm" style="width:90px"><i class="glyphicon glyphicon-retweet"></i>&nbsp;<span>Re-Certified</span></a>
+                            </td>*@
+                            @if (item.Job_Status == "ACTIVE (CURRENT)")
+                            {
                                 <td>
-                                    <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "NewlyEmployees" })" class="btn btn-microsoft btn-sm" style="width:90px;"><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;<span>Details</span></a>
+                                    <a href="@Url.Action("Certified", "IT", new { id = item.Employee_ID, urlBack = "NewlyEmployees" })" class="btn btn-bitbucket btn-sm" style="width:90px;"><i class="glyphicon glyphicon-chevron-down"></i>&nbsp;<span>Certified</span></a>
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Certified","IT",new { id = item.Employee_ID,urlBack = "NewlyEmployees" })" class="btn btn-bitbucket btn-sm" style="width:90px;"><i class="glyphicon glyphicon-chevron-down"></i>&nbsp;<span>Certified</span></a>
+                                    <a href="@Url.Action("ReCertified", "IT", new { id = item.Employee_ID, urlBack = "NewlyEmployees" })" class="btn btn-facebook btn-sm" style="width:90px"><i class="glyphicon glyphicon-retweet"></i>&nbsp;<span>Re-Certified</span></a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <button onclick="alert('Employee is In-Active')" class="btn btn-danger btn-sm" style="width:90px;"><i class="glyphicon glyphicon-chevron-down"></i>&nbsp;<span>Certified</span></button>
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("ReCertified","IT",new { id = item.Employee_ID,urlBack = "NewlyEmployees" })" class="btn btn-facebook btn-sm" style="width:90px"><i class="glyphicon glyphicon-retweet"></i>&nbsp;<span>Re-Certified</span></a>
+                                    <button onclick="alert('Employee is In-Active')" class="btn btn-danger btn-sm" style="width:90px"><i class="glyphicon glyphicon-retweet"></i>&nbsp;<span>Re-Certified</span></button>
                                 </td>
-                            </tr>
+                            }
+                        </tr>
                         }
                     </tbody>
                 </table>

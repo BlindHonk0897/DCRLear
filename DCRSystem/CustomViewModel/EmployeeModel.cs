@@ -15,5 +15,6 @@ namespace DCRSystem.CustomViewModel
         public IEnumerable<CertificationTracker> TotalCertifications { get; set; }
         public List<CertificationTracker> MyCertifications = new List<CertificationTracker>();
         public List<Certification> ImNotCertified = new List<Certification>();
+        public CertificationTracker CurrentCertification { get; set; }
     }
 }

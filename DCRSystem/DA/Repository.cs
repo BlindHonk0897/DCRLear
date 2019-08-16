@@ -77,10 +77,7 @@ namespace DCRSystem.DA
             {
                 return null;
             }
-
-            //return accounts.Where(u => u.BagdeNo.ToLower() == account.BagdeNo.ToLower() &&
-            //u.Password == account.Password).FirstOrDefault();
-            
+                      
         }
     }
 }
