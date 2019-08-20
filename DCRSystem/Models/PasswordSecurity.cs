@@ -30,6 +30,7 @@ namespace DCRSystem.Models
             return decryptpwd;
         }
          
+        //LEAR ENCRYPT PASSWORD USED
         public string EncryptPassword(string password)
         {
             System.Security.Cryptography.MD5CryptoServiceProvider md5Pass = new System.Security.Cryptography.MD5CryptoServiceProvider();

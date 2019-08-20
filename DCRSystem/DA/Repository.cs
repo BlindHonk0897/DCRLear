@@ -14,66 +14,74 @@ namespace DCRSystem.DA
        public static PasswordSecurity passSecure = new PasswordSecurity();
        static List<User> user = db.Users.ToList();
 
-        //static List<Account> accounts = new List<Account>() {
-
-            //new Account() {BagdeNo="7000357@gmail.com",Roles="Admin,Editor",Password="abcadmin" },
-            //new Account() {BagdeNo="7000355",Roles="Editor",Password="xyzeditor" }
-           // foreach(var us in user){new Account() {BagdeNo="7000357@gmail.com",Roles="Admin,Editor",Password="abcadmin" }};
-        
-         //};
-
         public static Account GetAccountDetails(Account account)
-        {
-            //var accc = db.Users.Where(u => u.BadgeNo.ToLower() == account.BagdeNo && u.Password == account.Password).FirstOrDefault();
-            //if (accc != null)
-            //{
-            //    Account acc = new Account() { BagdeNo = accc.BadgeNo, Roles = accc.Roles, Password = accc.Password };
-            //    return acc;
-            //}
+        {        
             var intBagde = System.Int32.Parse(account.BagdeNo);
-            System.Diagnostics.Debug.WriteLine(intBagde);
+            System.Diagnostics.Debug.WriteLine(intBagde); //Console Display For Debug Purposes
+
+            // get User from user_vw with Default Password (Lear)
             var accc = leardbUser.user_vw.Where(u => u.badge_no.ToLower() == intBagde.ToString().ToLower() && u.password == account.Password).FirstOrDefault();
-            System.Diagnostics.Debug.WriteLine(accc);
+            System.Diagnostics.Debug.WriteLine(accc); //Console Display For Debug Purposes
+
+            // encrypt Password
             var passEn = passSecure.EncryptPassword(account.Password);
+
+            // get User from user_vw with their Own Password:
             var accc1 = leardbUser.user_vw.Where(u => u.badge_no.ToLower() == intBagde.ToString().ToLower() && u.Employee_Password == passEn).FirstOrDefault();
-            System.Diagnostics.Debug.WriteLine(accc1);
+
+            System.Diagnostics.Debug.WriteLine(accc1);//Console Display For Debug Purposes
+
+            // Check if User with Default Password is exist
             if (accc != null)
             {
+                // if exist---
+
+                // Get all approvers from Database
                 var users = learEmployees.Database.SqlQuery<Approver>("Select * from approvers").ToList<Approver>();
+
+                // Set variable Roles as 'Default'
                 var Roles = "Default";
                
-
+                // Check if Default User is an Approver VIA foreach loop
                 foreach (Approver app in users)
                 {
-                    //System.Diagnostics.Debug.WriteLine(app.approver);
-                    //var tempBadge = "0" + accc.badge_no;
+                    
                     if (accc.badge_no.Equals(System.Int32.Parse(app.approver.ToString()).ToString().ToLower()))
                     {
+                        // if User is consider as Approver set variable Roles to 'Approver'
                         Roles = "Approver";
                         break;
                     }
                 }
+
+                // Initialize account and set its attributes by the Defaut User
                 Account acc = new Account() { BagdeNo = account.BagdeNo, Roles = Roles, Password = accc.password };
                 return acc;
-            }else if(accc1 != null)
+            }else if(accc1 != null) // else if Default User not exist check User with its prefer password 
             {
+                // if exist---
+
+                // Get all approvers from Database
                 var users = learEmployees.Database.SqlQuery<Approver>("Select * from approvers").ToList<Approver>();
+
+                // Set variable Roles as 'Default'
                 var Roles = "Default";
 
-               // var tempBadge = "0" + accc1.badge_no;
+                // Check if Default User is an Approver VIA foreach loop
                 foreach (Approver app in users)
-                {
-                    //System.Diagnostics.Debug.WriteLine(app.approver);
+                {               
                     if (accc1.badge_no.Equals(System.Int32.Parse(app.approver.ToString()).ToString().ToLower()))
                     {
+                        // if User is consider as Approver set variable Roles to 'Approver'
                         Roles = "Approver";
                         break;
                     }
                 }
+                // Initialize account and set its attributes by the Defaut User
                 Account acc = new Account() { BagdeNo = account.BagdeNo, Roles = Roles, Password = accc1.Employee_Password };
                 return acc;
             }
-            else
+            else // else just return null
             {
                 return null;
             }

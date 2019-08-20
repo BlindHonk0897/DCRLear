@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 namespace DCRSystem.Controllers
 {
-    [Authorize]
+    [Authorize] // DO NOT DELETE IMPORTANT COMMENT
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -72,7 +72,6 @@ namespace DCRSystem.Controllers
             return View();
         }
 
-        //
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -87,28 +86,41 @@ namespace DCRSystem.Controllers
             {
                 return View(model);
             }
-            // var pass = ps.Encryptdata(model.Password);
-            // Account user = new Account() { BagdeNo = model.BagdeNo,Roles = "", Password = pass }; -- if encrypted
             Account user = new Account() { BagdeNo = model.BagdeNo, Roles = "", Password = model.Password };
 
-            user = Repository.GetAccountDetails(user);
+            user = Repository.GetAccountDetails(user); // Calling getAccountDetailsFunction from Repository Class
 
+            // check if User is exist..
             if (user != null)
             {
+                // if true..
+
+                // Get Employee Details
                 Employees_Details userrr = _EmployeesManager.Employees_Details.Where(em => em.Employee_ID == user.BagdeNo).FirstOrDefault();
                 var intBadge = System.Int32.Parse(model.BagdeNo).ToString();
+                // Get User info from user_vw using BadgeNo
                 user_vw usertemp = learUser.user_vw.Where(use => use.badge_no == intBadge ).FirstOrDefault();
-                var countEmployees = _EmployeesManager.Employees_Details.ToList();
-                var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).ToList().Count();
-                var countNewlyEmployees = _EmployeesManager.newlyEmployees.ToList();
-                //var username = userrr.First_Name + " " + userrr.Last_Name;
 
+                // Get total Number of Employees 
+                var countEmployees = _EmployeesManager.Employees_Details.ToList();
+
+                // Get total Number of Active Employees 
+                var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).ToList().Count();
+                
+                // Get total Number of Inactive Employees 
+                var countNewlyEmployees = _EmployeesManager.newlyEmployees.ToList();
+              
+                // Set Authentication Cookie to User's EMAIL ADDRESS
                 FormsAuthentication.SetAuthCookie(usertemp.email, false);
+
+                // [ BEGIN -- Authentication Configuration
                 var authTicket = new FormsAuthenticationTicket(1, usertemp.email, DateTime.Now, DateTime.Now.AddMinutes(720), false, user.Roles);
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 HttpContext.Response.Cookies.Add(authCookie);
+                // -- END Authentication Configuration ]
 
+                // [ BEGIN -- Session Configuration
                 Session["User"] = usertemp.email;
                 Session["RoleUser"] = user.Roles;
                 Session["UserId"] = user.BagdeNo;
@@ -118,21 +130,32 @@ namespace DCRSystem.Controllers
                 Session["NumberOfActiveEmployees"] = countActiveEmployees;
                 Session["NumberOfInactiveEmployees"] = countEmployees.Count() - countActiveEmployees;
                 if (userrr != null) { Session["UserPosition"] = userrr.Position; }
+                // -- END Session Configuration ]
+
                 return RedirectToAction("Home", "Home");
             }
-            else if (model.BagdeNo.ToString() == "1234" && model.Password.ToString() =="IT")
+            else if (model.BagdeNo.ToString() == "1234" && model.Password.ToString() =="IT")  // Hardcoded User For IT admin
             {
+                // Get total Number of Employees 
                 var countEmployees = _EmployeesManager.Employees_Details.ToList();
+
+                // Get total Number of Inactive Employees 
                 var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).ToList().Count();
-                
+
+                // Get total Number of Inactive Employees 
                 var countNewlyEmployees = _EmployeesManager.newlyEmployees.ToList();
-                
+
+                // Set Authentication Cookie to User's EMAIL ADDRESS -- ( Hardcoded )
                 FormsAuthentication.SetAuthCookie("IT@lear.com", false);
 
+                // [ BEGIN -- Authentication Configuration
                 var authTicket = new FormsAuthenticationTicket(1, "IT@lear.com", DateTime.Now, DateTime.Now.AddMinutes(720), true, "IT");
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 HttpContext.Response.Cookies.Add(authCookie);
+                // -- END Authentication Configuration ]
+
+                // [ BEGIN -- Session Configuration
                 Session["User"] = "IT@lear.com";
                 Session["RoleUser"] = "IT";
                 Session["UserId"] = "IT";
@@ -141,17 +164,19 @@ namespace DCRSystem.Controllers
                 Session["NumberOfNewlyEmployees"] = countNewlyEmployees.Count();
                 Session["NumberOfActiveEmployees"] = countActiveEmployees;
                 Session["NumberOfInactiveEmployees"] = countEmployees.Count()- countActiveEmployees;
+                // [ BEGIN -- Session Configuration
+
                 return RedirectToAction("Home", "Home");
             }
 
-            else
+            else // else return View with error mesage.
             {
                 ModelState.AddModelError("", "Invalid login attempt.");
                 return View(model);
             }
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // GET: /Account/VerifyCode
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
@@ -164,7 +189,7 @@ namespace DCRSystem.Controllers
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // POST: /Account/VerifyCode
         [HttpPost]
         [AllowAnonymous]
@@ -194,7 +219,7 @@ namespace DCRSystem.Controllers
             }
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -202,7 +227,7 @@ namespace DCRSystem.Controllers
             return View();
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -269,7 +294,7 @@ namespace DCRSystem.Controllers
             return View(model);
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
@@ -282,7 +307,7 @@ namespace DCRSystem.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
         public ActionResult ForgotPassword()
@@ -290,7 +315,7 @@ namespace DCRSystem.Controllers
             return View();
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
@@ -318,7 +343,7 @@ namespace DCRSystem.Controllers
             return View(model);
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
@@ -326,7 +351,7 @@ namespace DCRSystem.Controllers
             return View();
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
@@ -334,7 +359,7 @@ namespace DCRSystem.Controllers
             return code == null ? View("Error") : View();
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
@@ -360,7 +385,7 @@ namespace DCRSystem.Controllers
             return View();
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
@@ -368,7 +393,7 @@ namespace DCRSystem.Controllers
             return View();
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
@@ -379,7 +404,7 @@ namespace DCRSystem.Controllers
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // GET: /Account/SendCode
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
@@ -394,7 +419,7 @@ namespace DCRSystem.Controllers
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // POST: /Account/SendCode
         [HttpPost]
         [AllowAnonymous]
@@ -414,7 +439,7 @@ namespace DCRSystem.Controllers
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
@@ -444,7 +469,7 @@ namespace DCRSystem.Controllers
             }
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
@@ -482,7 +507,7 @@ namespace DCRSystem.Controllers
             return View(model);
         }
 
-        //
+        
         // POST: /Account/LogOff
         [HttpPost]
         [AllowAnonymous]
@@ -499,6 +524,10 @@ namespace DCRSystem.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        // You may think why there's logOff() and logOut() method ?
+        // Never mind that because its method have different implementation
+        // So never Delete one of the method else you will encounter some error 
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult LogOut()
@@ -512,7 +541,7 @@ namespace DCRSystem.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        //
+        // not Used in this Application but Don't DELETE THIS METHOD it might be used in the future Application enhancement!
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()

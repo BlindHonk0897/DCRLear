@@ -11,22 +11,25 @@ using System.Web.Mvc;
 
 namespace DCRSystem.Controllers
 {
-    [Authorize(Roles ="IT")]
+    [Authorize(Roles ="IT")] // Only IT Authorized can access this Controller
     public class ITController : Controller
     {
         public commonEmployeesEntities cEE = new commonEmployeesEntities();
         public lear_DailiesCertificationRequirementEntities ldcr = new lear_DailiesCertificationRequirementEntities();
+       
         // GET: IT
         public ActionResult Employee(int? page, String searchInput = "")
         {
+            // Get all Employees from Database
             List<Employees_Details> employees = cEE.Employees_Details.OrderBy(a => a.Last_Name).ToList();
 
             if (!string.IsNullOrEmpty(searchInput))
             {
+                // get employee/employees with the same lastname with the input
                 employees = employees.Where(a => a.Last_Name.ToLower().Contains(searchInput.ToLower()) || a.Employee_ID.Contains(searchInput)).ToList();
             }
            
-            int pageSize = 10;
+            int pageSize = 10; // pagelist number of page
             int pageNumber = (page ?? 1);
 
 
@@ -34,255 +37,55 @@ namespace DCRSystem.Controllers
             //return View();
         }
 
-        //public ActionResult PlanReCertification()
-        //{
-        //    ViewBag.Employees = new SelectList(cEE.Employees_Details.Select(s => new {
-        //        badge_no = s.Employee_ID,
-        //        Surname = s.Last_Name,
-        //        Firstname = s.First_Name,
-        //        FullName = s.First_Name + ", "
-        //      + s.Last_Name,
-        //        Position = s.Position,
-        //        HiredDate = s.Hire_Date
-        //    }).OrderBy(s => s.Surname), "badge_no", "FullName");
-
-        //    ViewBag.Certifications = new SelectList(ldcr.Certifications.Select(c => new {
-        //        ID = c.Id,
-        //        Code = c.Code,
-        //        Description = c.Description
-        //    }).OrderBy(s => s.ID), "code", "code");
-
-        //    ViewBag.Employees1 = cEE.Employees_Details.OrderBy(s => s.Last_Name).ToList();
-        //    ViewBag.Certifications1 = ldcr.Certifications.OrderBy(s => s.Id).ToList();
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult AddPlanReCertification()
-        //{
-        //    var DateP = Request.Form["DatePlan"];
-        //    var Who = Request.Form["Employee"];
-        //    var Code = Request.Form["Code"];
-        //    List<String> error = new List<string>();
-        //    CertificationTracker certificationTracker = new CertificationTracker();
-        //    if (DateP != null && Who != null && Code != null)
-        //    {
-        //        // Check if Employee is Exist
-        //        var emp = cEE.Employees_Details.Where(u => u.Employee_ID.ToString().ToLower() == Who.ToString().ToLower()).FirstOrDefault();
-        //        if (emp != null)
-        //        {
-        //            certificationTracker.EmpBadgeNo = emp.Employee_ID;
-        //        }
-        //        else
-        //        {
-        //            error.Add("BadgeNo not exist");
-        //        }
-        //        // Check if certification Code is Exist
-        //        var code = ldcr.Certifications.Where(c => c.Code == Code).FirstOrDefault();
-        //        if (code != null)
-        //        {
-        //            certificationTracker.CertificationCode = code.Code;
-        //        }
-        //        else
-        //        {
-        //            error.Add("Certification Code not exist");
-        //        }
-
-        //        //if (Validator.isValidDate(DateP))
-        //        //{
-        //        //    certificationTracker.DateCertified = DateTime.ParseExact(DateP, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-        //        //}
-        //        //else
-        //        //{
-        //        //    error.Add("Date is prior from the date today!");
-        //        //}
-        //        if (error.Count > 0)
-        //        {
-        //            foreach (var da in error)
-        //            {
-        //                System.Diagnostics.Debug.WriteLine(da);
-        //            }
-
-
-        //            // return Content(DateP + " - " + Who + " - " + Code);
-        //        }
-        //        else
-        //        {
-
-        //           /// if(Validator.compareTwoDate(DateP,))
-        //            var TempCertificationTracker = ldcr.CertificationTrackers.Where(ct => ct.EmpBadgeNo ==
-        //            certificationTracker.EmpBadgeNo && ct.CertificationCode == certificationTracker.CertificationCode).FirstOrDefault();
-        //            if (TempCertificationTracker != null)
-        //            {
-        //                System.Diagnostics.Debug.WriteLine(TempCertificationTracker.DateCertified.ToString());
-        //                var DataFin = DateTime.ParseExact(DateP, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-        //                DateTime dtValue = (DateTime)TempCertificationTracker.DateCertified;
-        //                System.Diagnostics.Debug.WriteLine(dtValue.ToShortDateString());
-        //                //var DataFin1 = DateTime.ParseExact(dtValue.ToShortDateString(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
-        //                System.Diagnostics.Debug.WriteLine(DataFin.ToString());
-        //                //System.Diagnostics.Debug.WriteLine(DataFin1.ToString());
-        //               // if (Validator.compareTwoDate(DataFin.ToShortDateString(), dtValue.ToShortDateString()))
-        //               // {
-        //                    // Update that tracker
-        //                    System.Diagnostics.Debug.WriteLine(certificationTracker.CertificationCode + " --- " + certificationTracker.EmpBadgeNo
-        //                    + " -- " + certificationTracker.DateCertified);
-        //                    TempCertificationTracker.DateRecertified = DateTime.ParseExact(DateP, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-        //                    ldcr.Entry(TempCertificationTracker).State = EntityState.Modified;
-        //                    ldcr.SaveChanges();
-        //              //  }
-        //              //  else
-        //               // {
-        //                    //return Content("ERROR BHAI");
-        //               // }
-
-                         
-        //                //ldcr.CertificationTrackers.Find(TempCertificationTracker).
-        //            }
-                    
-        //            // return Content(error.Count.ToString());
-        //        }
-        //    }
-        //    return RedirectToAction("PlanReCertification");
-            
-        //}
-
-        //public ActionResult Certification()
-        //{
-        //    ViewBag.Employees = new SelectList(cEE.Employees_Details.Select(s => new {
-        //        badge_no = s.Employee_ID,
-        //        Surname = s.Last_Name,
-        //        Firstname = s.First_Name,
-        //        FullName = s.First_Name + ", "
-        //      + s.Last_Name,
-        //        Position = s.Position,
-        //        HiredDate = s.Hire_Date
-        //    }).OrderBy(s => s.Surname), "badge_no", "FullName");
-
-        //    ViewBag.Certifications = new SelectList(ldcr.Certifications.Select(c => new {
-        //        ID = c.Id,
-        //        Code = c.Code,
-        //        Description = c.Description
-        //    }).OrderBy(s => s.ID), "code", "code");
-
-        //    ViewBag.Employees1 = cEE.Employees_Details.OrderBy(s => s.Last_Name).ToList();
-        //    ViewBag.Certifications1 = ldcr.Certifications.OrderBy(s => s.Id).ToList();
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult AddCertification()
-        //{
-        //    var DateP = Request.Form["DatePlan"];
-        //    var Who = Request.Form["Employee"];
-        //    var Code = Request.Form["Code"];
-        //    List<String> error = new List<string>();
-        //    CertificationTracker certificationTracker = new CertificationTracker();
-        //    if (DateP != null && Who != null && Code != null)
-        //    {
-        //        // Check if Employee is Exist
-        //        var emp = cEE.Employees_Details.Where(u => u.Employee_ID.ToString().ToLower() == Who.ToString().ToLower()).FirstOrDefault();
-        //        if (emp != null)
-        //        {
-        //            certificationTracker.EmpBadgeNo = emp.Employee_ID;
-        //        }
-        //        else
-        //        {
-        //            error.Add("BadgeNo not exist");
-        //        }
-        //        // Check if certification Code is Exist
-        //        var code = ldcr.Certifications.Where(c => c.Code == Code).FirstOrDefault();
-        //        if (code != null)
-        //        {
-        //            certificationTracker.CertificationCode = code.Code;
-        //        }
-        //        else
-        //        {
-        //            error.Add("Certification Code not exist");
-        //        }
-
-        //        if (Validator.isValidDate(DateP))
-        //        {
-        //            certificationTracker.DateCertified = DateTime.ParseExact(DateP, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-        //        }
-        //        else
-        //        {
-        //            error.Add("Date is prior from the date today!");
-        //        }
-        //        if (error.Count > 0)
-        //        {
-        //            foreach (var da in error)
-        //            {
-        //                System.Diagnostics.Debug.WriteLine(da);
-        //            }
-
-
-        //           // return Content(DateP + " - " + Who + " - " + Code);
-        //        }
-        //        else
-        //        {
-        //            var TempCertificationTracker = ldcr.CertificationTrackers.Where(ct => ct.EmpBadgeNo ==
-        //            certificationTracker.EmpBadgeNo && ct.CertificationCode == certificationTracker.CertificationCode).FirstOrDefault();
-        //            if (TempCertificationTracker != null)
-        //            {
-        //                //// Update that tracker
-        //                //System.Diagnostics.Debug.WriteLine(certificationTracker.CertificationCode + " --- " + certificationTracker.EmpBadgeNo
-        //                //    + " -- " + certificationTracker.DateCertified);
-        //                //TempCertificationTracker.DateCertified = certificationTracker.DateCertified;
-        //                //ldcr.Entry(TempCertificationTracker).State = EntityState.Modified;
-        //                //ldcr.SaveChanges();
-        //                //ldcr.CertificationTrackers.Find(TempCertificationTracker).
-        //            }
-        //            else
-        //            {
-        //                // Add the new Tracker
-        //                ldcr.CertificationTrackers.Add(certificationTracker);
-        //                ldcr.SaveChanges();
-        //            }
-        //           // return Content(error.Count.ToString());
-        //        }
-        //    }
-        //    return RedirectToAction("Certification");
-        //}
-
         [HttpGet]
         public ActionResult Certified(String id,String urlBack)
         {
-            ViewBag.URLBack = urlBack;
+            ViewBag.URLBack = urlBack;// Backing Purposes
+
             EmployeeModel empModel = new EmployeeModel();
             if (id != null)
             {
+                // Get employee using the id
                 var employee = cEE.Employees_Details.Where(emp => emp.Employee_ID == id).FirstOrDefault();
-                if (employee != null)
+
+                if (employee != null) // if exist
                 {
                     empModel.Employee = employee;
-                   // ViewBag.Employee_Details = employee;
                 }
             }
+
+            // Get the Total Certifications
             empModel.TotalCertifications = ldcr.CertificationTrackers.Where(ct => ct.EmpBadgeNo == id).ToList();
+
+            // Get All Certifications
             empModel.Certifications = ldcr.Certifications.OrderBy(ct => ct.Code).ToList<Certification>();
+
             foreach(var certTrack in empModel.Certifications)
             {
                 if(empModel.TotalCertifications.FirstOrDefault(tc => tc.CertificationCode == certTrack.Code) == null)
                 {
+                    // Add Certifications which employee is not Certified
                     empModel.ImNotCertified.Add(certTrack);
                 }
             }
-            ViewBag.Certifications1 = ldcr.Certifications.OrderBy(s => s.Id).ToList();
-            // return Content(id);
             return View(empModel);
         }
 
         [HttpPost]
         public ActionResult PostCertified()
         {
+            // [ GET DATAS from submitted form --
             var DateP = Request.Form["DateCertified"];
             var Who = Request.Form["Employee"];
             var Code = Request.Form["Code"];
             var RedirectURL = Request.Form["URLBACK"];
-            var message = "";
-           
-            List<String> error = new List<string>();
+            // ----------------------
+            var message = "";// initialize variable for message
+            List<String> error = new List<string>();// initialize variable for error
+
             CertificationTracker certificationTracker = new CertificationTracker();
+
+            // Validate DATA submitted
             if (DateP != null && Who != null && Code != null && Code!="X" && !String.IsNullOrEmpty(DateP))
             {
                 // Check if Employee is Exist
