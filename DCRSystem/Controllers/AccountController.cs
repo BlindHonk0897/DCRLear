@@ -123,7 +123,7 @@ namespace DCRSystem.Controllers
             else if (model.BagdeNo.ToString() == "1234" && model.Password.ToString() =="IT")
             {
                 var countEmployees = _EmployeesManager.Employees_Details.ToList();
-                var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper() == "ACTIVE (CURRENT)").ToList().Count();
+                var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).ToList().Count();
                 
                 var countNewlyEmployees = _EmployeesManager.newlyEmployees.ToList();
                 

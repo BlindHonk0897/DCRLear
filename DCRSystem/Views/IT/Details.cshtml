@@ -11,7 +11,7 @@
                 <img class="profile-user-img img-responsive img-circle" src="~/Content/img/user.svg" alt="User profile picture">
                 <h3 class="profile-username text-center">@Model.Employee.Last_Name , @Model.Employee.First_Name</h3>
                 <p class="text-muted text-center">@Model.Employee.Position</p>
-                @if (Model.Employee.Job_Status == "ACTIVE (CURRENT)")
+                @if (Model.Employee.Job_Status.ToUpper().Contains("CURRENT"))
                 {
                     <a href="#" class="btn btn-primary btn-block"><b>@Model.Employee.Job_Status</b></a>
                 }

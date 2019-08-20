@@ -556,7 +556,7 @@ namespace DCRSystem.Controllers
         [HttpGet]
         public ActionResult Active(int? page, String searchInput = "")
         {
-            List<Employees_Details> employees = cEE.Employees_Details.Where(emp => emp.Job_Status.ToUpper() == "ACTIVE (CURRENT)").OrderBy(a => a.Last_Name).ToList();
+            List<Employees_Details> employees = cEE.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).OrderBy(a => a.Last_Name).ToList();
 
             if (!string.IsNullOrEmpty(searchInput))
             {
@@ -573,7 +573,7 @@ namespace DCRSystem.Controllers
         [HttpGet]
         public ActionResult Inactive(int? page, String searchInput = "")
         {
-            List<Employees_Details> employees = cEE.Employees_Details.Where(emp => emp.Job_Status.ToUpper() != "ACTIVE (CURRENT)").OrderBy(a => a.Last_Name).ToList();
+            List<Employees_Details> employees = cEE.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("INACTIVE")).OrderBy(a => a.Last_Name).ToList();
 
             if (!string.IsNullOrEmpty(searchInput))
             {
