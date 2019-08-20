@@ -12,6 +12,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Points" Type="int" />
         </EntityType>
         <EntityType Name="CertificationHistory">
           <Key>
@@ -73,6 +74,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Points" Type="Int32" />
         </EntityType>
         <EntityType Name="CertificationHistory">
           <Key>
@@ -112,6 +114,7 @@
           <EntitySetMapping Name="Certifications">
             <EntityTypeMapping TypeName="lear_DailiesCertificationRequirementModel.Certification">
               <MappingFragment StoreEntitySet="Certification">
+                <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

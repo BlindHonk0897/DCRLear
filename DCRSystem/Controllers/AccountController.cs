@@ -99,7 +99,7 @@ namespace DCRSystem.Controllers
                 var intBadge = System.Int32.Parse(model.BagdeNo).ToString();
                 user_vw usertemp = learUser.user_vw.Where(use => use.badge_no == intBadge ).FirstOrDefault();
                 var countEmployees = _EmployeesManager.Employees_Details.ToList();
-                var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper() == "ACTIVE (CURRENT)").ToList().Count();
+                var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).ToList().Count();
                 var countNewlyEmployees = _EmployeesManager.newlyEmployees.ToList();
                 //var username = userrr.First_Name + " " + userrr.Last_Name;
 

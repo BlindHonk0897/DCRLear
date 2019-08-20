@@ -42,22 +42,22 @@
                                     <span class="sr-only"></span>
                                 </div>
                             </div>
-                            <p><b> % Age : <code> @ViewBag.SkillsCertifiedPercentage%</code></b></p>
-                            <p><b>Skills Points : <code> 20</code></b></p>
+                            <p><b> % Age : <code> @Model.PercentAgeCertified%</code></b></p>
+                            <p><b>Skills Points : <code> @Model.TotalPointsCertified</code></b></p>
                         </a>
                     </li>
                     <hr style="width: 100%; color: black; height: 1px; background-color:palevioletred;" />
                     <hr style="width: 100%; color: black; height: 1px; background-color:palevioletred;" />
                     <li>
                         <a>
-                            <p><b> Skills Re-Certified: <code>@ViewBag.TotalReCertified out of @Model.TotalCertifications.Count()</code></b></p>
+                            <p><b> Skills Re-Certified: <code>@Model.NumberReCertified out of @Model.TotalCertifications.Count()</code></b></p>
                             <div class="progress progress-xs active">
                                 <div class="progress-bar progress-bar-danger progress-bar-striped" id="SRC" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
                                     <span class="sr-only"></span>
                                 </div>
                             </div>
-                            <p><b> % Age : <code> @ViewBag.SkillsReCertifiedPercentage%</code></b></p>
-                            <p><b>Skills Points : <code> 20</code></b></p>
+                            <p><b> % Age : <code> @Model.PercentAgeCertified%</code></b></p>
+                            <p><b>Skills Points : <code> @Model.TotalPointsReCertified</code></b></p>
                         </a>
                     </li>
                 </ul>
@@ -229,8 +229,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
     <script type="text/javascript">
     $(window).on('load', function () {
-        document.getElementById('SC').style.width = @ViewBag.SkillsCertifiedPercentage + "%";
-        document.getElementById('SRC').style.width = @ViewBag.SkillsReCertifiedPercentage + "%";
+         document.getElementById('SC').style.width = @Model.PercentAgeCertified + "%";
+        document.getElementById('SRC').style.width = @Model.PercentAgeReCertified + "%";
     });
     </script>
 }

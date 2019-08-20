@@ -16,5 +16,10 @@ namespace DCRSystem.CustomViewModel
         public List<CertificationTracker> MyCertifications = new List<CertificationTracker>();
         public List<Certification> ImNotCertified = new List<Certification>();
         public CertificationTracker CurrentCertification { get; set; }
+        public int PercentAgeCertified { get; set; }
+        public int PercentAgeReCertified { get; set; }
+        public int TotalPointsReCertified { get; set; }
+        public int TotalPointsCertified { get; set; }
+        public int NumberReCertified { get; set; }
     }
 }

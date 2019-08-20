@@ -11,7 +11,7 @@
                 <img class="profile-user-img img-responsive img-circle" src="~/Content/img/user.svg" alt="User profile picture">
                 <h3 class="profile-username text-center">@Model.Employee.Last_Name , @Model.Employee.First_Name</h3>
                 <p class="text-muted text-center">@Model.Employee.Position</p>
-                @if (Model.Employee.Job_Status == "ACTIVE (CURRENT)")
+                @if (Model.Employee.Job_Status.ToUpper().Contains("CURRENT"))
                 {
                     <a href="#" class="btn btn-primary btn-block"><b>@Model.Employee.Job_Status</b></a>
                 }
@@ -35,22 +35,22 @@
                                     <span class="sr-only"></span>
                                 </div>
                             </div>
-                            <p><b> % Age : <code> @ViewBag.SkillsCertifiedPercentage%</code></b></p>
-                            <p><b>Skills Points : <code> 20</code></b></p>
+                            <p><b> % Age : <code> @Model.PercentAgeCertified%</code></b></p>
+                            <p><b>Skills Points : <code> @Model.TotalPointsCertified</code></b></p>
                         </a>
                     </li>
                     <hr style="width: 100%; color: black; height: 1px; background-color:palevioletred;" />
                     <hr style="width: 100%; color: black; height: 1px; background-color:palevioletred;" />
                     <li>
                         <a>
-                            <p><b> Skills Re-Certified: <code>@ViewBag.TotalReCertified out of @Model.TotalCertifications.Count()</code></b></p>
+                            <p><b> Skills Re-Certified: <code>@Model.NumberReCertified out of @Model.TotalCertifications.Count()</code></b></p>
                             <div class="progress progress-xs active">
                                 <div class="progress-bar progress-bar-danger progress-bar-striped" id="SRC" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
                                     <span class="sr-only"></span>
                                 </div>
                             </div>
-                            <p><b> % Age : <code> @ViewBag.SkillsReCertifiedPercentage%</code></b></p>
-                            <p><b>Skills Points : <code> 20</code></b></p>
+                            <p><b> % Age : <code> @Model.PercentAgeReCertified%</code></b></p>
+                            <p><b>Skills Points : <code> @Model.TotalPointsReCertified</code></b></p>
                         </a>
                     </li>
                 </ul>
@@ -62,16 +62,17 @@
             <ul class="nav nav-tabs pull-right">
                 <li><a href="#second-tab" data-toggle="tab" id="Page2">Page 2</a></li>
                 <li class="active"><a href="#first-tab" data-toggle="tab" id="Page1">Page 1</a></li>
-                <li class="pull-left header"><i class="fa fa-inbox"></i><strong>Employee Details</strong></li>
+                <li class="pull-left header"><i class="fa fa-inbox"></i><strong>My Progress</strong></li>
             </ul>
             <div class="tab-content no-padding">
-                <div class="chart tab-pane active" id="first-tab" style="position: relative; height: 570px;">
+                <div class="chart tab-pane active" id="first-tab" style="position: relative; height: auto;">
                     <div class="table-responsive mailbox-messages">
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
                                     <th>Certification Code</th>
                                     <th>Description</th>
+                                    <th>Date Certified</th>
                                     <th>Date Certified</th>
                                     <th>Date Re-Certified</th>
                                     <th>Current Certification</th>
@@ -80,43 +81,44 @@
                             <tbody>
                                 @for (int i = 0; i < Model.Certifications.Count() / 2; i++)
                                 {
-                                    <tr>
-                                        <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
-                                        <td>- @Model.Certifications.ElementAt(i).Description</td>
-                                        @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
-                                        {
-                                            <td class="mailbox-star"><i class="fa fa-star text-yellow"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateCertified</td>
-                                        }
-                                        else
-                                        {
-                                            <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
-                                        }
-                                        @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
-                                        {
-                                            <td class="mailbox-star"><i class="fa fa-star text-blue"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateRecertified</td>
+                                <tr>
+                                    <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
+                                    <td>- @Model.Certifications.ElementAt(i).Description</td>
+                                    <td>@Model.Certifications.ElementAt(i).Points</td>
+                                    @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
+                                    {
+                                        <td class="mailbox-star"><i class="fa fa-star text-yellow"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateCertified</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
+                                    }
+                                    @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
+                                    {
+                                        <td class="mailbox-star"><i class="fa fa-star text-blue"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateRecertified</td>
 
-                                        }
-                                        else
+                                    }
+                                    else
+                                    {
+                                        <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
+                                    }
+                                    @if (Model.CurrentCertification != null)
+                                    {
+                                        if (Model.CurrentCertification.CertificationCode == Model.MyCertifications.ElementAt(i).CertificationCode)
                                         {
-                                            <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
-                                        }
-                                        @if (Model.CurrentCertification != null)
-                                        {
-                                            if (Model.CurrentCertification.CertificationCode == Model.MyCertifications.ElementAt(i).CertificationCode)
-                                            {
-                                                <td class="mailbox-attachment"><i class="fa fa-star text-green"></i>&nbsp;@Model.MyCertifications.ElementAt(i).CertificationCode -@Model.MyCertifications.ElementAt(i).DateCertified</td>
-                                            }
-                                            else
-                                            {
-                                                <td class="mailbox-attachment"></td>
-                                            }
+                                            <td class="mailbox-attachment"><i class="fa fa-star text-green"></i>&nbsp;@Model.MyCertifications.ElementAt(i).CertificationCode -@Model.MyCertifications.ElementAt(i).DateCertified</td>
                                         }
                                         else
                                         {
                                             <td class="mailbox-attachment"></td>
                                         }
+                                    }
+                                    else
+                                    {
+                                        <td class="mailbox-attachment"></td>
+                                    }
 
-                                    </tr>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -141,13 +143,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="chart tab-pane" id="second-tab" style="position: relative; height: 570px;">
+                <div class="chart tab-pane" id="second-tab" style="position: relative; height: auto;">
                     <div class="table-responsive mailbox-messages">
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
                                     <th>Certification Code</th>
                                     <th>Description</th>
+                                    <th>Point/s</th>
                                     <th>Date Certified</th>
                                     <th>Date Re-Certified</th>
                                     <th>Current Certification</th>
@@ -156,42 +159,43 @@
                             <tbody>
                                 @for (int i = (Model.Certifications.Count() / 2); i < Model.Certifications.Count(); i++)
                                 {
-                                    <tr>
-                                        <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
-                                        <td>- @Model.Certifications.ElementAt(i).Description</td>
-                                        @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
-                                        {
-                                            <td class="mailbox-star"><i class="fa fa-star text-yellow"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateCertified</td>
-                                        }
-                                        else
-                                        {
-                                            <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
-                                        }
-                                        @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
-                                        {
-                                            <td class="mailbox-star"><i class="fa fa-star text-blue"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateRecertified</td>
+                                <tr>
+                                    <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
+                                    <td>- @Model.Certifications.ElementAt(i).Description</td>
+                                    <td>@Model.Certifications.ElementAt(i).Points</td>
+                                    @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
+                                    {
+                                        <td class="mailbox-star"><i class="fa fa-star text-yellow"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateCertified</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
+                                    }
+                                    @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
+                                    {
+                                        <td class="mailbox-star"><i class="fa fa-star text-blue"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateRecertified</td>
 
-                                        }
-                                        else
+                                    }
+                                    else
+                                    {
+                                        <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
+                                    }
+                                    @if (Model.CurrentCertification != null)
+                                    {
+                                        if (Model.CurrentCertification.CertificationCode == Model.MyCertifications.ElementAt(i).CertificationCode)
                                         {
-                                            <td class="mailbox-star"><i class="fa fa-star text-black"></i></td>
-                                        }
-                                        @if (Model.CurrentCertification != null)
-                                        {
-                                            if (Model.CurrentCertification.CertificationCode == Model.MyCertifications.ElementAt(i).CertificationCode)
-                                            {
-                                                <td class="mailbox-attachment"><i class="fa fa-star text-green"></i>&nbsp;@Model.MyCertifications.ElementAt(i).CertificationCode -@Model.MyCertifications.ElementAt(i).DateCertified</td>
-                                            }
-                                            else
-                                            {
-                                                <td class="mailbox-attachment"></td>
-                                            }
+                                            <td class="mailbox-attachment"><i class="fa fa-star text-green"></i>&nbsp;@Model.MyCertifications.ElementAt(i).CertificationCode -@Model.MyCertifications.ElementAt(i).DateCertified</td>
                                         }
                                         else
                                         {
                                             <td class="mailbox-attachment"></td>
                                         }
-                                    </tr>
+                                    }
+                                    else
+                                    {
+                                        <td class="mailbox-attachment"></td>
+                                    }
+                                </tr>
                                 }
 
                             </tbody>
@@ -225,8 +229,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
     <script type="text/javascript">
     $(window).on('load', function () {
-        document.getElementById('SC').style.width = @ViewBag.SkillsCertifiedPercentage + "%";
-        document.getElementById('SRC').style.width = @ViewBag.SkillsReCertifiedPercentage + "%";
+         document.getElementById('SC').style.width = @Model.PercentAgeCertified + "%";
+         document.getElementById('SRC').style.width = @Model.PercentAgeReCertified + "%";
         });
         function backRight() {
             $('#Page1').click();

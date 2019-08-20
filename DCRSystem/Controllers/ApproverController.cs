@@ -49,27 +49,32 @@ namespace DCRSystem.Controllers
                     double SKP = (Convert.ToDouble(empModel.TotalCertifications.Count()) / Convert.ToDouble(empModel.Certifications.Count() + 2)) * (100);
                     if (!Double.IsNaN(SKP))
                     {
-                        ViewBag.SkillsCertifiedPercentage = Convert.ToInt32(SKP);
+                        // ViewBag.SkillsCertifiedPercentage = Convert.ToInt32(SKP);
+                        empModel.PercentAgeCertified = Convert.ToInt32(SKP);
                     }
                     else
                     {
-                        ViewBag.SkillsCertifiedPercentage = 0;
+                        // ViewBag.SkillsCertifiedPercentage = 0;
+                        empModel.PercentAgeCertified = 0;
                     }
                     var ReCertified = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID && cr.DateRecertified != null).OrderBy(cr => cr.Id).ToList().Count();
                     ViewBag.TotalReCertified = ReCertified;
                     double SRKP = (Convert.ToDouble(ReCertified) / Convert.ToDouble(empModel.Certifications.Count() + 2)) * (100);
                     if (!Double.IsNaN(SRKP))
                     {
-                        ViewBag.SkillsReCertifiedPercentage = Convert.ToInt32(SRKP);
+                        // ViewBag.SkillsReCertifiedPercentage = Convert.ToInt32(SRKP);
+                        empModel.PercentAgeReCertified = Convert.ToInt32(SRKP);
                     }
                     else
                     {
-                        ViewBag.SkillsReCertifiedPercentage = 0;
+                        // ViewBag.SkillsReCertifiedPercentage = 0;
+                        empModel.PercentAgeReCertified = 0;
                     }
 
                     System.Diagnostics.Debug.WriteLine(Convert.ToInt32(SKP));
                     System.Diagnostics.Debug.WriteLine(Convert.ToInt32(SRKP));
-
+                    var totalPointsCertiFied = 0;
+                    var TotalPointsReCertified = 0;
                     foreach (var certification in empModel.Certifications)
                     {
                         if (empModel.TotalCertifications.FirstOrDefault(el => el.CertificationCode == certification.Code) == null)
@@ -85,9 +90,16 @@ namespace DCRSystem.Controllers
                         else
                         {
                             empModel.MyCertifications.Add(empModel.TotalCertifications.FirstOrDefault(el => el.CertificationCode == certification.Code));
+                            totalPointsCertiFied += Convert.ToInt32(certification.Points);
+                        }
+                        if (empModel.TotalCertifications.FirstOrDefault(el => el.CertificationCode == certification.Code && el.DateRecertified != null) != null)
+                        {
+                            TotalPointsReCertified += Convert.ToInt32(certification.Points);
                         }
                     }
                     System.Diagnostics.Debug.WriteLine(empModel.MyCertifications.Count());
+                    empModel.TotalPointsCertified = totalPointsCertiFied;
+                    empModel.TotalPointsReCertified = TotalPointsReCertified;
                 }
             }
             return View(empModel);
@@ -106,30 +118,36 @@ namespace DCRSystem.Controllers
                     empModel.Certifications = ldcr.Certifications.OrderBy(l => l.Code).ToList();
                     empModel.TotalCertifications = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderBy(cr => cr.CertificationCode).ToList();
                     empModel.CurrentCertification = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderByDescending(cr => cr.DateCertified).FirstOrDefault();
-                    double SKP = (Convert.ToDouble(empModel.TotalCertifications.Count()) / Convert.ToDouble(empModel.Certifications.Count() + 2)) * (100);
+                    double SKP = (Convert.ToDouble(empModel.TotalCertifications.Count()) / Convert.ToDouble(empModel.Certifications.Count())) * (100);
                     if (!Double.IsNaN(SKP))
                     {
-                        ViewBag.SkillsCertifiedPercentage = Convert.ToInt32(SKP);
+                        //ViewBag.SkillsCertifiedPercentage = Convert.ToInt32(SKP);
+                        empModel.PercentAgeCertified = Convert.ToInt32(SKP);
                     }
                     else
                     {
-                        ViewBag.SkillsCertifiedPercentage = 0;
+                        //ViewBag.SkillsCertifiedPercentage = 0;
+                        empModel.PercentAgeCertified = 0;
                     }
                     var ReCertified = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID && cr.DateRecertified != null).OrderBy(cr => cr.Id).ToList().Count();
-                    ViewBag.TotalReCertified = ReCertified;
-                    double SRKP = (Convert.ToDouble(ReCertified) / Convert.ToDouble(empModel.Certifications.Count() + 2)) * (100);
+                    //ViewBag.TotalReCertified = ReCertified;
+                    empModel.NumberReCertified = ReCertified;
+                    double SRKP = (Convert.ToDouble(ReCertified) / Convert.ToDouble(empModel.Certifications.Count())) * (100);
                     if (!Double.IsNaN(SRKP))
                     {
-                        ViewBag.SkillsReCertifiedPercentage = Convert.ToInt32(SRKP);
+                        // ViewBag.SkillsReCertifiedPercentage = Convert.ToInt32(SRKP);
+                        empModel.PercentAgeReCertified = Convert.ToInt32(SRKP);
                     }
                     else
                     {
-                        ViewBag.SkillsReCertifiedPercentage = 0;
+                        // ViewBag.SkillsReCertifiedPercentage = 0;
+                        empModel.PercentAgeReCertified = 0;
                     }
 
                     System.Diagnostics.Debug.WriteLine(Convert.ToInt32(SKP));
                     System.Diagnostics.Debug.WriteLine(Convert.ToInt32(SRKP));
-
+                    var totalPointsCertiFied = 0;
+                    var TotalPointsReCertified = 0;
                     foreach (var certification in empModel.Certifications)
                     {
                         if (empModel.TotalCertifications.FirstOrDefault(el => el.CertificationCode == certification.Code) == null)
@@ -139,14 +157,23 @@ namespace DCRSystem.Controllers
                             CT.EmpBadgeNo = id;
                             CT.CertificationCode = certification.Code;
                             CT.DateCertified = null;
-                            CT.DateCertified = null;
+                            CT.DateRecertified = null;
                             empModel.MyCertifications.Add(CT);
                         }
                         else
                         {
                             empModel.MyCertifications.Add(empModel.TotalCertifications.FirstOrDefault(el => el.CertificationCode == certification.Code));
+                            totalPointsCertiFied += Convert.ToInt32(certification.Points);
+                        }
+                        if (empModel.TotalCertifications.FirstOrDefault(el => el.CertificationCode == certification.Code && el.DateRecertified != null) != null)
+                        {
+                            TotalPointsReCertified += Convert.ToInt32(certification.Points);
                         }
                     }
+                    empModel.TotalPointsCertified = totalPointsCertiFied;
+                    empModel.TotalPointsReCertified = TotalPointsReCertified;
+
+
                 }
             }
             return View(empModel);

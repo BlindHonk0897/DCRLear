@@ -34,7 +34,7 @@
                             <td>@item.Position</td>
                             <td>@item.Cost_Center_Description</td>
                             <td>
-                                <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Employee" })" class="btn btn-microsoft btn-sm" style="width:90px;"><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;<span>Details</span></a>
+                                <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Employee" })" class="btn btn-microsoft btn-sm" style="width:90px;"><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;<span>Progress</span></a>
                             </td>
                             @if (item.Job_Status.ToUpper().Contains("CURRENT"))
                             {

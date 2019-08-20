@@ -11,7 +11,7 @@
                 <img class="profile-user-img img-responsive img-circle" src="~/Content/img/user.svg" alt="User profile picture">
                 <h3 class="profile-username text-center">@Model.Employee.Last_Name , @Model.Employee.First_Name</h3>
                 <p class="text-muted text-center">@Model.Employee.Position</p>
-                @if (Model.Employee.Job_Status == "ACTIVE (CURRENT)")
+                @if (Model.Employee.Job_Status.ToUpper().Contains("CURRENT"))
                 {
                     <a href="#" class="btn btn-primary btn-block"><b>@Model.Employee.Job_Status</b></a>
                 }
@@ -35,22 +35,22 @@
                                     <span class="sr-only"></span>
                                 </div>
                             </div>
-                            <p><b> % Age : <code> @ViewBag.SkillsCertifiedPercentage%</code></b></p>
-                            <p><b>Skills Points : <code> 20</code></b></p>
+                            <p><b> % Age : <code> @Model.PercentAgeCertified%</code></b></p>
+                            <p><b>Skills Points : <code> @Model.TotalPointsCertified</code></b></p>
                         </a>
                     </li>
                     <hr style="width: 100%; color: black; height: 1px; background-color:palevioletred;" />
                     <hr style="width: 100%; color: black; height: 1px; background-color:palevioletred;" />
                     <li>
                         <a>
-                            <p><b> Skills Re-Certified: <code>@ViewBag.TotalReCertified out of @Model.TotalCertifications.Count()</code></b></p>
+                            <p><b> Skills Re-Certified: <code>@Model.NumberReCertified out of @Model.TotalCertifications.Count()</code></b></p>
                             <div class="progress progress-xs active">
                                 <div class="progress-bar progress-bar-danger progress-bar-striped" id="SRC" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
                                     <span class="sr-only"></span>
                                 </div>
                             </div>
-                            <p><b> % Age : <code> @ViewBag.SkillsReCertifiedPercentage%</code></b></p>
-                            <p><b>Skills Points : <code> 20</code></b></p>
+                            <p><b> % Age : <code> @Model.PercentAgeReCertified%</code></b></p>
+                            <p><b>Skills Points : <code> @Model.TotalPointsReCertified</code></b></p>
                         </a>
                     </li>
                 </ul>
@@ -60,18 +60,19 @@
     <div class="col-lg-9 connectedSortable">
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs pull-right">
-                <li><a href="#second-tab" data-toggle="tab" id="Page2">Page2</a></li>
+                <li><a href="#second-tab" data-toggle="tab" id="Page2">Page 2</a></li>
                 <li class="active"><a href="#first-tab" data-toggle="tab" id="Page1">Page 1</a></li>
                 <li class="pull-left header"><i class="fa fa-inbox"></i><strong>Employee Details</strong></li>
             </ul>
             <div class="tab-content no-padding">
-                <div class="chart tab-pane active" id="first-tab" style="position: relative; height: 570px;">
+                <div class="chart tab-pane active" id="first-tab" style="position: relative; height: auto;">
                     <div class="table-responsive mailbox-messages">
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
                                     <th>Certification Code</th>
                                     <th>Description</th>
+                                    <th>Date Certified</th>
                                     <th>Date Certified</th>
                                     <th>Date Re-Certified</th>
                                     <th>Current Certification</th>
@@ -83,6 +84,7 @@
                                     <tr>
                                         <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
                                         <td>- @Model.Certifications.ElementAt(i).Description</td>
+                                        <td>@Model.Certifications.ElementAt(i).Points</td>
                                         @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
                                         {
                                             <td class="mailbox-star"><i class="fa fa-star text-yellow"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateCertified</td>
@@ -122,7 +124,7 @@
                         </table>
                         <div class="box-footer no-padding">
                             <div class="mailbox-controls">
-                                <a href="@Url.Action("MyCertificate", "Approver",new {id = Model.Employee.Employee_ID})" class="btn btn-default btn-sm checkbox-toggle">
+                                <a href="@Url.Action("MyCertificate", "Ordinary",new {id = Model.Employee.Employee_ID})" class="btn btn-default btn-sm checkbox-toggle">
                                     <i class="fa fa-refresh fa-spin"></i>
                                 </a>
                                 <div class="btn-group">
@@ -141,13 +143,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="chart tab-pane" id="second-tab" style="position: relative; height: 570px;">
+                <div class="chart tab-pane" id="second-tab" style="position: relative; height: auto;">
                     <div class="table-responsive mailbox-messages">
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
                                     <th>Certification Code</th>
                                     <th>Description</th>
+                                    <th>Point/s</th>
                                     <th>Date Certified</th>
                                     <th>Date Re-Certified</th>
                                     <th>Current Certification</th>
@@ -159,6 +162,7 @@
                                     <tr>
                                         <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
                                         <td>- @Model.Certifications.ElementAt(i).Description</td>
+                                        <td>@Model.Certifications.ElementAt(i).Points</td>
                                         @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
                                         {
                                             <td class="mailbox-star"><i class="fa fa-star text-yellow"></i>&nbsp; @Model.MyCertifications.ElementAt(i).DateCertified</td>
@@ -198,7 +202,7 @@
                         </table>
                         <div class="box-footer no-padding">
                             <div class="mailbox-controls">
-                                <a href="@Url.Action("MyCertificate", "Approver",new {id = Model.Employee.Employee_ID})" class="btn btn-default btn-sm checkbox-toggle">
+                                <a href="@Url.Action("MyCertificate", "Ordinary",new {id = Model.Employee.Employee_ID,urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm checkbox-toggle">
                                     <i class="fa fa-refresh fa-spin"></i>
                                 </a>
                                 <div class="btn-group">
@@ -225,8 +229,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
     <script type="text/javascript">
     $(window).on('load', function () {
-        document.getElementById('SC').style.width = @ViewBag.SkillsCertifiedPercentage + "%";
-        document.getElementById('SRC').style.width = @ViewBag.SkillsReCertifiedPercentage + "%";
+         document.getElementById('SC').style.width = @Model.PercentAgeCertified + "%";
+         document.getElementById('SRC').style.width = @Model.PercentAgeReCertified + "%";
         });
         function backRight() {
             $('#Page1').click();
