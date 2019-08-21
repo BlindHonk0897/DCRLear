@@ -33,6 +33,17 @@
           <Property Name="DateCertified" Type="datetime" />
           <Property Name="DateRecertified" Type="datetime" />
         </EntityType>
+        <EntityType Name="ReCertificationPlan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Badge_No" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lastname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CertificationCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PlanDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -42,11 +53,68 @@
           <Property Name="Roles" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.certificateTracker_Vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="certificateTracker_Vw">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmpBadgeNo" />
+            <PropertyRef Name="CertificationCode" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmpBadgeNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CertificationCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateCertified" Type="datetime" />
+          <Property Name="DateRecertified" Type="datetime" />
+          <Property Name="Last Name" Type="varchar" MaxLength="30" />
+          <Property Name="First Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeDCR_Vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EmployeeDCR_Vw">
+          <Key>
+            <PropertyRef Name="Employee ID" />
+            <PropertyRef Name="Last Name" />
+            <PropertyRef Name="First Name" />
+          </Key>
+          <Property Name="Employee ID" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Last Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="First Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Position" Type="varchar" MaxLength="500" />
+          <Property Name="Cost Center Description" Type="varchar" MaxLength="200" />
+          <Property Name="Job Status" Type="varchar" MaxLength="500" />
+          <Property Name="Supervisor" Type="nvarchar" MaxLength="100" />
+          <Property Name="PlanRecertificationDate" Type="datetime" />
+        </EntityType>
         <EntityContainer Name="lear_DailiesCertificationRequirementModelStoreContainer">
           <EntitySet Name="Certification" EntityType="Self.Certification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CertificationHistory" EntityType="Self.CertificationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CertificationTracker" EntityType="Self.CertificationTracker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReCertificationPlan" EntityType="Self.ReCertificationPlan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="certificateTracker_Vw" EntityType="Self.certificateTracker_Vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [certificateTracker_Vw].[Id] AS [Id], 
+    [certificateTracker_Vw].[EmpBadgeNo] AS [EmpBadgeNo], 
+    [certificateTracker_Vw].[CertificationCode] AS [CertificationCode], 
+    [certificateTracker_Vw].[DateCertified] AS [DateCertified], 
+    [certificateTracker_Vw].[DateRecertified] AS [DateRecertified], 
+    [certificateTracker_Vw].[Last Name] AS [Last Name], 
+    [certificateTracker_Vw].[First Name] AS [First Name]
+    FROM [dbo].[certificateTracker_Vw] AS [certificateTracker_Vw]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EmployeeDCR_Vw" EntityType="Self.EmployeeDCR_Vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EmployeeDCR_Vw].[Employee ID] AS [Employee ID], 
+    [EmployeeDCR_Vw].[Last Name] AS [Last Name], 
+    [EmployeeDCR_Vw].[First Name] AS [First Name], 
+    [EmployeeDCR_Vw].[Position] AS [Position], 
+    [EmployeeDCR_Vw].[Cost Center Description] AS [Cost Center Description], 
+    [EmployeeDCR_Vw].[Job Status] AS [Job Status], 
+    [EmployeeDCR_Vw].[Supervisor] AS [Supervisor], 
+    [EmployeeDCR_Vw].[PlanRecertificationDate] AS [PlanRecertificationDate]
+    FROM [dbo].[EmployeeDCR_Vw] AS [EmployeeDCR_Vw]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -66,6 +134,9 @@
           <EntitySet Name="Certifications" EntityType="lear_DailiesCertificationRequirementModel.Certification" />
           <EntitySet Name="CertificationHistories" EntityType="lear_DailiesCertificationRequirementModel.CertificationHistory" />
           <EntitySet Name="CertificationTrackers" EntityType="lear_DailiesCertificationRequirementModel.CertificationTracker" />
+          <EntitySet Name="ReCertificationPlans" EntityType="lear_DailiesCertificationRequirementModel.ReCertificationPlan" />
+          <EntitySet Name="certificateTracker_Vw" EntityType="lear_DailiesCertificationRequirementModel.certificateTracker_Vw" />
+          <EntitySet Name="EmployeeDCR_Vw" EntityType="lear_DailiesCertificationRequirementModel.EmployeeDCR_Vw" />
         </EntityContainer>
         <EntityType Name="Certification">
           <Key>
@@ -94,6 +165,46 @@
           <Property Name="CertificationCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DateCertified" Type="DateTime" Precision="3" />
           <Property Name="DateRecertified" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ReCertificationPlan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Badge_No" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CertificationCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlanDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="certificateTracker_Vw">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmpBadgeNo" />
+            <PropertyRef Name="CertificationCode" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmpBadgeNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CertificationCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateCertified" Type="DateTime" Precision="3" />
+          <Property Name="DateRecertified" Type="DateTime" Precision="3" />
+          <Property Name="Last_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EmployeeDCR_Vw">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="First_Name" />
+          </Key>
+          <Property Name="Employee_ID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Cost_Center_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Job_Status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Supervisor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PlanRecertificationDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -139,6 +250,45 @@
                 <ScalarProperty Name="CertificationCode" ColumnName="CertificationCode" />
                 <ScalarProperty Name="EmpBadgeNo" ColumnName="EmpBadgeNo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReCertificationPlans">
+            <EntityTypeMapping TypeName="lear_DailiesCertificationRequirementModel.ReCertificationPlan">
+              <MappingFragment StoreEntitySet="ReCertificationPlan">
+                <ScalarProperty Name="PlanDate" ColumnName="PlanDate" />
+                <ScalarProperty Name="CertificationCode" ColumnName="CertificationCode" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Badge_No" ColumnName="Badge_No" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="certificateTracker_Vw">
+            <EntityTypeMapping TypeName="lear_DailiesCertificationRequirementModel.certificateTracker_Vw">
+              <MappingFragment StoreEntitySet="certificateTracker_Vw">
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+                <ScalarProperty Name="DateRecertified" ColumnName="DateRecertified" />
+                <ScalarProperty Name="DateCertified" ColumnName="DateCertified" />
+                <ScalarProperty Name="CertificationCode" ColumnName="CertificationCode" />
+                <ScalarProperty Name="EmpBadgeNo" ColumnName="EmpBadgeNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeDCR_Vw">
+            <EntityTypeMapping TypeName="lear_DailiesCertificationRequirementModel.EmployeeDCR_Vw">
+              <MappingFragment StoreEntitySet="EmployeeDCR_Vw">
+                <ScalarProperty Name="PlanRecertificationDate" ColumnName="PlanRecertificationDate" />
+                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
+                <ScalarProperty Name="Job_Status" ColumnName="Job Status" />
+                <ScalarProperty Name="Cost_Center_Description" ColumnName="Cost Center Description" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

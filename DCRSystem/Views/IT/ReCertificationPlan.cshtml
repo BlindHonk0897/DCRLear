@@ -1,0 +1,100 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<DCRSystem.Models.ReCertificationPlan>
+@{
+    ViewBag.Title = "ReCertificationPlan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form action="/IT/ReCertificationPlan">
+    <h3><a @*href="@Url.Action("AddModalRecertification","IT")"*@ onclick="modalShow()" class="btn btn-pinterest"><i class="fa fa-plus"></i>&nbsp;Plan</a><small class="label pull-right bg-red"><input type="search" class="form-control" name="searchInput" placeholder="Search by Lastname" /></small></h3>
+</form>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-danger">
+            <div class="box-body">
+                <table class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Certification</th>
+                            <th>Recertification Date Planned</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Badge_No</td>
+                                <td>@item.Lastname , @item.Firstname</td>
+                                <td>@item.CertificationCode</td>
+                                <td>@item.PlanDate</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="clearfix">
+            <div class="hint-text" style="font-size: 18px!important;">Showing Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+            <ul class="pagination" style="float:right; font-size:20px;">
+                <li><a> @Html.PagedListPager(Model, page => Url.Action("ReCertificationPlan", new { page }))</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="example-modal">
+        @using (Html.BeginForm("AddModalRecertification", "IT", FormMethod.Post, new { id = "AddForm" }))
+        {
+            <div id="myModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">Add ReCertification Plan</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Step: 1</h5>
+                            <div class="form-group">
+                                <label>Choose Employee</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    @Html.DropDownList("NotYetRecertified", null, new { Name = "EmployeeID", @*@onchange = "ShowMore(this.value)",*@ id = "DROP", @class = "chosen-select form-control" })
+                                </div>
+                            </div>                        
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section ViewSpecificJavascript{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+    <script type="text/javascript">
+        function modalShow() {
+            $('#myModal').modal('show');
+        }
+        // Date picker
+        $(function () {
+            $('#SelectedDate').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                format: "mm/dd/yyyy",
+                language: "tr"
+            });
+        });
+
+    </script>
+}

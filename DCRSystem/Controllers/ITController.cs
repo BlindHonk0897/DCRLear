@@ -8,6 +8,8 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Web.Services;
 
 namespace DCRSystem.Controllers
 {
@@ -21,7 +23,7 @@ namespace DCRSystem.Controllers
         public ActionResult Employee(int? page, String searchInput = "")
         {
             // Get all Employees from Database
-            List<Employees_Details> employees = cEE.Employees_Details.OrderBy(a => a.Last_Name).ToList();
+            List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.OrderBy(a => a.Last_Name).ToList();
 
             if (!string.IsNullOrEmpty(searchInput))
             {
@@ -74,7 +76,7 @@ namespace DCRSystem.Controllers
         [HttpPost]
         public ActionResult PostCertified()
         {
-            // [ GET DATAS from submitted form --
+            // [ GET Data from submitted form --
             var DateP = Request.Form["DateCertified"];
             var Who = Request.Form["Employee"];
             var Code = Request.Form["Code"];
@@ -85,7 +87,7 @@ namespace DCRSystem.Controllers
 
             CertificationTracker certificationTracker = new CertificationTracker();
 
-            // Validate DATA submitted
+            // Validate Data submitted
             if (DateP != null && Who != null && Code != null && Code!="X" && !String.IsNullOrEmpty(DateP))
             {
                 // Check if Employee is Exist
@@ -313,26 +315,23 @@ namespace DCRSystem.Controllers
                     double SKP = (Convert.ToDouble(empModel.TotalCertifications.Count() )/ Convert.ToDouble(empModel.Certifications.Count())) *(100);
                     if (!Double.IsNaN(SKP))
                     {
-                        //ViewBag.SkillsCertifiedPercentage = Convert.ToInt32(SKP);
+                       
                         empModel.PercentAgeCertified = Convert.ToInt32(SKP);
                     }
                     else
-                    {
-                        //ViewBag.SkillsCertifiedPercentage = 0;
-                        empModel.PercentAgeCertified = 0;
+                    {                     
+                       empModel.PercentAgeCertified = 0;
                     }
                     var ReCertified = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID && cr.DateRecertified != null).OrderBy(cr => cr.Id).ToList().Count();
-                    //ViewBag.TotalReCertified = ReCertified;
+                    
                     empModel.NumberReCertified = ReCertified;
                     double SRKP = (Convert.ToDouble(ReCertified) / Convert.ToDouble(empModel.Certifications.Count())) * (100);
                     if (!Double.IsNaN(SRKP))
-                    {
-                       // ViewBag.SkillsReCertifiedPercentage = Convert.ToInt32(SRKP);
+                    {                    
                         empModel.PercentAgeReCertified = Convert.ToInt32(SRKP);
                     }
                     else
                     {
-                       // ViewBag.SkillsReCertifiedPercentage = 0;
                         empModel.PercentAgeReCertified = 0;
                     }
                     
@@ -374,7 +373,7 @@ namespace DCRSystem.Controllers
         [HttpGet]
         public ActionResult Active(int? page, String searchInput = "")
         {
-            List<Employees_Details> employees = cEE.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).OrderBy(a => a.Last_Name).ToList();
+            List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).OrderBy(a => a.Last_Name).ToList();
 
             if (!string.IsNullOrEmpty(searchInput))
             {
@@ -391,7 +390,7 @@ namespace DCRSystem.Controllers
         [HttpGet]
         public ActionResult Inactive(int? page, String searchInput = "")
         {
-            List<Employees_Details> employees = cEE.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("INACTIVE")).OrderBy(a => a.Last_Name).ToList();
+            List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.Where(emp => emp.Job_Status.ToUpper().Contains("INACTIVE")).OrderBy(a => a.Last_Name).ToList();
 
             if (!string.IsNullOrEmpty(searchInput))
             {
@@ -522,6 +521,69 @@ namespace DCRSystem.Controllers
                 }
             }
             return View(empModel);
+        }
+
+
+        [HttpGet]
+        public ActionResult ReCertificationPlan(int? page, String searchInput = "")
+        {
+
+            // Get All Certification which is not yet Recertified
+           var NotYetRecertified =  new SelectList(ldcr.certificateTracker_Vw.Where(s => s.DateRecertified == null).OrderBy(s => s.EmpBadgeNo).Select(s => new { EmpBadgeNo = s.EmpBadgeNo, Name = s.EmpBadgeNo +" - " +s.Last_Name +", "+ s.First_Name }).ToList().Distinct(), "EmpBadgeNo", "Name");
+            // Pass to ViewBag
+            ViewBag.NotYetRecertified = NotYetRecertified;
+
+            // Get all Recertification Plan/Plans from Database
+            List<ReCertificationPlan> reCertificationPlans = ldcr.ReCertificationPlans.OrderByDescending(a => a.PlanDate).ToList();
+
+            if (!string.IsNullOrEmpty(searchInput))
+            {
+                // get Recertification Plan/Plans with the same lastname with the input
+                reCertificationPlans = reCertificationPlans.Where(a => a.Lastname.ToLower().Contains(searchInput.ToLower()) || a.Badge_No.ToString().Contains(searchInput)).ToList();
+            }
+
+            int pageSize = 10; // pagelist number of page
+            int pageNumber = (page ?? 1);
+
+
+            return View(reCertificationPlans.ToPagedList(pageNumber, pageSize));
+        }
+
+        [HttpPost]
+        public ActionResult AddRecertification()
+        {
+            System.Diagnostics.Debug.WriteLine(Request.Form["EmployeeID"]);
+            if (Request.Form["EmployeeID"] != null && Request.Form["Code"] != "X" && !String.IsNullOrEmpty(Request.Form["DatePlanned"]))
+            {
+                var EmpId = Request.Form["EmployeeID"].ToString();
+                
+                if(ldcr.ReCertificationPlans.Where(rcp => rcp.Badge_No == EmpId && rcp.CertificationCode == Request.Form["Code"]) == null)
+                {
+                    Employees_Details employee = cEE.Employees_Details.Where(emp => emp.Employee_ID == EmpId).FirstOrDefault();
+                    ReCertificationPlan reCertificationPlan = new ReCertificationPlan();
+                    reCertificationPlan.Badge_No = Request.Form["EmployeeID"];
+                    reCertificationPlan.CertificationCode = Request.Form["Code"];
+                    reCertificationPlan.PlanDate = Convert.ToDateTime(Request.Form["DatePlanned"]);
+                    reCertificationPlan.Lastname = employee.Last_Name;
+                    reCertificationPlan.Firstname = employee.First_Name;
+                    ldcr.ReCertificationPlans.Add(reCertificationPlan);
+                    ldcr.SaveChanges();
+                    Session["NumberOfRecertificationPlans"] = Convert.ToInt32(Session["NumberOfRecertificationPlans"]) + 1;
+                }
+            }
+            return RedirectToAction("ReCertificationPlan");
+        }
+
+        [HttpPost]
+        public ActionResult AddModalRecertification()
+        {
+            var EmpId = Request.Form["EmployeeID"].ToString();
+            Employees_Details employee = cEE.Employees_Details.Where(emp => emp.Employee_ID == EmpId).FirstOrDefault();
+            ViewBag.Name = employee.Last_Name + ", " + employee.First_Name;
+            ModalAddRecertificactionModel modal = new ModalAddRecertificactionModel();
+            modal.BadgeNo = EmpId;
+            modal.CertificationTrackers = ldcr.CertificationTrackers.Where(ctr => ctr.EmpBadgeNo == EmpId && ctr.DateRecertified == null).ToList();
+            return View(modal);
         }
     }
 }

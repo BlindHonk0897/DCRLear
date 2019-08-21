@@ -1,5 +1,5 @@
 ﻿@using PagedList.Mvc
-@model PagedList.IPagedList<DCRSystem.Models.Employees_Details>
+@model PagedList.IPagedList<DCRSystem.Models.EmployeeDCR_Vw>
 @{
     ViewBag.Title = "Inactive";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,6 +20,7 @@
                             <th>Employee Name</th>
                             <th>Position</th>
                             <th>Cell</th>
+                            <th>Supervisor</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -31,6 +32,7 @@
                                 <td>@item.Last_Name , @item.First_Name</td>
                                 <td>@item.Position</td>
                                 <td>@item.Cost_Center_Description</td>
+                                <td>@item.Supervisor</td>
                                 <td>
                                     <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack="Inactive" })" class="btn btn-default btn-sm" style="width:90px;">Details</a>
                                 </td>

@@ -1,5 +1,5 @@
 ﻿@using PagedList.Mvc
-@model PagedList.IPagedList<DCRSystem.Models.Employees_Details>
+@model PagedList.IPagedList<DCRSystem.Models.EmployeeDCR_Vw>
 @{
     ViewBag.Title = "Active";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,9 +20,9 @@
                             <th>Employee Name</th>
                             <th>Position</th>
                             <th>Cell</th>
-                            <th></th>
+                            <th>Supervisor</th>
+                            <th>Progress</th>
                             <th>Action</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,16 +33,22 @@
                                 <td>@item.Last_Name , @item.First_Name</td>
                                 <td>@item.Position</td>
                                 <td>@item.Cost_Center_Description</td>
+                                <td>@item.Supervisor</td>
                                 <td>
-                                    <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Active"  })" class="btn btn-success btn-sm" style="width:90px;"><i class="glyphicon glyphicon-zoom-in"></i>&nbsp;<span>Details</span></a>
+                                    <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Active" })" class="btn btn-brand btn-dribbble" style="background-color:#4183c4;color:white">
+                                        <i class="glyphicon glyphicon-zoom-in"></i>
+                                    </a>
                                 </td>
-                                 <td>
-                                    <a href="@Url.Action("Certified","IT",new { id = item.Employee_ID,urlBack = "Active"  })" class="btn btn-success btn-sm" style="width:90px;"><i class="glyphicon glyphicon-chevron-down"></i>&nbsp;<span>Certified</span></a>
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("ReCertified","IT",new { id = item.Employee_ID,urlBack = "Active"  })" class="btn btn-success btn-sm" style="width:90px"><i class="glyphicon glyphicon-retweet"></i>&nbsp;<span>Re-Certified</span></a>
+                                <td>  
+                                    <a href="@Url.Action("Certified", "IT", new { id = item.Employee_ID, urlBack = "Active" })" class="btn btn-brand btn-dribbble" style="background-color:#4183c4;color:white">
+                                        <i class="glyphicon glyphicon-chevron-down"></i>
+                                    </a>
+                                    <a href="@Url.Action("ReCertified", "IT", new { id = item.Employee_ID, urlBack = "Active" })" class="btn btn-brand btn-dribbble" style="background-color:#4875b4;color:white">
+                                        <i class="glyphicon glyphicon-retweet"></i>
+                                    </a>  
                                 </td>
                             </tr>
+                        
                         }
                     </tbody>
                 </table>

@@ -187,6 +187,7 @@
     <Compile Include="CustomViewModel\EmployeeModel.cs" />
     <Compile Include="CustomViewModel\EmployeesViewModel.cs" />
     <Compile Include="CustomViewModel\EmpRouteViewModel.cs" />
+    <Compile Include="CustomViewModel\ModalAddRecertificactionModel.cs" />
     <Compile Include="CustomViewModel\UrlModel.cs" />
     <Compile Include="DA\Account.cs" />
     <Compile Include="DA\Repository.cs" />
@@ -195,6 +196,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Approver.cs" />
+    <Compile Include="Models\certificateTracker_Vw.cs">
+      <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Certification.cs">
       <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
     </Compile>
@@ -202,6 +206,9 @@
       <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CertificationTracker.cs">
+      <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeDCR_Vw.cs">
       <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeesModel.Context.cs">
@@ -261,6 +268,9 @@
       <DependentUpon>EmployeesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PasswordSecurity.cs" />
+    <Compile Include="Models\ReCertificationPlan.cs">
+      <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
     </Compile>
@@ -843,6 +853,8 @@
     <Content Include="Views\Approver\MyCertificate.cshtml" />
     <Content Include="Views\Approver\Details.cshtml" />
     <Content Include="Views\IT\Testing.cshtml" />
+    <Content Include="Views\IT\ReCertificationPlan.cshtml" />
+    <Content Include="Views\IT\AddModalRecertification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

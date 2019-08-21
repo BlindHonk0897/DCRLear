@@ -80,6 +80,7 @@ namespace DCRSystem.Controllers
         {
             _EmployeesManager = new commonEmployeesEntities();
             learUser = new gatepassEntities();
+            _AccountManager = new lear_DailiesCertificationRequirementEntities();
             PasswordSecurity ps = new PasswordSecurity();
             
             if (!ModelState.IsValid)
@@ -164,6 +165,7 @@ namespace DCRSystem.Controllers
                 Session["NumberOfNewlyEmployees"] = countNewlyEmployees.Count();
                 Session["NumberOfActiveEmployees"] = countActiveEmployees;
                 Session["NumberOfInactiveEmployees"] = countEmployees.Count()- countActiveEmployees;
+                Session["NumberOfRecertificationPlans"] = _AccountManager.ReCertificationPlans.ToList().Count();
                 // [ BEGIN -- Session Configuration
 
                 return RedirectToAction("Home", "Home");

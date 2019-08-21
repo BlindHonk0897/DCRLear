@@ -18,6 +18,9 @@
                     <li class="@Url.IsLinkActive("NewlyEmployees", "IT")">
                         <a href="@Url.Action("NewlyEmployees", "IT")"><i class="fa fa-users"></i> <span>Newly Employed</span><small class="label pull-right bg-aqua-gradient">@Session["NumberOfNewlyEmployees"]</small></a>
                     </li>
+                    <li class="@Url.IsLinkActive("ReCertificationPlan", "IT")">
+                        <a href="@Url.Action("ReCertificationPlan", "IT")"><i class="fa fa-edit"></i> <span>Re-Certification Plan</span><small class="label pull-right bg-red">@Session["NumberOfRecertificationPlans"]</small></a>
+                    </li>
                     <li class="header"><i class="fa fa-filter"></i> <span><font color="#a64038">&nbsp;Filter Employees</font></span></li>
                     <li class="@Url.IsLinkActive("Active", "IT")">
                         <a href="@Url.Action("Active", "IT")"><i class="fa fa-circle text-green"></i> <span>Active</span><small class="label pull-right bg-green-active">@Session["NumberOfActiveEmployees"]</small></a>

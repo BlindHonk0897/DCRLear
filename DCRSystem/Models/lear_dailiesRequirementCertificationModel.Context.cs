@@ -29,5 +29,8 @@ namespace DCRSystem.Models
         public virtual DbSet<Certification> Certifications { get; set; }
         public virtual DbSet<CertificationHistory> CertificationHistories { get; set; }
         public virtual DbSet<CertificationTracker> CertificationTrackers { get; set; }
+        public virtual DbSet<ReCertificationPlan> ReCertificationPlans { get; set; }
+        public virtual DbSet<certificateTracker_Vw> certificateTracker_Vw { get; set; }
+        public virtual DbSet<EmployeeDCR_Vw> EmployeeDCR_Vw { get; set; }
     }
 }
