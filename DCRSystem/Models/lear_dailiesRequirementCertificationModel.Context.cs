@@ -12,6 +12,8 @@ namespace DCRSystem.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class lear_DailiesCertificationRequirementEntities : DbContext
     {
@@ -32,5 +34,32 @@ namespace DCRSystem.Models
         public virtual DbSet<ReCertificationPlan> ReCertificationPlans { get; set; }
         public virtual DbSet<certificateTracker_Vw> certificateTracker_Vw { get; set; }
         public virtual DbSet<EmployeeDCR_Vw> EmployeeDCR_Vw { get; set; }
+    
+        public virtual ObjectResult<Nullable<System.DateTime>> GET_LastReCertificationPlanned(string badgeNo)
+        {
+            var badgeNoParameter = badgeNo != null ?
+                new ObjectParameter("BadgeNo", badgeNo) :
+                new ObjectParameter("BadgeNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.DateTime>>("GET_LastReCertificationPlanned", badgeNoParameter);
+        }
+    
+        public virtual ObjectResult<ReCertificationPlan> GETLatestPlan(string badgeNo)
+        {
+            var badgeNoParameter = badgeNo != null ?
+                new ObjectParameter("BadgeNo", badgeNo) :
+                new ObjectParameter("BadgeNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReCertificationPlan>("GETLatestPlan", badgeNoParameter);
+        }
+    
+        public virtual ObjectResult<ReCertificationPlan> GETLatestPlan(string badgeNo, MergeOption mergeOption)
+        {
+            var badgeNoParameter = badgeNo != null ?
+                new ObjectParameter("BadgeNo", badgeNo) :
+                new ObjectParameter("BadgeNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReCertificationPlan>("GETLatestPlan", mergeOption, badgeNoParameter);
+        }
     }
 }

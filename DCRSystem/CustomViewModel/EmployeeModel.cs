@@ -9,7 +9,7 @@ namespace DCRSystem.CustomViewModel
     public class EmployeeModel
     {
         public int Id { get; set; }
-        public Employees_Details Employee { get; set; }
+        public EmployeeDCR_Vw Employee { get; set; }
         public IEnumerable<CertificationTracker> AvailableReCertifications { get; set; }
         public IEnumerable<Certification> Certifications { get; set; }
         public IEnumerable<CertificationTracker> TotalCertifications { get; set; }

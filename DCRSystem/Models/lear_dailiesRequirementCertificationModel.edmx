@@ -86,6 +86,9 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <Property Name="Supervisor" Type="nvarchar" MaxLength="100" />
           <Property Name="PlanRecertificationDate" Type="datetime" />
         </EntityType>
+        <Function Name="GET_LastReCertificationPlanned" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BadgeNo" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="lear_DailiesCertificationRequirementModelStoreContainer">
           <EntitySet Name="Certification" EntityType="Self.Certification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CertificationHistory" EntityType="Self.CertificationHistory" Schema="dbo" store:Type="Tables" />
@@ -137,6 +140,12 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <EntitySet Name="ReCertificationPlans" EntityType="lear_DailiesCertificationRequirementModel.ReCertificationPlan" />
           <EntitySet Name="certificateTracker_Vw" EntityType="lear_DailiesCertificationRequirementModel.certificateTracker_Vw" />
           <EntitySet Name="EmployeeDCR_Vw" EntityType="lear_DailiesCertificationRequirementModel.EmployeeDCR_Vw" />
+          <FunctionImport Name="GET_LastReCertificationPlanned" ReturnType="Collection(DateTime)">
+          <Parameter Name="BadgeNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GETLatestPlan" EntitySet="ReCertificationPlans" ReturnType="Collection(lear_DailiesCertificationRequirementModel.ReCertificationPlan)">
+          <Parameter Name="BadgeNo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Certification">
           <Key>
@@ -292,6 +301,8 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GET_LastReCertificationPlanned" FunctionName="lear_DailiesCertificationRequirementModel.Store.GET_LastReCertificationPlanned" />
+          <FunctionImportMapping FunctionImportName="GETLatestPlan" FunctionName="lear_DailiesCertificationRequirementModel.Store.GET_LastReCertificationPlanned" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

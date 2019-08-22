@@ -4,7 +4,12 @@
     ViewBag.Title = "Employee";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style type="text/css">
+    img[class="images"][title]:hover:after {
+        font-style: italic;
+        color: gray;
+    }
+</style>
 <form action="/IT/Employee">
     <h3><i class="fa fa-users"></i>&nbsp;<strong><font color="#c43e29">Employees</font></strong><small class="label pull-right bg-red"><input type="search" class="form-control" name="searchInput" placeholder="Search by Lastname" /></small></h3>
 </form>
@@ -21,9 +26,8 @@
                             <th>Position</th>
                             <th>Cell</th>
                             <th>Supervisor</th>
-                            <th>Progress</th>
+                            <th>More..</th>
                             <th>Action</th>
-                            @*<th></th>*@
                         </tr>
                     </thead>
                     <tbody>
@@ -34,32 +38,37 @@
                             <td>@item.Last_Name , @item.First_Name</td>
                             <td>@item.Position</td>
                             <td>@item.Cost_Center_Description</td>
-                            <td>@item.Supervisor</td>     
+                            <td>@item.Supervisor</td>
                             <td>
-                                <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Employee" })"  class="btn btn-brand btn-dribbble" style="background-color:#4183c4;color:white">
-                                    <i class="glyphicon glyphicon-zoom-in"></i>
+                                <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Employee" })">
+
+                                    <img src="~/Content/img/Emp_Prog.png" height="30" width="30" />
                                 </a>
                             </td>
                             <td>
-                            @if (item.Job_Status.ToUpper().Contains("CURRENT"))
-                            {
+                                @if (item.Job_Status.ToUpper().Contains("CURRENT"))
+                                {
 
-                                <a href="@Url.Action("Certified", "IT", new { id = item.Employee_ID, urlBack = "Employee" })" class="btn btn-brand btn-dribbble" style="background-color:#4183c4;color:white">
-                                    <i class="glyphicon glyphicon-chevron-down"></i>
-                                </a>               
-                                <a href="@Url.Action("ReCertified", "IT", new { id = item.Employee_ID, urlBack = "Employee" })"  class="btn btn-brand btn-dribbble" style="background-color:#4875b4;color:white">
-                                    <i class="glyphicon glyphicon-retweet"></i>
-                                </a>
-                            }
-                            else
-                            {
-                                <button onclick="alert('Employee is In-Active')" class="btn btn-brand btn-dribbble" style="background-color:#cc3700;color:white">
-                                    <i class="glyphicon glyphicon-chevron-down"></i>
-                                </button>                      
-                                <button onclick="alert('Employee is In-Active')"  class="btn btn-brand btn-dribbble" style="background-color:#cc3700;color:white">
-                                    <i class="glyphicon glyphicon-retweet"></i>
-                                </button>
-                            }
+                                    <a href="@Url.Action("Certified", "IT", new { id = item.Employee_ID, urlBack = "Employee" })">
+
+                                        <img src="~/Content/img/Certified.png" title="Certified Employee" height="30" width="30" class="images" />
+                                    </a>
+                                    <a href="@Url.Action("ReCertified", "IT", new { id = item.Employee_ID, urlBack = "Employee" })">
+
+                                        <img src="~/Content/img/ReCertified.png" title="Re-Certified Employee" height="30" width="30" class="images" />
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ModalMessage", "IT", new { message =  "Cannot Continue Employee is Inactive", urlBack = "Employee" })">
+
+                                        <img src="~/Content/img/InActiveCertified.png" title="InActive Employee" height="30" width="30" class="images" />
+                                    </a>
+                                    <a href="@Url.Action("ModalMessage", "IT", new { message =  "Cannot Continue Employee is Inactive", urlBack = "Employee" })">
+
+                                        <img src="~/Content/img/InActiveRecertified.png" title="InActive Employee" height="30" width="30" class="images" />
+                                    </a>
+                                }
                             </td>
                         </tr>
                         }

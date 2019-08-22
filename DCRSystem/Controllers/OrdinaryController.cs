@@ -20,7 +20,7 @@ namespace DCRSystem.Controllers
             EmployeeModel empModel = new EmployeeModel();
             if (id != null)
             {
-                var employee = cEE.Employees_Details.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
                 if (employee != null)
                 {
                     empModel.Employee = employee;

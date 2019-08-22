@@ -48,7 +48,7 @@ namespace DCRSystem.Controllers
             if (id != null)
             {
                 // Get employee using the id
-                var employee = cEE.Employees_Details.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
 
                 if (employee != null) // if exist
                 {
@@ -161,11 +161,12 @@ namespace DCRSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult ModalMessage(String message , int? id)
+        public ActionResult ModalMessage(String message , String urlBack)
         {
             ViewBag.message = message;
-            
-            return View();
+            UrlModel mode = new UrlModel();
+            mode.URLBack = urlBack;
+            return View(mode);
         }
 
 
@@ -176,7 +177,7 @@ namespace DCRSystem.Controllers
             EmployeeModel empModel = new EmployeeModel();
             if (id != null)
             {
-                var employee = cEE.Employees_Details.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
                 if (employee != null)
                 {
                     empModel.Employee = employee;
@@ -305,7 +306,7 @@ namespace DCRSystem.Controllers
             EmployeeModel empModel = new EmployeeModel();
             if (id != null)
             {
-                var employee = cEE.Employees_Details.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
                 if (employee != null)
                 {
                     empModel.Employee = employee;
@@ -455,7 +456,7 @@ namespace DCRSystem.Controllers
             EmployeeModel empModel = new EmployeeModel();
             if (id != null)
             {
-                var employee = cEE.Employees_Details.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
                 if (employee != null)
                 {
                     empModel.Employee = employee;
@@ -553,11 +554,14 @@ namespace DCRSystem.Controllers
         public ActionResult AddRecertification()
         {
             System.Diagnostics.Debug.WriteLine(Request.Form["EmployeeID"]);
+            System.Diagnostics.Debug.WriteLine(Request.Form["Code"]);
+            System.Diagnostics.Debug.WriteLine(Request.Form["DatePlanned"]);
             if (Request.Form["EmployeeID"] != null && Request.Form["Code"] != "X" && !String.IsNullOrEmpty(Request.Form["DatePlanned"]))
             {
                 var EmpId = Request.Form["EmployeeID"].ToString();
-                
-                if(ldcr.ReCertificationPlans.Where(rcp => rcp.Badge_No == EmpId && rcp.CertificationCode == Request.Form["Code"]) == null)
+                var Code = Request.Form["Code"].ToString();
+
+                if ((ldcr.ReCertificationPlans.Where(rcp => rcp.Badge_No == EmpId).ToList().FirstOrDefault())== null)
                 {
                     Employees_Details employee = cEE.Employees_Details.Where(emp => emp.Employee_ID == EmpId).FirstOrDefault();
                     ReCertificationPlan reCertificationPlan = new ReCertificationPlan();
@@ -569,6 +573,14 @@ namespace DCRSystem.Controllers
                     ldcr.ReCertificationPlans.Add(reCertificationPlan);
                     ldcr.SaveChanges();
                     Session["NumberOfRecertificationPlans"] = Convert.ToInt32(Session["NumberOfRecertificationPlans"]) + 1;
+                }
+                else
+                {
+                    ReCertificationPlan reCertificationPlan = ldcr.ReCertificationPlans.Where(rcp => rcp.Badge_No == EmpId).ToList().FirstOrDefault();
+                    reCertificationPlan.CertificationCode = Code;
+                    reCertificationPlan.PlanDate = Convert.ToDateTime(Request.Form["DatePlanned"]);
+                    ldcr. Entry(reCertificationPlan).State = EntityState.Modified;
+                    ldcr.SaveChanges();
                 }
             }
             return RedirectToAction("ReCertificationPlan");

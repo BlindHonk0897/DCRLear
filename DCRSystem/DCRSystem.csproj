@@ -208,6 +208,7 @@
     <Compile Include="Models\CertificationTracker.cs">
       <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DateConfig.cs" />
     <Compile Include="Models\EmployeeDCR_Vw.cs">
       <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
     </Compile>
@@ -506,6 +507,9 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\1 %281%29 %281%29.jpg" />
+    <Content Include="Content\img\Button-Back-1-512.png" />
+    <Content Include="Content\img\Certified.png" />
+    <Content Include="Content\img\Emp_Prog.png" />
     <Content Include="Content\img\icheck\aero%402x.png" />
     <Content Include="Content\img\icheck\aero.png" />
     <Content Include="Content\img\icheck\blue%402x.png" />
@@ -526,6 +530,8 @@
     <Content Include="Content\img\icheck\red.png" />
     <Content Include="Content\img\icheck\yellow%402x.png" />
     <Content Include="Content\img\icheck\yellow.png" />
+    <Content Include="Content\img\InActiveCertified.png" />
+    <Content Include="Content\img\InActiveRecertified.png" />
     <Content Include="Content\img\lear.png" />
     <Content Include="Content\img\LearHome.png" />
     <Content Include="Content\img\LearHome1.png" />
@@ -537,6 +543,7 @@
     <Content Include="Content\img\lear_clips.mp4" />
     <Content Include="Content\img\lear_inverse.png" />
     <Content Include="Content\img\logoIcon.png" />
+    <Content Include="Content\img\ReCertified.png" />
     <Content Include="Content\img\user.jpg" />
     <Content Include="Content\img\user.svg" />
     <Content Include="Content\js\adminlte.js" />
@@ -840,7 +847,6 @@
     <Content Include="Views\Home\PlanReCertication.cshtml" />
     <Content Include="Views\IT\Employee.cshtml" />
     <Content Include="Views\IT\Certified.cshtml" />
-    <Content Include="Views\IT\ModalMessage.cshtml" />
     <Content Include="Views\IT\ReCertified.cshtml" />
     <Content Include="Views\IT\Details.cshtml" />
     <Content Include="Views\IT\Active.cshtml" />
@@ -855,6 +861,7 @@
     <Content Include="Views\IT\Testing.cshtml" />
     <Content Include="Views\IT\ReCertificationPlan.cshtml" />
     <Content Include="Views\IT\AddModalRecertification.cshtml" />
+    <Content Include="Views\IT\ModalMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

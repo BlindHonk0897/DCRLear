@@ -35,16 +35,16 @@
                                 <td>@item.Cost_Center_Description</td>
                                 <td>@item.Supervisor</td>
                                 <td>
-                                    <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Active" })" class="btn btn-brand btn-dribbble" style="background-color:#4183c4;color:white">
-                                        <i class="glyphicon glyphicon-zoom-in"></i>
+                                    <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Active" })">
+                                        <img src="~/Content/img/Emp_Prog.png" height="30" width="30" class="images" />
                                     </a>
                                 </td>
                                 <td>  
-                                    <a href="@Url.Action("Certified", "IT", new { id = item.Employee_ID, urlBack = "Active" })" class="btn btn-brand btn-dribbble" style="background-color:#4183c4;color:white">
-                                        <i class="glyphicon glyphicon-chevron-down"></i>
+                                    <a href="@Url.Action("Certified", "IT", new { id = item.Employee_ID, urlBack = "Active" })" >
+                                        <img src="~/Content/img/Certified.png" title="Certified Employee" height="30" width="30" class="images" />
                                     </a>
-                                    <a href="@Url.Action("ReCertified", "IT", new { id = item.Employee_ID, urlBack = "Active" })" class="btn btn-brand btn-dribbble" style="background-color:#4875b4;color:white">
-                                        <i class="glyphicon glyphicon-retweet"></i>
+                                    <a href="@Url.Action("ReCertified", "IT", new { id = item.Employee_ID, urlBack = "Active" })" >
+                                        <img src="~/Content/img/ReCertified.png" title="Re-Certified Employee" height="30" width="30" class="images" />
                                     </a>  
                                 </td>
                             </tr>
