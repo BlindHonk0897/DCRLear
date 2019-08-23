@@ -76,7 +76,7 @@ namespace DCRSystem.DA
                 // Check if Default User is an Approver VIA foreach loop
                 foreach (Approver app in users)
                 {               
-                    if (accc1.Employee_Password.Equals(System.Int32.Parse(app.approver.ToString()).ToString().ToLower()))
+                    if (accc1.Employee_ID.Equals(app.approver.ToString().ToLower()))
                     {
                         // if User is consider as Approver set variable Roles to 'Approver'
                         Roles = "Approver";
