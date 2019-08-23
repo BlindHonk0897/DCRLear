@@ -275,6 +275,10 @@ namespace DCRSystem.Controllers
                         ldcr.Entry(TempCertificationTracker).State = EntityState.Modified;
                         ldcr.SaveChanges();
                         //ldcr.CertificationTrackers.Find(TempCertificationTracker);
+
+                        // DELETE RECERTIFACTION PLan Of the Employee //
+                        ldcr.deleteLastPlan(TempCertificationTracker.EmpBadgeNo);
+                        Session["NumberOfRecertificationPlans"] = Convert.ToInt32(Session["NumberOfRecertificationPlans"]) - 1;
                         message = emp.Last_Name + " , " + emp.First_Name + " is succesfully Re-Certified in " + TempCertificationTracker.CertificationCode;
 
                     }
@@ -309,7 +313,17 @@ namespace DCRSystem.Controllers
                 var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
                 if (employee != null)
                 {
-                    empModel.Employee = employee;
+                    empModel.Employee = new EmployeeDCR_Vw
+                    {
+                        Employee_ID = employee.Employee_ID,
+                        First_Name = employee.First_Name,
+                        Last_Name = employee.Last_Name,
+                        Cost_Center_Description = employee.Cost_Center_Description,
+                        Job_Status = employee.Job_Status,
+                        Supervisor = employee.Supervisor,
+                        PlanRecertificationDate = employee.PlanRecertificationDate,
+                        Position = employee.Position
+                    };
                     empModel.Certifications = ldcr.Certifications.OrderBy(l => l.Code).ToList();
                     empModel.TotalCertifications = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderBy(cr => cr.CertificationCode).ToList();
                     empModel.CurrentCertification = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderByDescending(cr => cr.DateCertified).FirstOrDefault();
@@ -536,7 +550,7 @@ namespace DCRSystem.Controllers
             ViewBag.NotYetRecertified = NotYetRecertified;
 
             // Get all Recertification Plan/Plans from Database
-            List<ReCertificationPlan> reCertificationPlans = ldcr.ReCertificationPlans.OrderByDescending(a => a.PlanDate).ToList();
+            List<ReCertificationPlan> reCertificationPlans = ldcr.ReCertificationPlans.OrderByDescending(a => a.Id).ToList();
 
             if (!string.IsNullOrEmpty(searchInput))
             {

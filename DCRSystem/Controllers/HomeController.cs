@@ -70,5 +70,12 @@ namespace DCRSystem.Controllers
            // return Content(DateP +" --- "+ Badge);
           return RedirectToAction("Employee");
         }
+
+        [Authorize(Roles = "Default,Approver,IT")]
+        [HttpGet]
+        public ActionResult About()
+        {
+            return View();
+        }
     }
 }

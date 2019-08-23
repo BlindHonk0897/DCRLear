@@ -20,14 +20,20 @@ namespace DCRSystem.DA
             System.Diagnostics.Debug.WriteLine(intBagde); //Console Display For Debug Purposes
 
             // get User from user_vw with Default Password (Lear)
-            var accc = leardbUser.user_vw.Where(u => u.badge_no.ToLower() == intBagde.ToString().ToLower() && u.password == account.Password).FirstOrDefault();
-            System.Diagnostics.Debug.WriteLine(accc); //Console Display For Debug Purposes
+            //var accc = leardbUser.user_vw.Where(u => u.badge_no.ToLower() == intBagde.ToString().ToLower() && u.password == account.Password).FirstOrDefault();
+            //System.Diagnostics.Debug.WriteLine(accc); //Console Display For Debug Purposes
+
+            // get User from users_vw 
+            var accc = leardbUser.users_vw.Where(u => u.Employee_ID.ToLower() == intBagde.ToString().ToLower() && u.Employee_ID == account.Password).FirstOrDefault();
 
             // encrypt Password
             var passEn = passSecure.EncryptPassword(account.Password);
 
             // get User from user_vw with their Own Password:
-            var accc1 = leardbUser.user_vw.Where(u => u.badge_no.ToLower() == intBagde.ToString().ToLower() && u.Employee_Password == passEn).FirstOrDefault();
+            //var accc1 = leardbUser.user_vw.Where(u => u.badge_no.ToLower() == intBagde.ToString().ToLower() && u.Employee_Password == passEn).FirstOrDefault();
+
+            // get User from users_vw 
+            var accc1 = leardbUser.users_vw.Where(u => u.Employee_ID.ToLower() == intBagde.ToString().ToLower() && u.Employee_Password == passEn).FirstOrDefault();
 
             System.Diagnostics.Debug.WriteLine(accc1);//Console Display For Debug Purposes
 
@@ -46,7 +52,7 @@ namespace DCRSystem.DA
                 foreach (Approver app in users)
                 {
                     
-                    if (accc.badge_no.Equals(System.Int32.Parse(app.approver.ToString()).ToString().ToLower()))
+                    if (accc.Employee_ID.Equals(System.Int32.Parse(app.approver.ToString()).ToString().ToLower()))
                     {
                         // if User is consider as Approver set variable Roles to 'Approver'
                         Roles = "Approver";
@@ -55,7 +61,7 @@ namespace DCRSystem.DA
                 }
 
                 // Initialize account and set its attributes by the Defaut User
-                Account acc = new Account() { BagdeNo = account.BagdeNo, Roles = Roles, Password = accc.password };
+                Account acc = new Account() { BagdeNo = account.BagdeNo, Roles = Roles, Password = accc.Employee_Password };
                 return acc;
             }else if(accc1 != null) // else if Default User not exist check User with its prefer password 
             {
@@ -70,7 +76,7 @@ namespace DCRSystem.DA
                 // Check if Default User is an Approver VIA foreach loop
                 foreach (Approver app in users)
                 {               
-                    if (accc1.badge_no.Equals(System.Int32.Parse(app.approver.ToString()).ToString().ToLower()))
+                    if (accc1.Employee_Password.Equals(System.Int32.Parse(app.approver.ToString()).ToString().ToLower()))
                     {
                         // if User is consider as Approver set variable Roles to 'Approver'
                         Roles = "Approver";

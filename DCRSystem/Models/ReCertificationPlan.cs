@@ -20,5 +20,6 @@ namespace DCRSystem.Models
         public string Firstname { get; set; }
         public string CertificationCode { get; set; }
         public System.DateTime PlanDate { get; set; }
+        public string Confirmed { get; set; }
     }
 }

@@ -20,7 +20,7 @@
                         <tr>
                             <th>Employee ID</th>
                             <th>Employee Name</th>
-                            <th>Certification</th>
+                            @*<th>Certification</th>*@
                             <th>Recertification Date Planned</th>
                             <th>View Details</th>
                         </tr>
@@ -31,7 +31,7 @@
                             <tr>
                                 <td>@item.Badge_No</td>
                                 <td>@item.Lastname , @item.Firstname</td>
-                                <td>@item.CertificationCode</td>
+                                @*<td>@item.CertificationCode</td>*@
                                 <td>@item.PlanDate.ToShortDateString()</td>
                                 <td>
                                     <a href="@Url.Action("Details","IT",new { id = item.Badge_No,urlBack = "ReCertificationPlan" })">

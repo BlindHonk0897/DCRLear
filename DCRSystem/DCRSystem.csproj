@@ -286,6 +286,11 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="About\Images\dan.jpg" />
+    <Content Include="About\Images\jeff.PNG" />
+    <Content Include="About\Images\sean.PNG" />
+    <Content Include="About\ReadMe\ReadMe.txt" />
+    <Content Include="Content\About.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -509,6 +514,7 @@
     <Content Include="Content\img\1 %281%29 %281%29.jpg" />
     <Content Include="Content\img\Button-Back-1-512.png" />
     <Content Include="Content\img\Certified.png" />
+    <Content Include="Content\img\CoreValuesRed.png" />
     <Content Include="Content\img\Emp_Prog.png" />
     <Content Include="Content\img\icheck\aero%402x.png" />
     <Content Include="Content\img\icheck\aero.png" />
@@ -544,7 +550,6 @@
     <Content Include="Content\img\lear_inverse.png" />
     <Content Include="Content\img\logoIcon.png" />
     <Content Include="Content\img\ReCertified.png" />
-    <Content Include="Content\img\user.jpg" />
     <Content Include="Content\img\user.svg" />
     <Content Include="Content\js\adminlte.js" />
     <Content Include="Content\js\init.js" />
@@ -866,6 +871,7 @@
     <Content Include="Views\IT\AddModalRecertification.cshtml" />
     <Content Include="Views\IT\ModalMessage.cshtml" />
     <Content Include="Views\IT\Testing2.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

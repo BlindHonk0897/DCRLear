@@ -100,8 +100,8 @@ namespace DCRSystem.Controllers
                 Employees_Details userrr = _EmployeesManager.Employees_Details.Where(em => em.Employee_ID == user.BagdeNo).FirstOrDefault();
                 var intBadge = System.Int32.Parse(model.BagdeNo).ToString();
                 // Get User info from user_vw using BadgeNo
-                user_vw usertemp = learUser.user_vw.Where(use => use.badge_no == intBadge ).FirstOrDefault();
-
+                users_vw usertemp = learUser.users_vw.Where(use => use.Employee_ID == user.BagdeNo ).FirstOrDefault();
+               
                 // Get total Number of Employees 
                 var countEmployees = _EmployeesManager.Employees_Details.ToList();
 
@@ -112,17 +112,17 @@ namespace DCRSystem.Controllers
                 var countNewlyEmployees = _EmployeesManager.newlyEmployees.ToList();
               
                 // Set Authentication Cookie to User's EMAIL ADDRESS
-                FormsAuthentication.SetAuthCookie(usertemp.email, false);
+                FormsAuthentication.SetAuthCookie(usertemp.Email, false);
 
                 // [ BEGIN -- Authentication Configuration
-                var authTicket = new FormsAuthenticationTicket(1, usertemp.email, DateTime.Now, DateTime.Now.AddMinutes(720), false, user.Roles);
+                var authTicket = new FormsAuthenticationTicket(1, usertemp.Email, DateTime.Now, DateTime.Now.AddMinutes(720), false, user.Roles);
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 HttpContext.Response.Cookies.Add(authCookie);
                 // -- END Authentication Configuration ]
 
                 // [ BEGIN -- Session Configuration
-                Session["User"] = usertemp.email;
+                Session["User"] = usertemp.Email;
                 Session["RoleUser"] = user.Roles;
                 Session["UserId"] = user.BagdeNo;
                 Session["NumberOfEmployees"] = countEmployees.Count();

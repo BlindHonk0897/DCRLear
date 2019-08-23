@@ -61,5 +61,14 @@ namespace DCRSystem.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReCertificationPlan>("GETLatestPlan", mergeOption, badgeNoParameter);
         }
+    
+        public virtual int deleteLastPlan(string bagdeNo)
+        {
+            var bagdeNoParameter = bagdeNo != null ?
+                new ObjectParameter("BagdeNo", bagdeNo) :
+                new ObjectParameter("BagdeNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("deleteLastPlan", bagdeNoParameter);
+        }
     }
 }

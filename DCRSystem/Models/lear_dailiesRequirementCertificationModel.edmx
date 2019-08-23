@@ -43,6 +43,7 @@
           <Property Name="Firstname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CertificationCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PlanDate" Type="datetime" Nullable="false" />
+          <Property Name="Confirmed" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -86,6 +87,9 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <Property Name="Supervisor" Type="nvarchar" MaxLength="100" />
           <Property Name="PlanRecertificationDate" Type="datetime" />
         </EntityType>
+        <Function Name="deleteLastPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BagdeNo" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="GET_LastReCertificationPlanned" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BadgeNo" Type="varchar" Mode="In" />
         </Function>
@@ -146,6 +150,9 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <FunctionImport Name="GETLatestPlan" EntitySet="ReCertificationPlans" ReturnType="Collection(lear_DailiesCertificationRequirementModel.ReCertificationPlan)">
           <Parameter Name="BadgeNo" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="deleteLastPlan">
+          <Parameter Name="BagdeNo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Certification">
           <Key>
@@ -185,6 +192,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CertificationCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PlanDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Confirmed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="certificateTracker_Vw">
           <Key>
@@ -265,6 +273,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <EntitySetMapping Name="ReCertificationPlans">
             <EntityTypeMapping TypeName="lear_DailiesCertificationRequirementModel.ReCertificationPlan">
               <MappingFragment StoreEntitySet="ReCertificationPlan">
+                <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
                 <ScalarProperty Name="PlanDate" ColumnName="PlanDate" />
                 <ScalarProperty Name="CertificationCode" ColumnName="CertificationCode" />
                 <ScalarProperty Name="Firstname" ColumnName="Firstname" />
@@ -303,6 +312,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GET_LastReCertificationPlanned" FunctionName="lear_DailiesCertificationRequirementModel.Store.GET_LastReCertificationPlanned" />
           <FunctionImportMapping FunctionImportName="GETLatestPlan" FunctionName="lear_DailiesCertificationRequirementModel.Store.GET_LastReCertificationPlanned" />
+          <FunctionImportMapping FunctionImportName="deleteLastPlan" FunctionName="lear_DailiesCertificationRequirementModel.Store.deleteLastPlan" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

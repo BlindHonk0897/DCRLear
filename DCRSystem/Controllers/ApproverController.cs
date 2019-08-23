@@ -35,14 +35,25 @@ namespace DCRSystem.Controllers
         [HttpGet]
         public ActionResult MyCertificate(String id)
         {
-
-            EmployeeModel empModel = new EmployeeModel();
+            System.Diagnostics.Debug.WriteLine(id);
+           EmployeeModel empModel = new EmployeeModel();
             if (id != null)
             {
                 var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
                 if (employee != null)
                 {
-                    empModel.Employee = employee;
+                    empModel.Employee = new EmployeeDCR_Vw
+                    {
+                        Employee_ID = employee.Employee_ID,
+                        First_Name = employee.First_Name,
+                        Last_Name = employee.Last_Name,
+                        Cost_Center_Description = employee.Cost_Center_Description
+                        ,
+                        Job_Status = employee.Job_Status,
+                        Supervisor = employee.Supervisor,
+                        PlanRecertificationDate = employee.PlanRecertificationDate,
+                        Position = employee.Position
+                    };
                     empModel.Certifications = ldcr.Certifications.OrderBy(l => l.Code).ToList();
                     empModel.TotalCertifications = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderBy(cr => cr.CertificationCode).ToList();
                     empModel.CurrentCertification = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderByDescending(cr => cr.DateCertified).FirstOrDefault();
