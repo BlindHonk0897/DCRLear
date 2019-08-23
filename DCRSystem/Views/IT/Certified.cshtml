@@ -12,7 +12,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
+<link rel="stylesheet" href="~/Content/Typing.css">
 @using (Html.BeginForm("PostCertified", "IT", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "", autocomplete = "off" }))
 {
     <div class="row">
@@ -162,7 +162,7 @@
                     <div class="mailbox-controls">
                     </div>
                     <div class="table-responsive mailbox-messages">
-                        <div class="box-body box-profile">
+                        <div class="box-body box-profile typewriter">
                             <h1 class="profile-username text-center"><font size="30">Certification</font></h1>
                         </div>
                         <div class="box-body">
@@ -172,7 +172,7 @@
                                 <label>Choose Type of Certification:</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
-                                        <i class="fa fa-codepen"></i>
+                                        <i class="fa fa-certificate"></i>
                                     </div>
                                     <select class="form-control select2" name="Code" style="width: 100%;">
                                         <option selected="selected" value="X">-- Select Here --</option>

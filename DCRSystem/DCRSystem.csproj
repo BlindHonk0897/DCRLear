@@ -620,6 +620,8 @@
     <Content Include="Content\select2\js\select2.full.min.js" />
     <Content Include="Content\select2\js\select2.js" />
     <Content Include="Content\select2\js\select2.min.js" />
+    <Content Include="Content\Typing.css" />
+    <Content Include="Content\Wave.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -689,6 +691,7 @@
     <Content Include="Models\LearUserModel.edmx.diagram">
       <DependentUpon>LearUserModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\Wave.scss" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
