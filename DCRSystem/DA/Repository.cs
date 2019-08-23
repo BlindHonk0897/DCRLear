@@ -24,7 +24,7 @@ namespace DCRSystem.DA
             //System.Diagnostics.Debug.WriteLine(accc); //Console Display For Debug Purposes
 
             // get User from users_vw 
-            var accc = leardbUser.users_vw.Where(u => u.Employee_ID.ToLower() == intBagde.ToString().ToLower() && u.Employee_ID == account.Password).FirstOrDefault();
+            var accc = leardbUser.users_vw.Where(u => u.Employee_ID.ToLower() == account.BagdeNo.ToString().ToLower() && "Lear" == account.Password).FirstOrDefault();
 
             // encrypt Password
             var passEn = passSecure.EncryptPassword(account.Password);
@@ -33,7 +33,7 @@ namespace DCRSystem.DA
             //var accc1 = leardbUser.user_vw.Where(u => u.badge_no.ToLower() == intBagde.ToString().ToLower() && u.Employee_Password == passEn).FirstOrDefault();
 
             // get User from users_vw 
-            var accc1 = leardbUser.users_vw.Where(u => u.Employee_ID.ToLower() == intBagde.ToString().ToLower() && u.Employee_Password == passEn).FirstOrDefault();
+            var accc1 = leardbUser.users_vw.Where(u => u.Employee_ID.ToLower() == account.BagdeNo.ToString().ToLower() && u.Employee_Password == passEn).FirstOrDefault();
 
             System.Diagnostics.Debug.WriteLine(accc1);//Console Display For Debug Purposes
 
@@ -52,7 +52,7 @@ namespace DCRSystem.DA
                 foreach (Approver app in users)
                 {
                     
-                    if (accc.Employee_ID.Equals(System.Int32.Parse(app.approver.ToString()).ToString().ToLower()))
+                    if (accc.Employee_ID.Equals(app.approver.ToString().ToLower()))
                     {
                         // if User is consider as Approver set variable Roles to 'Approver'
                         Roles = "Approver";
