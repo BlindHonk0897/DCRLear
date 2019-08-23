@@ -862,6 +862,7 @@
     <Content Include="Views\IT\ReCertificationPlan.cshtml" />
     <Content Include="Views\IT\AddModalRecertification.cshtml" />
     <Content Include="Views\IT\ModalMessage.cshtml" />
+    <Content Include="Views\IT\Testing2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

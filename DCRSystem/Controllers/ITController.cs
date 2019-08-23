@@ -401,6 +401,7 @@ namespace DCRSystem.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
+          System.Diagnostics.Debug.WriteLine(ldcr.GET_LastReCertificationPlanned("022675").FirstOrDefault().ToString());
 
             return View(employees.ToPagedList(pageNumber, pageSize));
         }
@@ -596,6 +597,11 @@ namespace DCRSystem.Controllers
             modal.BadgeNo = EmpId;
             modal.CertificationTrackers = ldcr.CertificationTrackers.Where(ctr => ctr.EmpBadgeNo == EmpId && ctr.DateRecertified == null).ToList();
             return View(modal);
+        }
+
+        public ActionResult Testing2()
+        {
+            return View();
         }
     }
 }

@@ -4,6 +4,9 @@
     ViewBag.Title = "ReCertificationPlan";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <form action="/IT/ReCertificationPlan">
     <h3><a @*href="@Url.Action("AddModalRecertification","IT")"*@ onclick="modalShow()" class="btn btn-pinterest"><i class="fa fa-plus"></i>&nbsp;Plan</a><small class="label pull-right bg-red"><input type="search" class="form-control" name="searchInput" placeholder="Search by Lastname" /></small></h3>
 </form>
@@ -25,17 +28,17 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>@item.Badge_No</td>
-                            <td>@item.Lastname , @item.Firstname</td>
-                            <td>@item.CertificationCode</td>
-                            <td>@item.PlanDate.ToShortDateString()</td>
-                            <td>
-                                <a href="@Url.Action("Details","IT",new { id = item.Badge_No,urlBack = "ReCertificationPlan" })">
-                                    <img src="~/Content/img/Emp_Prog.png" height="30" width="30" />
-                                </a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>@item.Badge_No</td>
+                                <td>@item.Lastname , @item.Firstname</td>
+                                <td>@item.CertificationCode</td>
+                                <td>@item.PlanDate.ToShortDateString()</td>
+                                <td>
+                                    <a href="@Url.Action("Details","IT",new { id = item.Badge_No,urlBack = "ReCertificationPlan" })">
+                                        <img src="~/Content/img/Emp_Prog.png" height="30" width="30" />
+                                    </a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -58,7 +61,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" title="Cancel Transaction" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <h4 class="modal-title">Add ReCertification Plan</h4>
@@ -71,9 +74,12 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-user"></i>
                                     </div>
-                                    @Html.DropDownList("NotYetRecertified", null, new { Name = "EmployeeID", @*@onchange = "ShowMore(this.value)",*@ id = "DROP", @class = "chosen-select form-control" })
+                                    @Html.DropDownList("NotYetRecertified", null, new { Name = "EmployeeID",@id = "DROP",
+                                   @class = "chosen-select form-control select2",
+                                   style = "width: 100%;"
+                               })
                                 </div>
-                            </div>                        
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
@@ -83,8 +89,10 @@
                 </div>
             </div>
         }
+        <script>$('.select2').select2();</script>
     </div>
 </div>
+
 @section ViewSpecificJavascript{
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
