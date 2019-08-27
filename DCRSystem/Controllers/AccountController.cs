@@ -78,11 +78,14 @@ namespace DCRSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(Account model, string returnUrl)
         {
+          
             _EmployeesManager = new commonEmployeesEntities();
             learUser = new gatepassEntities();
             _AccountManager = new lear_DailiesCertificationRequirementEntities();
             PasswordSecurity ps = new PasswordSecurity();
-            
+
+            // System.Diagnostics.Debug.WriteLine(ps.EncryptPassword(model.Password)); 
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -236,6 +239,7 @@ namespace DCRSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(Account model)
         {
+           
             _EmployeesManager = new commonEmployeesEntities();
             _AccountManager = new lear_DailiesCertificationRequirementEntities();
            

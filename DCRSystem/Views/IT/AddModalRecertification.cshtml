@@ -10,7 +10,16 @@
     $(window).on('load', function () {
         $('#myModal').modal('show');
     });
+
 </script>
+<style type="text/css">
+    .event a {
+        background-color: #42B373 !important;
+        background-image: none !important;
+        color: #ffffff !important;
+    }
+</style>
+
 <div class="example-modal">
     @using (Html.BeginForm("AddRecertification", "IT", FormMethod.Post, new { id = "AddForm" }))
     {
@@ -67,6 +76,7 @@
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
     <script type="text/javascript">
+       
         function modalShow() {
             $('#myModal').modal('show');
         }
