@@ -88,6 +88,7 @@ namespace DCRSystem.Controllers
                     empModel.TotalPointsReCertified = TotalPointsReCertified;
                 }
             }
+            
             return View(empModel);
         }
     }

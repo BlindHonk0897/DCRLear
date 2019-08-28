@@ -68,6 +68,7 @@ namespace DCRSystem.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+           
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -78,7 +79,7 @@ namespace DCRSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(Account model, string returnUrl)
         {
-          
+           
             _EmployeesManager = new commonEmployeesEntities();
             learUser = new gatepassEntities();
             _AccountManager = new lear_DailiesCertificationRequirementEntities();

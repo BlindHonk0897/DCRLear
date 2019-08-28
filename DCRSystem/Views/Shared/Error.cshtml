@@ -3,7 +3,28 @@
 @{
     ViewBag.Title = "Error";
 }
+@Styles.Render("~/Styles/Error/404.css")
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-
+<div class="error-page">
+    <h2 class="headline text-red"> 404</h2>
+    <div class="error-content">
+        <h3><i class="fa fa-warning text-red"></i> Oops! Page not found.</h3>
+        <p>
+            We could not find the page you were looking for.
+            Meanwhile, you may <a href="#">return to dashboard</a> or try using the search form.
+        </p>
+        <form class="search-form">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search">
+                <div class="input-group-btn">
+                    <button type="submit" name="submit" class="btn btn-warning btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/Scripts/Error/P404/menu")
+}

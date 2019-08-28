@@ -286,6 +286,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
     <Content Include="About\Images\dan.jpg" />
     <Content Include="About\Images\jeff.PNG" />
     <Content Include="About\Images\sean.PNG" />
@@ -782,6 +783,8 @@
     <Content Include="Scripts\Elements\Sliders-menu.js" />
     <Content Include="Scripts\Elements\Sliders.js" />
     <Content Include="Scripts\Elements\Timeline-menu.js" />
+    <Content Include="Scripts\Error\P404-menu.js" />
+    <Content Include="Scripts\Error\P500-menu.js" />
     <Content Include="Scripts\Forms\Advanced-menu.js" />
     <Content Include="Scripts\Forms\Advanced.js" />
     <Content Include="Scripts\Forms\Editors-menu.js" />
@@ -812,6 +815,7 @@
     <Content Include="Styles\Elements\General.css" />
     <Content Include="Styles\Elements\Icons.css" />
     <Content Include="Styles\Elements\Modals.css" />
+    <Content Include="Styles\Error\404.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
