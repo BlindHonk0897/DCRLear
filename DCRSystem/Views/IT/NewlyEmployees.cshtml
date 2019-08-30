@@ -4,6 +4,7 @@
     ViewBag.Title = "NewlyEmployees";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Styles.Render("~/Content/PagedList.css")
 <form action="/IT/NewlyEmployees">
     <h3><i class="fa fa-users"></i>&nbsp;<strong><font color="sky-blue">Newly Employed</font></strong><small class="label pull-right bg-aqua-active"><input type="search" class="form-control" name="searchInput" placeholder="Search by Lastname/BadgeNo" /></small></h3>
 </form>
@@ -65,14 +66,11 @@
 
             </div>
         </div>
-    </div>
-    <div class="box-body">
         <div class="clearfix">
-            <div class="hint-text" style="font-size: 18px!important;">Showing Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
-            <ul class="pagination" style="float:right; font-size:20px;">
-                <li><a> @Html.PagedListPager(Model, page => Url.Action("NewlyEmployees", new { page }))</a></li>
+            <div class="hint-text pull-left" style="font-size: 18px!important;">Showing Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+            <ul class="pagination pull-right">
+                <li> @Html.PagedListPager(Model, page => Url.Action("NewlyEmployees", new { page }))</li>
             </ul>
         </div>
     </div>
-
 </div>

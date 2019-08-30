@@ -7,6 +7,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+@Styles.Render("~/Content/PagedList.css")
 <form action="/IT/ReCertificationPlan">
     <h3><a @*href="@Url.Action("AddModalRecertification","IT")"*@ onclick="modalShow()" class="btn btn-pinterest"><i class="fa fa-plus"></i>&nbsp;Plan</a><small class="label pull-right bg-red"><input type="search" class="form-control" name="searchInput" placeholder="Search by Lastname" /></small></h3>
 </form>
@@ -49,8 +50,8 @@
     <div class="box-body">
         <div class="clearfix">
             <div class="hint-text" style="font-size: 18px!important;">Showing Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
-            <ul class="pagination" style="float:right; font-size:20px;">
-                <li><a> @Html.PagedListPager(Model, page => Url.Action("ReCertificationPlan", new { page }))</a></li>
+            <ul class="pagination pull-right" style="font-size:20px;">
+                <li>@Html.PagedListPager(Model, page => Url.Action("ReCertificationPlan", new { page }))</li>
             </ul>
         </div>
     </div>
