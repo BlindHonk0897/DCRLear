@@ -1,0 +1,92 @@
+﻿@model DCRSystem.Models.Certification
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#myModal').modal('show');
+    });
+
+</script>
+<style type="text/css">
+    .event a {
+        background-color: #42B373 !important;
+        background-image: none !important;
+        color: #ffffff !important;
+    }
+</style>
+
+<div class="example-modal">
+    @using (Html.BeginForm("PostEdit", "Certificate", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div id="myModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="@Url.Action("Certificates","Certificate")" class="close" title="Cancel Transaction" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </a>
+                        <h4 class="modal-title">Update Certificate </h4>
+                    </div>
+                    <div class="modal-body">
+                         @Html.HiddenFor(model => model.Id)
+                        <input type="hidden" value="@ViewBag.OldCode" name="OldCode"/>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
+                                @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control",@required = "true" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Points, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Points, new { htmlAttributes = new { @class = "form-control", @min = "1"} })
+                                @Html.ValidationMessageFor(model => model.Points, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="@Url.Action("Certificates","Certificate")" class="btn btn-default pull-left">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section ViewSpecificJavascript{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+    <script type="text/javascript">
+
+        function modalShow() {
+            $('#myModal').modal('show');
+        }
+        // Date picker
+        $(function () {
+            $('#SelectedDate').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                format: "mm/dd/yyyy",
+                language: "tr"
+            });
+        });
+
+    </script>
+}

@@ -180,10 +180,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApproverController.cs" />
+    <Compile Include="Controllers\CertificateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ITController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdinaryController.cs" />
+    <Compile Include="CustomViewModel\CertificateViewModel.cs" />
     <Compile Include="CustomViewModel\EmployeeModel.cs" />
     <Compile Include="CustomViewModel\EmployeesViewModel.cs" />
     <Compile Include="CustomViewModel\EmpRouteViewModel.cs" />
@@ -876,6 +878,9 @@
     <Content Include="Views\IT\ModalMessage.cshtml" />
     <Content Include="Views\IT\Testing2.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Certificate\Certificates.cshtml" />
+    <Content Include="Views\Certificate\Edit.cshtml" />
+    <Content Include="Views\Certificate\ModalFailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,7 +1,15 @@
 ﻿@using Microsoft.AspNet.Identity
+<style type="text/css">
+    .main-header a{
+        color:black;
+    }
+    .main-header .sidebar-toggle:hover {
+        color: #A71717;
+    }
+</style>
 <header class="main-header">
     @* BEGIN Logo *@
-    <a href="@Url.Action("Home", "Home")" class="logo">
+    <a href="@Url.Action("Home", "Home")" class="logo" >
         @* Mini logo for sidebar 50x50 pixels *@
         @*<span class="logo-mini"><b>A</b>LT</span>*@
         <span class="logo-mini"><img src="~/Content/img/lear.png" style="height:50px;" /></span>
@@ -13,15 +21,18 @@
     @* END Logo *@
     @* BEGIN Header *@
     <nav class="navbar navbar-static-top" role="navigation">
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" >
             <span class="sr-only">Toggle navigation</span>
         </a>
+        
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 @* BEGIN User Account Menu *@
+                
                 @if (Session["UserRole"] != null || Session["UserPosition"] != null)
                 {
                     <li class="dropdown user user-menu">
+
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="glyphicon glyphicon-user"></i>
                             <span class="hidden-xs">@User.Identity.GetUserName()</span>
@@ -37,15 +48,15 @@
                             </li>
                             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                             {
-                            @Html.AntiForgeryToken()
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default btn-flat"><i class="fa fa-share"></i>&nbsp;<span>Sign out</span></a>
-                                </div>
-                            </li>
+                                @Html.AntiForgeryToken()
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default btn-flat"><i class="fa fa-share"></i>&nbsp;<span>Sign out</span></a>
+                                    </div>
+                                </li>
                             }
                         </ul>
                     </li>

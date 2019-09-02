@@ -23,7 +23,7 @@ namespace DCRSystem.DA
             //var accc = leardbUser.user_vw.Where(u => u.badge_no.ToLower() == intBagde.ToString().ToLower() && u.password == account.Password).FirstOrDefault();
             //System.Diagnostics.Debug.WriteLine(accc); //Console Display For Debug Purposes
 
-            // get User from users_vw 
+            // get User from users_vw // Comment next Line For Deploying // Uncomment for Testing--
             var accc = leardbUser.users_vw.Where(u => u.Employee_ID.ToLower() == account.BagdeNo.ToString().ToLower() && "Lear" == account.Password).FirstOrDefault();
 
             // encrypt Password

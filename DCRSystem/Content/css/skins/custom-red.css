@@ -1,9 +1,7 @@
-﻿/*
- * Skin: Blue
- * ----------
- */
+﻿
 .custom-red .main-header .navbar {
-    background-color: #A71717;
+    /* background-color: #A71717;*/
+    background-color: orange;
 }
 
     .custom-red .main-header .navbar .nav > li > a {

@@ -70,5 +70,18 @@ namespace DCRSystem.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("deleteLastPlan", bagdeNoParameter);
         }
+    
+        public virtual int UpdateLDCRTablesWhenUpdateCertification(string oldCode, string newCode)
+        {
+            var oldCodeParameter = oldCode != null ?
+                new ObjectParameter("OldCode", oldCode) :
+                new ObjectParameter("OldCode", typeof(string));
+    
+            var newCodeParameter = newCode != null ?
+                new ObjectParameter("NewCode", newCode) :
+                new ObjectParameter("NewCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateLDCRTablesWhenUpdateCertification", oldCodeParameter, newCodeParameter);
+        }
     }
 }

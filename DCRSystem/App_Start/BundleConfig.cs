@@ -35,7 +35,6 @@ namespace DCRSystem
                 .Include("~/Content/css/icheck/blue.min.css", new CssRewriteUrlTransformAbsolute())
                 .Include("~/Content/css/AdminLTE.css", new CssRewriteUrlTransformAbsolute())
                 .Include("~/Content/css/skins/_all-skins.css")
-                .Include("~/Content/css/skins/custom-red.css")
                 .Include("~/Content/CDN/Datatable/css/jquery.dataTables.min.css")
                 .Include("~/Content/plugins/pace/css/pace.css")
                 .Include("~/Content/plugins/pace/css/pace.min.css")

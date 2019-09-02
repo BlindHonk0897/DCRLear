@@ -162,15 +162,15 @@ h6,
 }
 /* General Links */
 a {
-  color: #3c8dbc;
+  color: black;
 }
-a:hover,
-a:active,
-a:focus {
-  outline: none;
-  text-decoration: none;
-  color: #72afd2;
-}
+    a:hover,
+    a:active,
+    a:focus {
+        outline: none;
+        text-decoration: none;
+        color: black;
+    }
 /* Page Header */
 .page-header {
   margin: 10px 0 20px 0;
@@ -256,7 +256,7 @@ a:focus {
   content: "\f0c9";
 }
 .main-header .sidebar-toggle:hover {
-  color: #fff;
+  color: green;
 }
 .main-header .sidebar-toggle:focus,
 .main-header .sidebar-toggle:active {
@@ -420,6 +420,7 @@ a:focus {
   -moz-transition: -moz-transform 0.3s ease-in-out, width 0.3s ease-in-out;
   -o-transition: -o-transform 0.3s ease-in-out, width 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  font-family:sans-serif;
 }
 @media (max-width: 767px) {
   .main-sidebar {
@@ -509,6 +510,7 @@ a:focus {
 .sidebar-menu > li > a {
   padding: 12px 5px 12px 15px;
   display: block;
+  color:black;
 }
 .sidebar-menu > li > a > .fa,
 .sidebar-menu > li > a > .glyphicon,

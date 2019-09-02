@@ -85,7 +85,11 @@ namespace DCRSystem.Controllers
             _AccountManager = new lear_DailiesCertificationRequirementEntities();
             PasswordSecurity ps = new PasswordSecurity();
 
-            // System.Diagnostics.Debug.WriteLine(ps.EncryptPassword(model.Password)); 
+             System.Diagnostics.Debug.WriteLine(ps.EncryptPassword(model.Password) +" : pass");
+            var adminPass = ps.EncryptPassword(model.Password);
+            var adminAccount = _AccountManager.Users.Where(us => us.BadgeNo.ToString().Equals(model.BagdeNo) && us.Password.Equals(adminPass)).FirstOrDefault();
+
+            //System.Diagnostics.Debug.WriteLine(adminAccount.Password+" : password");
 
             if (!ModelState.IsValid)
             {
@@ -139,7 +143,7 @@ namespace DCRSystem.Controllers
 
                 return RedirectToAction("Home", "Home");
             }
-            else if (model.BagdeNo.ToString() == "1234" && model.Password.ToString() =="IT")  // Hardcoded User For IT admin
+            else if (/*model.BagdeNo.ToString() == "1234" && model.Password.ToString() =="IT"*/ adminAccount!=null)  // Hardcoded User For IT admin
             {
                 // Get total Number of Employees 
                 var countEmployees = _EmployeesManager.Employees_Details.ToList();
@@ -170,6 +174,7 @@ namespace DCRSystem.Controllers
                 Session["NumberOfActiveEmployees"] = countActiveEmployees;
                 Session["NumberOfInactiveEmployees"] = countEmployees.Count()- countActiveEmployees;
                 Session["NumberOfRecertificationPlans"] = _AccountManager.ReCertificationPlans.ToList().Count();
+                Session["NumberOfCertificates"] = _AccountManager.Certifications.ToList().Count();
                 // [ BEGIN -- Session Configuration
 
                 return RedirectToAction("Home", "Home");

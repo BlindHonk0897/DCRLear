@@ -93,6 +93,10 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
         <Function Name="GET_LastReCertificationPlanned" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BadgeNo" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="UpdateLDCRTablesWhenUpdateCertification" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OldCode" Type="varchar" Mode="In" />
+          <Parameter Name="NewCode" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="lear_DailiesCertificationRequirementModelStoreContainer">
           <EntitySet Name="Certification" EntityType="Self.Certification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CertificationHistory" EntityType="Self.CertificationHistory" Schema="dbo" store:Type="Tables" />
@@ -152,6 +156,10 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           </FunctionImport>
           <FunctionImport Name="deleteLastPlan">
           <Parameter Name="BagdeNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateLDCRTablesWhenUpdateCertification">
+            <Parameter Name="OldCode" Mode="In" Type="String" />
+            <Parameter Name="NewCode" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Certification">
@@ -313,6 +321,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <FunctionImportMapping FunctionImportName="GET_LastReCertificationPlanned" FunctionName="lear_DailiesCertificationRequirementModel.Store.GET_LastReCertificationPlanned" />
           <FunctionImportMapping FunctionImportName="GETLatestPlan" FunctionName="lear_DailiesCertificationRequirementModel.Store.GET_LastReCertificationPlanned" />
           <FunctionImportMapping FunctionImportName="deleteLastPlan" FunctionName="lear_DailiesCertificationRequirementModel.Store.deleteLastPlan" />
+          <FunctionImportMapping FunctionImportName="UpdateLDCRTablesWhenUpdateCertification" FunctionName="lear_DailiesCertificationRequirementModel.Store.UpdateLDCRTablesWhenUpdateCertification" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

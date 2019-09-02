@@ -1,0 +1,55 @@
+﻿@model DCRSystem.CustomViewModel.CertificateViewModel
+    @{
+        ViewBag.Title = "Certificates";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-danger">
+                <div class="box-body">
+                    <table class="table table-sm table-hover" id="CertificateTable">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Certification Code</th>
+                                <th>Description</th>
+                                <th>Points</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var certificate in Model.Certifications)
+                            {
+                                <tr>
+                                    <td>@certificate.Id</td>
+                                    <td>@certificate.Code</td>
+                                    <td>@certificate.Description</td>
+                                    <td>@certificate.Points</td>
+                                    <td>
+                                        <a href="@Url.Action("Edit","Certificate",new { id = certificate.Id })" title="Edit"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    jQuery.noConflict();
+    //$.noConflict(true)
+    $(document).ready(function () {
+       
+       
+        $("#CertificateTable").DataTable(
+            {
+                "ordering": false
+            }
+        );
+        $('.dataTables_filter input[type="search"]').
+            attr('placeholder', 'Search');
+            //css({ 'width': '100px', 'display': 'inline-block', 'color': 'red' });
+    })
+    </script>
