@@ -3,9 +3,11 @@
     ViewBag.Title = "Homepage";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- @*@Scripts.Render("~/Scripts/Elements/General/menu")
+@Styles.Render("~/Content/plugins/datepicker/css")
+@Styles.Render("~/Content/plugins/daterangepicker/css")
+@*@Scripts.Render("~/Scripts/Elements/General/menu")
 
-@Styles.Render("~/Styles/Elements/General")*@
+    @Styles.Render("~/Styles/Elements/General")*@
 
 <div class="row">
     <div class="col-xs-12">
@@ -63,7 +65,7 @@
     </div>
 </div>
 <div class="row">
-   <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-red">
             <div class="inner">
                 <h3>@Session["NumberOfEmployees"]</h3>
@@ -127,13 +129,81 @@
                 <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
             </div>
         </div>
+        <div class="box box-solid bg-green-gradient">
+            <div class="box-header">
+                <i class="fa fa-calendar"></i>
+                <h3 class="box-title">Calendar</h3>
+                <div class="pull-right box-tools">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li><a href="#">Add new event</a></li>
+                            <li><a href="#">Clear events</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">View calendar</a></li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-success btn-sm" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-success btn-sm" data-widget="remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <div id="calendar" style="width: 100%"></div>
+            </div>
+            <div class="box-footer text-black">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="clearfix">
+                            <span class="pull-left">Task #1</span>
+                            <small class="pull-right">90%</small>
+                        </div>
+                        <div class="progress xs">
+                            <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
+                        </div>
+                        <div class="clearfix">
+                            <span class="pull-left">Task #2</span>
+                            <small class="pull-right">70%</small>
+                        </div>
+                        <div class="progress xs">
+                            <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="clearfix">
+                            <span class="pull-left">Task #3</span>
+                            <small class="pull-right">60%</small>
+                        </div>
+                        <div class="progress xs">
+                            <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
+                        </div>
+                        <div class="clearfix">
+                            <span class="pull-left">Task #4</span>
+                            <small class="pull-right">40%</small>
+                        </div>
+                        <div class="progress xs">
+                            <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+   
 </div>*@
 
-    @section ViewSpecificJavascript{
-        @*@Scripts.Render("~/AdminLTE/plugins/datatables/js")*@
-        @Scripts.Render("~/Scripts/Tables/Data")
-    }
+
+@section ViewSpecificJavascript{
+    @*@Scripts.Render("~/AdminLTE/plugins/datatables/js")*@
+    @Scripts.Render("~/Scripts/Tables/Data")
+    @Scripts.Render("~/Content/plugins/datepicker/js")
+    @Scripts.Render("~/Content/plugins/daterangepicker/js")
+}
 
 
 
