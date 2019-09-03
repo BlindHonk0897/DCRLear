@@ -328,6 +328,7 @@
     <Content Include="Content\css\icheck\yellow.css" />
     <Content Include="Content\css\icheck\yellow.min.css" />
     <Content Include="Content\css\login-main.css" />
+    <Content Include="Content\css\main.css" />
     <Content Include="Content\css\skins\custom-red.css" />
     <Content Include="Content\css\skins\skin-black-light.css" />
     <Content Include="Content\css\skins\skin-black-light.min.css" />
@@ -519,6 +520,7 @@
     <Content Include="Content\img\Certified.png" />
     <Content Include="Content\img\CoreValuesRed.png" />
     <Content Include="Content\img\Emp_Prog.png" />
+    <Content Include="Content\img\FotoJet.jpg" />
     <Content Include="Content\img\icheck\aero%402x.png" />
     <Content Include="Content\img\icheck\aero.png" />
     <Content Include="Content\img\icheck\blue%402x.png" />
@@ -541,7 +543,13 @@
     <Content Include="Content\img\icheck\yellow.png" />
     <Content Include="Content\img\InActiveCertified.png" />
     <Content Include="Content\img\InActiveRecertified.png" />
+    <Content Include="Content\img\Lear Logo - Original Pantone 485C and Black.png" />
     <Content Include="Content\img\lear.png" />
+    <Content Include="Content\img\Lear1.jpg" />
+    <Content Include="Content\img\Lear2.jpg" />
+    <Content Include="Content\img\Lear3.jpg" />
+    <Content Include="Content\img\Lear4.jpg" />
+    <Content Include="Content\img\Lear5.jpg" />
     <Content Include="Content\img\LearHome.png" />
     <Content Include="Content\img\LearHome1.png" />
     <Content Include="Content\img\LearHome2.png" />
@@ -553,6 +561,13 @@
     <Content Include="Content\img\lear_inverse.png" />
     <Content Include="Content\img\logoIcon.png" />
     <Content Include="Content\img\ReCertified.png" />
+    <Content Include="Content\img\Ribbons\Certified.svg" />
+    <Content Include="Content\img\Ribbons\CertifiedRibbon %282%29.png" />
+    <Content Include="Content\img\Ribbons\ribbon.svg" />
+    <Content Include="Content\img\Ribbons\CertifiedRibbon.png" />
+    <Content Include="Content\img\Ribbons\CurrentRibbon.png" />
+    <Content Include="Content\img\Ribbons\MostRibbon.png" />
+    <Content Include="Content\img\Ribbons\ReCertifiedRibbon.png" />
     <Content Include="Content\img\user.svg" />
     <Content Include="Content\js\adminlte.js" />
     <Content Include="Content\js\init.js" />
@@ -881,6 +896,10 @@
     <Content Include="Views\Certificate\Certificates.cshtml" />
     <Content Include="Views\Certificate\Edit.cshtml" />
     <Content Include="Views\Certificate\ModalFailed.cshtml" />
+    <Content Include="Views\IT\ModalCertifiedCertificates.cshtml" />
+    <Content Include="Views\IT\ModalReCertifiedCertificates.cshtml" />
+    <Content Include="Views\IT\ModelCurrentCertification.cshtml" />
+    <Content Include="Views\IT\ModelNotCertified.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

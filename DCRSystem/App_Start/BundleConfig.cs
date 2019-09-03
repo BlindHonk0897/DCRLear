@@ -39,8 +39,12 @@ namespace DCRSystem
                 .Include("~/Content/plugins/pace/css/pace.css")
                 .Include("~/Content/plugins/pace/css/pace.min.css")
                 .Include("~/Content/select2/css/select2.css")
-                .Include("~/Content/select2/css/select2.min.css"));
-               
+                .Include("~/Content/select2/css/select2.min.css")
+                .Include("~/Content/css/skins/custom-red.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                     "~/Content/css/font-awesome.min.css",
+                     "~/Content/css/main.css"));
 
             bundles.Add(new StyleBundle("~/Bundles/login-css")
                 .Include("~/Content/css/font-awesome.min.css")

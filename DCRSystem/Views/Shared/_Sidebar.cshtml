@@ -10,36 +10,36 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header"></li>
                     <li class="@Url.IsLinkActive("Home", "Home")">
-                        <a href="@Url.Action("Home", "Home")"><i class="fa fa-home"></i> <span>Home</span></a>
+                        <a href="@Url.Action("Home", "Home")" class="sidebar-link"><i class="fa fa-home"></i> <span><font color="black">Home</font></span></a>
                     </li>
                     <li class="@Url.IsLinkActive("Employee", "IT")">
-                        <a href="@Url.Action("Employee", "IT")"><i class="fa fa-users"></i> <span>Employees</span><small class="label pull-right bg-red">@Session["NumberOfEmployees"]</small></a>
+                        <a href="@Url.Action("Employee", "IT")" class="sidebar-link"><i class="fa fa-users"></i> <span><font color="black">Employees</font></span><small class="label pull-right bg-red">@Session["NumberOfEmployees"]</small></a>
                     </li>
                     <li class="@Url.IsLinkActive("NewlyEmployees", "IT")">
-                        <a href="@Url.Action("NewlyEmployees", "IT")"><i class="fa fa-users"></i> <span>Newly Employed</span><small class="label pull-right bg-aqua-gradient">@Session["NumberOfNewlyEmployees"]</small></a>
+                        <a href="@Url.Action("NewlyEmployees", "IT")" class="sidebar-link"><i class="fa fa-users"></i> <span><font color="black">Newly Employed</font></span><small class="label pull-right bg-aqua-gradient">@Session["NumberOfNewlyEmployees"]</small></a>
                     </li>
                     <li class="@Url.IsLinkActive("ReCertificationPlan", "IT")">
-                        <a href="@Url.Action("ReCertificationPlan", "IT")"><i class="fa fa-edit"></i> <span>Re-Certification Plan</span><small class="label pull-right bg-red">@Session["NumberOfRecertificationPlans"]</small></a>
+                        <a href="@Url.Action("ReCertificationPlan", "IT")" class="sidebar-link"><i class="fa fa-edit"></i> <span><font color="black">Re-Certification Plan</font></span><small class="label pull-right bg-red">@Session["NumberOfRecertificationPlans"]</small></a>
                     </li>
                     <li class="@Url.IsLinkActive("Certificates", "Certificate")">
-                        <a href="@Url.Action("Certificates", "Certificate")"><i class="fa fa-certificate"></i> <span>Manage Certificates</span><small class="label pull-right bg-red">@Session["NumberOfCertificates"]</small></a>
+                        <a href="@Url.Action("Certificates", "Certificate")" class="sidebar-link"><i class="fa fa-certificate"></i> <span><font color="black">Manage Certificates</font></span><small class="label pull-right bg-red">@Session["NumberOfCertificates"]</small></a>
                     </li>
                     <li class="header"><i class="fa fa-filter"></i> <span><font color="#a64038">&nbsp;Filter Employees</font></span></li>
                     <li class="@Url.IsLinkActive("Active", "IT")">
-                        <a href="@Url.Action("Active", "IT")"><i class="fa fa-circle text-green"></i> <span>Active</span><small class="label pull-right bg-green-active">@Session["NumberOfActiveEmployees"]</small></a>
+                        <a href="@Url.Action("Active", "IT")" class="sidebar-link"><i class="fa fa-circle text-green"></i> <span><font color="black">Active</font></span><small class="label pull-right bg-green-active">@Session["NumberOfActiveEmployees"]</small></a>
                     </li>
                     <li class="@Url.IsLinkActive("Inactive", "IT")">
-                        <a href="@Url.Action("Inactive", "IT")"><i class="fa fa-circle text-bold"></i> <span>Inactive</span><small class="label pull-right bg-gray-active">@Session["NumberOfInactiveEmployees"]</small></a>
+                        <a href="@Url.Action("Inactive", "IT")" class="sidebar-link"><i class="fa fa-circle text-bold"></i> <span><font color="black">Inactive</font></span><small class="label pull-right bg-gray-active">@Session["NumberOfInactiveEmployees"]</small></a>
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="#" class="sidebar-link">
                             <i class="fa fa-question-circle"></i>
-                            <span>Help</span>
+                            <span><font color="black">Help</font></span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a @*href="@Url.Action("About", "Home")"*@>About</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a @*href="@Url.Action("About", "Home")"*@ class="sidebar-link"><font color="black">About</font></a></li>
+                            <li><a href="#" class="sidebar-link"><font color="black">Contact</font></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -55,27 +55,27 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header"></li>
                     <li class="@Url.IsLinkActive("Home", "Home")">
-                        <a href="@Url.Action("Home", "Home")"><i class="fa fa-home"></i> <span>Home</span></a>
+                        <a href="@Url.Action("Home", "Home")" class="sidebar-link"><i class="fa fa-home"></i> <span><font color="black">Home</font></span></a>
                     </li>
                     <li class="@Url.IsLinkActive("MyCertificate", "Approver")">
-                        <a href="@Url.Action("MyCertificate","Approver",new { id = Session["UserId"] })"><i class="fa fa-trophy"></i> <span>My Progress</span></a>
+                        <a href="@Url.Action("MyCertificate","Approver",new { id = Session["UserId"] })" class="sidebar-link"><i class="fa fa-trophy"></i> <span><font color="black">My Progress</font></span></a>
                     </li>
                     <li class="@Url.IsLinkActive("Employees", "Approver")">
-                        <a href="@Url.Action("Employees", "Approver",new { id = Session["UserId"] })"><i class="fa fa-users"></i> <span>Employees</span><small class="label pull-right bg-green-active">@Session["NumberOfUnderEmployees"]</small></a>
+                        <a href="@Url.Action("Employees", "Approver",new { id = Session["UserId"] })" class="sidebar-link"><i class="fa fa-users"></i> <span><font color="black">Employees</font></span><small class="label pull-right bg-green-active">@Session["NumberOfUnderEmployees"]</small></a>
                     </li>
-                    <li class="header"><b><font color="#a64038">Active/Inactive Employees</font></b></li>
-                    <li><a href="#"><i class="fa fa-circle text-green"></i> <span>Active</span></a></li>
-                    <li><a href="#"><i class="fa fa-circle text-bold"></i> <span>Inactive</span></a></li>
+                    <li class="header"><b><font color="#a64038" >Active/Inactive Employees</font></b></li>
+                    <li><a href="#" class="sidebar-link"><i class="fa fa-circle text-green"></i> <span><font color="black">Active</font></span></a></li>
+                    <li><a href="#" class="sidebar-link"><i class="fa fa-circle text-bold"></i> <span><font color="black">Inactive</font></span></a></li>
                     @*<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>*@
                     <li class="treeview">
-                        <a href="#">
+                        <a href="#" class="sidebar-link">
                             <i class="fa fa-question-circle"></i>
-                            <span>Help</span>
+                            <span><font color="black">Help</font></span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a @*href="@Url.Action("About", "Home")"*@>About</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a @*href="@Url.Action("About", "Home")"*@ class="sidebar-link"><font color="black">About</font></a></li>
+                            <li><a href="#" class="sidebar-link"><font color="black">Contact</font></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -91,20 +91,20 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header"></li>
                     <li class="@Url.IsLinkActive("Home", "Home")">
-                        <a href="@Url.Action("Home", "Home")"><i class="fa fa-home"></i> <span>Home</span></a>
+                        <a href="@Url.Action("Home", "Home")" class="sidebar-link"><i class="fa fa-home"></i> <span><font color="black">Home</font></span></a>
                     </li>
                     <li class="@Url.IsLinkActive("MyCertificate", "Ordinary")">
-                        <a href="@Url.Action("MyCertificate","Ordinary",new { id = Session["UserId"] })"><i class="fa fa-trophy"></i> <span>My Progress</span></a>
+                        <a href="@Url.Action("MyCertificate","Ordinary",new { id = Session["UserId"] })" class="sidebar-link"><i class="fa fa-trophy"></i> <span><font color="black">My Progress</font></span></a>
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="#" class="sidebar-link">
                             <i class="fa fa-question-circle"></i>
-                            <span>Help</span>
+                            <span><font color="black">Help</font></span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a @*href="@Url.Action("About", "Home")"*@>About</a></li>   
-                            <li><a href="#">Contact</a></li>
+                            <li><a @*href="@Url.Action("About", "Home")"*@ class="sidebar-link"><font color="black">About</font></a></li>   
+                            <li><a href="#" class="sidebar-link"><font color="black">Contact</font></a></li>
                         </ul>
                     </li>
                 </ul>

@@ -617,5 +617,82 @@ namespace DCRSystem.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult ModalCertifiedCertificates(String id ,String urlBack)
+        {
+            EmployeeModel model = new EmployeeModel();
+            model.MyCertifications  = ldcr.CertificationTrackers.Where(ct => ct.EmpBadgeNo == id).ToList();
+            var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+
+            if (employee != null) // if exist
+            {
+                model.Employee = employee;
+            }
+            ViewBag.urlBack = urlBack;
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult ModalReCertifiedCertificates(String id, String urlBack)
+        {
+            EmployeeModel model = new EmployeeModel();
+            model.MyCertifications = ldcr.CertificationTrackers.Where(ct => ct.EmpBadgeNo == id).ToList();
+            var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+
+            if (employee != null) // if exist
+            {
+                model.Employee = employee;
+            }
+            ViewBag.urlBack = urlBack;
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult ModelCurrentCertification(String id,String urlBack)
+        {
+            EmployeeModel model = new EmployeeModel();
+            var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+          
+            if (employee != null) // if exist
+            {
+                model.Employee = employee;
+                model.CurrentCertification = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID ).OrderByDescending(cr => cr.DateCertified).FirstOrDefault();
+            }
+            ViewBag.urlBack = urlBack;
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult ModelNotCertified(String id, String urlBack)
+        {
+            EmployeeModel empModel = new EmployeeModel();
+            if (id != null)
+            {
+                // Get employee using the id
+                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+
+                if (employee != null) // if exist
+                {
+                    empModel.Employee = employee;
+                }
+            }
+
+            // Get the Total Certifications
+            empModel.TotalCertifications = ldcr.CertificationTrackers.Where(ct => ct.EmpBadgeNo == id).ToList();
+
+            // Get All Certifications
+            empModel.Certifications = ldcr.Certifications.OrderBy(ct => ct.Code).ToList<Certification>();
+
+            foreach (var certTrack in empModel.Certifications)
+            {
+                if (empModel.TotalCertifications.FirstOrDefault(tc => tc.CertificationCode == certTrack.Code) == null)
+                {
+                    // Add Certifications which employee is not Certified
+                    empModel.ImNotCertified.Add(certTrack);
+                }
+            }
+            ViewBag.urlBack = urlBack;
+            return View(empModel);
+        }
     }
 }
