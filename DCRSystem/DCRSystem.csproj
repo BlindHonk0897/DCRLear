@@ -190,6 +190,7 @@
     <Compile Include="CustomViewModel\EmployeesViewModel.cs" />
     <Compile Include="CustomViewModel\EmpRouteViewModel.cs" />
     <Compile Include="CustomViewModel\ModalAddRecertificactionModel.cs" />
+    <Compile Include="CustomViewModel\PartialViewModel.cs" />
     <Compile Include="CustomViewModel\UrlModel.cs" />
     <Compile Include="DA\Account.cs" />
     <Compile Include="DA\Repository.cs" />
@@ -267,6 +268,7 @@
       <DependentUpon>lear_dailiesRequirementCertificationModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Month.cs" />
     <Compile Include="Models\newlyEmployee.cs">
       <DependentUpon>EmployeesModel.tt</DependentUpon>
     </Compile>
@@ -958,6 +960,9 @@
     <Content Include="Views\IT\ModalReCertifiedCertificates.cshtml" />
     <Content Include="Views\IT\ModelCurrentCertification.cshtml" />
     <Content Include="Views\IT\ModelNotCertified.cshtml" />
+    <Content Include="Views\IT\SearchOption.cshtml" />
+    <Content Include="Views\IT\_DynamicTableBody.cshtml" />
+    <Content Include="Views\IT\GetEmployeesByMonth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -365,9 +365,11 @@ namespace DCRSystem.Controllers
                             CT.DateCertified = null;
                             CT.DateRecertified = null;
                             empModel.MyCertifications.Add(CT);
+                            empModel.ImNotCertified.Add(certification);
                         }
                         else
                         {
+
                             empModel.MyCertifications.Add(empModel.TotalCertifications.FirstOrDefault(el => el.CertificationCode == certification.Code));
                             totalPointsCertiFied += Convert.ToInt32(certification.Points);
                         }
@@ -377,9 +379,7 @@ namespace DCRSystem.Controllers
                         }
                     }
                     empModel.TotalPointsCertified = totalPointsCertiFied;
-                    empModel.TotalPointsReCertified = TotalPointsReCertified;
-
-
+                    empModel.TotalPointsReCertified = TotalPointsReCertified;               
                 }
             }
             return View(empModel);
@@ -694,5 +694,73 @@ namespace DCRSystem.Controllers
             ViewBag.urlBack = urlBack;
             return View(empModel);
         }
+
+        [HttpGet]
+        public ActionResult SearchOption()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult _DynamicTableBody(String month)
+        {
+            ViewBag.Number = month;
+
+            PartialViewModel model = new PartialViewModel();
+            var certificate = ldcr.CertificationTrackers.ToList();
+            foreach(var cert in certificate)
+            {
+                if (Convert.ToDateTime(cert.DateCertified).ToString("MMMM").ToUpper().Equals(month.ToUpper()))
+                {
+                    var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo).FirstOrDefault();
+                    if(!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
+                    {
+                        model.EmployeeDCR_Vws.Add(employee);
+                    }
+                  
+                }
+            }
+            return PartialView(model); // Here must be return PartialView, not View.
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult GetEmployeesByMonth(String month = "")
+        {
+
+            PartialViewModel model = new PartialViewModel();
+            var certificate = ldcr.CertificationTrackers.ToList();
+            foreach (var cert in certificate)
+            {
+                if (Convert.ToDateTime(cert.DateCertified).ToString("MMMM").ToUpper().Equals(month.ToUpper()))
+                {
+                    var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo).FirstOrDefault();
+                    if (!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
+                    {
+                        model.EmployeeDCR_Vws.Add(employee);
+                    }
+
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult JqAJAX(Month st)
+        {
+            try
+            {
+                return RedirectToAction("GetEmployeesByMonth","IT", new { month = st.Name });
+               
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    msg = "UnSuccessfully Event "
+                });
+            }
+        }
+
     }
 }

@@ -221,14 +221,14 @@
                         </table>
                         <div class="box-footer no-padding">
                             <div class="mailbox-controls">
-                                <a href="@Url.Action("Details", "IT",new {id = Model.Employee.Employee_ID,urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm checkbox-toggle">
+                                <a href="@Url.Action("Details", "IT", new { id = Model.Employee.Employee_ID, urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm checkbox-toggle">
                                     <i class="fa fa-refresh fa-spin" title="Refresh" style="font-size:25px"></i>
                                 </a>
                                 <div class="btn-group">
-                                    <a href="@Url.Action("ModalCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; Certified</a>
-                                    <a href="@Url.Action("ModalReCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; Re-Certified</a>
-                                    <a href="@Url.Action("ModelCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification</a>
-                                    <a href="@Url.Action("ModelNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified</a>
+                                    <a href="@Url.Action("ModalCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; Certified &nbsp;<small class="label pull-right bg-red-active">@Model.TotalCertifications.Count()</small></a>
+                                    <a href="@Url.Action("ModalReCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; Re-Certified &nbsp;<small class="label pull-right bg-red-active">@Model.NumberReCertified</small></a>
+                                    <a href="@Url.Action("ModelCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification &nbsp;<small class="label pull-right bg-red-active">@(Model.CurrentCertification != null ? "1":"0" ) </small></a>
+                                    <a href="@Url.Action("ModelNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified &nbsp;<small class="label pull-right bg-red-active">@Model.ImNotCertified.Count()</small></a>
                                 </div>
 
                                 <div class="pull-right">
@@ -301,14 +301,14 @@
                         </table>
                         <div class="box-footer no-padding">
                             <div class="mailbox-controls">
-                                <a href="@Url.Action("Details", "IT",new {id = Model.Employee.Employee_ID,urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm checkbox-toggle">
+                                <a href="@Url.Action("Details", "IT", new { id = Model.Employee.Employee_ID, urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm checkbox-toggle">
                                     <i class="fa fa-refresh fa-spin" title="Refresh" style="font-size:25px"></i>
                                 </a>
                                 <div class="btn-group">
-                                    <a href="@Url.Action("ModalCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; Certified</a>
-                                    <a href="@Url.Action("ModalReCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; Re-Certified</a>
-                                    <a href="@Url.Action("ModelCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification</a>
-                                    <a href="@Url.Action("ModelNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified</a>
+                                    <a href="@Url.Action("ModalCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; Certified &nbsp;<small class="label pull-right bg-red-active">@Model.TotalCertifications.Count()</small></a>
+                                    <a href="@Url.Action("ModalReCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; Re-Certified &nbsp;<small class="label pull-right bg-red-active">@Model.NumberReCertified</small></a>
+                                    <a href="@Url.Action("ModelCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification &nbsp;<small class="label pull-right bg-red-active">1</small></a>
+                                    <a href="@Url.Action("ModelNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified &nbsp;<small class="label pull-right bg-red-active">@Model.ImNotCertified.Count()</small></a>
                                 </div>
                                 <div class="pull-right">
                                     <div class="btn-group">
