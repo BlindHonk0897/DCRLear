@@ -6,8 +6,24 @@
     .main-header .sidebar-toggle:hover {
         color: #A71717;
     }
+    .shadow-sm {
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important
+    }
+
+    .shadow {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important
+    }
+
+    .shadow-lg {
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important
+    }
+
+    .shadow-none {
+        box-shadow: none !important
+    }
 </style>
-<header class="main-header box-shadow">
+
+<header class="main-header hoverable">
     @* BEGIN Logo *@
     <p class="logo" >
         @* Mini logo for sidebar 50x50 pixels *@
@@ -20,7 +36,7 @@
     </p>
     @* END Logo *@
     @* BEGIN Header *@
-    <nav class="navbar navbar-static-top" role="navigation">
+    <nav class="navbar navbar-static-top shadow p-3 mb-5 bg-white rounded" role="navigation">
 
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>

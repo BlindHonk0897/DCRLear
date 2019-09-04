@@ -772,6 +772,7 @@
       <DependentUpon>LearUserModel.edmx</DependentUpon>
     </Content>
     <Content Include="Content\Wave.scss" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
