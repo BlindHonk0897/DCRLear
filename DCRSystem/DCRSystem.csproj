@@ -185,12 +185,14 @@
     <Compile Include="Controllers\ITController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdinaryController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="CustomViewModel\CertificateViewModel.cs" />
     <Compile Include="CustomViewModel\EmployeeModel.cs" />
     <Compile Include="CustomViewModel\EmployeesViewModel.cs" />
     <Compile Include="CustomViewModel\EmpRouteViewModel.cs" />
     <Compile Include="CustomViewModel\ModalAddRecertificactionModel.cs" />
     <Compile Include="CustomViewModel\PartialViewModel.cs" />
+    <Compile Include="CustomViewModel\SearchOptionsViewModel.cs" />
     <Compile Include="CustomViewModel\UrlModel.cs" />
     <Compile Include="DA\Account.cs" />
     <Compile Include="DA\Repository.cs" />
@@ -235,6 +237,9 @@
     </Compile>
     <Compile Include="Models\Emp_Route.cs">
       <DependentUpon>EmployeesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Filter.cs">
+      <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LearUserModel.Context.cs">
@@ -960,9 +965,12 @@
     <Content Include="Views\IT\ModalReCertifiedCertificates.cshtml" />
     <Content Include="Views\IT\ModelCurrentCertification.cshtml" />
     <Content Include="Views\IT\ModelNotCertified.cshtml" />
-    <Content Include="Views\IT\SearchOption.cshtml" />
-    <Content Include="Views\IT\_DynamicTableBody.cshtml" />
-    <Content Include="Views\IT\GetEmployeesByMonth.cshtml" />
+    <Content Include="Views\Search\SearchOption.cshtml" />
+    <Content Include="Views\Search\_DynamicTableBody.cshtml" />
+    <Content Include="Views\Search\EmployeeByMonth.cshtml" />
+    <Content Include="Views\Search\EmployeeByYear.cshtml" />
+    <Content Include="Views\Search\EmployeeByCell.cshtml" />
+    <Content Include="Views\Search\Filter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

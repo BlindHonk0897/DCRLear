@@ -33,6 +33,13 @@
           <Property Name="DateCertified" Type="datetime" />
           <Property Name="DateRecertified" Type="datetime" />
         </EntityType>
+        <EntityType Name="Filter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilterName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="ReCertificationPlan">
           <Key>
             <PropertyRef Name="Id" />
@@ -101,6 +108,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <EntitySet Name="Certification" EntityType="Self.Certification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CertificationHistory" EntityType="Self.CertificationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CertificationTracker" EntityType="Self.CertificationTracker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Filter" EntityType="Self.Filter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReCertificationPlan" EntityType="Self.ReCertificationPlan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="certificateTracker_Vw" EntityType="Self.certificateTracker_Vw" store:Type="Views" store:Schema="dbo">
@@ -161,6 +169,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
             <Parameter Name="OldCode" Mode="In" Type="String" />
             <Parameter Name="NewCode" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Filters" EntityType="lear_DailiesCertificationRequirementModel.Filter" />
         </EntityContainer>
         <EntityType Name="Certification">
           <Key>
@@ -230,6 +239,13 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <Property Name="Job_Status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Supervisor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PlanRecertificationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Filter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilterName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -322,6 +338,14 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <FunctionImportMapping FunctionImportName="GETLatestPlan" FunctionName="lear_DailiesCertificationRequirementModel.Store.GET_LastReCertificationPlanned" />
           <FunctionImportMapping FunctionImportName="deleteLastPlan" FunctionName="lear_DailiesCertificationRequirementModel.Store.deleteLastPlan" />
           <FunctionImportMapping FunctionImportName="UpdateLDCRTablesWhenUpdateCertification" FunctionName="lear_DailiesCertificationRequirementModel.Store.UpdateLDCRTablesWhenUpdateCertification" />
+          <EntitySetMapping Name="Filters">
+            <EntityTypeMapping TypeName="lear_DailiesCertificationRequirementModel.Filter">
+              <MappingFragment StoreEntitySet="Filter">
+                <ScalarProperty Name="FilterName" ColumnName="FilterName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

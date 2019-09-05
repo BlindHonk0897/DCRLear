@@ -1,0 +1,305 @@
+﻿@using System.Web.Helpers
+@model DCRSystem.CustomViewModel.SearchOptionsViewModel
+@{
+    ViewBag.Title = "SearchOption";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+<div class="row">
+    @* Start of Search options Related to Calendars *@
+    <div class="col-md-4">
+        <a href="#" class="btn btn-danger btn-block margin-bottom"><i class="fa fa-search text-black"></i> &nbsp;Search options Related to Calendars </a>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title"><strong>Find Certified Employees Through Month</strong></h4>
+                <div class="box-tools">
+                </div>
+            </div>
+            <form action="/Search/EmployeeByMonth">
+                <div class="box-body text-center">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select id="" class="dropdown form-control select2" name="Month" style="width: 99%;">
+                                        @{ String[] months = System.Globalization.DateTimeFormatInfo.CurrentInfo.MonthNames;}
+                                        @for (var iMonth = 0; iMonth <= 12;)
+                                        {
+                                            <option value="@months.GetValue(iMonth)" @(DateTime.Now.Month == iMonth + 1 ? " selected" : "")>@months.GetValue(iMonth)</option>
+                                            iMonth++;
+                                        }
+                                    </select>
+                                    <span class="input-group-btn text-black">
+                                        <button type="submit" class="btn btn-github btn-flat form-control" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title"><strong>Find Certified Employees Through Year</strong></h4>
+                <div class="box-tools">
+                </div>
+            </div>
+            <form action="/Search/EmployeeByYear">
+                <div class="box-body  text-center">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select id="" class="dropdown form-control select2" name="Year" style="width: 99%;">
+
+                                        @for (var i = 1990; i <= DateTime.Now.Year; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                    <span class="input-group-btn text-black">
+                                        <button type="submit" class="btn btn-github btn-flat text-center" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title"><strong>Find Employee Through Month And Year</strong></h4>
+                <div class="box-tools">
+                </div>
+            </div>
+            <div class="box-body  text-center">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <select id="" class="dropdown form-control select2" name="Code" style="width: 99%;"></select>
+                                <span class="input-group-btn text-black">
+                                    <button type="button" class="btn btn-github btn-flat text-center" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    @* End of Search options Related to Calendars*@
+
+    @* Start of Search options Related to Medal and Certificates*@
+    <div class="col-md-4">
+        <a href="#" class="btn btn-danger btn-block margin-bottom"><i class="fa fa-search text-black"></i> &nbsp;Search options Related to Medal and Certificates</a>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title"><strong>Find Employees Through Medal Creteria</strong></h4>
+                <div class="box-tools">
+                </div>
+            </div>
+            <form action="/Search/EmployeeByMonth">
+                <div class="box-body text-center">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select id="" class="dropdown form-control select2" name="Month" style="width: 99%;">
+                                        <option value="Bronze">Bronze</option>
+                                        <option value="Silver">Silver</option>
+                                        <option value="Gold">Gold</option>
+                                        @*@{ String[] months = System.Globalization.DateTimeFormatInfo.CurrentInfo.MonthNames;}
+                                            @for (var iMonth = 0; iMonth <= 12;)
+                                            {
+                                                <option value="@months.GetValue(iMonth)" @(DateTime.Now.Month == iMonth + 1 ? " selected" : "")>@months.GetValue(iMonth)</option>
+                                                iMonth++;
+                                            }*@
+                                    </select>
+                                    <span class="input-group-btn text-black">
+                                        <button type="submit" class="btn btn-github btn-flat form-control" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title"><strong>Find Certifified Employees Through Certificates</strong></h4>
+                <div class="box-tools">
+                </div>
+            </div>
+            <div class="box-body  text-center">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <select id="" class="dropdown form-control select2" name="Code" style="width: 99%;">
+                                    @foreach (var certificate in Model.Certifications)
+                                    {
+                                        <option value="@certificate.Code">@certificate.Code   - @certificate.Description</option>
+                                    }
+                                </select>
+                                <span class="input-group-btn text-black">
+                                    <button type="button" class="btn btn-github btn-flat text-center" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title"><strong>Find Re-Certifified Employees Through Certificates</strong></h4>
+                <div class="box-tools">
+                </div>
+            </div>
+            <div class="box-body  text-center">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <select id="" class="dropdown form-control select2" name="Code" style="width: 99%;">
+                                    @foreach(var certificate in Model.Certifications)
+                                    {
+                                        <option value="@certificate.Code">@certificate.Code   - @certificate.Description</option>
+                                    }
+                                </select>
+                                <span class="input-group-btn text-black">
+                                    <button type="button" class="btn btn-github btn-flat text-center" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    @* End of Search options Related to Medal and Certificates*@
+
+    @* Start of Search Options Related To Employee Details*@
+    <div class="col-md-4">
+        <a href="#" class="btn btn-danger btn-block margin-bottom"><i class="fa fa-search text-black"></i> &nbsp;Search Options Related To Employee Details</a>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title"><strong>Find Certified Employees Through Cell</strong></h4>
+                <div class="box-tools">
+                </div>
+            </div>
+            <form action="/Search/EmployeeByCell">
+                <div class="box-body text-center">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select id="" class="dropdown form-control select2" name="Cell" style="width: 99%;">
+                                       
+                                            @foreach (var cell in Model.allCells)
+                                            {
+                                                <option value="@cell")>@cell</option>                                
+                                            }
+                                    </select>
+                                    <span class="input-group-btn text-black">
+                                        <button type="submit" class="btn btn-github btn-flat form-control" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title"><strong>Find Employee Through Employee ID</strong></h4>
+                <div class="box-tools">
+                </div>
+            </div>
+            <div class="box-body  text-center">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <select id="" class="dropdown form-control select2" name="Code" style="width: 99%;">
+                                    @*@foreach(var id in Model.allIds)
+                                    {
+                                        <option value="@id">@id</option>
+                                    }*@
+                                </select>
+                                <span class="input-group-btn text-black">
+                                    <button type="button" class="btn btn-github btn-flat text-center" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title"><strong>Find Employee Through It's Lastname</strong></h4>
+                <div class="box-tools">
+                </div>
+            </div>
+            <div class="box-body  text-center">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <select id="" class="dropdown form-control select2" name="Code" style="width: 99%;"></select>
+                                <span class="input-group-btn text-black">
+                                    <button type="button" class="btn btn-github btn-flat text-center" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    @* End of Search Options Related To Employee Details*@
+</div>
+<script type="text/javascript">
+    $('.select2').select2();
+    $('#DateControl').change(function () {
+       var url = '@Url.Action("_DynamicTableBody")';
+        url += '?month=' + $(this).val();
+        $('#tableBody').load(url);
+    });
+</script>
+<script type="text/javascript">
+    jQuery.noConflict();
+    //$.noConflict(true)
+    $(document).ready(function () {
+
+
+        $("#EmployeeTable").DataTable(
+            {
+                "ordering": false
+            }
+        );
+        $('.dataTables_filter input[type="search"]').
+            attr('placeholder', 'Search');
+        //css({ 'width': '100px', 'display': 'inline-block', 'color': 'red' });
+    })
+</script>
+@section scripts{
+
+}
+
+

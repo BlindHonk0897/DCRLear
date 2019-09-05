@@ -1,0 +1,14 @@
+﻿@model DCRSystem.CustomViewModel.PartialViewModel
+
+@foreach (var emp in Model.EmployeeDCR_Vws)
+{
+<tr>
+    <td>@emp.Employee_ID</td>
+    <td>@emp.Last_Name , @emp.First_Name</td>
+    <td>@emp.Position</td>
+    <td>@emp.Cost_Center_Description</td>
+    <td>@emp.Supervisor</td>
+    <td>Progress</td>
+    <th>A | B</th>
+</tr>
+}

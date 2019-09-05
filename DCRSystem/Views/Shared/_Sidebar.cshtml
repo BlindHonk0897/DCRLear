@@ -41,8 +41,8 @@
                     <li class="@Url.IsLinkActive("Certificates", "Certificate")">
                         <a href="@Url.Action("Certificates", "Certificate")" class="sidebar-link"><i class="fa fa-certificate"></i> <span><font color="black">Manage Certificates</font></span><small class="label pull-right bg-red">@Session["NumberOfCertificates"]</small></a>
                     </li>
-                    <li class="@Url.IsLinkActive("SearchOption", "IT")">
-                        <a href="@Url.Action("SearchOption", "IT")" class="sidebar-link"><i class="fa fa-search"></i> <span><font color="black">Search Option</font></span>@*<small class="label pull-right bg-red">@Session["NumberOfCertificates"]</small>*@</a>
+                    <li class="@Url.IsLinkActive("Filter", "Search")">
+                        <a href="@Url.Action("Filter", "Search")" class="sidebar-link"><i class="fa fa-search"></i> <span><font color="black">Search Option</font></span>@*<small class="label pull-right bg-red">@Session["NumberOfCertificates"]</small>*@</a>
                     </li>
                     <li class="header"><i class="fa fa-filter"></i> <span><font color="#a64038">&nbsp;Filter Employees</font></span></li>
                     <li class="@Url.IsLinkActive("Active", "IT")">

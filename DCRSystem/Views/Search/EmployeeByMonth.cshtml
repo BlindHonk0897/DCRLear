@@ -1,0 +1,117 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<DCRSystem.Models.EmployeeDCR_Vw>
+@{
+    ViewBag.Title = "EmployeeByMonth";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(window).on('load', function () {
+            $('#myModal').modal('show');
+        });
+    </script>
+<div class="container">
+        <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="@Url.Action("SearchOption","Search")" class="close">×</a>
+                        <h3 class="modal-title"><i class="fa fa-users"></i>&nbsp;Employees Certified in the month of @ViewBag.Month <span><small class="label bg-red">@ViewBag.EmpCount</small></span></h3>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/Search/EmployeeByMonth" id="search_form">
+                            @*<h3><i class="fa fa-users"></i>&nbsp;<strong><font color="#c43e29">Employees</font></strong>*@
+                            <input type="text" name="Month" value="@ViewBag.Month" hidden />
+                            <small class="label input-group pull-left bg-red">
+                                <input type="search" class="form-control" name="searchInput" placeholder="Search by Lastname/BadgeNo" />
+                            </small>
+                            <small class="pull-right"><button onclick="form_submit()" class="form-control btn btn-primary">Go</button></small>
+                            
+                            @*</h3>*@
+                        </form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box box-danger">
+                                    <div class="box-body">
+                                        <table class="table table-sm table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Employee ID</th>
+                                                    <th>Employee Name</th>
+                                                    <th>Position</th>
+                                                    <th>Cell</th>
+                                                    <th>Supervisor</th>
+                                                    <th>Progress</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Employee_ID</td>
+                                                        <td>@item.Last_Name , @item.First_Name</td>
+                                                        <td>@item.Position</td>
+                                                        <td>@item.Cost_Center_Description</td>
+                                                        <td>@item.Supervisor</td>
+                                                        <td>
+                                                            <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Employee" })">
+
+                                                                <img src="~/Content/img/Emp_Prog.png" height="30" width="30" />
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            @if (item.Job_Status.ToUpper().Contains("CURRENT"))
+                                                            {
+
+                                                                <a href="@Url.Action("Certified", "IT", new { id = item.Employee_ID, urlBack = "Employee" })">
+
+                                                                    <img src="~/Content/img/Certified.png" title="Certified Employee" height="30" width="30" class="images" />
+                                                                </a>
+                                                                <a href="@Url.Action("ReCertified", "IT", new { id = item.Employee_ID, urlBack = "Employee" })">
+
+                                                                    <img src="~/Content/img/ReCertified.png" title="Re-Certified Employee" height="30" width="30" class="images" />
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="@Url.Action("ModalMessage", "IT", new { message =  "Cannot Continue Employee is Inactive", urlBack = "Employee" })">
+
+                                                                    <img src="~/Content/img/InActiveCertified.png" title="InActive Employee" height="30" width="30" class="images" />
+                                                                </a>
+                                                                <a href="@Url.Action("ModalMessage", "IT", new { message =  "Cannot Continue Employee is Inactive", urlBack = "Employee" })">
+
+                                                                    <img src="~/Content/img/InActiveRecertified.png" title="InActive Employee" height="30" width="30" class="images" />
+                                                                </a>
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <div class="hint-text pull-left" style="font-size: 18px!important;">Showing Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+                                    <ul class="pagination pull-right">
+                                        <li> @Html.PagedListPager(Model, page => Url.Action("EmployeeByMonth", new { page, month = ViewBag.Month }))</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="@Url.Action("SearchOption","Search")" class="btn btn-danger" ><i class="fa fa-reply text-black"></i>&nbsp;Back to Search Options</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    function form_submit() {
+        document.getElementById("search_form").submit();
+    }
+</script>
+
