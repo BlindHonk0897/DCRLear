@@ -12,8 +12,10 @@ namespace DCRSystem.CustomViewModel
         public List<Certification> Certifications = new List<Certification>();
         public List<string> allIds = new List<string>();
         public List<string> allCells = new List<string>();
-        public List<string> allMedals = new List<string>();
+        public List<Medal> allMedals = new List<Medal>();
         public List<Filter> filters = new List<Filter>();
+        public List<string> Choices = new List<string>();
+        public string KeyName { get; set; }
 
     }
 }

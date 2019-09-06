@@ -1,0 +1,100 @@
+﻿@model DCRSystem.CustomViewModel.SearchOptionsViewModel
+
+
+@* BY MONTH *@
+@if (Model.KeyName.ToString().ToUpper().Equals("BYMONTH"))
+{
+    String[] months = System.Globalization.DateTimeFormatInfo.CurrentInfo.MonthNames;
+    for (var iMonth = 0; iMonth <= 12;)
+    {
+        var val = months.GetValue(iMonth) + "-" + Model.KeyName;
+        <option value="@val" @(DateTime.Now.Month == iMonth + 1 ? " selected" : "")>@months.GetValue(iMonth)</option>
+        iMonth++;
+    }
+}
+
+@* BY YEAR *@
+@if (Model.KeyName.ToString().ToUpper().Equals("BYYEAR"))
+{
+    for (var i = 1990; i <= DateTime.Now.Year; i++)
+    {
+        var val = i.ToString() + "-" + Model.KeyName;
+        <option value="@val">@i</option>
+    }
+}
+
+@* BY MEDAL *@
+@if (Model.KeyName.ToString().ToUpper().Equals("BYMEDAL"))
+{
+    foreach (var medal in Model.allMedals)
+    {
+        var val = medal.MedalName + "-" + Model.KeyName;
+        <option value="@val">@medal.MedalName.ToString().ToUpper()</option>
+    }
+}
+
+@* BY CERTIFIED CERTIFICATES *@
+@if (Model.KeyName.ToString().ToUpper().Equals("BYCERTIFICATES"))
+{
+    foreach (var cert in Model.Certifications)
+    {
+        var val = cert.Code + "-" + Model.KeyName;
+        <option value="@val">@cert.Code &nbsp; - @cert.Description</option>
+    }
+}
+
+@* BY RE-CERTIFIED CERTIFICATES *@
+@if (Model.KeyName.ToString().ToUpper().Equals("BYRCERTIFICATES"))
+{
+    foreach (var cert in Model.Certifications)
+    {
+        var val = cert.Code + "-" + Model.KeyName;
+        <option value="@val">@cert.Code &nbsp; - @cert.Description</option>
+    }
+}
+
+@* BY CELL *@
+@if (Model.KeyName.ToString().ToUpper().Equals("BYCELL"))
+{
+    foreach (var cell in Model.allCells)
+    {
+        var val = cell + "-" + Model.KeyName;
+        <option value="@val">@cell</option>
+    }
+}
+
+@* BY Employee ID *@
+@if (Model.KeyName.ToString().ToUpper().Equals("BYID"))
+{
+    foreach (var id in Model.allIds)
+    {
+        <option value="@id">@id</option>
+    }
+}
+
+@* BY LASTNAME *@
+@if (Model.KeyName.ToString().ToUpper().Equals("BYLASTNAME"))
+{
+    for (var i = 1990; i <= DateTime.Now.Year; i++)
+    {
+        <option value="@i">@i</option>
+    }
+}
+
+@* BY MONTH AND YEAR*@
+@if (Model.KeyName.ToString().ToUpper().Equals("BYMONTHANDYEAR"))
+{
+    for (var i = 1990; i <= DateTime.Now.Year; i++)
+    {
+        <option value="@i">@i</option>
+    }
+}
+
+
+
+
+
+
+
+
+

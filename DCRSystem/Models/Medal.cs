@@ -12,10 +12,9 @@ namespace DCRSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Filter
+    public partial class Medal
     {
         public int Id { get; set; }
-        public string FilterName { get; set; }
-        public string KeyName { get; set; }
+        public string MedalName { get; set; }
     }
 }

@@ -1,18 +1,37 @@
-﻿@model DCRSystem.CustomViewModel.SearchOptionsViewModel
+﻿@using PagedList.Mvc
+@using DCRSystem.Models
+@using DCRSystem.CustomViewModel
+@model PagedList.IPagedList<DCRSystem.Models.EmployeeDCR_Vw>
+
 @{
     ViewBag.Title = "Filter";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    lear_DailiesCertificationRequirementEntities lear = new lear_DailiesCertificationRequirementEntities();
+    SearchOptionsViewModel model = new SearchOptionsViewModel();
+
+    model.allIds = lear.EmployeeDCR_Vw.Select(emp => emp.Employee_ID).ToList();
+    model.allCells = lear.EmployeeDCR_Vw.Select(emp => emp.Cost_Center_Description).Distinct().ToList();
+    model.Certifications = lear.Certifications.OrderBy(cert => cert.Code).ToList();
+    model.allMedals = lear.Medals.ToList();
+    model.filters = lear.Filters.ToList();
+
 }
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<style type="text/css">
+    .select2-container .select2-selection--single {
+        width: 370px;
+    }
+</style>
 <div class="row">
     <div class="col-md-3">
         <div class="box box-solid">
             <div class="box-header with-border">
-                <h4 class="box-title"><strong>Filters</strong></h4>
+                <h4 class="box-title"><strong>Options</strong></h4>
                 <div class="box-tools">
+                    <small class="label pull-right bg-red"><i class="fa fa-users"></i>&nbsp; @ViewBag.EmpCount</small>
                 </div>
             </div>
             <form action="#">
@@ -21,21 +40,60 @@
                         <li class="active">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <select id="" class="dropdown form-control select2" name="Month" style="width: 100%;">
-                                        @foreach (var filter in Model.filters)
+                                    <select id="Filters" class="dropdown form-control select2" name="Month" style="width: 100%;">
+                                        @foreach (var filter in model.filters)
                                         {
-                                            <option value="@filter.Id">@filter.FilterName.ToString().ToUpper()</option>
+                                            <option value="@filter.KeyName" @(ViewBag.Type == filter.KeyName?" selected":"")>@filter.FilterName</option>
                                         }
                                     </select>
-                                    @*<span class="input-group-btn text-black">
-                                        <button type="submit" class="btn btn-github btn-flat form-control" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
-                                    </span>*@
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="col-md-3" @(ViewBag.Data == "" ? "hidden" : "") id="subFilter">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title"><strong>Choose</strong></h4>
+                <div class="box-tools">
+                    <small class="label pull-right bg-red">@ViewBag.Data</small>
+                </div>
+            </div>
+            <form action="#">
+                <div class="box-body text-center">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select id="subFilterBody" class="dropdown form-control select2" name="Month" style="width: 100%;">
+                                       
+                                    </select>
+                                    @*<span class="input-group-btn text-black">
+                                            <button type="submit" class="btn btn-github btn-flat form-control" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
+                                      </span>*@
+
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-2" @(ViewBag.Data == "" ? "hidden" : "") id="Go">
+        <div class="box-solid" style="background-color:transparent">
+            @*<div class="box-header with-border">
+            <h3 class="box-title">Click Here To Continue</h3>
+        </div>
+        <div class="box-body text-center">
+            <a onclick="filterFunc()" class="btn btn-social-icon btn-bitbucket" style="background-color:#A71717"><i class="fa fa-play"></i></a>
+        </div>*@
+            <a onclick="filterFunc()" class="btn btn-app"style="background-color:#ffffff">
+                <i class="fa fa-play"></i> Continue
+            </a>
         </div>
     </div>
 </div>
@@ -55,8 +113,8 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @*@foreach (var item in Model.)
+                    <tbody id="tableBody">
+                        @foreach (var item in Model)
                         {
                             <tr>
                                 <td>@item.Employee_ID</td>
@@ -96,21 +154,69 @@
                                     }
                                 </td>
                             </tr>
-                        }*@
+                        }
                     </tbody>
                 </table>
 
             </div>
 
         </div>
+        <div class="clearfix">
+            <div class="hint-text pull-left" style="font-size: 18px!important;">Showing Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+            <ul class="pagination pull-right">
+                <li> @Html.PagedListPager(Model, page => Url.Action("Filter", new { page, type = ViewBag.Type, data = ViewBag.Data }))</li>
+            </ul>
+        </div>
     </div>
+    <input value="@ViewBag.Type" id="Reminder" hidden />
+    <input value="@ViewBag.Data" id="DATA" hidden />
 </div>
 <script type="text/javascript">
     $('.select2').select2();
-    $('#DateControl').change(function () {
-       var url = '@Url.Action("_DynamicTableBody")';
-        url += '?month=' + $(this).val();
-        $('#tableBody').load(url);
+     $('#Filters').change(function () {
+        var keyName = $(this).val();
+        if (keyName != "All") {
+            var url = '@Url.Action("_DynamicFilterBody", "Search")';
+            url += '?keyName=' + $(this).val();
+            $('#subFilterBody').load(url);
+            $('#subFilter').show();
+            $('#Go').show();
+        } else {
+            $('#subFilter').hide();
+            $('#Go').hide();
+            window.location.href = '@Url.Action("Filter","Search")';
+        }
     });
+
+    function filterFunc() {
+        var arr = $('#subFilterBody').val().split('-');
+        if (arr[2] === undefined || arr[2] === null) {
+            var url = '@Url.Action("Filter", "Search")';
+            url += '?Type=' + arr[1] + '&Data=' + arr[0];
+            // $('#tableBody').load(url);
+            var formData = new FormData();
+            window.location.href = url;
+           
+        } else {
+            var dat = arr[0] + "-" + arr[1];
+            var url = '@Url.Action("Filter", "Search")';
+            url += '?Type=' + arr[2] + '&Data=' + dat;
+            // $('#tableBody').load(url);
+            var formData = new FormData();
+            window.location.href = url;     
+        }
+         
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var type = $('#Reminder').val();
+        var Data = $('#DATA').val();
+        if (type != "" && type != null) {
+            var url = '@Url.Action("_DynamicFilterBody", "Search")';
+            url += '?keyName=' + type;
+            $('#subFilterBody').load(url);
+        }
+    })
 </script>
 

@@ -273,6 +273,9 @@
       <DependentUpon>lear_dailiesRequirementCertificationModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Medal.cs">
+      <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Month.cs" />
     <Compile Include="Models\newlyEmployee.cs">
       <DependentUpon>EmployeesModel.tt</DependentUpon>
@@ -971,6 +974,7 @@
     <Content Include="Views\Search\EmployeeByYear.cshtml" />
     <Content Include="Views\Search\EmployeeByCell.cshtml" />
     <Content Include="Views\Search\Filter.cshtml" />
+    <Content Include="Views\Search\_DynamicFilterBody.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

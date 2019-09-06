@@ -39,6 +39,17 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FilterName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="KeyName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.Medal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Medal">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="MedalName" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MedalName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="ReCertificationPlan">
           <Key>
@@ -111,6 +122,12 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <EntitySet Name="Filter" EntityType="Self.Filter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReCertificationPlan" EntityType="Self.ReCertificationPlan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medal" EntityType="Self.Medal" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Medal].[Id] AS [Id], 
+    [Medal].[MedalName] AS [MedalName]
+    FROM [dbo].[Medal] AS [Medal]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="certificateTracker_Vw" EntityType="Self.certificateTracker_Vw" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [certificateTracker_Vw].[Id] AS [Id], 
@@ -170,6 +187,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
             <Parameter Name="NewCode" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="Filters" EntityType="lear_DailiesCertificationRequirementModel.Filter" />
+          <EntitySet Name="Medals" EntityType="lear_DailiesCertificationRequirementModel.Medal" />
         </EntityContainer>
         <EntityType Name="Certification">
           <Key>
@@ -246,6 +264,15 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FilterName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KeyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Medal">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="MedalName" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MedalName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -341,7 +368,16 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <EntitySetMapping Name="Filters">
             <EntityTypeMapping TypeName="lear_DailiesCertificationRequirementModel.Filter">
               <MappingFragment StoreEntitySet="Filter">
+                <ScalarProperty Name="KeyName" ColumnName="KeyName" />
                 <ScalarProperty Name="FilterName" ColumnName="FilterName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medals">
+            <EntityTypeMapping TypeName="lear_DailiesCertificationRequirementModel.Medal">
+              <MappingFragment StoreEntitySet="Medal">
+                <ScalarProperty Name="MedalName" ColumnName="MedalName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
