@@ -1,0 +1,83 @@
+﻿@model DCRSystem.CustomViewModel.EmployeeModel
+@{
+    ViewBag.Title = "ModalAssignNewCell";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DCRSystem.Models.lear_DailiesCertificationRequirementEntities lear = new DCRSystem.Models.lear_DailiesCertificationRequirementEntities();
+    DCRSystem.Models.commonEmployeesEntities lear2 = new DCRSystem.Models.commonEmployeesEntities();
+    var Cell = lear.EmployeeDCR_Vw.Select(emp => emp.HRCCell).Distinct().ToList();
+    var SuperVisors = lear2.Emp_Route.OrderBy(em => em.Checker_1_Name).Select(emp => emp.Checker_1_Name).Distinct().ToList();
+}
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#myModal').modal('show');
+    });
+
+</script>
+<style type="text/css">
+    .event a {
+        background-color: #42B373 !important;
+        background-image: none !important;
+        color: #ffffff !important;
+    }
+</style>
+
+<div class="example-modal">
+    @using (Html.BeginForm("AssignNewCell", "IT", FormMethod.Post, new { id = "AddForm" }))
+    {
+        <div id="myModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="@Url.Action(ViewBag.UrlBack,"IT", new { page =ViewBag.Page})" class="close" title="Cancel Transaction" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </a>
+                        <h4 class="modal-title">Assign New Cell to @Model.Employee.Last_Name , @Model.Employee.First_Name</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input name="EmployeeID" value="@Model.Employee.Employee_ID" type="hidden" />
+                        <input name="HrcCell" value="@Model.Employee.HRCCell" type="hidden" />
+                        <input name="PageNum" value="@ViewBag.Page" type="hidden" />
+                        <input name="UrlBack" value="@ViewBag.UrlBack" type="hidden" />
+                        @*<h5>Step 2:</h5>*@
+                        <div class="form-group">
+                            <label>Choose Cell:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-certificate"></i>
+                                </div>
+                                <select class="form-control select2" name="Cell" style="width: 100%;">
+                                    <option selected="selected" value="X">-- Select Here --</option>
+                                    @foreach (var cert in Cell)
+                                    {
+                                        <option value="@cert">@cert</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="@Url.Action(ViewBag.UrlBack,"IT", new { page = ViewBag.Page})" t class="btn btn-default pull-left">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <script>$('.select2').select2();</script>
+</div>
+@section ViewSpecificJavascript{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+    <script type="text/javascript">
+
+        function modalShow() {
+            $('#myModal').modal('show');
+        }
+
+    </script>
+}
+

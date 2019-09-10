@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    DCRSystem.Models.CertificationPlanGenerator CGenerator = new DCRSystem.Models.CertificationPlanGenerator();
 }
 <a href="@Url.Action(ViewBag.URLBack, "IT")" class="" style="padding-top:0px;color:brown"><h5>&nbsp;<span><img src="~/Content/img/Button-Back-1-512.png" class="img-circle" height="30" width="30" title="BACK" /> </span></h5></a>
 <div class="row">
@@ -118,9 +119,9 @@
             </div>
         </div>
         <div class="box box-solid">
-            <div class="box-header with-border">
-                <h6 class="box-title"><marquee direction="right"><strong>Progress:</strong></marquee></h6>
-            </div>
+            @*<div class="box-header with-border">*@
+                <h4 class="box-title"><marquee direction="right"><strong>Progress:</strong></marquee></h4>
+            @*</div>*@
             <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
                     <li>
@@ -167,10 +168,13 @@
                                 <tr>
                                     <th>Certification Code</th>
                                     <th>Description</th>
-                                    <th>Point/s</th>
+                                    @*<th>Point/s</th>*@
                                     <th>Date Certified</th>
                                     <th>Date Re-Certified</th>
-                                    <th>Current Certification</th>
+                                    @*<th>Current Certification</th>*@
+                                    <th>Certification Plan</th>
+                                    <th>Status</th>
+                                    <th>Identifier</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -179,7 +183,7 @@
                                     <tr>
                                         <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
                                         <td>- @Model.Certifications.ElementAt(i).Description</td>
-                                        <td>@Model.Certifications.ElementAt(i).Points</td>
+                                        @*<td>@Model.Certifications.ElementAt(i).Points</td>*@
                                         @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
                                         {
                                             <td class="mailbox-star"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateCertified).ToShortDateString()</td>
@@ -197,7 +201,7 @@
                                         {
                                             <td class="mailbox-star"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" /></td>
                                         }
-                                        @if (Model.CurrentCertification != null)
+                                        @*@if (Model.CurrentCertification != null)
                                         {
                                             if (Model.CurrentCertification.CertificationCode == Model.MyCertifications.ElementAt(i).CertificationCode)
                                             {
@@ -213,8 +217,17 @@
                                         else
                                         {
                                             <td class="mailbox-attachment"></td>
+                                        }*@
+                                        @*<td>@CGenerator.GetCertification(Model.Certifications.ElementAt(i).Code).Type</td>*@
+                                        @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
+                                        {
+                                            <td>@CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))</td>
                                         }
-
+                                        else {
+                                            <td>@CGenerator.GetCertificationPlan(Model.Certifications.ElementAt(i).Code)</td>
+                                        }
+                                        <td>Testing</td>
+                                        <td>Testing</td>
                                     </tr>
                                 }
                             </tbody>
@@ -227,8 +240,9 @@
                                 <div class="btn-group">
                                     <a href="@Url.Action("ModalCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; Certified &nbsp;<small class="label pull-right bg-red-active">@Model.TotalCertifications.Count()</small></a>
                                     <a href="@Url.Action("ModalReCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; Re-Certified &nbsp;<small class="label pull-right bg-red-active">@Model.NumberReCertified</small></a>
-                                    <a href="@Url.Action("ModelCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification &nbsp;<small class="label pull-right bg-red-active">@(Model.CurrentCertification != null ? "1":"0" ) </small></a>
-                                    <a href="@Url.Action("ModelNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified &nbsp;<small class="label pull-right bg-red-active">@Model.ImNotCertified.Count()</small></a>
+                                    <a href="@Url.Action("ModalCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification &nbsp;<small class="label pull-right bg-red-active">@(Model.CurrentCertification != null ? Model.CurrentCertification.CertificationCode : "None" ) </small></a>
+                                    <a href="@Url.Action("ModalNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified &nbsp;<small class="label pull-right bg-red-active">@Model.ImNotCertified.Count()</small></a>
+                                    <a href="@Url.Action("ModalCeritificatesWithPoints","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><i class="fa fa-eye" style="font-size:23px"></i>&nbsp; Show Certificates with Points</a>
                                 </div>
 
                                 <div class="pull-right">
@@ -247,10 +261,13 @@
                                 <tr>
                                     <th>Certification Code</th>
                                     <th>Description</th>
-                                    <th>Point/s</th>
+                                    @*<th>Point/s</th>*@
                                     <th>Date Certified</th>
                                     <th>Date Re-Certified</th>
-                                    <th>Current Certification</th>
+                                    @*<th>Current Certification</th>*@
+                                    <th>Certification Plan</th>
+                                    <th>Status</th>
+                                    <th>Identifier</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -259,7 +276,7 @@
                                     <tr>
                                         <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
                                         <td>- @Model.Certifications.ElementAt(i).Description</td>
-                                        <td>@Model.Certifications.ElementAt(i).Points</td>
+                                        @*<td>@Model.Certifications.ElementAt(i).Points</td>*@
                                         @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
                                         {
                                             <td class="mailbox-star"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateCertified).ToShortDateString()</td>
@@ -277,7 +294,7 @@
                                         {
                                             <td class="mailbox-star"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" /></td>
                                         }
-                                        @if (Model.CurrentCertification != null)
+                                        @*@if (Model.CurrentCertification != null)
                                         {
                                             if (Model.CurrentCertification.CertificationCode == Model.MyCertifications.ElementAt(i).CertificationCode)
                                             {
@@ -293,7 +310,17 @@
                                         else
                                         {
                                             <td class="mailbox-attachment"></td>
+                                        }*@
+                                        @*<td>@CGenerator.GetCertification(Model.Certifications.ElementAt(i).Code).Type</td>*@
+                                        @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
+                                        {
+                                            <td>@CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))</td>
                                         }
+                                        else {
+                                            <td>@CGenerator.GetCertificationPlan(Model.Certifications.ElementAt(i).Code)</td>
+                                        }
+                                        <td>Testing</td>
+                                        <td>Testing</td>
                                     </tr>
                                 }
 
@@ -307,8 +334,9 @@
                                 <div class="btn-group">
                                     <a href="@Url.Action("ModalCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; Certified &nbsp;<small class="label pull-right bg-red-active">@Model.TotalCertifications.Count()</small></a>
                                     <a href="@Url.Action("ModalReCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; Re-Certified &nbsp;<small class="label pull-right bg-red-active">@Model.NumberReCertified</small></a>
-                                    <a href="@Url.Action("ModelCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification &nbsp;<small class="label pull-right bg-red-active">1</small></a>
-                                    <a href="@Url.Action("ModelNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified &nbsp;<small class="label pull-right bg-red-active">@Model.ImNotCertified.Count()</small></a>
+                                    <a href="@Url.Action("ModalCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification &nbsp;<small class="label pull-right bg-red-active">@(Model.CurrentCertification != null ? Model.CurrentCertification.CertificationCode : "None" )</small></a>
+                                    <a href="@Url.Action("ModalNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified &nbsp;<small class="label pull-right bg-red-active">@Model.ImNotCertified.Count()</small></a>
+                                    <a href="@Url.Action("ModalCeritificatesWithPoints","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><i class="fa fa-eye" style="font-size:23px"></i>&nbsp; Show Certificates with Points</a>
                                 </div>
                                 <div class="pull-right">
                                     <div class="btn-group">

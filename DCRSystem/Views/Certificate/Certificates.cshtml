@@ -4,6 +4,9 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<form action="/IT/ReCertificationPlan">
+    <h3><a @*href="@Url.Action("AddModalRecertification","IT")"*@ onclick="alert('addCodeHere!')" class="btn btn-pinterest"><i class="fa fa-plus"></i>&nbsp;Certificate</a></h3>
+</form>
     <div class="row">
         <div class="col-md-12">
             <div class="box box-danger">
@@ -15,6 +18,7 @@
                                 <th>Certification Code</th>
                                 <th>Description</th>
                                 <th>Points</th>
+                                <th>Type</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -26,8 +30,9 @@
                                     <td>@certificate.Code</td>
                                     <td>@certificate.Description</td>
                                     <td>@certificate.Points</td>
+                                    <td>@certificate.Type</td>
                                     <td>
-                                        <a href="@Url.Action("Edit","Certificate",new { id = certificate.Id })" title="Edit"><i class="fa fa-edit text-red"></i></a>
+                                        <a href="@Url.Action("Edit","Certificate",new { id = certificate.Id })" title="Edit"><i class="fa fa-edit text-red" style="font-size:23px"></i></a>
                                     </td>
                                 </tr>
                             }

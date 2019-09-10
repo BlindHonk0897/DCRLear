@@ -112,7 +112,9 @@ namespace DCRSystem.Models
         public string Adu_AccountName { get; set; }
         public string status { get; set; }
         public string Dept_Man { get; set; }
-        public string Supervisor { get; set; }
         public Nullable<System.DateTime> PlanDateReCertification { get; set; }
+        public string HRCSupervisor { get; set; }
+        public string CurrentCell { get; set; }
+        public string CurrentSupervisor { get; set; }
     }
 }

@@ -47,10 +47,10 @@ namespace DCRSystem.Controllers
                         Employee_ID = employee.Employee_ID,
                         First_Name = employee.First_Name,
                         Last_Name = employee.Last_Name,
-                        Cost_Center_Description = employee.Cost_Center_Description
+                        HRCCell = employee.HRCCell
                         ,
                         Job_Status = employee.Job_Status,
-                        Supervisor = employee.Supervisor,
+                        HRCSupervisor = employee.HRCSupervisor,
                         PlanRecertificationDate = employee.PlanRecertificationDate,
                         Position = employee.Position
                     };

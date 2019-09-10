@@ -1,0 +1,140 @@
+﻿@model DCRSystem.CustomViewModel.EmployeeModel
+@{
+    ViewBag.Title = "ModalCeritificatesWithPoints";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style type="text/css">
+    .list-group {
+        overflow: hidden;
+    }
+
+    .list-group-item:first-child, .list-group-item:last-child {
+        overflow: hidden;
+    }
+
+    .list-group-submenu {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        white-space: nowrap;
+        list-style: none;
+        padding-left: 0px;
+    }
+
+        .list-group-submenu .list-group-submenu-item {
+            float: right;
+            white-space: nowrap;
+            display: block;
+            padding: 0;
+            margin-bottom: -1px;
+        }
+
+    .no-border {
+        border: none;
+    }
+
+
+    /*
+        Text fields
+    */
+    div.input-group-option:last-child span.input-group-addon-remove {
+        /*display: none;*/
+    }
+
+    div.input-group-option:last-child input.form-control {
+        border-bottom-right-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+
+    div.input-group-option {
+        margin-bottom: 3px;
+    }
+</style>
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#companyPositionModal').modal('show');
+    });
+</script>
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="companyPositionModal" tabindex="-1" role="dialog" aria-labelledby="companyPositionLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="@Url.Action("Details", "IT", new { id = Model.Employee.Employee_ID, urlBack = "Employee" })" class="close" aria-hidden="true">×</a>
+                    <h4 class="modal-title" id="companyPositionLabel">Certificates:</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="hidden" id="companyPosEditTemplate">
+                        <form role="form">
+                            <div class="">
+                                <input type="hidden" name="position_id" class="hidden" value="">
+                                <div class="input-group input-group-option col-xs-12">
+                                    <input type="text" name="position_label" class="form-control companyPosInput" value="">
+                                    <span class="input-group-btn companyPosButtonsEdit">
+                                        <button class="btn btn-primary companyPosEditSaveBtn" data-loading-text="Saving..." type="button"><span class="glyphicon glyphicon-ok"></span></button>
+                                        <button class="btn btn-default companyPosEditCancelBtn" type="button" data-toggle="tooltip" data-placement="top" title="Cancel">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-8">
+                            @*<ul class="list-group companyPosItemsList">
+                                @foreach (var certificate in Model.Certifications)
+                                {
+                                    <li class="list-group-item" data-position-id="@certificate.Id">
+                                        <div class="companyPosItem">
+                                            <span class="companyPosLabel"><strong>@certificate.Code</strong></span>
+                                            &nbsp; ----
+                                            <abbr>@certificate.Points</abbr>
+                                        </div>
+                                    </li>
+                                }
+
+                            </ul>*@
+                            <div class="box box-danger">
+                                <div class="box-body">
+                                    <table class="table table-sm table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Certification Code</th>
+                                                <th>Description</th>
+                                                <th>Points</th>                                              
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var certificate in Model.Certifications)
+                                            {
+                                                <tr>
+                                                    <td>@certificate.Id</td>
+                                                    <td>@certificate.Code</td>
+                                                    <td>@certificate.Description</td>
+                                                    <td>@certificate.Points</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="@Url.Action("Details", "IT", new { id = Model.Employee.Employee_ID, urlBack = ViewBag.urlBack })" class="btn btn-danger">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section ViewSpecificJavascript{
+
+
+}

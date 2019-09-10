@@ -12,12 +12,13 @@ namespace DCRSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Certification
+    public partial class EmployeeDCR
     {
         public int Id { get; set; }
-        public string Code { get; set; }
-        public string Description { get; set; }
-        public Nullable<int> Points { get; set; }
-        public string Type { get; set; }
+        public string BadgeNo { get; set; }
+        public string HRCCell { get; set; }
+        public string CurrentCell { get; set; }
+        public string HRCSupervisor { get; set; }
+        public string CurrentSupervisor { get; set; }
     }
 }

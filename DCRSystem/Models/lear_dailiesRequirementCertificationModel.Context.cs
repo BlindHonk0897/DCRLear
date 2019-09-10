@@ -36,6 +36,7 @@ namespace DCRSystem.Models
         public virtual DbSet<EmployeeDCR_Vw> EmployeeDCR_Vw { get; set; }
         public virtual DbSet<Filter> Filters { get; set; }
         public virtual DbSet<Medal> Medals { get; set; }
+        public virtual DbSet<EmployeeDCR> EmployeeDCRs { get; set; }
     
         public virtual ObjectResult<Nullable<System.DateTime>> GET_LastReCertificationPlanned(string badgeNo)
         {

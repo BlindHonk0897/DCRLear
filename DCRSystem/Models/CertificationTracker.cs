@@ -19,5 +19,6 @@ namespace DCRSystem.Models
         public string CertificationCode { get; set; }
         public Nullable<System.DateTime> DateCertified { get; set; }
         public Nullable<System.DateTime> DateRecertified { get; set; }
+        public Nullable<System.DateTime> TrainingDate { get; set; }
     }
 }

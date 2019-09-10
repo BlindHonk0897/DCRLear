@@ -10,7 +10,7 @@
     SearchOptionsViewModel model = new SearchOptionsViewModel();
 
     model.allIds = lear.EmployeeDCR_Vw.Select(emp => emp.Employee_ID).ToList();
-    model.allCells = lear.EmployeeDCR_Vw.Select(emp => emp.Cost_Center_Description).Distinct().ToList();
+    model.allCells = lear.EmployeeDCR_Vw.Select(emp => emp.HRCCell).Distinct().ToList();
     model.Certifications = lear.Certifications.OrderBy(cert => cert.Code).ToList();
     model.allMedals = lear.Medals.ToList();
     model.filters = lear.Filters.ToList();
@@ -31,7 +31,7 @@
             <div class="box-header with-border">
                 <h4 class="box-title"><strong>Options</strong></h4>
                 <div class="box-tools">
-                    <small class="label pull-right bg-red"><i class="fa fa-users"></i>&nbsp; @ViewBag.EmpCount</small>
+                    <small class="label pull-right bg-red"><i class="fa fa-users"></i>&nbsp; @ViewBag.EmpCount Results</small>
                 </div>
             </div>
             <form action="#">
@@ -120,8 +120,8 @@
                                 <td>@item.Employee_ID</td>
                                 <td>@item.Last_Name , @item.First_Name</td>
                                 <td>@item.Position</td>
-                                <td>@item.Cost_Center_Description</td>
-                                <td>@item.Supervisor</td>
+                                <td>@item.HRCCell</td>
+                                <td>@item.HRCSupervisor</td>
                                 <td>
                                     <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Employee" })">
 

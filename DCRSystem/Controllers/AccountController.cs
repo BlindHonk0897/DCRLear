@@ -90,6 +90,7 @@ namespace DCRSystem.Controllers
             var adminAccount = _AccountManager.Users.Where(us => us.BadgeNo.ToString().Equals(model.BagdeNo) && us.Password.Equals(adminPass)).FirstOrDefault();
 
             //System.Diagnostics.Debug.WriteLine(adminAccount.Password+" : password");
+           
 
             if (!ModelState.IsValid)
             {

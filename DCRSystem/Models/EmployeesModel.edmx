@@ -318,7 +318,9 @@ warning 6002: The table/view 'common.dbo.newlyEmployees' does not have a primary
           <Property Name="Adu_AccountName" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="varchar" MaxLength="6" Nullable="false" />
           <Property Name="Dept_Man" Type="varchar" MaxLength="15" />
-          <Property Name="Supervisor" Type="nvarchar" MaxLength="100" />
+          <Property Name="HRCSupervisor" Type="nvarchar" MaxLength="100" />
+          <Property Name="CurrentCell" Type="varchar" MaxLength="50" />
+          <Property Name="CurrentSupervisor" Type="varchar" MaxLength="50" />
           <Property Name="PlanDateReCertification" Type="datetime" />
         </EntityType>
         <EntityContainer Name="commonModelStoreContainer">
@@ -525,7 +527,9 @@ warning 6002: The table/view 'common.dbo.newlyEmployees' does not have a primary
     [newlyEmployees].[Adu_AccountName] AS [Adu_AccountName], 
     [newlyEmployees].[status] AS [status], 
     [newlyEmployees].[Dept_Man] AS [Dept_Man], 
-    [newlyEmployees].[Supervisor] AS [Supervisor], 
+    [newlyEmployees].[HRCSupervisor] AS [HRCSupervisor], 
+    [newlyEmployees].[CurrentCell] AS [CurrentCell], 
+    [newlyEmployees].[CurrentSupervisor] AS [CurrentSupervisor], 
     [newlyEmployees].[PlanDateReCertification] AS [PlanDateReCertification]
     FROM [dbo].[newlyEmployees] AS [newlyEmployees]</DefiningQuery>
           </EntitySet>
@@ -848,8 +852,10 @@ warning 6002: The table/view 'common.dbo.newlyEmployees' does not have a primary
           <Property Name="Adu_AccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="Dept_Man" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Supervisor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PlanDateReCertification" Type="DateTime" Precision="3" />
+          <Property Name="HRCSupervisor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentCell" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurrentSupervisor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -979,8 +985,10 @@ warning 6002: The table/view 'common.dbo.newlyEmployees' does not have a primary
           <EntitySetMapping Name="newlyEmployees">
             <EntityTypeMapping TypeName="commonModel.newlyEmployee">
               <MappingFragment StoreEntitySet="newlyEmployees">
+                <ScalarProperty Name="CurrentSupervisor" ColumnName="CurrentSupervisor" />
+                <ScalarProperty Name="CurrentCell" ColumnName="CurrentCell" />
+                <ScalarProperty Name="HRCSupervisor" ColumnName="HRCSupervisor" />
                 <ScalarProperty Name="PlanDateReCertification" ColumnName="PlanDateReCertification" />
-                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
                 <ScalarProperty Name="Dept_Man" ColumnName="Dept_Man" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="Adu_AccountName" ColumnName="Adu_AccountName" />

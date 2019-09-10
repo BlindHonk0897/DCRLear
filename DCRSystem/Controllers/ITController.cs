@@ -81,6 +81,7 @@ namespace DCRSystem.Controllers
             var Who = Request.Form["Employee"];
             var Code = Request.Form["Code"];
             var RedirectURL = Request.Form["URLBACK"];
+            var TrainingDate = Request.Form["TrainingDate"];
             // ----------------------
             var message = "";// initialize variable for message
             List<String> error = new List<string>();// initialize variable for error
@@ -88,7 +89,7 @@ namespace DCRSystem.Controllers
             CertificationTracker certificationTracker = new CertificationTracker();
 
             // Validate Data submitted
-            if (DateP != null && Who != null && Code != null && Code!="X" && !String.IsNullOrEmpty(DateP))
+            if (DateP != null && Who != null && Code != null && Code!="X" && !String.IsNullOrEmpty(DateP) && TrainingDate !=null && !String.IsNullOrEmpty(TrainingDate))
             {
                 // Check if Employee is Exist
                 var emp = cEE.Employees_Details.Where(u => u.Employee_ID.ToString().ToLower() == Who.ToString().ToLower()).FirstOrDefault();
@@ -117,7 +118,15 @@ namespace DCRSystem.Controllers
                 }
                 else
                 {
-                    error.Add("Date is not Valid!");
+                    error.Add("Date Certified is not Valid!");
+                }
+                if (Validator.isValidDate(TrainingDate))
+                {
+                    certificationTracker.TrainingDate = DateTime.ParseExact(TrainingDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    error.Add("TrainingDate is not Valid!");
                 }
                 if (error.Count > 0)
                 {
@@ -149,6 +158,11 @@ namespace DCRSystem.Controllers
                 {
                     ModelState.AddModelError("", "Please provide date certified.");
                     message += "Please provide date certified.";
+                }
+                if (TrainingDate == null || String.IsNullOrEmpty(TrainingDate))
+                {
+                    ModelState.AddModelError("", "Please provide Training Date.");
+                    message += "Please provide Training Date.";
                 }
                 if (Code == "X")
                 {
@@ -318,9 +332,9 @@ namespace DCRSystem.Controllers
                         Employee_ID = employee.Employee_ID,
                         First_Name = employee.First_Name,
                         Last_Name = employee.Last_Name,
-                        Cost_Center_Description = employee.Cost_Center_Description,
+                        HRCCell = employee.HRCCell,
                         Job_Status = employee.Job_Status,
-                        Supervisor = employee.Supervisor,
+                        HRCSupervisor = employee.HRCSupervisor,
                         PlanRecertificationDate = employee.PlanRecertificationDate,
                         Position = employee.Position
                     };
@@ -649,7 +663,7 @@ namespace DCRSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult ModelCurrentCertification(String id,String urlBack)
+        public ActionResult ModalCurrentCertification(String id,String urlBack)
         {
             EmployeeModel model = new EmployeeModel();
             var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
@@ -663,7 +677,7 @@ namespace DCRSystem.Controllers
             return View(model);
         }
         [HttpGet]
-        public ActionResult ModelNotCertified(String id, String urlBack)
+        public ActionResult ModalNotCertified(String id, String urlBack)
         {
             EmployeeModel empModel = new EmployeeModel();
             if (id != null)
@@ -695,5 +709,102 @@ namespace DCRSystem.Controllers
             return View(empModel);
         }
 
+        public ActionResult ModalCeritificatesWithPoints(String id, String urlBack)
+        {
+            EmployeeModel empModel = new EmployeeModel();
+            if (id != null)
+            {
+                // Get employee using the id
+                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+
+                if (employee != null) // if exist
+                {
+                    empModel.Employee = employee;
+                }
+            }
+            empModel.Certifications = ldcr.Certifications.ToList();
+            ViewBag.urlBack = urlBack;
+            return View(empModel);
+        }
+
+        public ActionResult ModalAssignNewCell(String IdEmp ,String HRCCell ,int? page,String urlBack)
+        {
+            EmployeeModel empModel = new EmployeeModel();
+            empModel.Employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == IdEmp).FirstOrDefault();
+            ViewBag.Page = page;
+            ViewBag.UrlBack = urlBack;
+            return View(empModel);
+        }
+
+        public ActionResult ModalAssignNewSupervisor(String IdEmp, String HRCSupervisor, int? page, String urlBack)
+        {
+            EmployeeModel empModel = new EmployeeModel();
+            empModel.Employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == IdEmp).FirstOrDefault();
+            ViewBag.Page = page;
+            ViewBag.UrlBack = urlBack;
+            return View(empModel);
+        }
+
+        [HttpPost]
+        public ActionResult AssignNewCell()
+        {
+            var EmpID = Request.Form["EmployeeID"];
+            var Hrccell = Request.Form["HrcCell"];
+            var Cell = Request.Form["Cell"];
+            var PageNum = Request.Form["PageNum"];
+            var Urlback = Request.Form["UrlBack"];
+            if (Cell == "X") { Cell = ""; }
+            var EmpDcr = ldcr.EmployeeDCRs.Where(emp => emp.BadgeNo == EmpID).FirstOrDefault();
+            if(EmpDcr == null)
+            {
+                EmployeeDCR dcr = new EmployeeDCR
+                {
+                    BadgeNo = EmpID,
+                    HRCCell =Hrccell,
+                    CurrentCell = Cell
+                };
+                ldcr.EmployeeDCRs.Add(dcr);
+                ldcr.SaveChanges();
+            }
+            else
+            {
+                EmpDcr.CurrentCell = Cell;               
+                ldcr.Entry(EmpDcr).State = EntityState.Modified;
+                ldcr.SaveChanges();
+            }
+
+            return RedirectToAction(Urlback,"IT" , new { page = PageNum});
+        }
+
+        [HttpPost]
+        public ActionResult AssignNewSupervisor()
+        {
+            var EmpID = Request.Form["EmployeeID"];
+            var Hrcsupervisor = Request.Form["HrcSupervisor"];
+            var Supervisor = Request.Form["Supervisor"];
+            var PageNum = Request.Form["PageNum"];
+            var Urlback = Request.Form["UrlBack"];
+            if (Supervisor == "X") { Supervisor = ""; }
+            var EmpDcr = ldcr.EmployeeDCRs.Where(emp => emp.BadgeNo == EmpID).FirstOrDefault();
+            if (EmpDcr == null)
+            {
+                EmployeeDCR dcr = new EmployeeDCR
+                {
+                    BadgeNo = EmpID,
+                    HRCSupervisor = Hrcsupervisor,
+                    CurrentSupervisor = Supervisor
+                };
+                ldcr.EmployeeDCRs.Add(dcr);
+                ldcr.SaveChanges();
+            }
+            else
+            {
+                EmpDcr.CurrentSupervisor = Supervisor;
+                ldcr.Entry(EmpDcr).State = EntityState.Modified;
+                ldcr.SaveChanges();
+            }
+
+            return RedirectToAction(Urlback, "IT", new { page = PageNum });
+        }
     }
 }

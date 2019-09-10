@@ -18,9 +18,11 @@ namespace DCRSystem.Models
         public string Last_Name { get; set; }
         public string First_Name { get; set; }
         public string Position { get; set; }
-        public string Cost_Center_Description { get; set; }
         public string Job_Status { get; set; }
-        public string Supervisor { get; set; }
         public Nullable<System.DateTime> PlanRecertificationDate { get; set; }
+        public string HRCCell { get; set; }
+        public string CurrentCell { get; set; }
+        public string HRCSupervisor { get; set; }
+        public string CurrentSupervisor { get; set; }
     }
 }

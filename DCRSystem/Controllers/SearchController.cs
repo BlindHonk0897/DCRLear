@@ -83,7 +83,7 @@ namespace DCRSystem.Controllers
         {
             ViewBag.Cell = Cell;
            
-            List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.Where(emp => emp.Cost_Center_Description.Equals(Cell)).ToList();
+            List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.Where(emp => emp.HRCCell.Equals(Cell)).ToList();
             ViewBag.CellCount = employees.Count();
             if (!string.IsNullOrEmpty(searchInput))
             {
@@ -101,7 +101,7 @@ namespace DCRSystem.Controllers
         {
             SearchOptionsViewModel model = new SearchOptionsViewModel();
             model.allIds = ldcr.EmployeeDCR_Vw.Select(emp => emp.Employee_ID).ToList();
-            model.allCells = ldcr.EmployeeDCR_Vw.Select(emp => emp.Cost_Center_Description).Distinct().ToList();
+            model.allCells = ldcr.EmployeeDCR_Vw.Select(emp => emp.HRCCell).Distinct().ToList();
             model.Certifications = ldcr.Certifications.OrderBy(cert => cert.Code).ToList();
            // System.Diagnostics.Debug.WriteLine(model.allCells.Count()+"MAOAOAOOAOAOAOAOA");
             return View(model);
@@ -147,7 +147,7 @@ namespace DCRSystem.Controllers
         public List<EmployeeDCR_Vw> getEmployeeByCell(String Cell)
         {
             PartialViewModel model = new PartialViewModel();
-            model.EmployeeDCR_Vws = ldcr.EmployeeDCR_Vw.Where(emp => emp.Cost_Center_Description.Equals(Cell)).ToList(); 
+            model.EmployeeDCR_Vws = ldcr.EmployeeDCR_Vw.Where(emp => emp.HRCCell.Equals(Cell)).ToList(); 
             return model.EmployeeDCR_Vws;
         }
 
@@ -213,7 +213,7 @@ namespace DCRSystem.Controllers
 
             model.KeyName = keyName;
             //model.allIds = ldcr.EmployeeDCR_Vw.Select(emp => emp.Employee_ID).ToList();
-            model.allCells = ldcr.EmployeeDCR_Vw.Select(emp => emp.Cost_Center_Description).Distinct().ToList();
+            model.allCells = ldcr.EmployeeDCR_Vw.Select(emp => emp.HRCCell).Distinct().ToList();
             model.Certifications = ldcr.Certifications.OrderBy(cert => cert.Code).ToList();
             model.allMedals = ldcr.Medals.ToList();
            

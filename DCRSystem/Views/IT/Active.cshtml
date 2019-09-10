@@ -3,8 +3,19 @@
 @{
     ViewBag.Title = "Active";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    DCRSystem.Models.lear_DailiesCertificationRequirementEntities lear = new DCRSystem.Models.lear_DailiesCertificationRequirementEntities();
+    var cell = lear.EmployeeDCR_Vw.Select(emp => emp.HRCCell).Distinct().ToList();
 }
 @Styles.Render("~/Content/PagedList.css")
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<style type="text/css">
+    .select2-container--default [aria-selected=true].select2-results__option {
+        background-color: gray;
+    }
+</style>
 <form action="/IT/Active">
     <h3><i class="fa fa-users"></i>&nbsp;<strong><font color="green">Active Employees</font></strong><small class="label pull-right bg-green-active"><input type="search" class="form-control" name="searchInput" placeholder="Search by Lastname/BadgeNo" /></small></h3>
 </form>
@@ -19,8 +30,12 @@
                             <th>Employee ID</th>
                             <th>Employee Name</th>
                             <th>Position</th>
-                            <th>Cell</th>
-                            <th>Supervisor</th>
+                            <th>HRC Cell</th>
+                            <th>Current Cell</th>
+                            <th>Assign New Cell</th>
+                            <th>HRC Supervisor</th>
+                            <th>Current Supervisor</th>
+                            <th>Change Supervisor</th>
                             <th>Progress</th>
                             <th>Action</th>
                         </tr>
@@ -28,26 +43,31 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>@item.Employee_ID</td>
-                                <td>@item.Last_Name , @item.First_Name</td>
-                                <td>@item.Position</td>
-                                <td>@item.Cost_Center_Description</td>
-                                <td>@item.Supervisor</td>
-                                <td>
-                                    <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Active" })">
-                                        <img src="~/Content/img/Emp_Prog.png" height="30" width="30" class="images" />
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("Certified", "IT", new { id = item.Employee_ID, urlBack = "Active" })">
-                                        <img src="~/Content/img/Certified.png" title="Certified Employee" height="30" width="30" class="images" />
-                                    </a>
-                                    <a href="@Url.Action("ReCertified", "IT", new { id = item.Employee_ID, urlBack = "Active" })">
-                                        <img src="~/Content/img/ReCertified.png" title="Re-Certified Employee" height="30" width="30" class="images" />
-                                    </a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>@item.Employee_ID</td>
+                            <td>@item.Last_Name , @item.First_Name</td>
+                            <td>@item.Position</td>
+                            @*<td>@item.Cost_Center_Description</td>*@
+                            <td>@item.HRCCell</td>
+                            <td>@item.CurrentCell</td>
+                            <td><a class="text-center" title="Assign New Cell" href="@Url.Action("ModalAssignNewCell", "IT", new { IdEmp = item.Employee_ID, HRCell = item.HRCCell, page = Model.PageNumber ,UrlBack = "Active"})"><i class="fa fa-edit text-red" style="font-size:23px"></i></a> </td>
+                            <td>@item.HRCSupervisor</td>
+                            <td>@item.CurrentSupervisor</td>
+                            <td><a class="text-center" title="Assign New Supervisor" href="@Url.Action("ModalAssignNewSupervisor", "IT", new { IdEmp = item.Employee_ID, HRCell = item.HRCSupervisor, page = Model.PageNumber ,UrlBack = "Active"})"><i class="fa fa-edit text-red" style="font-size:23px"></i></a> </td>
+                            <td>
+                                <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Active" })">
+                                    <img src="~/Content/img/Emp_Prog.png" height="30" width="30" class="images" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Certified", "IT", new { id = item.Employee_ID, urlBack = "Active" })">
+                                    <img src="~/Content/img/Certified.png" title="Certified Employee" height="30" width="30" class="images" />
+                                </a>
+                                <a href="@Url.Action("ReCertified", "IT", new { id = item.Employee_ID, urlBack = "Active" })">
+                                    <img src="~/Content/img/ReCertified.png" title="Re-Certified Employee" height="30" width="30" class="images" />
+                                </a>
+                            </td>
+                        </tr>
 
                         }
                     </tbody>
@@ -66,5 +86,7 @@
     </div>
 
 </div>
-
+<script type="text/javascript">
+    $('.select2').select2();
+</script>
 

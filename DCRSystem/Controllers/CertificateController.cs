@@ -40,6 +40,7 @@ namespace DCRSystem.Controllers
         public ActionResult PostEdit([Bind(Include = "Id,Code,Description,Points")] Certification certification)
         {
             var oldCode = Request.Form["OldCode"].ToString();
+            var Type = Request.Form["Type"];
             using (lear_DailiesCertificationRequirementEntities db = new lear_DailiesCertificationRequirementEntities())
             {
                 if (ModelState.IsValid)
@@ -48,6 +49,7 @@ namespace DCRSystem.Controllers
                     {
                         certification.Code = certification.Code.ToUpper();
                         certification.Description = certification.Description.ToUpper();
+                        certification.Type = Type;
                         db.Entry(certification).State = EntityState.Modified;
                         db.SaveChanges();
                         return RedirectToAction("Certificates");
@@ -58,6 +60,7 @@ namespace DCRSystem.Controllers
                         {
                             certification.Code = certification.Code.ToUpper();
                             certification.Description = certification.Description.ToUpper();
+                            certification.Type = Type;
                             db.Entry(certification).State = EntityState.Modified;
                             db.SaveChanges();
                             db.UpdateLDCRTablesWhenUpdateCertification(oldCode, certification.Code);

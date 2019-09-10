@@ -210,10 +210,14 @@
     <Compile Include="Models\CertificationHistory.cs">
       <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CertificationPlanGenerator.cs" />
     <Compile Include="Models\CertificationTracker.cs">
       <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DateConfig.cs" />
+    <Compile Include="Models\EmployeeDCR.cs">
+      <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EmployeeDCR_Vw.cs">
       <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
     </Compile>
@@ -966,8 +970,8 @@
     <Content Include="Views\Certificate\ModalFailed.cshtml" />
     <Content Include="Views\IT\ModalCertifiedCertificates.cshtml" />
     <Content Include="Views\IT\ModalReCertifiedCertificates.cshtml" />
-    <Content Include="Views\IT\ModelCurrentCertification.cshtml" />
-    <Content Include="Views\IT\ModelNotCertified.cshtml" />
+    <Content Include="Views\IT\ModalCurrentCertification.cshtml" />
+    <Content Include="Views\IT\ModalNotCertified.cshtml" />
     <Content Include="Views\Search\SearchOption.cshtml" />
     <Content Include="Views\Search\_DynamicTableBody.cshtml" />
     <Content Include="Views\Search\EmployeeByMonth.cshtml" />
@@ -975,6 +979,9 @@
     <Content Include="Views\Search\EmployeeByCell.cshtml" />
     <Content Include="Views\Search\Filter.cshtml" />
     <Content Include="Views\Search\_DynamicFilterBody.cshtml" />
+    <Content Include="Views\IT\ModalCeritificatesWithPoints.cshtml" />
+    <Content Include="Views\IT\ModalAssignNewCell.cshtml" />
+    <Content Include="Views\IT\ModalAssignNewSupervisor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

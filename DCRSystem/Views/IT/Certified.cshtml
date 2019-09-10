@@ -68,7 +68,7 @@
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
                                 <h5 class="description-header"></h5>
-                                <span class="description-text">Choosen Employee</span>
+                                <span class="description-text">Chosen Employee</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -184,13 +184,23 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label>Training Date:</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @*<input type="text" name="DateCertified" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>*@
+                                    <input readonly id="SelectedDate" class="form-control" name="TrainingDate" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label>Date Certified:</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     @*<input type="text" name="DateCertified" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask>*@
-                                    <input readonly id="SelectedDate" class="form-control" name="DateCertified" />
+                                    <input readonly id="SelectedDate1" class="form-control" name="DateCertified" required />
                                 </div>
                             </div>
                         </div>
@@ -252,6 +262,12 @@
     <script type="text/javascript">
         $(function () {
             $('#SelectedDate').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                format: "mm/dd/yyyy",
+                language: "tr"
+            });
+            $('#SelectedDate1').datepicker({
                 changeMonth: true,
                 changeYear: true,
                 format: "mm/dd/yyyy",

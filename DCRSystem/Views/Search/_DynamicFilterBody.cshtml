@@ -8,7 +8,7 @@
     for (var iMonth = 0; iMonth <= 12;)
     {
         var val = months.GetValue(iMonth) + "-" + Model.KeyName;
-        <option value="@val" @(DateTime.Now.Month == iMonth + 1 ? " selected" : "")>@months.GetValue(iMonth)</option>
+        <option value="@val" @*@(DateTime.Now.Month == iMonth + 1 ? " selected" : "")*@>@months.GetValue(iMonth)</option>
         iMonth++;
     }
 }
