@@ -982,6 +982,8 @@
     <Content Include="Views\IT\ModalCeritificatesWithPoints.cshtml" />
     <Content Include="Views\IT\ModalAssignNewCell.cshtml" />
     <Content Include="Views\IT\ModalAssignNewSupervisor.cshtml" />
+    <Content Include="Views\Certificate\Sample.cshtml" />
+    <Content Include="Views\Certificate\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

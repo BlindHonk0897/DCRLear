@@ -98,6 +98,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.certifica
           <Property Name="CertificationCode" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DateCertified" Type="datetime" />
           <Property Name="DateRecertified" Type="datetime" />
+          <Property Name="TrainingDate" Type="datetime" />
           <Property Name="Last Name" Type="varchar" MaxLength="30" />
           <Property Name="First Name" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -151,6 +152,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
     [certificateTracker_Vw].[CertificationCode] AS [CertificationCode], 
     [certificateTracker_Vw].[DateCertified] AS [DateCertified], 
     [certificateTracker_Vw].[DateRecertified] AS [DateRecertified], 
+    [certificateTracker_Vw].[TrainingDate] AS [TrainingDate], 
     [certificateTracker_Vw].[Last Name] AS [Last Name], 
     [certificateTracker_Vw].[First Name] AS [First Name]
     FROM [dbo].[certificateTracker_Vw] AS [certificateTracker_Vw]</DefiningQuery>
@@ -263,6 +265,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <Property Name="DateRecertified" Type="DateTime" Precision="3" />
           <Property Name="Last_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TrainingDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="EmployeeDCR_Vw">
           <Key>
@@ -373,6 +376,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <EntitySetMapping Name="certificateTracker_Vw">
             <EntityTypeMapping TypeName="lear_DailiesCertificationRequirementModel.certificateTracker_Vw">
               <MappingFragment StoreEntitySet="certificateTracker_Vw">
+                <ScalarProperty Name="TrainingDate" ColumnName="TrainingDate" />
                 <ScalarProperty Name="First_Name" ColumnName="First Name" />
                 <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
                 <ScalarProperty Name="DateRecertified" ColumnName="DateRecertified" />

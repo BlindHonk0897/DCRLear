@@ -559,7 +559,14 @@ namespace DCRSystem.Controllers
         {
 
             // Get All Certification which is not yet Recertified
-           var NotYetRecertified =  new SelectList(ldcr.certificateTracker_Vw.Where(s => s.DateRecertified == null).OrderBy(s => s.EmpBadgeNo).Select(s => new { EmpBadgeNo = s.EmpBadgeNo, Name = s.EmpBadgeNo +" - " +s.Last_Name +", "+ s.First_Name }).ToList().Distinct(), "EmpBadgeNo", "Name");
+            var NotYetRecertified =  new SelectList(ldcr.certificateTracker_Vw.Where(s => s.DateRecertified == null).OrderBy(s => s.EmpBadgeNo).Select(s => new { EmpBadgeNo = s.EmpBadgeNo, Name = s.EmpBadgeNo +" - " +s.Last_Name +", "+ s.First_Name }).ToList().Distinct(), "EmpBadgeNo", "Name");
+           
+            //    new List<SelectListItem>
+            //    {                 
+            //        new SelectListItem {Text = "Google", Value = "Google"},
+            //        new SelectListItem {Text = "Other", Value = "Other"},
+            //    }, "Value", "Text");
+
             // Pass to ViewBag
             ViewBag.NotYetRecertified = NotYetRecertified;
 

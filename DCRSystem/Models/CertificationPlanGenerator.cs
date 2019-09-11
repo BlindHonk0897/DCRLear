@@ -10,59 +10,62 @@ namespace DCRSystem.Models
     {
         lear_DailiesCertificationRequirementEntities ldcr = new lear_DailiesCertificationRequirementEntities();
 
-       
-        public String GetCertificationPlan(String Code )
+
+        public String GetCertificationPlan(String Code)
         {
             if (GetCertificateType(Code).Equals("Yearly"))
             {
-                DateTime now =Convert.ToDateTime(DateTime.Now.ToString("MM/dd/yyyy"));
+                DateTime now = Convert.ToDateTime(DateTime.Now.ToString("MM/dd/yyyy"));
                 now = now.AddYears(1);
                 return now.ToShortDateString().ToString();
-            }else
+            }
+            else
             if (GetCertificateType(Code).Equals("Semi-Annual"))
             {
-                 DateTime now = Convert.ToDateTime(DateTime.Now.ToString("MM/dd/yyyy"));
-               now = now.AddMonths(6);
+                DateTime now = Convert.ToDateTime(DateTime.Now.ToString("MM/dd/yyyy"));
+                now = now.AddMonths(6);
                 return now.ToShortDateString().ToString();
-            }else
+            }
+            else
             if (GetCertificateType(Code).Equals("Quarterly"))
             {
                 DateTime now = Convert.ToDateTime(DateTime.Now.ToString("MM/dd/yyyy"));
-               now = now.AddMonths(3);
+                now = now.AddMonths(3);
                 return now.ToShortDateString().ToString();
             }
             else
             {
                 return "";
             }
-           
+
         }
 
-        public String GetCertificationPlanA(String Code ,CertificationTracker cert)
+        public DateTime GetCertificationPlanA(String Code, CertificationTracker cert)
         {
             if (GetCertificateType(Code).Equals("Yearly"))
             {
                 DateTime now = Convert.ToDateTime(cert.DateCertified);
-                now =  now.AddYears(1);
-                return now.ToShortDateString().ToString();
+                now = now.AddYears(1);
+                return now;
             }
             else
             if (GetCertificateType(Code).Equals("Semi-Annual"))
             {
                 DateTime now = Convert.ToDateTime(cert.DateCertified);
-                now.AddMonths(6);
-                return now.ToShortDateString().ToString();
+                now = now.AddMonths(6);
+                return now;
             }
             else
             if (GetCertificateType(Code).Equals("Quarterly"))
             {
                 DateTime now = Convert.ToDateTime(cert.DateCertified);
-                now.AddMonths(3);
-                return now.ToShortDateString().ToString();
+                now = now.AddMonths(3);
+                return now;
             }
             else
             {
-                return "";
+                DateTime now = new DateTime();
+                return now;
             }
 
 
@@ -76,6 +79,24 @@ namespace DCRSystem.Models
         public String GetCertificateType(String Code)
         {
             return ldcr.Certifications.Where(cert => cert.Code == Code).FirstOrDefault().Type;
+        }
+
+        public DateTime DateNowAddYear(int Year)
+        {
+            DateTime now = Convert.ToDateTime(DateTime.Now.ToString("MM/dd/yyyy"));
+            return now.AddYears(Year);
+        }
+
+        public DateTime DateNowAddMonth(int Month)
+        {
+            DateTime now = Convert.ToDateTime(DateTime.Now.ToString("MM/dd/yyyy"));
+            return now.AddMonths(Month);
+        }
+
+        public int DifferenceMonth(DateTime date1)
+        {
+            DateTime now = Convert.ToDateTime(DateTime.Now.ToString("MM/dd/yyyy"));
+            return Convert.ToInt32(now.Subtract(date1).Days / (365.25 / 12));
         }
     }
 }

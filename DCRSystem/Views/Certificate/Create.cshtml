@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#myModal').modal('show');
+    });
+
+</script>
+<style type="text/css">
+    .event a {
+        background-color: #42B373 !important;
+        background-image: none !important;
+        color: #ffffff !important;
+    }
+</style>
+
+<div class="example-modal">
+    @using (Html.BeginForm("Save", "Certificate", FormMethod.Post, new { id = "AddForm" }))
+    {
+        <div id="myModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="@Url.Action("Certificates","Certificate")" class="close" title="Cancel Transaction" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </a>
+                        <h4 class="modal-title text-center"> Create Certificate</h4>
+                    </div>
+                    <div class="modal-body">
+                        @*<input name="EmployeeID" value="@Model.BadgeNo" type="hidden" />*@
+                        @*<h5>Step 2:</h5>*@
+                        <div class="form-group">
+                            <label>Code:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </div>
+                                <input name="Code" type="text" required placeholder="Provide Unique Code" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-comments"></i>
+                                </div>
+                                <input name="Description" type="text" required placeholder="Provide Description" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Point/s:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <input name="Point" type="number" min="1" required placeholder="Provide Point" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Type:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="glyphicon glyphicon-paperclip"></i>
+                                </div>
+                                <select class="form-control select2" name="Type" style="width: 100%;">
+                                    <option  value="Yearly">Yearly</option>
+                                    <option  value="Semi-Annual">Semi-Annual</option>
+                                    <option  value="Quarterly">Quarterly</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="@Url.Action("Certificates","Certificate")" t class="btn btn-default pull-left">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <script>$('.select2').select2();</script>
+</div>
+@section ViewSpecificJavascript{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+    <script type="text/javascript">
+
+        function modalShow() {
+            $('#myModal').modal('show');
+        }
+        // Date picker
+        $(function () {
+            $('#SelectedDate').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                format: "mm/dd/yyyy",
+                language: "tr"
+            });
+        });
+
+    </script>
+}
+

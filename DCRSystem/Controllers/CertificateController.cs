@@ -84,5 +84,38 @@ namespace DCRSystem.Controllers
             ViewBag.ID = id.ToString();
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Save()
+        {
+            var Code = Request.Form["Code"].ToUpper();
+            var Description = Request.Form["Description"].ToUpper();
+            var Point = Convert.ToInt32(Request.Form["Point"]);
+            var Type = Request.Form["Type"];
+
+            using (lear_DailiesCertificationRequirementEntities ldcr =new lear_DailiesCertificationRequirementEntities())
+            {
+                var exist = ldcr.Certifications.Where(cert => cert.Code == Code).FirstOrDefault();
+                if (exist == null)
+                {
+                    Certification certification = new Certification
+                    {
+                        Code = Code,
+                        Description = Description,
+                        Points = Point,
+                        Type = Type
+                    };
+                    ldcr.Certifications.Add(certification);
+                    ldcr.SaveChanges();
+                }
+            }
+            return RedirectToAction("Certificates", "Certificate");
+        }
     }
 }
