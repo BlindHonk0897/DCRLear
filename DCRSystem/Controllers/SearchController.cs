@@ -3,6 +3,7 @@ using DCRSystem.Models;
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -326,6 +327,86 @@ namespace DCRSystem.Controllers
                     msg = "UnSuccessfully Event "
                 });
             }
+        }
+
+        public ActionResult ModalAssignNewCell(String IdEmp, String HRCCell, int? page, String urlBack)
+        {
+            EmployeeModel empModel = new EmployeeModel();
+            empModel.Employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == IdEmp).FirstOrDefault();
+            ViewBag.Page = page;
+            ViewBag.UrlBack = urlBack;
+            return View(empModel);
+        }
+
+        public ActionResult ModalAssignNewSupervisor(String IdEmp, String HRCSupervisor, int? page, String urlBack)
+        {
+            EmployeeModel empModel = new EmployeeModel();
+            empModel.Employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == IdEmp).FirstOrDefault();
+            ViewBag.Page = page;
+            ViewBag.UrlBack = urlBack;
+            return View(empModel);
+        }
+
+        [HttpPost]
+        public ActionResult AssignNewCell()
+        {
+            var EmpID = Request.Form["EmployeeID"];
+            var Hrccell = Request.Form["HrcCell"];
+            var Cell = Request.Form["Cell"];
+            var PageNum = Request.Form["PageNum"];
+            var Urlback = Request.Form["UrlBack"];
+            if (Cell == "X") { Cell = ""; }
+            var EmpDcr = ldcr.EmployeeDCRs.Where(emp => emp.BadgeNo == EmpID).FirstOrDefault();
+            if (EmpDcr == null)
+            {
+                EmployeeDCR dcr = new EmployeeDCR
+                {
+                    BadgeNo = EmpID,
+                    HRCCell = Hrccell,
+                    CurrentCell = Cell
+                };
+                ldcr.EmployeeDCRs.Add(dcr);
+                ldcr.SaveChanges();
+            }
+            else
+            {
+                EmpDcr.CurrentCell = Cell;
+                ldcr.Entry(EmpDcr).State = EntityState.Modified;
+                ldcr.SaveChanges();
+            }
+
+            return RedirectToAction(Urlback, "Search", new { page = PageNum });
+        }
+
+        [HttpPost]
+        public ActionResult AssignNewSupervisor()
+        {
+            var EmpID = Request.Form["EmployeeID"];
+            var Hrcsupervisor = Request.Form["HrcSupervisor"];
+            var Supervisor = Request.Form["Supervisor"];
+            var PageNum = Request.Form["PageNum"];
+            var Urlback = Request.Form["UrlBack"];
+            if (Supervisor == "X") { Supervisor = ""; }
+            var EmpDcr = ldcr.EmployeeDCRs.Where(emp => emp.BadgeNo == EmpID).FirstOrDefault();
+            if (EmpDcr == null)
+            {
+                EmployeeDCR dcr = new EmployeeDCR
+                {
+                    BadgeNo = EmpID,
+                    HRCSupervisor = Hrcsupervisor,
+                    CurrentSupervisor = Supervisor
+                };
+                ldcr.EmployeeDCRs.Add(dcr);
+                ldcr.SaveChanges();
+            }
+            else
+            {
+                EmpDcr.CurrentSupervisor = Supervisor;
+                ldcr.Entry(EmpDcr).State = EntityState.Modified;
+                ldcr.SaveChanges();
+            }
+
+            return RedirectToAction(Urlback, "Search", new { page = PageNum });
         }
     }
 }

@@ -5,6 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Styles.Render("~/Content/PagedList.css")
+<style type="text/css">
+
+</style>
 <form action="/IT/Inactive">
     <h3><i class="fa fa-users"></i>&nbsp;<strong><font color="gray">Inactive Employees</font></strong><small class="label pull-right bg-gray-active"><input type="search" class="form-control" name="searchInput" placeholder="Search by Lastname/BadgeNo" /></small></h3>
 </form>
@@ -13,6 +16,7 @@
     <div class="col-md-12">
         <div class="box box-default">
             <div class="box-body">
+                <div class="d-inline-flex p-2 bd-highlight">I'm an inline flexbox container!</div>
                 <table class="table table-sm table-hover">
                     <thead>
                         <tr>

@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     DCRSystem.Models.CertificationPlanGenerator CGenerator = new DCRSystem.Models.CertificationPlanGenerator();
 }
-<a href="@Url.Action(ViewBag.URLBack, "IT")" class="" style="padding-top:0px;color:brown"><h5>&nbsp;<span><img src="~/Content/img/Button-Back-1-512.png" class="img-circle" height="30" width="30" title="BACK" /> </span></h5></a>
+<a href="@Url.Action(ViewBag.URLBack, "IT")" class="">&nbsp;<span><img src="~/Content/img/Button-Back-1-512.png" class="img-circle" height="34" width="34" title="BACK" /> </span></a>
 <div class="row">
     <div class="col-md-3">
         @if (Model.Employee.Job_Status.ToUpper().Contains("CURRENT"))
@@ -155,10 +155,16 @@
     </div>
     <div class="col-md-9 connectedSortable">
         <div class="box nav-tabs-custom">
+            <ul class="nav nav-tabs pull-left">
+               
+            </ul>
             <ul class="nav nav-tabs pull-right">
                 <li><a href="#second-tab" data-toggle="tab" id="Page2">Page 2</a></li>
                 <li class="active"><a href="#first-tab" data-toggle="tab" id="Page1">Page 1</a></li>
+
                 <li class="pull-left header"><i class="fa fa-inbox"></i><strong>Employee Progress</strong></li>
+                <li class="pull-left"><small @*href="#"*@ onclick="alert('Add Code Here!')"><img src="~/Content/img/excel.png" width="25" height="25" />&nbsp;Export to Excel Employee Details</small></li>
+                <li class="pull-left"><small @*href="#"*@ onclick="alert('Add Code Here!')"><img src="~/Content/img/printer.png" width="25" height="25" />&nbsp;Show Printable Employee Details</small></li>
             </ul>
             <div class="tab-content no-padding">
                 <div class="chart tab-pane active" id="first-tab" style="position: relative; height: auto;">
@@ -268,7 +274,7 @@
                                     <a href="@Url.Action("ModalReCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; Re-Certified &nbsp;<small class="label pull-right bg-red-active">@Model.NumberReCertified</small></a>
                                     <a href="@Url.Action("ModalCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification &nbsp;<small class="label pull-right bg-red-active">@(Model.CurrentCertification != null ? Model.CurrentCertification.CertificationCode : "None" ) </small></a>
                                     <a href="@Url.Action("ModalNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified &nbsp;<small class="label pull-right bg-red-active">@Model.ImNotCertified.Count()</small></a>
-                                    <a href="@Url.Action("ModalCeritificatesWithPoints","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-eye-close" style="font-size:23px"></i>&nbsp; Show Certificates with Points</a>
+                                    <a href="@Url.Action("ModalCeritificatesWithPoints","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-eye-close" style="font-size:19.5px"></i>&nbsp; Show Certificates with Points</a>
                                 </div>
 
                                 <div class="pull-right">
@@ -388,7 +394,7 @@
                                     <a href="@Url.Action("ModalReCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; Re-Certified &nbsp;<small class="label pull-right bg-red-active">@Model.NumberReCertified</small></a>
                                     <a href="@Url.Action("ModalCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification &nbsp;<small class="label pull-right bg-red-active">@(Model.CurrentCertification != null ? Model.CurrentCertification.CertificationCode : "None" )</small></a>
                                     <a href="@Url.Action("ModalNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified &nbsp;<small class="label pull-right bg-red-active">@Model.ImNotCertified.Count()</small></a>
-                                    <a href="@Url.Action("ModalCeritificatesWithPoints","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-eye-close" style="font-size:23px"></i>&nbsp; Show Certificates with Points</a>
+                                    <a href="@Url.Action("ModalCeritificatesWithPoints","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-eye-close" style="font-size:19.5px"></i>&nbsp; Show Certificates with Points</a>
                                 </div>
                                 <div class="pull-right">
                                     <div class="btn-group">

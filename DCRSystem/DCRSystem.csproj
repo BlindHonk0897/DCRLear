@@ -534,6 +534,7 @@
     <Content Include="Content\img\Certified.png" />
     <Content Include="Content\img\CoreValuesRed.png" />
     <Content Include="Content\img\Emp_Prog.png" />
+    <Content Include="Content\img\excel.png" />
     <Content Include="Content\img\FotoJet.jpg" />
     <Content Include="Content\img\icheck\aero%402x.png" />
     <Content Include="Content\img\icheck\aero.png" />
@@ -574,6 +575,8 @@
     <Content Include="Content\img\lear_clips.mp4" />
     <Content Include="Content\img\lear_inverse.png" />
     <Content Include="Content\img\logoIcon.png" />
+    <Content Include="Content\img\printer.png" />
+    <Content Include="Content\img\PrintSave.png" />
     <Content Include="Content\img\ReCertified.png" />
     <Content Include="Content\img\Ribbons\Certified.svg" />
     <Content Include="Content\img\Ribbons\CertifiedRibbon %282%29.png" />
@@ -984,6 +987,8 @@
     <Content Include="Views\IT\ModalAssignNewSupervisor.cshtml" />
     <Content Include="Views\Certificate\Sample.cshtml" />
     <Content Include="Views\Certificate\Create.cshtml" />
+    <Content Include="Views\Search\ModalAssignNewSupervisor.cshtml" />
+    <Content Include="Views\Search\ModalAssignNewCell.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

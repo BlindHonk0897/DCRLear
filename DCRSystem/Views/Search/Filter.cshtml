@@ -16,14 +16,15 @@
     model.filters = lear.Filters.ToList();
 
 }
+@Styles.Render("~/Content/PagedList.css")
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <style type="text/css">
-    .select2-container .select2-selection--single {
+    /*.select2-container .select2-selection--single {
         width: 370px;
-    }
+    }*/
 </style>
 <div class="row">
     <div class="col-md-3">
@@ -40,10 +41,10 @@
                         <li class="active">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <select id="Filters" class="dropdown form-control select2" name="Month" style="width: 100%;">
+                                    <select id="Filters" class="form-control select2" name="Month" style="width: 100%;">
                                         @foreach (var filter in model.filters)
                                         {
-                                            <option value="@filter.KeyName" @(ViewBag.Type == filter.KeyName?" selected":"")>@filter.FilterName</option>
+                                            <option value="@filter.KeyName" @(ViewBag.Type == filter.KeyName ? " selected" : "")>@filter.FilterName</option>
                                         }
                                     </select>
                                 </div>
@@ -68,12 +69,10 @@
                         <li class="active">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <select id="subFilterBody" class="dropdown form-control select2" name="Month" style="width: 100%;">
-                                       
-                                    </select>
+                                    <select id="subFilterBody" class="dropdown form-control select2" name="Month" style="width: 100%;"></select>
                                     @*<span class="input-group-btn text-black">
-                                            <button type="submit" class="btn btn-github btn-flat form-control" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
-                                      </span>*@
+                                              <button type="submit" class="btn btn-github btn-flat form-control" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
+                                        </span>*@
 
                                 </div>
                             </div>
@@ -86,12 +85,12 @@
     <div class="col-md-2" @(ViewBag.Data == "" ? "hidden" : "") id="Go">
         <div class="box-solid" style="background-color:transparent">
             @*<div class="box-header with-border">
-            <h3 class="box-title">Click Here To Continue</h3>
-        </div>
-        <div class="box-body text-center">
-            <a onclick="filterFunc()" class="btn btn-social-icon btn-bitbucket" style="background-color:#A71717"><i class="fa fa-play"></i></a>
-        </div>*@
-            <a onclick="filterFunc()" class="btn btn-app"style="background-color:#ffffff">
+                    <h3 class="box-title">Click Here To Continue</h3>
+                </div>
+                <div class="box-body text-center">
+                    <a onclick="filterFunc()" class="btn btn-social-icon btn-bitbucket" style="background-color:#A71717"><i class="fa fa-play"></i></a>
+                </div>*@
+            <a onclick="filterFunc()" class="btn btn-app" style="background-color:#ffffff">
                 <i class="fa fa-play"></i> Continue
             </a>
         </div>
@@ -107,8 +106,12 @@
                             <th>Employee ID</th>
                             <th>Employee Name</th>
                             <th>Position</th>
-                            <th>Cell</th>
-                            <th>Supervisor</th>
+                            <th>HRC Cell</th>
+                            <th>Current Cell</th>
+                            <th>Assign New Cell</th>
+                            <th>HRC Supervisor</th>
+                            <th>Current Supervisor</th>
+                            <th>Change Supervisor</th>
                             <th>Progress</th>
                             <th>Action</th>
                         </tr>
@@ -121,10 +124,27 @@
                                 <td>@item.Last_Name , @item.First_Name</td>
                                 <td>@item.Position</td>
                                 <td>@item.HRCCell</td>
+                                <td>@item.CurrentCell</td>
+                                @if (item.Job_Status.ToUpper().Contains("CURRENT"))
+                                {
+                                    <td><a class="text-center" title="Assign New Cell" href="@Url.Action("ModalAssignNewCell", "Search", new { IdEmp = item.Employee_ID, HRCell = item.HRCCell, page = Model.PageNumber ,UrlBack = "Filter"})"><i class="fa fa-edit text-red" style="font-size:23px"></i></a> </td>
+                                }
+                                else
+                                {
+                                    <td><a class="text-center" title="Assign New Cell" onclick="alert('Cannot Continue Choosen Employee is InActive')"><i class="fa fa-edit text-black" style="font-size:23px"></i></a> </td>
+                                }
                                 <td>@item.HRCSupervisor</td>
+                                <td>@item.CurrentSupervisor</td>
+                                @if (item.Job_Status.ToUpper().Contains("CURRENT"))
+                                {
+                                    <td><a class="text-center" title="Assign New Supervisor" href="@Url.Action("ModalAssignNewSupervisor", "Search", new { IdEmp = item.Employee_ID, HRCell = item.HRCSupervisor, page = Model.PageNumber,UrlBack = "Filter" })"><i class="fa fa-edit text-red" style="font-size:23px"></i></a> </td>
+                                }
+                                else
+                                {
+                                    <td><a class="text-center" title="Assign New Supervisor" onclick="alert('Cannot Continue Choosen Employee is InActive')"><i class="fa fa-edit text-black" style="font-size:23px"></i></a> </td>
+                                }
                                 <td>
                                     <a href="@Url.Action("Details","IT",new { id = item.Employee_ID,urlBack = "Employee" })">
-
                                         <img src="~/Content/img/Emp_Prog.png" height="30" width="30" />
                                     </a>
                                 </td>
@@ -196,16 +216,16 @@
             // $('#tableBody').load(url);
             var formData = new FormData();
             window.location.href = url;
-           
+
         } else {
             var dat = arr[0] + "-" + arr[1];
             var url = '@Url.Action("Filter", "Search")';
             url += '?Type=' + arr[2] + '&Data=' + dat;
             // $('#tableBody').load(url);
             var formData = new FormData();
-            window.location.href = url;     
+            window.location.href = url;
         }
-         
+
     }
 </script>
 <script type="text/javascript">
