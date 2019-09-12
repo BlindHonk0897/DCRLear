@@ -1,16 +1,19 @@
 ﻿using DCRSystem.CustomViewModel;
 using DCRSystem.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace DCRSystem.Controllers
 {
     public class HomeController : Controller
     {
         public commonEmployeesEntities cEE = new commonEmployeesEntities();
+        public lear_DailiesCertificationRequirementEntities ldcr = new lear_DailiesCertificationRequirementEntities();
 
         [Authorize(Roles = "Default,Approver,IT")]
         public ActionResult Index()
@@ -41,14 +44,22 @@ namespace DCRSystem.Controllers
         public ActionResult Home()
         {
             ViewBag.Message = "Your contact page.";
+            List<Chart> dataPoints = new List<Chart>();
+            var Certificates = ldcr.Certifications.ToList();
 
+            foreach(var cert in Certificates)
+            {
+                dataPoints.Add(new Chart(cert.Code, getNumberOfCertifiedEmployee(cert.Code)));
+            }
+
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
             return View();
         }
 
         [Authorize(Roles = "Default,Approver,IT")]
         public ActionResult MyCertificate()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your MyCertificate page.";
 
             return View();
         }
@@ -76,6 +87,11 @@ namespace DCRSystem.Controllers
         public ActionResult About()
         {
             return View();
+        }
+
+        public int getNumberOfCertifiedEmployee(String CertificateCode)
+        {
+            return ldcr.certificateTracker_Vw.Where(cert => cert.CertificationCode == CertificateCode).ToList().Count();
         }
     }
 }

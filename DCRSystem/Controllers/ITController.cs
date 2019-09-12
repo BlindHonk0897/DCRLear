@@ -831,5 +831,86 @@ namespace DCRSystem.Controllers
 
             return View(employees.ToPagedList(pageNumber, pageSize));
         }
+
+        public ActionResult Testing3(String id, String urlBack)
+        {
+            ViewBag.URLBack = urlBack;
+            EmployeeModel empModel = new EmployeeModel();
+            if (id != null)
+            {
+                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+                if (employee != null)
+                {
+                    empModel.Employee = new EmployeeDCR_Vw
+                    {
+                        Employee_ID = employee.Employee_ID,
+                        First_Name = employee.First_Name,
+                        Last_Name = employee.Last_Name,
+                        HRCCell = employee.HRCCell,
+                        Job_Status = employee.Job_Status,
+                        HRCSupervisor = employee.HRCSupervisor,
+                        PlanRecertificationDate = employee.PlanRecertificationDate,
+                        Position = employee.Position
+                    };
+                    empModel.Certifications = ldcr.Certifications.OrderBy(l => l.Code).ToList();
+                    empModel.TotalCertifications = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderBy(cr => cr.CertificationCode).ToList();
+                    empModel.CurrentCertification = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderByDescending(cr => cr.DateCertified).FirstOrDefault();
+                    double SKP = (Convert.ToDouble(empModel.TotalCertifications.Count()) / Convert.ToDouble(empModel.Certifications.Count())) * (100);
+                    if (!Double.IsNaN(SKP))
+                    {
+
+                        empModel.PercentAgeCertified = Convert.ToInt32(SKP);
+                    }
+                    else
+                    {
+                        empModel.PercentAgeCertified = 0;
+                    }
+                    var ReCertified = ldcr.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID && cr.DateRecertified != null).OrderBy(cr => cr.Id).ToList().Count();
+
+                    empModel.NumberReCertified = ReCertified;
+                    double SRKP = (Convert.ToDouble(ReCertified) / Convert.ToDouble(empModel.Certifications.Count())) * (100);
+                    if (!Double.IsNaN(SRKP))
+                    {
+                        empModel.PercentAgeReCertified = Convert.ToInt32(SRKP);
+                    }
+                    else
+                    {
+                        empModel.PercentAgeReCertified = 0;
+                    }
+
+                    System.Diagnostics.Debug.WriteLine(Convert.ToInt32(SKP));
+                    System.Diagnostics.Debug.WriteLine(Convert.ToInt32(SRKP));
+                    var totalPointsCertiFied = 0;
+                    var TotalPointsReCertified = 0;
+                    foreach (var certification in empModel.Certifications)
+                    {
+                        if (empModel.TotalCertifications.FirstOrDefault(el => el.CertificationCode == certification.Code) == null)
+                        {
+                            CertificationTracker CT = new CertificationTracker();
+                            CT.Id = 0;
+                            CT.EmpBadgeNo = id;
+                            CT.CertificationCode = certification.Code;
+                            CT.DateCertified = null;
+                            CT.DateRecertified = null;
+                            empModel.MyCertifications.Add(CT);
+                            empModel.ImNotCertified.Add(certification);
+                        }
+                        else
+                        {
+
+                            empModel.MyCertifications.Add(empModel.TotalCertifications.FirstOrDefault(el => el.CertificationCode == certification.Code));
+                            totalPointsCertiFied += Convert.ToInt32(certification.Points);
+                        }
+                        if (empModel.TotalCertifications.FirstOrDefault(el => el.CertificationCode == certification.Code && el.DateRecertified != null) != null)
+                        {
+                            TotalPointsReCertified += Convert.ToInt32(certification.Points);
+                        }
+                    }
+                    empModel.TotalPointsCertified = totalPointsCertiFied;
+                    empModel.TotalPointsReCertified = TotalPointsReCertified;
+                }
+            }
+            return View(empModel);
+        }
     }
 }

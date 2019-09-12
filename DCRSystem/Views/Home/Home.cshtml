@@ -9,6 +9,26 @@
 
     @Styles.Render("~/Styles/Elements/General")*@
 
+<script>
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+	        animationEnabled: true,
+	        theme: "light2", // "light1", "light2", "dark1", "dark2"
+	        title: {
+		        text: "Number of Certified Employees under Each Certificate"
+	        },
+	        axisY: {
+		        title: "No. of Employees"
+	        },
+	        data: [{
+		        type: "column",
+		        dataPoints: @Html.Raw(ViewBag.DataPoints)
+	        }]
+        });
+        chart.render();
+    }
+</script>
+
 <div class="row">
     <div class="col-xs-12">
         <div class="box" style="background-color:transparent">
@@ -117,86 +137,13 @@
     </div>
     
 </div>
-@*<div class="row">
-    <section class="col-lg-7 connectedSortable">
-        <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs pull-right">
-                <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-                <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-                <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
-            </ul>
-            <div class="tab-content no-padding">
-                <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-                <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
-            </div>
-        </div>
-        <div class="box box-solid bg-green-gradient">
-            <div class="box-header">
-                <i class="fa fa-calendar"></i>
-                <h3 class="box-title">Calendar</h3>
-                <div class="pull-right box-tools">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li><a href="#">Add new event</a></li>
-                            <li><a href="#">Clear events</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">View calendar</a></li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn btn-success btn-sm" data-widget="collapse">
-                        <i class="fa fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-success btn-sm" data-widget="remove">
-                        <i class="fa fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="box-body no-padding">
-                <div id="calendar" style="width: 100%"></div>
-            </div>
-            <div class="box-footer text-black">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="clearfix">
-                            <span class="pull-left">Task #1</span>
-                            <small class="pull-right">90%</small>
-                        </div>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-                        </div>
-                        <div class="clearfix">
-                            <span class="pull-left">Task #2</span>
-                            <small class="pull-right">70%</small>
-                        </div>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="clearfix">
-                            <span class="pull-left">Task #3</span>
-                            <small class="pull-right">60%</small>
-                        </div>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-                        </div>
-                        <div class="clearfix">
-                            <span class="pull-left">Task #4</span>
-                            <small class="pull-right">40%</small>
-                        </div>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="row">
+    <section class="col-lg-12 connectedSortable">
+        <div class="nav-tabs-custom" id="chartContainer"></div>
     </section>
-   
-</div>*@
+    @*<div id="chartContainer" style="height: 370px; width: 100%;"></div>*@
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</div>
 
 
 @section ViewSpecificJavascript{

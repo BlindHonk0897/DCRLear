@@ -214,6 +214,7 @@
     <Compile Include="Models\CertificationTracker.cs">
       <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Chart.cs" />
     <Compile Include="Models\DateConfig.cs" />
     <Compile Include="Models\EmployeeDCR.cs">
       <DependentUpon>lear_dailiesRequirementCertificationModel.tt</DependentUpon>
@@ -990,6 +991,7 @@
     <Content Include="Views\Search\ModalAssignNewSupervisor.cshtml" />
     <Content Include="Views\Search\ModalAssignNewCell.cshtml" />
     <Content Include="Views\IT\Probationary.cshtml" />
+    <Content Include="Views\IT\Testing3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

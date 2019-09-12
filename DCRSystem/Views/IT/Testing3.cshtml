@@ -1,0 +1,283 @@
+﻿
+@model DCRSystem.CustomViewModel.EmployeeModel
+@{
+    ViewBag.Title = "Testing3";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DCRSystem.Models.CertificationPlanGenerator CGenerator = new DCRSystem.Models.CertificationPlanGenerator();
+}
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<a href="@Url.Action(ViewBag.URLBack, "IT")" class="">&nbsp;<span><img src="~/Content/img/Button-Back-1-512.png" class="img-circle" height="34" width="34" title="BACK" /> </span></a>
+<div class="row">
+    <div class="col-md-3">
+        @if (Model.Employee.Job_Status.ToUpper().Contains("CURRENT"))
+        {
+            <a onclick="ShowProfile()" class="btn btn-primary btn-block"><b>@Model.Employee.Last_Name , @Model.Employee.First_Name</b></a>
+        }
+        else
+        {
+            <a onclick="ShowProfile()" class="btn btn-danger btn-block"><b>@Model.Employee.Last_Name , @Model.Employee.First_Name</b></a>
+        }
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Details</h3>
+            </div>
+            <div class="box-body no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    @if (Model.Employee.Job_Status.ToUpper().Contains("CURRENT"))
+                    {
+                        if (Model.Employee.PlanRecertificationDate != null)
+                        {
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-calendar"></i>Plan For Re-Certification
+                                    <span class="label label-primary pull-right">@Convert.ToDateTime(Model.Employee.PlanRecertificationDate).ToString("MMMM").ToUpper()</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-calendar"></i> Plan Date For Re-Certification
+                                    <span class="label label-primary pull-right">@Convert.ToDateTime(Model.Employee.PlanRecertificationDate).ToShortDateString()</span>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            var CertifiactionTracker = DCRSystem.Models.DateConfig.getLastCertified(Model.Employee.Employee_ID);
+                            if (CertifiactionTracker != null)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-calendar"></i>Plan For Re-Certification
+                                        <span class="label label-primary pull-right">@DCRSystem.Models.DateConfig.AddOneYear(Convert.ToDateTime(CertifiactionTracker.DateCertified)).ToString("MMMM").ToUpper()</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-calendar"></i> Plan Date For Re-Certification
+                                        <span class="label label-primary pull-right">@DCRSystem.Models.DateConfig.AddOneYear(Convert.ToDateTime(CertifiactionTracker.DateCertified)).ToShortDateString()</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-calendar"></i>Plan For Re-Certification
+                                        <span class="label label-primary pull-right">@DCRSystem.Models.DateConfig.AddOneYear(DateTime.Now).ToString("MMMM").ToUpper()</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-calendar"></i> Plan Date For Re-Certification
+                                        <span class="label label-primary pull-right">@DCRSystem.Models.DateConfig.AddOneYear(DateTime.Now).ToShortDateString()</span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                        var CertifiactionTracker1 = DCRSystem.Models.DateConfig.getLastReCertified(Model.Employee.Employee_ID);
+                        if (CertifiactionTracker1 != null)
+                        {
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-calendar"></i> Actual Date Re-Certified
+                                    <span class="label label-primary pull-right">@Convert.ToDateTime(CertifiactionTracker1.DateRecertified).ToShortDateString()</span>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-calendar"></i> Actual Date Re-Certified
+                                    <span class="label label-danger pull-right">Not Re-Certified</span>
+                                </a>
+                            </li>
+                        }
+
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-calendar"></i> Plan For Re-Certification
+                                <span class="label label-danger pull-right">Not Applicable</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-calendar"></i> Plan Date For Re-Certification
+                                <span class="label label-danger pull-right">Not Applicable</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-calendar"></i> Actual Date Re-Certified
+                                <span class="label label-danger pull-right">Not Applicable</span>
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+        <div class="box box-solid">
+            @*<div class="box-header with-border">*@
+            <h4 class="box-title"><marquee direction="right"><strong>Progress:</strong></marquee></h4>
+            @*</div>*@
+            <div class="box-body no-padding">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a>
+                            <p><b> Skills Certified: <code>@Model.TotalCertifications.Count() out of @Model.Certifications.Count()</code></b></p>
+                            <div class="progress progress-xs active">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" id="SC" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </div>
+                            <p><b> Percentage : <code> @Model.PercentAgeCertified%</code></b></p>
+                            <p><b>Skills Points : <code> @Model.TotalPointsCertified</code></b></p>
+                        </a>
+                    </li>
+                    <hr style="width: 100%; color: black; height: 1px; background-color:palevioletred;" />
+                    <li>
+                        <a>
+                            <p><b> Skills Re-Certified: <code>@Model.NumberReCertified out of @Model.TotalCertifications.Count()</code></b></p>
+                            <div class="progress progress-xs active">
+                                <div class="progress-bar progress-bar-danger progress-bar-striped" id="SRC" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </div>
+                            <p><b> Percentage : <code> @Model.PercentAgeReCertified%</code></b></p>
+                            <p><b>Skills Points : <code> @Model.TotalPointsReCertified</code></b></p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 connectedSortable">
+        <div class="box nav-tabs-custom">
+            <ul class="nav nav-tabs pull-left">
+               
+            </ul>
+            <ul class="nav nav-tabs pull-right">
+                @*<li><a href="#second-tab" data-toggle="tab" id="Page2">Page 2</a></li>
+                <li class="active"><a href="#first-tab" data-toggle="tab" id="Page1">Page 1</a></li>*@
+
+                <li class="pull-left header"><i class="fa fa-inbox"></i><strong>Employee Progress</strong></li>
+                <li class="pull-left"><small @*href="#"*@ onclick="alert('Add Code Here!')"><img src="~/Content/img/excel.png" width="25" height="25" />&nbsp;Export to Excel Employee Details</small></li>
+                <li class="pull-left"><small @*href="#"*@ onclick="alert('Add Code Here!')"><img src="~/Content/img/printer.png" width="25" height="25" />&nbsp;Show Printable Employee Details</small></li>
+            </ul>
+            <div class="tab-content ">
+                <div class="chart tab-pane active" id="first-tab" style="position: relative; height: auto;">
+                    <div class="table-responsive mailbox-messages">
+                        <table class="table table-hover table-striped" id="DetailsTable">
+                            <thead>
+                                <tr>
+                                    <th>Certification Code</th>
+                                    <th>Description</th>
+                                    <th>Type</th>
+                                    <th>Date Certified</th>
+                                    <th>Date Re-Certified</th>
+                                    @*<th>Current Certification</th>*@
+                                    <th>Certification Plan</th>
+                                    <th>Status</th>
+                                    <th>Identifier</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Certifications.Count(); i++)
+                                {
+                                    if (Model.MyCertifications.ElementAt(i).DateCertified != null)
+                                    {
+                                <tr>
+                                    <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
+                                    <td>@Model.Certifications.ElementAt(i).Description</td>
+                                    <td class="mailbox-star">@Model.Certifications.ElementAt(i).Type</td>
+                                    <td class="mailbox-star"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateCertified).ToShortDateString()</td>
+                                    @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
+                                    {
+                                        <td class="mailbox-star"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateRecertified).ToShortDateString()</td>
+
+                                    }
+                                    else
+                                    {
+                                        <td class="mailbox-star"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" /></td>
+                                    }
+                                    <td>@CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)).ToShortDateString()</td>
+                                    @if (CGenerator.DateNowAddMonth(-2) <= CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))
+                                    {
+                                        <td><small class="label  bg-green-active">Active  &nbsp; &nbsp; &nbsp;</small></td>
+                                    }
+                                    else
+                                    {
+                                        <td><small class="label bg-gray-active">In-Active</small></td>
+                                    }
+                                    @if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) <= 1)
+                                    {
+                                        if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) == 1)
+                                        {
+                                            <td><small class="label bg-yellow-active"> &nbsp;1 Month Overdue </small></td>
+                                        }
+                                        else
+                                        {
+                                            <td><small class="label bg-yellow-active"> &nbsp;Upcoming </small></td>
+                                        }
+
+                                    }
+                                    else if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) > 1 && CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) < 3)
+                                    {
+                                        @*<td>Red @CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))</td>*@
+                                        <td><small class="label bg-red-active">@CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))</small></td>
+                                    }
+                                    else
+                                    {
+                                        <td><small class="label bg-gray-active"> @CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))</small></td>
+                                    }
+                                </tr>
+                                    }
+
+                                }
+
+                            </tbody>
+                        </table>
+                        <div class="box-footer no-padding">
+                            <div class="mailbox-controls">
+                                <a href="@Url.Action("Details", "IT", new { id = Model.Employee.Employee_ID, urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm checkbox-toggle">
+                                    <i class="fa fa-refresh fa-spin" title="Refresh" style="font-size:25px"></i>
+                                </a>
+                                <div class="btn-group">
+                                    <a href="@Url.Action("ModalCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; Certified &nbsp;<small class="label pull-right bg-red-active">@Model.TotalCertifications.Count()</small></a>
+                                    <a href="@Url.Action("ModalReCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; Re-Certified &nbsp;<small class="label pull-right bg-red-active">@Model.NumberReCertified</small></a>
+                                    <a href="@Url.Action("ModalCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification &nbsp;<small class="label pull-right bg-red-active">@(Model.CurrentCertification != null ? Model.CurrentCertification.CertificationCode : "None" ) </small></a>
+                                    <a href="@Url.Action("ModalNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified &nbsp;<small class="label pull-right bg-red-active">@Model.ImNotCertified.Count()</small></a>
+                                    <a href="@Url.Action("ModalCeritificatesWithPoints","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-eye-close" style="font-size:19.5px"></i>&nbsp; Show Certificates with Points</a>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery.noConflict();
+    //$.noConflict(true)
+    $(document).ready(function () {
+
+
+        $("#DetailsTable").DataTable(
+            {
+                "ordering": true
+            }
+        );
+        $('.dataTables_filter input[type="search"]').
+            attr('placeholder', 'Search');
+        //css({ 'width': '100px', 'display': 'inline-block', 'color': 'red' });
+    })
+</script>
