@@ -813,5 +813,23 @@ namespace DCRSystem.Controllers
 
             return RedirectToAction(Urlback, "IT", new { page = PageNum });
         }
+
+        public ActionResult Probationary(int? page, String searchInput = "")
+        {
+            // Get all Employees from Database
+            List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.Where(emp => emp.EmploymentStatus.ToUpper().Equals("PROBATIONARY") && emp.Job_Status.ToUpper().Contains("CURRENT")).OrderBy(a => a.Last_Name).ToList();
+
+            if (!string.IsNullOrEmpty(searchInput))
+            {
+                // get employee/employees with the same lastname with the input
+                employees = employees.Where(a => a.Last_Name.ToLower().Contains(searchInput.ToLower()) || a.Employee_ID.Contains(searchInput)).ToList();
+            }
+
+            int pageSize = 10; // pagelist number of page
+            int pageNumber = (page ?? 1);
+
+
+            return View(employees.ToPagedList(pageNumber, pageSize));
+        }
     }
 }

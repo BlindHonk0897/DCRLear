@@ -184,6 +184,25 @@ namespace DCRSystem.Controllers
             return model.EmployeeDCR_Vws;
         }
 
+        public List<EmployeeDCR_Vw> getEmployeeByMonthAndYear(String Year ,String Month)
+        {
+            PartialViewModel model = new PartialViewModel();
+            var certificate = ldcr.CertificationTrackers.ToList();
+            foreach (var cert in certificate)
+            {
+                if (Convert.ToDateTime(cert.DateCertified).Year.ToString().ToUpper().Equals(Year.ToUpper()) && Convert.ToDateTime(cert.DateCertified).ToString("MMMM").ToUpper().Equals(Month.ToUpper()))
+                {
+                    var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo).FirstOrDefault();
+                    if (!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
+                    {
+                        model.EmployeeDCR_Vws.Add(employee);
+                    }
+
+                }
+            }
+            return model.EmployeeDCR_Vws;
+        }
+
 
         [HttpGet]
         public ActionResult _DynamicTableBody(String Type ,String data)
@@ -233,10 +252,23 @@ namespace DCRSystem.Controllers
 
             SearchOptionsViewModel model = new SearchOptionsViewModel();
             model.filters = ldcr.Filters.ToList();
-            ViewBag.Type = Type;
+            var type = Type.Split('-');
+            var Month = "";
+            if (type.Count() > 1)
+            {
+                ViewBag.Type = type[0];
+                Month = type[1];
+            }
+            else
+            {
+                ViewBag.Type = Type;
+            }
+           
             ViewBag.Data = data;
+            ViewBag.Month = Month;
             // Get all Employees from Database
-            System.Diagnostics.Debug.WriteLine( (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(data))+ "sahdfjsfsdfhjd" );
+            //System.Diagnostics.Debug.WriteLine( (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(data))+ "sahdfjsfsdfhjd" );
+            System.Diagnostics.Debug.WriteLine(Month.ToUpper() + "sahdfjsfsdfhjd");
             if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(data))
             {
                 
@@ -279,10 +311,10 @@ namespace DCRSystem.Controllers
                 //    employees = getEmployeeByLastName(data);
                 //}
                
-                //if (Type.ToString().ToUpper().Equals("BYMONTHANDYEAR"))
-                //{
-                //    employees = getEmployeeByMonthAndYear(data);
-                //}
+                if (Type.ToString().ToUpper().Equals("BYMONTHANDYEAR") || type[0].ToString().ToUpper().Equals("BYMONTHANDYEAR"))
+                {
+                    employees = getEmployeeByMonthAndYear(data,Month);
+                }
 
                 // kutob dire
                 ViewBag.EmpCount = employees.Count();

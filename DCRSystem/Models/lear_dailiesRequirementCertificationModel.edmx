@@ -117,6 +117,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <Property Name="HRCCell" Type="varchar" MaxLength="200" />
           <Property Name="CurrentCell" Type="varchar" MaxLength="50" />
           <Property Name="Job Status" Type="varchar" MaxLength="500" />
+          <Property Name="EmploymentStatus" Type="varchar" MaxLength="500" />
           <Property Name="HRCSupervisor" Type="nvarchar" MaxLength="100" />
           <Property Name="CurrentSupervisor" Type="varchar" MaxLength="50" />
           <Property Name="PlanRecertificationDate" Type="datetime" />
@@ -166,6 +167,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
     [EmployeeDCR_Vw].[HRCCell] AS [HRCCell], 
     [EmployeeDCR_Vw].[CurrentCell] AS [CurrentCell], 
     [EmployeeDCR_Vw].[Job Status] AS [Job Status], 
+    [EmployeeDCR_Vw].[EmploymentStatus] AS [EmploymentStatus], 
     [EmployeeDCR_Vw].[HRCSupervisor] AS [HRCSupervisor], 
     [EmployeeDCR_Vw].[CurrentSupervisor] AS [CurrentSupervisor], 
     [EmployeeDCR_Vw].[PlanRecertificationDate] AS [PlanRecertificationDate]
@@ -283,6 +285,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <Property Name="CurrentCell" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="HRCSupervisor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CurrentSupervisor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmploymentStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Filter">
           <Key>
@@ -390,6 +393,7 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <EntitySetMapping Name="EmployeeDCR_Vw">
             <EntityTypeMapping TypeName="lear_DailiesCertificationRequirementModel.EmployeeDCR_Vw">
               <MappingFragment StoreEntitySet="EmployeeDCR_Vw">
+                <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
                 <ScalarProperty Name="CurrentSupervisor" ColumnName="CurrentSupervisor" />
                 <ScalarProperty Name="HRCSupervisor" ColumnName="HRCSupervisor" />
                 <ScalarProperty Name="CurrentCell" ColumnName="CurrentCell" />

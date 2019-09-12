@@ -155,6 +155,9 @@ namespace DCRSystem.Controllers
                 // Get total Number of Inactive Employees 
                 var countNewlyEmployees = _EmployeesManager.newlyEmployees.ToList();
 
+                // Get total Number of Probationary Employees 
+                var countProbationaryEmployees = _AccountManager.EmployeeDCR_Vw.Where(emp => emp.EmploymentStatus.ToUpper().Equals("PROBATIONARY") && emp.Job_Status.ToUpper().Contains("CURRENT")).ToList().Count();
+
                 // Set Authentication Cookie to User's EMAIL ADDRESS -- ( Hardcoded )
                 FormsAuthentication.SetAuthCookie("IT@lear.com", false);
 
@@ -176,6 +179,7 @@ namespace DCRSystem.Controllers
                 Session["NumberOfInactiveEmployees"] = countEmployees.Count()- countActiveEmployees;
                 Session["NumberOfRecertificationPlans"] = _AccountManager.ReCertificationPlans.ToList().Count();
                 Session["NumberOfCertificates"] = _AccountManager.Certifications.ToList().Count();
+                Session["NumberOfProbationaryEmployees"] = countProbationaryEmployees;
                 // [ BEGIN -- Session Configuration
 
                 return RedirectToAction("Home", "Home");

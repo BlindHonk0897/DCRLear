@@ -35,6 +35,9 @@
                     <li class="@Url.IsLinkActive("NewlyEmployees", "IT")">
                         <a href="@Url.Action("NewlyEmployees", "IT")" class="sidebar-link"><i class="fa fa-users"></i> <span><font color="black">Newly Employed</font></span><small class="label pull-right bg-aqua-gradient">@Session["NumberOfNewlyEmployees"]</small></a>
                     </li>
+                    <li class="@Url.IsLinkActive("Probationary", "IT")">
+                        <a href="@Url.Action("Probationary", "IT")" class="sidebar-link"><i class="fa fa-users"></i> <span><font color="black">Probationary</font></span><small class="label pull-right bg-red">@Session["NumberOfProbationaryEmployees"]</small></a>
+                    </li>
                     <li class="@Url.IsLinkActive("ReCertificationPlan", "IT")">
                         <a href="@Url.Action("ReCertificationPlan", "IT")" class="sidebar-link"><i class="fa fa-edit"></i> <span><font color="black">Re-Certification Plan</font></span><small class="label pull-right bg-red">@Session["NumberOfRecertificationPlans"]</small></a>
                     </li>

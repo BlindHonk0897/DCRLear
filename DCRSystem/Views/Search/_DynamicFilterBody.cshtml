@@ -86,7 +86,8 @@
 {
     for (var i = 1990; i <= DateTime.Now.Year; i++)
     {
-        <option value="@i">@i</option>
+        var val = i.ToString() + "-" + Model.KeyName;
+        <option value="@val">@i</option>
     }
 }
 
