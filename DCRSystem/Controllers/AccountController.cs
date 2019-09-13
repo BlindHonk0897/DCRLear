@@ -146,17 +146,17 @@ namespace DCRSystem.Controllers
             }
             else if (/*model.BagdeNo.ToString() == "1234" && model.Password.ToString() =="IT"*/ adminAccount!=null)  // Hardcoded User For IT admin
             {
-                // Get total Number of Employees 
-                var countEmployees = _EmployeesManager.Employees_Details.ToList();
+                // Get total Number of Dailies Employees 
+                var countEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Payroll_Type.ToUpper().Equals("DAILY")).ToList();
 
                 // Get total Number of Inactive Employees 
-                var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).ToList().Count();
+                var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT") && emp.Payroll_Type.ToUpper().Equals("DAILY")).ToList().Count();
 
                 // Get total Number of Inactive Employees 
                 var countNewlyEmployees = _EmployeesManager.newlyEmployees.ToList();
 
                 // Get total Number of Probationary Employees 
-                var countProbationaryEmployees = _AccountManager.EmployeeDCR_Vw.Where(emp => emp.EmploymentStatus.ToUpper().Equals("PROBATIONARY") && emp.Job_Status.ToUpper().Contains("CURRENT")).ToList().Count();
+                var countProbationaryEmployees = _AccountManager.EmployeeDCR_Vw.Where(emp => emp.EmploymentStatus.ToUpper().Equals("PROBATIONARY") && emp.Job_Status.ToUpper().Contains("CURRENT") && emp.PayrollType.ToUpper().Equals("DAILY")).ToList().Count();
 
                 // Set Authentication Cookie to User's EMAIL ADDRESS -- ( Hardcoded )
                 FormsAuthentication.SetAuthCookie("IT@lear.com", false);

@@ -93,11 +93,13 @@ namespace DCRSystem.Models
             return now.AddMonths(Month);
         }
 
-        public int DifferenceMonth(DateTime endDate)
+        public double DifferenceMonth(DateTime endDate)
         {
             DateTime startDate = Convert.ToDateTime(DateTime.Now.ToString("MM/dd/yyyy"));
-            int monthsApart = 12 * (startDate.Year - endDate.Year) + startDate.Month - endDate.Month;
-            return monthsApart;
+           // int monthsApart = 12 * (startDate.Year - endDate.Year) + startDate.Month - endDate.Month;
+            TimeSpan difference = startDate - endDate;
+            var days = difference.TotalDays;
+            return days;
         }
 
         //public int GetMonthDifference(DateTime endDate)

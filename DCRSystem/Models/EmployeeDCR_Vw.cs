@@ -25,5 +25,6 @@ namespace DCRSystem.Models
         public string HRCSupervisor { get; set; }
         public string CurrentSupervisor { get; set; }
         public string EmploymentStatus { get; set; }
+        public string PayrollType { get; set; }
     }
 }

@@ -213,26 +213,25 @@
                                     {
                                         <td><small class="label bg-gray-active">In-Active</small></td>
                                     }
-                                    @if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) <= 1)
+                                   
+                                    @if(CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) > 0)
                                     {
-                                        if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) == 1)
+                                        if(CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) <= 31)
                                         {
                                             <td><small class="label bg-yellow-active"> &nbsp;1 Month Overdue </small></td>
                                         }
+                                        else if(CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) > 31 && CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) < 63)
+                                        {
+                                            <td><small class="label bg-red-active"> &nbsp;Almost 2 Months Overdue </small></td>
+                                        }
                                         else
                                         {
-                                            <td><small class="label bg-yellow-active"> &nbsp;Upcoming </small></td>
+                                            <td><small class="label bg-gray-active"> &nbsp;2 Months Overdue </small></td>
                                         }
-
-                                    }
-                                    else if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) > 1 && CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) < 3)
-                                    {
-                                        @*<td>Red @CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))</td>*@
-                                        <td><small class="label bg-red-active">@CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))</small></td>
                                     }
                                     else
                                     {
-                                        <td><small class="label bg-gray-active"> @CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))</small></td>
+                                        <td><small class="label bg-yellow-active"> &nbsp;Upcoming </small></td>
                                     }
                                 </tr>
                                     }

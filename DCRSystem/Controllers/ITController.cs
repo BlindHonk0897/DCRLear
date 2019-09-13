@@ -23,7 +23,7 @@ namespace DCRSystem.Controllers
         public ActionResult Employee(int? page, String searchInput = "")
         {
             // Get all Employees from Database
-            List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.OrderBy(a => a.Last_Name).ToList();
+            List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.Where(emp => emp.PayrollType.ToUpper().Equals("DAILY")).OrderBy(a => a.Last_Name).ToList();
 
             if (!string.IsNullOrEmpty(searchInput))
             {

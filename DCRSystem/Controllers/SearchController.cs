@@ -117,10 +117,14 @@ namespace DCRSystem.Controllers
                 if (Convert.ToDateTime(cert.DateCertified).ToString("MMMM").ToUpper().Equals(month.ToUpper()))
                 {
                     var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo).FirstOrDefault();
-                    if (!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
+                    if (employee != null)
                     {
-                        model.EmployeeDCR_Vws.Add(employee);
+                        if (!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
+                        {
+                            model.EmployeeDCR_Vws.Add(employee);
+                        }
                     }
+                    
 
                 }
             }
@@ -135,9 +139,12 @@ namespace DCRSystem.Controllers
                 if (Convert.ToDateTime(cert.DateCertified).Year.ToString().ToUpper().Equals(Year.ToUpper()))
                 {
                     var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo).FirstOrDefault();
-                    if (!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
+                    if (employee != null)
                     {
-                        model.EmployeeDCR_Vws.Add(employee);
+                        if (!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
+                        {
+                            model.EmployeeDCR_Vws.Add(employee);
+                        }
                     }
 
                 }
@@ -193,9 +200,12 @@ namespace DCRSystem.Controllers
                 if (Convert.ToDateTime(cert.DateCertified).Year.ToString().ToUpper().Equals(Year.ToUpper()) && Convert.ToDateTime(cert.DateCertified).ToString("MMMM").ToUpper().Equals(Month.ToUpper()))
                 {
                     var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo).FirstOrDefault();
-                    if (!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
+                    if (employee != null)
                     {
-                        model.EmployeeDCR_Vws.Add(employee);
+                        if (!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
+                        {
+                            model.EmployeeDCR_Vws.Add(employee);
+                        }
                     }
 
                 }

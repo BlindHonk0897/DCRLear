@@ -155,26 +155,24 @@
     </div>
     <div class="col-md-9 connectedSortable">
         <div class="box nav-tabs-custom">
-            <ul class="nav nav-tabs pull-left">
-               
-            </ul>
+            <ul class="nav nav-tabs pull-left"></ul>
             <ul class="nav nav-tabs pull-right">
-                <li><a href="#second-tab" data-toggle="tab" id="Page2">Page 2</a></li>
-                <li class="active"><a href="#first-tab" data-toggle="tab" id="Page1">Page 1</a></li>
+                @*<li><a href="#second-tab" data-toggle="tab" id="Page2">Page 2</a></li>
+                <li class="active"><a href="#first-tab" data-toggle="tab" id="Page1">Page 1</a></li>*@
 
                 <li class="pull-left header"><i class="fa fa-inbox"></i><strong>Employee Progress</strong></li>
                 <li class="pull-left"><small @*href="#"*@ onclick="alert('Add Code Here!')"><img src="~/Content/img/excel.png" width="25" height="25" />&nbsp;Export to Excel Employee Details</small></li>
                 <li class="pull-left"><small @*href="#"*@ onclick="alert('Add Code Here!')"><img src="~/Content/img/printer.png" width="25" height="25" />&nbsp;Show Printable Employee Details</small></li>
             </ul>
-            <div class="tab-content no-padding">
+            <div class="tab-content ">
                 <div class="chart tab-pane active" id="first-tab" style="position: relative; height: auto;">
                     <div class="table-responsive mailbox-messages">
-                        <table class="table table-hover table-striped">
+                        <table class="table table-hover table-striped" id="DetailsTable">
                             <thead>
                                 <tr>
                                     <th>Certification Code</th>
                                     <th>Description</th>
-                                    @*<th>Point/s</th>*@
+                                    <th>Type</th>
                                     <th>Date Certified</th>
                                     <th>Date Re-Certified</th>
                                     @*<th>Current Certification</th>*@
@@ -184,84 +182,58 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for (int i = 0; i < Model.Certifications.Count() / 2; i++)
+                                @for (int i = 0; i < Model.Certifications.Count(); i++)
                                 {
-                                <tr>
-                                    <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
-                                    <td>- @Model.Certifications.ElementAt(i).Description</td>
-                                    @*<td>@Model.Certifications.ElementAt(i).Points</td>*@
-                                    @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
+                                    if (Model.MyCertifications.ElementAt(i).DateCertified != null)
                                     {
-                                        <td class="mailbox-star"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateCertified).ToShortDateString()</td>
-                                    }
-                                    else
-                                    {
-                                        <td class="mailbox-star"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" /></td>
-                                    }
-                                    @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
-                                    {
-                                        <td class="mailbox-star"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateRecertified).ToShortDateString()</td>
+                                        <tr>
+                                            <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
+                                            <td>@Model.Certifications.ElementAt(i).Description</td>
+                                            <td class="mailbox-star">@Model.Certifications.ElementAt(i).Type</td>
+                                            <td class="mailbox-star"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateCertified).ToShortDateString()</td>
+                                            @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
+                                            {
+                                                <td class="mailbox-star"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateRecertified).ToShortDateString()</td>
 
-                                    }
-                                    else
-                                    {
-                                        <td class="mailbox-star"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" /></td>
-                                    }
-                                    @*@if (Model.CurrentCertification != null)
-                                    {
-                                        if (Model.CurrentCertification.CertificationCode == Model.MyCertifications.ElementAt(i).CertificationCode)
-                                        {
-                                            <td class="mailbox-attachment">
-                                                <img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp;@Model.MyCertifications.ElementAt(i).CertificationCode - @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateCertified).ToShortDateString()
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td class="mailbox-attachment"></td>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <td class="mailbox-attachment"></td>
-                                    }*@
-                                    @*<td>@CGenerator.GetCertification(Model.Certifications.ElementAt(i).Code).Type</td>*@
-                                    @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
-                                    {
-                                        <td>@CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)).ToShortDateString()</td>
-                                        if (CGenerator.DateNowAddMonth(-2) <= CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))
-                                        {
-                                            <td><small class="label  bg-green-active">Active  &nbsp; &nbsp; &nbsp;</small></td>
-                                        }
-                                        else
-                                        {
-                                            <td><small class="label bg-red-active">In-Active</small></td>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <td>@CGenerator.GetCertificationPlan(Model.Certifications.ElementAt(i).Code)</td>
-                                        <td><small class="label  bg-green-active">Active  &nbsp; &nbsp; &nbsp;</small></td>
-                                    }
-                                    @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
-                                    {
-                                        if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) <= 1)
-                                        {
-                                            @*<td>Yellow @CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))</td>*@
-                                            <td><small class="label bg-yellow-active"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</small></td>
-                                        }
-                                        else if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) > 1)
-                                        {
-                                            @*<td>Red @CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))</td>*@
-                                            <td><small class="label bg-red-active"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</small></td>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <td><small class="label bg-yellow-active"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</small></td>
+                                            }
+                                            else
+                                            {
+                                                <td class="mailbox-star"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" /></td>
+                                            }
+                                            <td>@CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)).ToShortDateString()</td>
+                                            @if (CGenerator.DateNowAddMonth(-2) <= CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))
+                                            {
+                                                <td><small class="label  bg-green-active">Active  &nbsp; &nbsp; &nbsp;</small></td>
+                                            }
+                                            else
+                                            {
+                                                <td><small class="label bg-gray-active">In-Active</small></td>
+                                            }
 
+                                            @if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) > 0)
+                                            {
+                                                if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) <= 31)
+                                                {
+                                                    <td><small class="label bg-yellow-active"> &nbsp;1 Month Overdue </small></td>
+                                                }
+                                                else if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) > 31 && CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) < 63)
+                                                {
+                                                    <td><small class="label bg-red-active">Almost 2 Months Overdue </small></td>
+                                                }
+                                                else
+                                                {
+                                                    <td><small class="label bg-gray-active"> &nbsp;2 Months Overdue </small></td>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <td><small class="label bg-green-active"> &nbsp;In due time </small></td>
+                                            }
+                                        </tr>
                                     }
-                                </tr>
+
                                 }
+
                             </tbody>
                         </table>
                         <div class="box-footer no-padding">
@@ -277,134 +249,12 @@
                                     <a href="@Url.Action("ModalCeritificatesWithPoints","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-eye-close" style="font-size:19.5px"></i>&nbsp; Show Certificates with Points</a>
                                 </div>
 
-                                <div class="pull-right">
-                                    <div class="btn-group">
-                                        <button onclick="moveLeft()" class="btn btn-default btn-sm"><i class="fa fa-chevron-right" style="font-size:20px"></i></button>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="chart tab-pane" id="second-tab" style="position: relative; height: auto;">
-                    <div class="table-responsive mailbox-messages">
-                        <table class="table table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Certification Code</th>
-                                    <th>Description</th>
-                                    @*<th>Point/s</th>*@
-                                    <th>Date Certified</th>
-                                    <th>Date Re-Certified</th>
-                                    @*<th>Current Certification</th>*@
-                                    <th>Certification Plan</th>
-                                    <th>Status</th>
-                                    <th>Identifier</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for (int i = (Model.Certifications.Count() / 2); i < Model.Certifications.Count(); i++)
-                                {
-                                    <tr>
-                                        <td class="mailbox-subject"><b>@Model.Certifications.ElementAt(i).Code</b></td>
-                                        <td>- @Model.Certifications.ElementAt(i).Description</td>
-                                        @*<td>@Model.Certifications.ElementAt(i).Points</td>*@
-                                        @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
-                                        {
-                                            <td class="mailbox-star"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateCertified).ToShortDateString()</td>
-                                        }
-                                        else
-                                        {
-                                            <td class="mailbox-star"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" /></td>
-                                        }
-                                        @if (Model.MyCertifications.ElementAt(i).DateRecertified != null)
-                                        {
-                                            <td class="mailbox-star"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateRecertified).ToShortDateString()</td>
 
-                                        }
-                                        else
-                                        {
-                                            <td class="mailbox-star"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" /></td>
-                                        }
-                                        @*@if (Model.CurrentCertification != null)
-                                        {
-                                            if (Model.CurrentCertification.CertificationCode == Model.MyCertifications.ElementAt(i).CertificationCode)
-                                            {
-                                                <td class="mailbox-attachment">
-                                                    <img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp;@Model.MyCertifications.ElementAt(i).CertificationCode - @Convert.ToDateTime(Model.MyCertifications.ElementAt(i).DateCertified).ToShortDateString()
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td class="mailbox-attachment"></td>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <td class="mailbox-attachment"></td>
-                                        }*@
-                                        @*<td>@CGenerator.GetCertification(Model.Certifications.ElementAt(i).Code).Type</td>*@
-                                        @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
-                                         {
-                                            <td>@CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)).ToShortDateString()</td>
-                                            if (CGenerator.DateNowAddMonth(-2) <= CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))
-                                            {
-                                                <td><small class="label  bg-green-active">Active  &nbsp; &nbsp; &nbsp;</small></td>
-                                            }
-                                            else
-                                            {
-                                                <td><small class="label bg-red-active">In-Active</small></td>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <td>@CGenerator.GetCertificationPlan(Model.Certifications.ElementAt(i).Code)</td>
-                                            <td><small class="label  bg-green-active">Active  &nbsp; &nbsp; &nbsp;</small></td>
-                                        }
-                                        @if (Model.MyCertifications.ElementAt(i).DateCertified != null)
-                                        {
-                                            if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) <= 1)
-                                            {
-                                                @*<td>Yellow @CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))</td>*@
-                                                <td><small class="label bg-yellow-active"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</small></td>
-                                            }
-                                            else if (CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i))) > 1)
-                                            {
-                                                @*<td>Red @CGenerator.DifferenceMonth(CGenerator.GetCertificationPlanA(Model.Certifications.ElementAt(i).Code, Model.MyCertifications.ElementAt(i)))</td>*@
-                                                <td><small class="label bg-red-active"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</small></td>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <td><small class="label bg-yellow-active"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</small></td>
-
-                                        }
-                                    </tr>
-                                }
-
-                            </tbody>
-                        </table>
-                        <div class="box-footer no-padding">
-                            <div class="mailbox-controls">
-                                <a href="@Url.Action("Details", "IT", new { id = Model.Employee.Employee_ID, urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm checkbox-toggle">
-                                    <i class="fa fa-refresh fa-spin" title="Refresh" style="font-size:25px"></i>
-                                </a>
-                                <div class="btn-group">
-                                    <a href="@Url.Action("ModalCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; Certified &nbsp;<small class="label pull-right bg-red-active">@Model.TotalCertifications.Count()</small></a>
-                                    <a href="@Url.Action("ModalReCertifiedCertificates","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; Re-Certified &nbsp;<small class="label pull-right bg-red-active">@Model.NumberReCertified</small></a>
-                                    <a href="@Url.Action("ModalCurrentCertification","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/CurrentRibbon.png" width="25" height="25" />&nbsp; Current Certification &nbsp;<small class="label pull-right bg-red-active">@(Model.CurrentCertification != null ? Model.CurrentCertification.CertificationCode : "None" )</small></a>
-                                    <a href="@Url.Action("ModalNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified &nbsp;<small class="label pull-right bg-red-active">@Model.ImNotCertified.Count()</small></a>
-                                    <a href="@Url.Action("ModalCeritificatesWithPoints","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-eye-close" style="font-size:19.5px"></i>&nbsp; Show Certificates with Points</a>
-                                </div>
-                                <div class="pull-right">
-                                    <div class="btn-group">
-                                        <button onclick="backRight()" class="btn btn-default btn-sm"><i class="fa fa-chevron-left" style="font-size:20px"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -433,7 +283,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>
+                        @*<button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Close</button>*@
                     </div>
 
                 }
@@ -450,7 +300,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+                        @*<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>*@
                     </div>
 
                 }
@@ -466,12 +316,18 @@
         document.getElementById('SC').style.width = @Model.PercentAgeCertified + "%";
         document.getElementById('SRC').style.width = @Model.PercentAgeReCertified + "%";
         });
-        function backRight() {
-            $('#Page1').click();
-        }
-        function moveLeft() {
-            $('#Page2').click();
-        }
+        $(document).ready(function () {
+
+
+            $("#DetailsTable").DataTable(
+                {
+                    "ordering": true
+                }
+            );
+            $('.dataTables_filter input[type="search"]').
+                attr('placeholder', 'Search');
+            //css({ 'width': '100px', 'display': 'inline-block', 'color': 'red' });
+        })
         function ShowProfile() {
             $('#myModal').modal('show');
         }
