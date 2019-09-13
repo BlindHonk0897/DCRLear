@@ -21,9 +21,11 @@
 {
     if (Session["RoleUser"].ToString() == "IT")
     {
+       
         <aside class="main-sidebar shadow-lg p-3 mb-5 bg-white rounded">
-            <section class="sidebar">
+            <section class="sidebar" >
                 @* BEGIN Menu *@
+                
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header"></li>
                     <li class="@Url.IsLinkActive("Home", "Home")">

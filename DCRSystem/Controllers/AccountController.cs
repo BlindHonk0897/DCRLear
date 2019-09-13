@@ -117,9 +117,9 @@ namespace DCRSystem.Controllers
                 // Get total Number of Active Employees 
                 var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).ToList().Count();
                 
-                // Get total Number of Inactive Employees 
-                var countNewlyEmployees = _EmployeesManager.newlyEmployees.ToList();
-              
+                // Get total Number of Newly Employed Employees 
+                var countNewlyEmployees = _EmployeesManager.newlyEmployees.Where(emp => emp.Payroll_Type.ToString().ToUpper().Equals("DAILY")).OrderBy(nwEmp => nwEmp.Last_Name).ToList();
+
                 // Set Authentication Cookie to User's EMAIL ADDRESS
                 FormsAuthentication.SetAuthCookie(usertemp.Email, false);
 
@@ -149,11 +149,11 @@ namespace DCRSystem.Controllers
                 // Get total Number of Dailies Employees 
                 var countEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Payroll_Type.ToUpper().Equals("DAILY")).ToList();
 
-                // Get total Number of Inactive Employees 
+                // Get total Number of Active Employees 
                 var countActiveEmployees = _EmployeesManager.Employees_Details.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT") && emp.Payroll_Type.ToUpper().Equals("DAILY")).ToList().Count();
 
-                // Get total Number of Inactive Employees 
-                var countNewlyEmployees = _EmployeesManager.newlyEmployees.ToList();
+                // Get total Number of Newly Employed Employees 
+                var countNewlyEmployees = _EmployeesManager.newlyEmployees.Where(emp => emp.Payroll_Type.ToString().ToUpper().Equals("DAILY")).OrderBy(nwEmp => nwEmp.Last_Name).ToList();
 
                 // Get total Number of Probationary Employees 
                 var countProbationaryEmployees = _AccountManager.EmployeeDCR_Vw.Where(emp => emp.EmploymentStatus.ToUpper().Equals("PROBATIONARY") && emp.Job_Status.ToUpper().Contains("CURRENT") && emp.PayrollType.ToUpper().Equals("DAILY")).ToList().Count();

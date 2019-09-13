@@ -278,7 +278,7 @@ namespace DCRSystem.Controllers
             ViewBag.Month = Month;
             // Get all Employees from Database
             //System.Diagnostics.Debug.WriteLine( (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(data))+ "sahdfjsfsdfhjd" );
-            System.Diagnostics.Debug.WriteLine(Month.ToUpper() + "sahdfjsfsdfhjd");
+           
             if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(data))
             {
                 

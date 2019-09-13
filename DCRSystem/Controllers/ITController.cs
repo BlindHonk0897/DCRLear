@@ -437,7 +437,7 @@ namespace DCRSystem.Controllers
         [HttpGet]
         public ActionResult NewlyEmployees(int? page, String searchInput = "")
         {
-            List<newlyEmployee> employees = cEE.newlyEmployees.OrderBy(nwEmp => nwEmp.Last_Name).ToList();
+            List<newlyEmployee> employees = cEE.newlyEmployees.Where(emp => emp.Payroll_Type.ToString().ToUpper().Equals("DAILY")).OrderBy(nwEmp => nwEmp.Last_Name).ToList();
 
             if (!string.IsNullOrEmpty(searchInput))
             {

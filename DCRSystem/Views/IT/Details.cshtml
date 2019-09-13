@@ -161,8 +161,8 @@
                 <li class="active"><a href="#first-tab" data-toggle="tab" id="Page1">Page 1</a></li>*@
 
                 <li class="pull-left header"><i class="fa fa-inbox"></i><strong>Employee Progress</strong></li>
-                <li class="pull-left"><small @*href="#"*@ onclick="alert('Add Code Here!')"><img src="~/Content/img/excel.png" width="25" height="25" />&nbsp;Export to Excel Employee Details</small></li>
-                <li class="pull-left"><small @*href="#"*@ onclick="alert('Add Code Here!')"><img src="~/Content/img/printer.png" width="25" height="25" />&nbsp;Show Printable Employee Details</small></li>
+                <li class="pull-left"><a href="@Url.Action("ExportEmployeeDetailsToExcel","Data",new { id =Model.Employee.Employee_ID })"><img src="~/Content/img/excel.png" width="25" height="25" />&nbsp;Export to Excel Employee Details</a></li>
+                <li class="pull-left"><a @*href="#"*@ onclick="alert('Add Code Here!')"><img src="~/Content/img/printer.png" width="25" height="25" />&nbsp;Show Printable Employee Details</a></li>
             </ul>
             <div class="tab-content ">
                 <div class="chart tab-pane active" id="first-tab" style="position: relative; height: auto;">
@@ -227,7 +227,7 @@
                                             }
                                             else
                                             {
-                                                <td><small class="label bg-green-active"> &nbsp;In due time </small></td>
+                                                <td><small class="label " style="background-color:#5B9709"> &nbsp;In due time </small></td>
                                             }
                                         </tr>
                                     }
@@ -248,8 +248,6 @@
                                     <a href="@Url.Action("ModalNotCertified","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" />&nbsp; Not yet Certified &nbsp;<small class="label pull-right bg-red-active">@Model.ImNotCertified.Count()</small></a>
                                     <a href="@Url.Action("ModalCeritificatesWithPoints","IT",new { id = Model.Employee.Employee_ID , urlBack = ViewBag.URLBack })" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-eye-close" style="font-size:19.5px"></i>&nbsp; Show Certificates with Points</a>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -325,8 +323,8 @@
                 }
             );
             $('.dataTables_filter input[type="search"]').
-                attr('placeholder', 'Search');
-            //css({ 'width': '100px', 'display': 'inline-block', 'color': 'red' });
+                attr('placeholder', 'Type Here');
+            $('.dataTables_filter input[type="search"]').css({ 'width': '100px', 'display': 'inline-block', 'color': 'gray' });
         })
         function ShowProfile() {
             $('#myModal').modal('show');

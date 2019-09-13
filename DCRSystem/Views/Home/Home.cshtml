@@ -26,11 +26,65 @@
 	        }]
         });
         chart.render();
+        var today = new Date();
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+       
+        var date = monthNames[(today.getMonth())]+ ' ' + today.getDate() + ' ' + today.getFullYear() ;
+        var piechart = new CanvasJS.Chart("PieChart", {
+	        theme: "light1", // "light1", "light2", "dark1", "dark2"
+	        exportEnabled: true,
+	        animationEnabled: true,
+	        title: {
+		        text: "Cerified - Uncertified Employees"
+	        },
+            subtitles: [{
+                text: date
+	        }],
+	        data: [{
+		        type: "pie",
+		        startAngle: 180,
+		        toolTipContent: "<b>{label}</b>: {y}",
+		        showInLegend: "true",
+		        legendText: "{label}",
+		        indexLabel: "{label} - {y}",
+		        dataPoints: @Html.Raw(ViewBag.PiePoints)
+	        }]
+            });
+            piechart.render();
+
+            var monthchart = new CanvasJS.Chart("MonthsChart", {
+	        theme: "light2", // "light1", "light2", "dark1", "dark2"
+	        animationEnabled: true,
+	        title: {
+		        text: "Monthly Records for Certified Employees"
+	        },
+	        axisX: {
+		        interval: 1
+	        },
+	        axisY: {
+		        valueFormatString: ""
+	        },
+	        data: [{
+		        type: "waterfall",
+		        yValueFormatString: "",
+		        indexLabelOrientation: "vertical",
+		        indexLabelFontColor: "black",
+		        risingColor: "#73C2FB",
+		        fallingColor: "#FFA571",
+		        dataPoints: @Html.Raw(ViewBag.MonthChartPoints)
+	        }]
+            });
+           monthchart.render();
+            $(".canvasjs-chart-credit").hide();
     }
 </script>
 
-<div class="row">
-    <div class="col-xs-12">
+
+@*<div class="row">*@
+    @*<h1>@ViewBag.DateToday</h1>*@
+    @*<div class="col-xs-12">
         <div class="box" style="background-color:transparent">
             <div class="box-body">
                 <div id="carousel-example-generic" class="col-xs-12 carousel slide" data-ride="carousel">
@@ -83,7 +137,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 <div class="row">
     <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-red">
@@ -138,13 +192,27 @@
     
 </div>
 <div class="row">
-    <section class="col-lg-12 connectedSortable">
+    <div class="col-md-6">
         <div class="nav-tabs-custom" id="chartContainer"></div>
-    </section>
-    @*<div id="chartContainer" style="height: 370px; width: 100%;"></div>*@
-    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-</div>
+    </div>
+    <div class="col-md-6">
+        <div class="nav-tabs-custom" id="PieChart"></div>
+    </div>
 
+    @*<div id="chartContainer" style="height: 370px; width: 100%;"></div>*@
+    
+</div>
+<div class="row" style="margin-top:400px">
+    <div class="col-md-12">
+      <div class="nav-tabs-custom" id="MonthsChart"></div>
+    </div>
+</div>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".canvasjs-chart-credit").hide();
+    })
+</script>
 
 @section ViewSpecificJavascript{
     @*@Scripts.Render("~/AdminLTE/plugins/datatables/js")*@

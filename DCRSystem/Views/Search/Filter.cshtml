@@ -39,15 +39,15 @@
                 <div class="box-body text-center">
                     <ul class="nav nav-pills nav-stacked">
                         <li class="active">
-                            <div class="form-group">
+                            <div class="form-group d-inline-block">
                                 <div class="input-group">
+                                   
                                     <select id="Filters" class="form-control select2" name="Month" style="width: 100%;">
                                         @foreach (var filter in model.filters)
                                         {
                                             <option value="@filter.KeyName" @(ViewBag.Type == filter.KeyName ? " selected" : "")>@filter.FilterName</option>
                                         }
-                                    </select>
-
+                                  </select>                                  
                                 </div>
                                 <div class="input-group pull-right">
                                     <small class="label pull-right bg-red">@ViewBag.Month &nbsp; @ViewBag.Data</small>
