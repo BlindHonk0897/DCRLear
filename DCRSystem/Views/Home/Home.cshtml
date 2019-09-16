@@ -16,9 +16,12 @@
 	        theme: "light2", // "light1", "light2", "dark1", "dark2"
 	        title: {
 		        text: "Number of Certified Employees under Each Certificate"
-	        },
+            },
+            exportFileName: "Number of Certified Employees under Each Certificate( BarChart )",  //Give any name accordingly
+            exportEnabled: true,
 	        axisY: {
-		        title: "No. of Employees"
+                title: "No. of Employees"
+
 	        },
 	        data: [{
 		        type: "column",
@@ -33,7 +36,8 @@
        
         var date = monthNames[(today.getMonth())]+ ' ' + today.getDate() + ' ' + today.getFullYear() ;
         var piechart = new CanvasJS.Chart("PieChart", {
-	        theme: "light1", // "light1", "light2", "dark1", "dark2"
+            theme: "light1", // "light1", "light2", "dark1", "dark2"
+            exportFileName: "Cerified - Uncertified Employees( PieChart )", 
 	        exportEnabled: true,
 	        animationEnabled: true,
 	        title: {
@@ -54,7 +58,7 @@
             });
             piechart.render();
 
-            var monthchart = new CanvasJS.Chart("MonthsChart", {
+            @*var monthchart = new CanvasJS.Chart("MonthsChart", {
 	        theme: "light2", // "light1", "light2", "dark1", "dark2"
 	        animationEnabled: true,
 	        title: {
@@ -76,7 +80,29 @@
 		        dataPoints: @Html.Raw(ViewBag.MonthChartPoints)
 	        }]
             });
-           monthchart.render();
+           monthchart.render();*@
+        var subTitle = "Year of " + today.getFullYear();
+        var barchart = new CanvasJS.Chart("MonthsChart", {
+	        animationEnabled: true,
+	        title: {
+                text: "Monthly Records for Certified Employees"
+            },
+            exportFileName: "Monthly Records for Certified Employees ( SplineChart )",  //Give any name accordingly
+            exportEnabled: true,
+            subtitles: [{
+                text: subTitle
+	        }],
+	        axisY: {
+                title: "No. of Employees",
+		        gridThickness: 0
+	        },
+	        data: [{
+                type: "splineArea",
+		        indexLabel: "{y}",
+		        dataPoints: @Html.Raw(ViewBag.BarPoints)
+	        }]
+        });
+        barchart.render();
             $(".canvasjs-chart-credit").hide();
     }
 </script>
@@ -148,7 +174,7 @@
             <div class="icon">
                 <i class="fa fa-users"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="@Url.Action("Employee", "IT")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-xs-6">
@@ -162,7 +188,7 @@
             <div class="icon">
                 <i class="fa fa-users"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="@Url.Action("NewlyEmployees", "IT")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-xs-6">
@@ -174,7 +200,7 @@
             <div class="icon">
                 <i class="fa fa-users"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="@Url.Action("Active", "IT")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-xs-6">
@@ -186,7 +212,7 @@
             <div class="icon">
                 <i class="fa fa-users"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="@Url.Action("Inactive", "IT")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     

@@ -20,8 +20,8 @@ namespace DCRSystem.Controllers
             EmployeeModel empModel = new EmployeeModel();
             if (id != null)
             {
-                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
-                System.Diagnostics.Debug.WriteLine(employee.Job_Status + "hehehehe");
+                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id && emp.Job_Status.ToUpper().Contains("CURRENT")).FirstOrDefault();
+               // System.Diagnostics.Debug.WriteLine(employee.Job_Status + "hehehehe");
                 if (employee != null)
                 {
                     empModel.Employee = new EmployeeDCR_Vw {

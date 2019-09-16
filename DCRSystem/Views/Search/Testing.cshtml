@@ -4,7 +4,7 @@
 @model PagedList.IPagedList<DCRSystem.Models.EmployeeDCR_Vw>
 
 @{
-    ViewBag.Title = "Filter";
+    ViewBag.Title = "Testing";
     Layout = "~/Views/Shared/_Layout.cshtml";
     lear_DailiesCertificationRequirementEntities lear = new lear_DailiesCertificationRequirementEntities();
     SearchOptionsViewModel model = new SearchOptionsViewModel();
@@ -27,101 +27,103 @@
     }
 </style>
 <div class="row">
-    <div class="col-md-5">
-        <div class="box box-solid">
-            <div class="box-header with-border">
-                <h4 class="box-title"><strong>Options</strong></h4>
-                <div class="box-tools">
-                    <small class="label pull-right bg-red"><i class="fa fa-users"></i>&nbsp; @ViewBag.EmpCount Results</small>
+    <div class="col-md-12">
+        @*<div class="col-md-5">*@
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h4 class="box-title"><strong>Options</strong></h4>
+                    <div class="box-tools">
+                        <small class="label pull-right bg-red"><i class="fa fa-users"></i>&nbsp; @ViewBag.EmpCount Results</small>
+                    </div>
                 </div>
-            </div>
-            <form action="#">
-                <div class="box-body text-center">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="active">
-                            <div class="form-group d-inline-block">
-                                <div class="input-group">
-                                   
-                                    <select id="Filters" class="form-control select2" name="Month" style="width: 100%;">
-                                        @foreach (var filter in model.filters)
-                                        {
-                                            <option value="@filter.KeyName" @(ViewBag.Type == filter.KeyName ? " selected" : "")>@filter.FilterName</option>
-                                        }
-                                  </select>                                  
-                                </div>
-                                <div class="input-group pull-right">
-                                    <small class="label pull-right bg-red">@ViewBag.Month &nbsp; @ViewBag.Data</small>
-                                </div>
-                            </div>
-                            <div class="form-group" id="MonthDropdown" hidden>
-                                <div class="input-group">
-                                    <select id="Month" class="dropdown form-control select2" name="Month" style="width: 100%;">
-                                        <option value="X">Select Month</option>
-                                        @{
-                                            String[] months = System.Globalization.DateTimeFormatInfo.CurrentInfo.MonthNames;
-                                            for (var iMonth = 0; iMonth <= 12;)
+                <form action="#">
+                    <div class="box-body text-center">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active">
+                                <div class="form-group d-inline-block">
+                                    <div class="input-group">
+
+                                        <select id="Filters" class="form-control select2" name="Month" style="width: 100%;">
+                                            @foreach (var filter in model.filters)
                                             {
-                                                var val = months.GetValue(iMonth);
-                                                <option value="@val">@months.GetValue(iMonth)</option>
-                                                iMonth++;
+                                                <option value="@filter.KeyName" @(ViewBag.Type == filter.KeyName ? " selected" : "")>@filter.FilterName</option>
                                             }
-                                        }
-                                    </select>
+                                        </select>
+                                    </div>
+                                    <div class="input-group pull-right">
+                                        <small class="label pull-right bg-red">@ViewBag.Month &nbsp; @ViewBag.Data</small>
+                                    </div>
                                 </div>
-                               
-                            </div>
-                            <div class="form-group" @(ViewBag.Data == "" ? "hidden" : "") id="subFilter">
-
-                                <div class="input-group">
-                                    <select id="subFilterBody" class="dropdown form-control select2" name="Month" style="width: 100%;"></select>
+                                <div class="form-group" id="MonthDropdown" hidden>
+                                    <div class="input-group">
+                                        <select id="Month" class="dropdown form-control select2" name="Month" style="width: 100%;">
+                                            <option value="X">Select Month</option>
+                                            @{
+                                                String[] months = System.Globalization.DateTimeFormatInfo.CurrentInfo.MonthNames;
+                                                for (var iMonth = 0; iMonth <= 12;)
+                                                {
+                                                    var val = months.GetValue(iMonth);
+                                                    <option value="@val">@months.GetValue(iMonth)</option>
+                                                    iMonth++;
+                                                }
+                                            }
+                                        </select>
+                                    </div>
 
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="col-md-3" @*@(ViewBag.Data == "" ? "hidden" : "")*@ hidden id="subFilterff">
-        <div class="box box-solid">
-            <div class="box-header with-border">
-                <h4 class="box-title"><strong>Choose</strong></h4>
-                <div class="box-tools">
-                    <small class="label pull-right bg-red">@ViewBag.Data</small>
-                </div>
+                                <div class="form-group" @(ViewBag.Data == "" ? "hidden" : "") id="subFilter">
+
+                                    <div class="input-group">
+                                        <select id="subFilterBody" class="dropdown form-control select2" name="Month" style="width: 100%;"></select>
+
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
             </div>
-            <form action="#">
-                <div class="box-body text-center">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="active">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <select id="subFilterBody1" class="dropdown form-control select2" name="Month" style="width: 100%;"></select>
-                                    @*<span class="input-group-btn text-black">
+        @*</div>*@
+       
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h4 class="box-title"><strong>Choose</strong></h4>
+                    <div class="box-tools">
+                        <small class="label pull-right bg-red">@ViewBag.Data</small>
+                    </div>
+                </div>
+                <form action="#">
+                    <div class="box-body text-center">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <select id="subFilterBody1" class="dropdown form-control select2" name="Month" style="width: 100%;"></select>
+                                        @*<span class="input-group-btn text-black">
                                               <button type="submit" class="btn btn-github btn-flat form-control" style="height:28px;background-color:firebrick"><font color="black">Go!</font></button>
                                         </span>*@
 
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="col-md-2" @(ViewBag.Data == "" ? "hidden" : "") id="Go">
-        <div class="box-solid" style="background-color:transparent">
-            @*<div class="box-header with-border">
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        @*</div>*@
+       
+            <div class="box-solid" style="background-color:transparent">
+                @*<div class="box-header with-border">
                     <h3 class="box-title">Click Here To Continue</h3>
                 </div>
                 <div class="box-body text-center">
                     <a onclick="filterFunc()" class="btn btn-social-icon btn-bitbucket" style="background-color:#A71717"><i class="fa fa-play"></i></a>
                 </div>*@
-            <a onclick="filterFunc()" class="btn btn-app" style="background-color:#ffffff">
-                <i class="fa fa-play text-green"></i> Continue
-            </a>
-        </div>
+                <a onclick="filterFunc()" class="btn btn-app" style="background-color:#ffffff">
+                    <i class="fa fa-play text-green"></i> Continue
+                </a>
+            </div>
+        @*</div>*@
     </div>
 </div>
 <div class="row">
@@ -220,9 +222,7 @@
     <input value="@ViewBag.Data" id="DATA" hidden />
 </div>
 <script type="text/javascript">
-    $('.select2').select2({
-        placeholder: "Select Here"
-    });
+    $('.select2').select2();
      $('#Filters').change(function () {
          var keyName = $(this).val();
          //alert(keyName);
@@ -246,7 +246,7 @@
 
     function filterFunc() {
         var MonthForByMonthAndYear = $('#Month').val();
-       
+
         var arr = $('#subFilterBody').val().split('-');
         if (arr[2] === undefined || arr[2] === null) {
             var url = '@Url.Action("Filter", "Search")';
@@ -256,7 +256,7 @@
             } else {
                 url += '?Type=' + arr[1] + '&Data=' + arr[0];
             }
-            
+
             // $('#tableBody').load(url);
             var formData = new FormData();
             window.location.href = url;

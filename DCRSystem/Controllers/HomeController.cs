@@ -84,6 +84,25 @@ namespace DCRSystem.Controllers
             ViewBag.MonthChartPoints = JsonConvert.SerializeObject(monthChartPoints);
             // - End of MonthsChart - //
 
+            // Start of barcharts //
+            List<BarCharts> barCharts = new List<BarCharts>();
+
+            barCharts.Add(new BarCharts("JANUARY", getCertifiedEmployeeByMonthThisYear("JANUARY")));
+            barCharts.Add(new BarCharts("FEBUARY", getCertifiedEmployeeByMonthThisYear("FEBUARY")));
+            barCharts.Add(new BarCharts("MARCH", getCertifiedEmployeeByMonthThisYear("MARCH")));
+            barCharts.Add(new BarCharts("APRIL", getCertifiedEmployeeByMonthThisYear("APRIL")));
+            barCharts.Add(new BarCharts("MAY", getCertifiedEmployeeByMonthThisYear("MAY")));
+            barCharts.Add(new BarCharts("JUNE", getCertifiedEmployeeByMonthThisYear("JUNE")));
+            barCharts.Add(new BarCharts("JULY", getCertifiedEmployeeByMonthThisYear("JULY")));
+            barCharts.Add(new BarCharts("AUGUST", getCertifiedEmployeeByMonthThisYear("AUGUST")));
+            barCharts.Add(new BarCharts("SEPTEMBER", getCertifiedEmployeeByMonthThisYear("SEPTEMBER")));
+            barCharts.Add(new BarCharts("OCTOBER", getCertifiedEmployeeByMonthThisYear("OCTOBER")));
+            barCharts.Add(new BarCharts("NOVEMBER", getCertifiedEmployeeByMonthThisYear("NOVEMBER")));
+            barCharts.Add(new BarCharts("DECEMBER", getCertifiedEmployeeByMonthThisYear("DECEMBER")));
+
+            ViewBag.BarPoints = JsonConvert.SerializeObject(barCharts);
+            // - End of barcharts //
+
             return View();
         }
 

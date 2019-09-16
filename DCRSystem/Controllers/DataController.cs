@@ -18,32 +18,49 @@ namespace DCRSystem.Controllers
         lear_DailiesCertificationRequirementEntities entities = new lear_DailiesCertificationRequirementEntities();
         public FileResult ExportEmployeeDetailsToExcel( String id )
         {
+            var employeeDetails = entities.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
             var employeeProgess = GetEmployeeDetails(id);
-            if (employeeProgess.FullName != null)
+            if (employeeProgess.FullName != null && employeeDetails != null)
             {
-                DataTable dt = new DataTable("Grid");
+                DataTable dt = new DataTable("Employee Details");
 
-                dt.Columns.AddRange(new DataColumn[8] { new DataColumn("Certificate Code"),
-                                            new DataColumn("Description"),
-                                            new DataColumn("Type"),
-                                            new DataColumn("Date Certified"),
-                                            new DataColumn("Date Re-Certified"),
-                                            new DataColumn("Certification Plan"),
-                                            new DataColumn("Status"),
-                                            new DataColumn("Identifier")});
+                dt.Columns.AddRange(new DataColumn[7] { new DataColumn("Employee ID"),
+                                            new DataColumn("Employee Name"),
+                                            new DataColumn("Position"),
+                                            new DataColumn("HRC Cell"),
+                                            new DataColumn("Current Cell"),
+                                            new DataColumn("HRC Supervisor"),
+                                            new DataColumn("Current Supervisor"),
+                                           });
+
 
                 //var certificates = from Certification in entities.Certifications
                 //                   select Certification;
 
+                dt.Rows.Add(employeeDetails.Employee_ID,employeeDetails.Last_Name +", "+employeeDetails.First_Name,employeeDetails.Position,employeeDetails.HRCCell
+                            ,employeeDetails.CurrentCell,employeeDetails.HRCSupervisor,employeeDetails.CurrentSupervisor);
+
+                //DataTable progress = new DataTable("Grid1");
+                dt.Columns.AddRange(new DataColumn[8] { new DataColumn("Certificate Code"),
+                                            new DataColumn("Description"),
+                                            new DataColumn("Type"),
+                                            new DataColumn("Date Certified"),
+                                            new DataColumn("Date Recertified"),
+                                           new DataColumn("Certification Plan"),
+                                            new DataColumn("Status"),
+                                            new DataColumn("Identifier")});
+                //dt.Rows.Add("", "", "", "", "", "", "", "","","");
+                //dt.Rows.Add("", "Employee's Certificates :", "", "", "", "", "", "", "", "");
+
                 foreach (var certificate in employeeProgess.EmployeeCertificates)
                 {
-                    dt.Rows.Add(certificate.CertificateCode, certificate.Description, certificate.Type, certificate.DateCertified,certificate.DateRecertified,
+                    dt.Rows.Add("", "", "", "", "", "", "", certificate.CertificateCode, certificate.Description, certificate.Type, certificate.DateCertified,certificate.DateRecertified,
                         certificate.CertificationPlan,certificate.Status,certificate.Identifier);
                 }
 
-                for(int i = 0; i < 3; i++)
+                for (int i = 0; i < 2; i++)
                 {
-                    dt.Rows.Add("", "", "", "", "", "", "", "");
+                    dt.Rows.Add("", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
 
                 }
                 dt.Rows.Add("", "Skills Certified :", employeeProgess.SkillsCertified, "", "", "", "", "");
@@ -56,11 +73,12 @@ namespace DCRSystem.Controllers
                 dt.Rows.Add("", "Points :", employeeProgess.SkillsReCertifiedPoints, "", "", "", "", "");
                 dt.Rows.Add("", "", "", "", "", "", "", "");
                 dt.Rows.Add("", "", "", "", "", "", "", "");
-                dt.Rows.Add("Details Of :",employeeProgess.EmpBadgeNo+" - "+ employeeProgess.FullName, "", "", "", "", "Date Exported :",DateTime.Now.ToString());
+                dt.Rows.Add("Details Of :", employeeProgess.EmpBadgeNo + " - " + employeeProgess.FullName, "", "", "", "", "Date Exported :", DateTime.Now.ToString());
 
                 using (XLWorkbook wb = new XLWorkbook())
                 {
                     wb.Worksheets.Add(dt);
+                    //wb.Worksheets.Add(progress);
                     using (MemoryStream stream = new MemoryStream())
                     {
                         wb.SaveAs(stream);
@@ -174,6 +192,17 @@ namespace DCRSystem.Controllers
                 return "In due time";
             }
                
+        }
+
+        public ActionResult ModalDetailsPrintable(String id ,String urlBack, String redirectUrl)
+        {
+            ViewBag.id = id;
+            if (id != null) { ViewBag.id = id; }
+            UrlModel mode = new UrlModel();
+            if (id != null) { mode.EmpId = id; }
+            mode.URLBack = urlBack;
+            mode.RedirectUrl = redirectUrl;
+            return View(mode);
         }
 
     }

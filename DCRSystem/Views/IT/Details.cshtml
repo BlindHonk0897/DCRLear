@@ -162,7 +162,7 @@
 
                 <li class="pull-left header"><i class="fa fa-inbox"></i><strong>Employee Progress</strong></li>
                 <li class="pull-left"><a href="@Url.Action("ExportEmployeeDetailsToExcel","Data",new { id =Model.Employee.Employee_ID })"><img src="~/Content/img/excel.png" width="25" height="25" />&nbsp;Export to Excel Employee Details</a></li>
-                <li class="pull-left"><a @*href="#"*@ onclick="alert('Add Code Here!')"><img src="~/Content/img/printer.png" width="25" height="25" />&nbsp;Show Printable Employee Details</a></li>
+                <li class="pull-left"><a href="@Url.Action("ModalDetailsPrintable","Data",new { id =Model.Employee.Employee_ID ,urlBack = "Details",redirectUrl =ViewBag.UrlBack})"><img src="~/Content/img/printer.png" width="25" height="25" />&nbsp;Show Printable Employee Details</a></li>
             </ul>
             <div class="tab-content ">
                 <div class="chart tab-pane active" id="first-tab" style="position: relative; height: auto;">
@@ -306,6 +306,7 @@
         </div>
     </div>
 </div>
+
 @section ViewSpecificJavascript{
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
@@ -329,6 +330,7 @@
         function ShowProfile() {
             $('#myModal').modal('show');
         }
+        
     </script>
 }
 

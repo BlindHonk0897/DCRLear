@@ -116,7 +116,7 @@ namespace DCRSystem.Controllers
             {
                 if (Convert.ToDateTime(cert.DateCertified).ToString("MMMM").ToUpper().Equals(month.ToUpper()))
                 {
-                    var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo).FirstOrDefault();
+                    var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo && emp.Job_Status.ToUpper().Contains("CURRENT")).FirstOrDefault();
                     if (employee != null)
                     {
                         if (!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
@@ -138,7 +138,7 @@ namespace DCRSystem.Controllers
             {
                 if (Convert.ToDateTime(cert.DateCertified).Year.ToString().ToUpper().Equals(Year.ToUpper()))
                 {
-                    var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo).FirstOrDefault();
+                    var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo && emp.Job_Status.ToUpper().Contains("CURRENT")).FirstOrDefault();
                     if (employee != null)
                     {
                         if (!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
@@ -155,7 +155,7 @@ namespace DCRSystem.Controllers
         public List<EmployeeDCR_Vw> getEmployeeByCell(String Cell)
         {
             PartialViewModel model = new PartialViewModel();
-            model.EmployeeDCR_Vws = ldcr.EmployeeDCR_Vw.Where(emp => emp.HRCCell.Equals(Cell)).ToList(); 
+            model.EmployeeDCR_Vws = ldcr.EmployeeDCR_Vw.Where(emp => emp.HRCCell.Equals(Cell) && emp.Job_Status.ToUpper().Contains("CURRENT")).ToList(); 
             return model.EmployeeDCR_Vws;
         }
 
@@ -166,7 +166,7 @@ namespace DCRSystem.Controllers
             var Certificates = ldcr.CertificationTrackers.Where(cert => cert.CertificationCode.Contains(Certificate) && cert.DateRecertified != null).ToList();
             foreach(var certific in Certificates)
             {
-                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID.Equals(certific.EmpBadgeNo)).FirstOrDefault();
+                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID.Equals(certific.EmpBadgeNo) && emp.Job_Status.ToUpper().Contains("CURRENT")).FirstOrDefault();
                 if (employee != null)
                 {
                     model.EmployeeDCR_Vws.Add(employee);
@@ -182,7 +182,7 @@ namespace DCRSystem.Controllers
             var Certificates = ldcr.CertificationTrackers.Where(cert => cert.CertificationCode.Contains(Certificate)).ToList();
             foreach (var certific in Certificates)
             {
-                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID.Equals(certific.EmpBadgeNo)).FirstOrDefault();
+                var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID.Equals(certific.EmpBadgeNo) && emp.Job_Status.ToUpper().Contains("CURRENT")).FirstOrDefault();
                 if (employee != null)
                 {
                     model.EmployeeDCR_Vws.Add(employee);
@@ -199,7 +199,7 @@ namespace DCRSystem.Controllers
             {
                 if (Convert.ToDateTime(cert.DateCertified).Year.ToString().ToUpper().Equals(Year.ToUpper()) && Convert.ToDateTime(cert.DateCertified).ToString("MMMM").ToUpper().Equals(Month.ToUpper()))
                 {
-                    var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo).FirstOrDefault();
+                    var employee = ldcr.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == cert.EmpBadgeNo && emp.Job_Status.ToUpper().Contains("CURRENT")).FirstOrDefault();
                     if (employee != null)
                     {
                         if (!model.EmployeeDCR_Vws.Any(x => x.Employee_ID == employee.Employee_ID))
@@ -334,7 +334,7 @@ namespace DCRSystem.Controllers
             }
             else
             {
-                List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.OrderBy(a => a.Last_Name).ToList();
+                List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).OrderBy(a => a.Last_Name).ToList();
                 ViewBag.EmpCount = employees.Count();
                 int pageSize = 10; // pagelist number of page
                 int pageNumber = (page ?? 1);
@@ -449,6 +449,91 @@ namespace DCRSystem.Controllers
             }
 
             return RedirectToAction(Urlback, "Search", new { page = PageNum });
+        }
+
+        public ActionResult Testing(int? page, String Type = "", String data = "")
+        {
+
+            SearchOptionsViewModel model = new SearchOptionsViewModel();
+            model.filters = ldcr.Filters.ToList();
+            var type = Type.Split('-');
+            var Month = "";
+            if (type.Count() > 1)
+            {
+                ViewBag.Type = type[0];
+                Month = type[1];
+            }
+            else
+            {
+                ViewBag.Type = Type;
+            }
+
+            ViewBag.Data = data;
+            ViewBag.Month = Month;
+            // Get all Employees from Database
+            //System.Diagnostics.Debug.WriteLine( (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(data))+ "sahdfjsfsdfhjd" );
+
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(data))
+            {
+
+                List<EmployeeDCR_Vw> employees = new List<EmployeeDCR_Vw>();
+
+                if (Type.ToString().ToUpper().Equals("BYMONTH"))
+                {
+                    employees = getEmployeeByMonth(data);
+                }
+
+                if (Type.ToString().ToUpper().Equals("BYYEAR"))
+                {
+                    employees = getEmployeeByYear(data);
+                }
+
+                if (Type.ToString().ToUpper().Equals("BYCERTIFICATES"))
+                {
+                    employees = getEmployeeByCertificates(data);
+                }
+
+                if (Type.ToString().ToUpper().Equals("BYRCERTIFICATES"))
+                {
+                    employees = getEmployeeByRCertificates(data);
+                }
+
+                if (Type.ToString().ToUpper().Equals("BYCELL"))
+                {
+                    employees = getEmployeeByCell(data);
+                }
+
+                // wala pa neh
+
+                //if (Type.ToString().ToUpper().Equals("BYMEDAL"))
+                //{
+                //    employees = getEmployeeByMedal(data);
+                //}
+
+                //if (Type.ToString().ToUpper().Equals("BYLASTNAME"))
+                //{
+                //    employees = getEmployeeByLastName(data);
+                //}
+
+                if (Type.ToString().ToUpper().Equals("BYMONTHANDYEAR") || type[0].ToString().ToUpper().Equals("BYMONTHANDYEAR"))
+                {
+                    employees = getEmployeeByMonthAndYear(data, Month);
+                }
+
+                // kutob dire
+                ViewBag.EmpCount = employees.Count();
+                int pageSize = 10; // pagelist number of page
+                int pageNumber = (page ?? 1);
+                return View(employees.ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.OrderBy(a => a.Last_Name).ToList();
+                ViewBag.EmpCount = employees.Count();
+                int pageSize = 10; // pagelist number of page
+                int pageNumber = (page ?? 1);
+                return View(employees.ToPagedList(pageNumber, pageSize));
+            }
         }
     }
 }
