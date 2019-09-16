@@ -15,17 +15,16 @@
     .shadow-none {
         box-shadow: none !important
     }
-
 </style>
 @if (Session["RoleUser"] != null)
 {
     if (Session["RoleUser"].ToString() == "IT")
     {
-       
+
         <aside class="main-sidebar shadow-lg p-3 mb-5 bg-white rounded">
-            <section class="sidebar" >
+            <section class="sidebar">
                 @* BEGIN Menu *@
-                
+
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header"></li>
                     <li class="@Url.IsLinkActive("Home", "Home")">
@@ -67,6 +66,7 @@
                             <li><a href="#" class="sidebar-link"><font color="black">Contact</font></a></li>
                         </ul>
                     </li>
+                   
                 </ul>
                 @* END Menu *@
             </section>
@@ -88,7 +88,7 @@
                     <li class="@Url.IsLinkActive("Employees", "Approver")">
                         <a href="@Url.Action("Employees", "Approver",new { id = Session["UserId"] })" class="sidebar-link"><i class="fa fa-users"></i> <span><font color="black">Employees</font></span><small class="label pull-right bg-green-active">@Session["NumberOfUnderEmployees"]</small></a>
                     </li>
-                    <li class="header"><b><font color="#a64038" >Active/Inactive Employees</font></b></li>
+                    <li class="header"><b><font color="#a64038">Active/Inactive Employees</font></b></li>
                     <li><a href="#" class="sidebar-link"><i class="fa fa-circle text-green"></i> <span><font color="black">Active</font></span></a></li>
                     <li><a href="#" class="sidebar-link"><i class="fa fa-circle text-bold"></i> <span><font color="black">Inactive</font></span></a></li>
                     @*<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>*@
@@ -128,7 +128,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a @*href="@Url.Action("About", "Home")"*@ class="sidebar-link"><font color="black">About</font></a></li>   
+                            <li><a @*href="@Url.Action("About", "Home")"*@ class="sidebar-link"><font color="black">About</font></a></li>
                             <li><a href="#" class="sidebar-link"><font color="black">Contact</font></a></li>
                         </ul>
                     </li>

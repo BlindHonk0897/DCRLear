@@ -203,7 +203,12 @@ namespace DCRSystem.Controllers
             mode.URLBack = urlBack;
             mode.RedirectUrl = redirectUrl;
             return View(mode);
+
         }
 
+        public ActionResult Calendar()
+        {
+            return View();
+        }
     }
 }

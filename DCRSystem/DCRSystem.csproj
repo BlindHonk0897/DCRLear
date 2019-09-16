@@ -1020,6 +1020,7 @@
     <Content Include="Views\IT\Testing3.cshtml" />
     <Content Include="Views\Search\Testing.cshtml" />
     <Content Include="Views\Data\ModalDetailsPrintable.cshtml" />
+    <Content Include="Views\Data\Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
