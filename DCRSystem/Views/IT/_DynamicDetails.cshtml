@@ -1,0 +1,43 @@
+﻿@model DCRSystem.DataModel.EmployeeProgressDetails
+@foreach (var cert in Model.EmployeeCertificates)
+{
+<tr>
+    <td class="mailbox-subject"><b>@cert.CertificateCode</b></td>
+    <td>@cert.Description</td>
+    <td class="mailbox-star">@cert.Type</td>
+    <td class="mailbox-star"><img src="~/Content/img/Ribbons/CertifiedRibbon (2).png" width="25" height="25" />&nbsp; @Convert.ToDateTime(cert.DateCertified).ToShortDateString()</td>
+    @if (!cert.DateRecertified.ToString().Contains("Not yet Recertified"))
+    {
+        <td class="mailbox-star"><img src="~/Content/img/Ribbons/ReCertifiedRibbon.png" width="25" height="25" />&nbsp; @cert.DateRecertified</td>
+    }
+    else
+    {
+        <td class="mailbox-star"><img src="~/Content/img/Ribbons/ribbon.svg" width="25" height="25" /></td>
+    }
+    <td>@cert.CertificationPlan</td>
+    @if (cert.Status.ToString().Equals("Active"))
+    {
+        <td><small class="label  bg-green-active">Active  &nbsp; &nbsp; &nbsp;</small></td>
+    }
+    else
+    {
+        <td><small class="label bg-gray-active">In-Active</small></td>
+    }
+    @if (cert.Identifier.ToString().Equals("One Month Overdue"))
+    {
+        <td><small class="label bg-yellow-active"> &nbsp;1 Month Overdue </small></td>
+    }
+    else if (cert.Identifier.ToString().Equals("Almost Two Months Overdue"))
+    {
+        <td><small class="label bg-red-active"> &nbsp;Almost 2 Months Overdue </small></td>
+    }
+    else if (cert.Identifier.ToString().Equals("Two Months Overdue"))
+    {
+        <td><small class="label bg-gray-active"> &nbsp;2 Months Overdue </small></td>
+    }
+    else if (cert.Identifier.ToString().Equals("In due time"))
+    {
+        <td><small class="label " style="background-color:#5B9709"> &nbsp;In due time </small></td>
+    }
+</tr>
+}

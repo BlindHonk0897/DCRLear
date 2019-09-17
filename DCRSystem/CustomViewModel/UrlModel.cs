@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DCRSystem.DataModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,5 +12,6 @@ namespace DCRSystem.CustomViewModel
         public String EmpId { get; set; }
         public String URLBack { get; set; }
         public String RedirectUrl { get; set; }
+        public EmployeeProgressDetails employeeProgress = new EmployeeProgressDetails();
     }
 }

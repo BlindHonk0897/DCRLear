@@ -1,4 +1,5 @@
 ﻿using DCRSystem.CustomViewModel;
+using DCRSystem.DataModel;
 using DCRSystem.Models;
 using PagedList;
 using System;
@@ -832,9 +833,10 @@ namespace DCRSystem.Controllers
             return View(employees.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult Testing3(String id, String urlBack)
+        public ActionResult Testing3(String id, String urlBack, String type = "")
         {
             ViewBag.URLBack = urlBack;
+            ViewBag.Type = type;
             EmployeeModel empModel = new EmployeeModel();
             if (id != null)
             {
@@ -911,6 +913,32 @@ namespace DCRSystem.Controllers
                 }
             }
             return View(empModel);
+        }
+        public JsonResult JsonDetailsResult(String id)
+        {
+            DataController controllerData = new DataController();
+            var empP = controllerData.GetEmployeeDetails(id);           
+            var response = new { data = empP.EmployeeCertificates, recordsFiltered = empP.EmployeeCertificates.Count(), recordsTotal = empP.EmployeeCertificates.Count() };
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult _DynamicDetails(String id ,String Type="")
+        {
+            DataController controllerData = new DataController();
+            EmployeeProgressDetails model = new EmployeeProgressDetails();
+            if (Request.IsAjaxRequest())
+            {
+                if (Type.ToString().ToUpper().Equals("Default"))
+                {
+                    controllerData.GetEmployeeDetails(id);
+                }
+                return PartialView(model); // Here must be return PartialView, not View.
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

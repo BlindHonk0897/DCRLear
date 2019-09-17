@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     DCRSystem.Models.CertificationPlanGenerator CGenerator = new DCRSystem.Models.CertificationPlanGenerator();
 }
+<style type="text/css">
+    .add {
+        color: #fff;
+        background-color: #cb2027;
+        border-color: rgba(0,0,0,.2);
+    }
+</style>
 <a href="@Url.Action(ViewBag.URLBack, "IT")" class="">&nbsp;<span><img src="~/Content/img/Button-Back-1-512.png" class="img-circle" height="34" width="34" title="BACK" /> </span></a>
 <div class="row">
     <div class="col-md-3">
@@ -158,11 +165,12 @@
             <ul class="nav nav-tabs pull-left"></ul>
             <ul class="nav nav-tabs pull-right">
                 @*<li><a href="#second-tab" data-toggle="tab" id="Page2">Page 2</a></li>
-                <li class="active"><a href="#first-tab" data-toggle="tab" id="Page1">Page 1</a></li>*@
+        <li class="active"><a href="#first-tab" data-toggle="tab" id="Page1">Page 1</a></li>*@
 
                 <li class="pull-left header"><i class="fa fa-inbox"></i><strong>Employee Progress</strong></li>
                 <li class="pull-left"><a href="@Url.Action("ExportEmployeeDetailsToExcel","Data",new { id =Model.Employee.Employee_ID })"><img src="~/Content/img/excel.png" width="25" height="25" />&nbsp;Export to Excel Employee Details</a></li>
                 <li class="pull-left"><a href="@Url.Action("ModalDetailsPrintable","Data",new { id =Model.Employee.Employee_ID ,urlBack = "Details",redirectUrl =ViewBag.UrlBack})"><img src="~/Content/img/printer.png" width="25" height="25" />&nbsp;Show Printable Employee Details</a></li>
+                <li class="pull-left"> <a href="@Url.Action("Certified","IT",new { id = Model.Employee.Employee_ID,urlBack="Employee"})"><img src="~/Content/img/addButton.png" width="25" height="25" />&nbsp;New Certification</a></li>
             </ul>
             <div class="tab-content ">
                 <div class="chart tab-pane active" id="first-tab" style="position: relative; height: auto;">
@@ -305,6 +313,7 @@
             </div>
         </div>
     </div>
+    <input type="number" id="TotalPage" value="@Model.TotalCertifications.Count()" hidden/>
 </div>
 
 @section ViewSpecificJavascript{
@@ -316,13 +325,14 @@
         document.getElementById('SRC').style.width = @Model.PercentAgeReCertified + "%";
         });
         $(document).ready(function () {
-
-
             $("#DetailsTable").DataTable(
                 {
-                    "ordering": true
+                    "ordering": true,
+                    stateSave: true,
+                    pageLength:$('#TotalPage').val()
                 }
             );
+          
             $('.dataTables_filter input[type="search"]').
                 attr('placeholder', 'Type Here');
             $('.dataTables_filter input[type="search"]').css({ 'width': '100px', 'display': 'inline-block', 'color': 'gray' });

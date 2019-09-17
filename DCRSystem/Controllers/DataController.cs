@@ -196,12 +196,15 @@ namespace DCRSystem.Controllers
 
         public ActionResult ModalDetailsPrintable(String id ,String urlBack, String redirectUrl)
         {
+            DataController controllerData = new DataController();
+            
             ViewBag.id = id;
             if (id != null) { ViewBag.id = id; }
             UrlModel mode = new UrlModel();
             if (id != null) { mode.EmpId = id; }
             mode.URLBack = urlBack;
             mode.RedirectUrl = redirectUrl;
+            mode.employeeProgress = controllerData.GetEmployeeDetails(id);
             return View(mode);
 
         }
