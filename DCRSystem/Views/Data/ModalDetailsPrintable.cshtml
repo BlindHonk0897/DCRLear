@@ -202,9 +202,9 @@
                 </div>
                 <div class="modal-footer">
                     @*<button class="btn btn-success btn-block" data-dismiss="modal">OK</button>*@
-                    <a href="@Url.Action(Model.URLBack,"IT",new { id = Model.EmpId,urlBack = Model.RedirectUrl })" class="pull-left"><i class="fa fa-arrow-left text-red" style="font-size:20px">Cancel</i></a>
+                    <a href="@Url.Action(Model.URLBack,"IT",new { id = Model.EmpId,urlBack = Model.RedirectUrl })" class="pull-left"><i class="fa fa-times text-red" style="font-size:20px">Cancel</i></a>
                     <a onclick="Print('DetailsEmp')"><i class="fa fa-print text-black" style="font-size:20px">Print</i></a>
-                    <a @*onclick="Print('DetailsEmp')"*@ href="@Url.Action("PrintViewToPdf","Data" ,new { id = Model.EmpId})" class="pull-right"><i class="fa fa-file-pdf-o text-blue" style="font-size:20px">To Pdf</i></a>
+                    <a title="Recommended before Printing" @*onclick="Print('DetailsEmp')"*@ href="@Url.Action("PrintViewToPdf","Data" ,new { id = Model.EmpId})" class="pull-right"><i class="fa fa-file-pdf-o text-blue" style="font-size:20px">To Pdf</i></a>
                 </div>
             </div>
         </div>
