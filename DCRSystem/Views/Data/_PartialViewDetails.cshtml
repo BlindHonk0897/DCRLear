@@ -1,7 +1,8 @@
 ﻿@model DCRSystem.DataModel.EmployeeProgressDetails
 <div class="" id="DetailsEmp">
     @*<div class="table-responsive mailbox-messages">*@
-    <h3 class="text-center"><font color="#1f1818">Dailies Certification Card</font></h3>
+    <img src="~/Content/img/learlogo.jpg"  width="210" height="63"/>
+    <center><h3 class="text-center"><font color="#1f1818">Dailies Certification Card</font></h3></center>
     <p style="color:#1f1818">@Model.FullName ( @Model.EmpBadgeNo )<small style="float:right;padding-right:50px">@DateTime.Now.ToShortDateString()</small></p>
 
     <table id="DetailsTable" style="border: 1px solid #000000">

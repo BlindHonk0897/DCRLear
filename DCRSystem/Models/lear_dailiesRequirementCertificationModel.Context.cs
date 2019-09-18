@@ -86,5 +86,14 @@ namespace DCRSystem.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateLDCRTablesWhenUpdateCertification", oldCodeParameter, newCodeParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> getNumberOfCertificate(string bagdeNo)
+        {
+            var bagdeNoParameter = bagdeNo != null ?
+                new ObjectParameter("BagdeNo", bagdeNo) :
+                new ObjectParameter("BagdeNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("getNumberOfCertificate", bagdeNoParameter);
+        }
     }
 }

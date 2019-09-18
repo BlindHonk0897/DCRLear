@@ -26,5 +26,7 @@ namespace DCRSystem.Models
         public string CurrentSupervisor { get; set; }
         public string EmploymentStatus { get; set; }
         public string PayrollType { get; set; }
+        public Nullable<int> CertificateNumber { get; set; }
+        public string Medal { get; set; }
     }
 }

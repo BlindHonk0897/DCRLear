@@ -213,6 +213,30 @@ namespace DCRSystem.Controllers
             return model.EmployeeDCR_Vws;
         }
 
+        public List<EmployeeDCR_Vw> getEmployeeByMedal(String Medal)
+        {
+            PartialViewModel model = new PartialViewModel();
+            if (Medal != null)
+            {
+                if (Medal.ToString().ToUpper().Equals("BRONZE"))
+                {
+                    model.EmployeeDCR_Vws = ldcr.EmployeeDCR_Vw.Where(emp => emp.Medal.ToUpper().Equals("BRONZE") && emp.Job_Status.ToUpper().Contains("CURRENT")).ToList();
+                    return model.EmployeeDCR_Vws;
+                }
+                else if (Medal.ToString().ToUpper().Equals("SILVER"))
+                {
+                    model.EmployeeDCR_Vws = ldcr.EmployeeDCR_Vw.Where(emp => emp.Medal.ToUpper().Equals("SILVER") && emp.Job_Status.ToUpper().Contains("CURRENT")).ToList();
+                    return model.EmployeeDCR_Vws;
+                }
+                else if (Medal.ToString().ToUpper().Equals("GOLD"))
+                {
+                    model.EmployeeDCR_Vws = ldcr.EmployeeDCR_Vw.Where(emp => emp.Medal.ToUpper().Equals("GOLD") && emp.Job_Status.ToUpper().Contains("CURRENT")).ToList();
+                    return model.EmployeeDCR_Vws;
+                }
+                return model.EmployeeDCR_Vws;
+            }
+            return model.EmployeeDCR_Vws;
+        }
 
         [HttpGet]
         public ActionResult _DynamicTableBody(String Type ,String data)
@@ -311,10 +335,10 @@ namespace DCRSystem.Controllers
 
                 // wala pa neh
 
-                //if (Type.ToString().ToUpper().Equals("BYMEDAL"))
-                //{
-                //    employees = getEmployeeByMedal(data);
-                //}
+                if (Type.ToString().ToUpper().Equals("BYMEDAL"))
+                {
+                    employees = getEmployeeByMedal(data);
+                }
 
                 //if (Type.ToString().ToUpper().Equals("BYLASTNAME"))
                 //{

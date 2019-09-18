@@ -122,6 +122,8 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <Property Name="HRCSupervisor" Type="nvarchar" MaxLength="100" />
           <Property Name="CurrentSupervisor" Type="varchar" MaxLength="50" />
           <Property Name="PlanRecertificationDate" Type="datetime" />
+          <Property Name="CertificateNumber" Type="int" />
+          <Property Name="Medal" Type="varchar" MaxLength="6" />
         </EntityType>
         <Function Name="deleteLastPlan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BagdeNo" Type="varchar" Mode="In" />
@@ -172,7 +174,9 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
     [EmployeeDCR_Vw].[PayrollType] AS [PayrollType], 
     [EmployeeDCR_Vw].[HRCSupervisor] AS [HRCSupervisor], 
     [EmployeeDCR_Vw].[CurrentSupervisor] AS [CurrentSupervisor], 
-    [EmployeeDCR_Vw].[PlanRecertificationDate] AS [PlanRecertificationDate]
+    [EmployeeDCR_Vw].[PlanRecertificationDate] AS [PlanRecertificationDate], 
+    [EmployeeDCR_Vw].[CertificateNumber] AS [CertificateNumber], 
+    [EmployeeDCR_Vw].[Medal] AS [Medal]
     FROM [dbo].[EmployeeDCR_Vw] AS [EmployeeDCR_Vw]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -213,6 +217,9 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <EntitySet Name="Filters" EntityType="lear_DailiesCertificationRequirementModel.Filter" />
           <EntitySet Name="Medals" EntityType="lear_DailiesCertificationRequirementModel.Medal" />
           <EntitySet Name="EmployeeDCRs" EntityType="lear_DailiesCertificationRequirementModel.EmployeeDCR" />
+          <FunctionImport Name="getNumberOfCertificate" ReturnType="Collection(Int32)">
+            <Parameter Name="BagdeNo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Certification">
           <Key>
@@ -289,6 +296,8 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <Property Name="CurrentSupervisor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EmploymentStatus" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="PayrollType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CertificateNumber" Type="Int32" />
+          <Property Name="Medal" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Filter">
           <Key>
@@ -396,6 +405,8 @@ warning 6002: The table/view 'lear_DailiesCertificationRequirement.dbo.EmployeeD
           <EntitySetMapping Name="EmployeeDCR_Vw">
             <EntityTypeMapping TypeName="lear_DailiesCertificationRequirementModel.EmployeeDCR_Vw">
               <MappingFragment StoreEntitySet="EmployeeDCR_Vw">
+                <ScalarProperty Name="Medal" ColumnName="Medal" />
+                <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
                 <ScalarProperty Name="PayrollType" ColumnName="PayrollType" />
                 <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
                 <ScalarProperty Name="CurrentSupervisor" ColumnName="CurrentSupervisor" />

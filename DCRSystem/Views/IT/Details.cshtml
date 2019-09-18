@@ -16,7 +16,23 @@
     <div class="col-md-3">
         @if (Model.Employee.Job_Status.ToUpper().Contains("CURRENT"))
         {
-            <a onclick="ShowProfile()" class="btn btn-primary btn-block"><b>@Model.Employee.Last_Name , @Model.Employee.First_Name</b></a>
+            if (Model.TotalCertifications.Count() > 0 && Model.TotalCertifications.Count() <= 2)
+            {
+                <a onclick="ShowProfile()" class="btn btn-primary btn-block"><b>@Model.Employee.Last_Name , @Model.Employee.First_Name</b> <small class="label pull-right" style="background-color:#cd7f32">Bronze Medalist</small></a>
+            }
+            else if (Model.TotalCertifications.Count() > 2 && Model.TotalCertifications.Count() <= 5)
+            {
+                <a onclick="ShowProfile()" class="btn btn-primary btn-block"><b>@Model.Employee.Last_Name , @Model.Employee.First_Name</b> <small class="label pull-right" style="background-color:silver">Silver Medalist</small></a>
+            }
+            else if (Model.TotalCertifications.Count() > 5)
+            {
+                <a onclick="ShowProfile()" class="btn btn-primary btn-block"><b>@Model.Employee.Last_Name , @Model.Employee.First_Name</b> <small class="label pull-right" style="background-color:goldenrod">Gold Medalist</small></a>
+            }
+            else
+            {
+                <a onclick="ShowProfile()" class="btn btn-primary btn-block"><b>@Model.Employee.Last_Name , @Model.Employee.First_Name</b> </a>
+            }
+
         }
         else
         {
@@ -127,7 +143,7 @@
         </div>
         <div class="box box-solid">
             @*<div class="box-header with-border">*@
-                <h4 class="box-title"><marquee direction="right"><strong>Progress:</strong></marquee></h4>
+            <h4 class="box-title"><marquee direction="right"><strong>Progress:</strong></marquee></h4>
             @*</div>*@
             <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
