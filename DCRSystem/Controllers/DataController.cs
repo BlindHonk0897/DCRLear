@@ -9,6 +9,7 @@ using ClosedXML.Excel;
 using DCRSystem.Models;
 using DCRSystem.DataModel;
 using DCRSystem.CustomViewModel;
+using Rotativa;
 
 namespace DCRSystem.Controllers
 {
@@ -210,6 +211,27 @@ namespace DCRSystem.Controllers
         }
 
         public ActionResult Calendar()
+        {
+            return View();
+        }
+
+        public ActionResult PrintViewToPdf(String id)
+        {
+            DataController controllerData = new DataController();
+            EmployeeProgressDetails model = new EmployeeProgressDetails();
+            if(id != null)
+            {
+                model = controllerData.GetEmployeeDetails(id);
+                return new Rotativa.PartialViewAsPdf("_PartialViewDetails", model) { FileName = model.FullName +"'s Details.pdf" };
+            }
+            else
+            {
+                return new HttpNotFoundResult();
+            }
+            //Code to get content
+            
+        }
+        public ActionResult _PartialViewDetails()
         {
             return View();
         }

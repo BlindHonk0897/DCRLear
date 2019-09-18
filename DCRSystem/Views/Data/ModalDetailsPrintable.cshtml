@@ -25,7 +25,7 @@
             padding: 20px;
             border-radius: 5px;
             border: none;
-            width: 900px;
+            width: 925px;
             height: auto;
         }
 
@@ -142,49 +142,61 @@
                    
                 </div>
                 <div class="modal-body">
-                    <div class="box box-solid">
-                        <div class="table-responsive mailbox-messages">
-                            <table class=" table-bordered" id="DetailsTable">
+                    <div class="" id="DetailsEmp">
+                        @*<div class="table-responsive mailbox-messages">*@
+                            <h3 class="text-center"><font color="#1f1818">Dailies Certification Card</font></h3>
+                            <p style="color:#1f1818">@Model.employeeProgress.FullName ( @Model.EmpId )<small style="float:right;padding-right:50px">@DateTime.Now.ToShortDateString()</small></p>
+                            
+                            <table class="table-bordered" id="DetailsTable" style="border: 1px solid #000000">
                                 <thead>
                                     <tr>
-                                        <th>Certification Code</th>
-                                        <th>Description</th>
-                                        <th>Type</th>
-                                        <th>Date Certified</th>
-                                        <th>Date Re-Certified</th>
+                                        <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Certification Code</th>
+                                        <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Description</th>
+                                        <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:50px">Type</th>
+                                        <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Date Certified</th>
+                                        <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Date Re-Certified</th>
                                         @*<th>Current Certification</th>*@
                                         @*<th>Certification Plan</th>*@
-                                        <th>Status</th>
+                                        <th style="border: 1px solid #000000 ;color:#000000">Status</th>
                                         @*<th>Identifier</th>*@
                                     </tr>
                                 </thead>
                                 <tbody id="TableDetails">
                                     @foreach(var cert in Model.employeeProgress.EmployeeCertificates)
                                     {
-                                    <tr style="padding-left:2px">
-                                        <td>@cert.CertificateCode</td>
-                                        <td>@cert.Description</td>
-                                        <td>@cert.Type</td>
-                                        <td>@cert.DateCertified</td>
-                                        <td>@cert.DateRecertified</td>
-                                        <td>@cert.Status</td>
-                                    </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.CertificateCode</font></td>
+                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.Description</font></td>
+                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.Type</font></td>
+                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.DateCertified</font></td>
+                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.DateRecertified</font></td>
+                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.Status</font></td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
-
-                        </div>
+                        @*</div>*@
                     </div>
                 </div>
                 <div class="modal-footer">
                     @*<button class="btn btn-success btn-block" data-dismiss="modal">OK</button>*@
-                    <a href="@Url.Action(Model.URLBack,"IT",new { id = Model.EmpId,urlBack = Model.RedirectUrl })" class="btn btn-danger pull-left cancel">Cancel</a>
-                    <a href="@Url.Action(Model.URLBack,"IT",new { id = Model.EmpId,urlBack = Model.RedirectUrl })" class="btn btn-danger pull-right print">Print</a>
+                    <a href="@Url.Action(Model.URLBack,"IT",new { id = Model.EmpId,urlBack = Model.RedirectUrl })" class="pull-left"><i class="fa fa-arrow-left text-red" style="font-size:20px">Cancel</i></a>
+                    <a onclick="Print('DetailsEmp')"><i class="fa fa-print text-black" style="font-size:20px">Print</i></a>
+                    <a @*onclick="Print('DetailsEmp')"*@ href="@Url.Action("PrintViewToPdf","Data" ,new { id = Model.EmpId})" class="pull-right"><i class="fa fa-file-pdf-o text-blue" style="font-size:20px">To Pdf</i></a>
                 </div>
             </div>
         </div>
     </div>
-    <input type="text" id="EmployeeID" value="@Model.EmpId"/>
+    <input type="text" id="EmployeeID" value="@Model.EmpId" hidden/>
 </div>
+<script type="text/javascript">
+    function Print(el) {
+        var restorepage = document.body.innerHTML;
+        var printcontent = document.getElementById(el).innerHTML;
+        document.body.innerHTML = printcontent;
+        window.print();
+        document.body.innerHTML = restorepage;
+    }
+</script>
 
 
