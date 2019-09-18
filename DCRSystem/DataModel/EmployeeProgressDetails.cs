@@ -18,5 +18,9 @@ namespace DCRSystem.DataModel
         public String SkillsReCertifiedPercentage { get; set; }
         public String SkillsReCertifiedPoints { get; set; }
         public List<EmployeeCertificates> EmployeeCertificates = new List<EmployeeCertificates>();
+        // --for print purposes only --//
+        public String LogoImagePath { get; set; }
+        public String Medal { get; set; }
+
     }
 }

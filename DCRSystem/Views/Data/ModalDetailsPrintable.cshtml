@@ -118,7 +118,6 @@
     img {
         margin-bottom: 32px;
     }
-    
 </style>
 <script type="text/javascript">
     $(window).on('load', function () {
@@ -144,38 +143,61 @@
                 <div class="modal-body">
                     <div class="" id="DetailsEmp">
                         @*<div class="table-responsive mailbox-messages">*@
-                            <h3 class="text-center"><font color="#1f1818">Dailies Certification Card</font></h3>
-                            <p style="color:#1f1818">@Model.employeeProgress.FullName ( @Model.EmpId )<small style="float:right;padding-right:50px">@DateTime.Now.ToShortDateString()</small></p>
-                            
-                            <table class="table-bordered" id="DetailsTable" style="border: 1px solid #000000">
-                                <thead>
+                        <img src="~/Content/img/learlogo.jpg" width="210" height="63" />
+                        <div class="pull-right">
+                            @if (Model.employeeProgress.Medal != null)
+                            {
+                                if (Model.employeeProgress.Medal.ToString().ToUpper().Equals("BRONZE"))
+                                {
+                                    <img src="~/Content/img/Bronze.png" width="70" height="70" />
+                                }
+                                else if (Model.employeeProgress.Medal.ToString().ToUpper().Equals("SILVER"))
+                                {
+                                    <img src="~/Content/img/Silver.png" width="70" height="70" />
+                                }
+                                else if (Model.employeeProgress.Medal.ToString().ToUpper().Equals("GOLD"))
+                                {
+                                    <img src="~/Content/img/Gold.png" width="70" height="70" />
+                                }
+                            }
+                        </div>
+                        <h3 class="text-center"><font color="#1f1818">Dailies Certification Card</font></h3>
+                        <p style="color:#1f1818">@Model.employeeProgress.FullName ( @Model.EmpId )<small style="float:right;padding-right:50px">@DateTime.Now.ToShortDateString()</small></p>
+
+                        <table class="table-bordered" id="DetailsTable" style="border: 1px solid #000000">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Certification Code</th>
+                                    <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Description</th>
+                                    <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:50px">Type</th>
+                                    <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Date Certified</th>
+                                    <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Date Re-Certified</th>
+                                    @*<th>Current Certification</th>*@
+                                    @*<th>Certification Plan</th>*@
+                                    <th style="border: 1px solid #000000 ;color:#000000">Status</th>
+                                    @*<th>Identifier</th>*@
+                                </tr>
+                            </thead>
+                            <tbody id="TableDetails">
+                                @foreach (var cert in Model.employeeProgress.EmployeeCertificates)
+                                {
                                     <tr>
-                                        <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Certification Code</th>
-                                        <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Description</th>
-                                        <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:50px">Type</th>
-                                        <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Date Certified</th>
-                                        <th style="border: 1px solid #000000 ;color:#1f1818 ;padding-right:20px">Date Re-Certified</th>
-                                        @*<th>Current Certification</th>*@
-                                        @*<th>Certification Plan</th>*@
-                                        <th style="border: 1px solid #000000 ;color:#000000">Status</th>
-                                        @*<th>Identifier</th>*@
+                                        <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.CertificateCode</font></td>
+                                        <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.Description</font></td>
+                                        <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.Type</font></td>
+                                        <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.DateCertified</font></td>
+                                        <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.DateRecertified</font></td>
+                                        <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.Status</font></td>
                                     </tr>
-                                </thead>
-                                <tbody id="TableDetails">
-                                    @foreach(var cert in Model.employeeProgress.EmployeeCertificates)
-                                    {
-                                        <tr>
-                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.CertificateCode</font></td>
-                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.Description</font></td>
-                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.Type</font></td>
-                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.DateCertified</font></td>
-                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.DateRecertified</font></td>
-                                            <td style="border: 1px solid #000000"><font color="#1f1a1a">@cert.Status</font></td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                }
+                            </tbody>
+                        </table>
                         @*</div>*@
+                        <br />
+                    </div>
+                    <div class="inline">
+                        <small><b>Prepared by:____________________</b></small>
+                        <small class="pull-right" style="padding-right:20px"><b>Approved by:__________________</b></small>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -206,6 +206,11 @@ namespace DCRSystem.Controllers
             mode.URLBack = urlBack;
             mode.RedirectUrl = redirectUrl;
             mode.employeeProgress = controllerData.GetEmployeeDetails(id);
+            var emplo = entities.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+            if (emplo != null)
+            {
+                mode.employeeProgress.Medal = emplo.Medal;
+            }
             return View(mode);
 
         }
@@ -222,6 +227,12 @@ namespace DCRSystem.Controllers
             if(id != null)
             {
                 model = controllerData.GetEmployeeDetails(id);
+                model.LogoImagePath = "learlogo.jpg";
+                var emplo = entities.EmployeeDCR_Vw.Where(emp => emp.Employee_ID == id).FirstOrDefault();
+                if(emplo != null)
+                {
+                    model.Medal = emplo.Medal;
+                }
                 return new Rotativa.PartialViewAsPdf("_PartialViewDetails", model) { FileName = model.FullName +"'s Details.pdf" };
             }
             else

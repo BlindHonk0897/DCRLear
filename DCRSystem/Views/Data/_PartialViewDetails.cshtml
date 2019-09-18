@@ -1,7 +1,25 @@
 ﻿@model DCRSystem.DataModel.EmployeeProgressDetails
 <div class="" id="DetailsEmp">
     @*<div class="table-responsive mailbox-messages">*@
-    <img src="~/Content/img/learlogo.jpg"  width="210" height="63"/>
+    <img src="@Server.MapPath("~/Content/img/learlogo.jpg")" alt="IMG" width="210" height="63" />
+    <div class="pull-right" style="float:right">
+        @if (Model.Medal != null)
+        {
+            if (Model.Medal.ToString().ToUpper().Equals("BRONZE"))
+            {
+                <img src="@Server.MapPath("~/Content/img/Bronze.png")" width="70" height="70" />
+            }
+            else if (Model.Medal.ToString().ToUpper().Equals("SILVER"))
+            {
+                <img src="@Server.MapPath("~/Content/img/Silver.png")" width="70" height="70" />
+            }
+            else if (Model.Medal.ToString().ToUpper().Equals("GOLD"))
+            {
+                <img src="@Server.MapPath("~/Content/img/Gold.png")" width="70" height="70" />
+            }
+        }
+    </div>
+
     <center><h3 class="text-center"><font color="#1f1818">Dailies Certification Card</font></h3></center>
     <p style="color:#1f1818">@Model.FullName ( @Model.EmpBadgeNo )<small style="float:right;padding-right:50px">@DateTime.Now.ToShortDateString()</small></p>
 
@@ -33,5 +51,10 @@
             }
         </tbody>
     </table>
+    <br />
+    <div class="inline">
+        <small><b>Prepared by:____________________</b></small>
+        <small class="pull-right" style="float:right;padding-right:20px"><b>Approved by:__________________</b></small>
+    </div>
     @*</div>*@
 </div>

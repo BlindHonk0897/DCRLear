@@ -560,12 +560,15 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\1 %281%29 %281%29.jpg" />
     <Content Include="Content\img\addButton.png" />
+    <Content Include="Content\img\Bronze.png" />
     <Content Include="Content\img\Button-Back-1-512.png" />
     <Content Include="Content\img\Certified.png" />
     <Content Include="Content\img\CoreValuesRed.png" />
     <Content Include="Content\img\Emp_Prog.png" />
     <Content Include="Content\img\excel.png" />
     <Content Include="Content\img\FotoJet.jpg" />
+    <Content Include="Content\img\FotoJet.png" />
+    <Content Include="Content\img\Gold.png" />
     <Content Include="Content\img\icheck\aero%402x.png" />
     <Content Include="Content\img\icheck\aero.png" />
     <Content Include="Content\img\icheck\blue%402x.png" />
@@ -616,6 +619,7 @@
     <Content Include="Content\img\Ribbons\CurrentRibbon.png" />
     <Content Include="Content\img\Ribbons\MostRibbon.png" />
     <Content Include="Content\img\Ribbons\ReCertifiedRibbon.png" />
+    <Content Include="Content\img\Silver.png" />
     <Content Include="Content\img\user.svg" />
     <Content Include="Content\js\adminlte.js" />
     <Content Include="Content\js\init.js" />
