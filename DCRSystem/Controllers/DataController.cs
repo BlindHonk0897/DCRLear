@@ -116,6 +116,11 @@ namespace DCRSystem.Controllers
                 {
                     empP.EmpBadgeNo = employee.Employee_ID;
                     empP.FullName = employee.Last_Name + " , " + employee.First_Name;
+                    empP.Position = employee.Position;
+                    empP.HrcCell = employee.HRCCell;
+                    empP.HrcSupervisor = employee.HRCSupervisor;
+                    empP.CurrentCell = employee.CurrentCell;
+                    empP.CurrentSupervisor = employee.CurrentSupervisor;
                     empP.SkillsCertified = entities.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderBy(cr => cr.CertificationCode).ToList().Count() + " out of " + Certificates;
 
                     NumberOfCertified = entities.CertificationTrackers.Where(cr => cr.EmpBadgeNo == employee.Employee_ID).OrderBy(cr => cr.CertificationCode).ToList().Count();
@@ -233,7 +238,10 @@ namespace DCRSystem.Controllers
                 {
                     model.Medal = emplo.Medal;
                 }
-                return new Rotativa.PartialViewAsPdf("_PartialViewDetails", model) { FileName = model.FullName +"'s Details.pdf" };
+                return new Rotativa.PartialViewAsPdf("_PartialViewDetails", model) {
+                    FileName = model.FullName + "'s Details.pdf"
+                 
+                };
             }
             else
             {
@@ -246,5 +254,138 @@ namespace DCRSystem.Controllers
         {
             return View();
         }
+
+        public FileResult ExportEmployeesToExcel(String Type = "", String data = "" ,String Month ="")
+        {
+            List<EmployeeDCR_Vw> employees = new List<EmployeeDCR_Vw>();
+            SearchController searchControl = new SearchController();
+
+            if (!string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(data))
+            {             
+                if (Type.ToString().ToUpper().Equals("BYMONTH"))
+                {
+                    employees = searchControl.getEmployeeByMonth(data);
+                }
+
+                if (Type.ToString().ToUpper().Equals("BYYEAR"))
+                {
+                    employees = searchControl.getEmployeeByYear(data);
+                }
+
+                if (Type.ToString().ToUpper().Equals("BYCERTIFICATES"))
+                {
+                    employees = searchControl.getEmployeeByCertificates(data);
+                }
+
+                if (Type.ToString().ToUpper().Equals("BYRCERTIFICATES"))
+                {
+                    employees = searchControl.getEmployeeByRCertificates(data);
+                }
+
+                if (Type.ToString().ToUpper().Equals("BYCELL"))
+                {
+                    employees = searchControl.getEmployeeByCell(data);
+                }
+
+                // wala pa neh
+
+                if (Type.ToString().ToUpper().Equals("BYMEDAL"))
+                {
+                    employees = searchControl.getEmployeeByMedal(data);
+                }
+
+                //if (Type.ToString().ToUpper().Equals("BYLASTNAME"))
+                //{
+                //    employees = getEmployeeByLastName(data);
+                //}
+
+                if (Type.ToString().ToUpper().Equals("BYMONTHANDYEAR") || Type.ToString().ToUpper().Equals("BYMONTHANDYEAR"))
+                {
+                    employees = searchControl.getEmployeeByMonthAndYear(data, Month);
+                }
+
+                
+            }
+            else
+            {
+                employees = entities.EmployeeDCR_Vw.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).OrderBy(a => a.Last_Name).ToList();
+                
+            }
+
+            //PutToExcel(employees);
+            //return Content("Under Constraction");
+            return PutToExcel(employees);
+        }
+
+        public FileResult PutToExcel(List<EmployeeDCR_Vw> list)
+        {
+            DataTable dt = new DataTable("Employee Details");
+            List<Certification> Certificate = entities.Certifications.ToList();
+            dt.Columns.AddRange(new DataColumn[7] { new DataColumn("Employee ID"),
+                                            new DataColumn("Employee Name"),
+                                            new DataColumn("Position"),
+                                            new DataColumn("HRC Cell"),
+                                            new DataColumn("Current Cell"),
+                                            new DataColumn("HRC Supervisor"),
+                                            new DataColumn("Current Supervisor"),
+                                           });
+            var initial = GetEmployeeDetails(list.ElementAt(0).Employee_ID).EmployeeCertificates;
+         
+                dt.Columns.AddRange(new DataColumn[31]{
+                                            new DataColumn(Certificate.ElementAt(0).Code),
+                                            new DataColumn(Certificate.ElementAt(1).Code),
+                                            new DataColumn(Certificate.ElementAt(2).Code),
+                                            new DataColumn(Certificate.ElementAt(3).Code),
+                                            new DataColumn(Certificate.ElementAt(4).Code),
+                                            new DataColumn(Certificate.ElementAt(5).Code),
+                                            new DataColumn(Certificate.ElementAt(6).Code),
+                                            new DataColumn(Certificate.ElementAt(7).Code),
+                                            new DataColumn(Certificate.ElementAt(8).Code),
+                                            new DataColumn(Certificate.ElementAt(9).Code),
+                                            new DataColumn(Certificate.ElementAt(10).Code),
+                                            new DataColumn(Certificate.ElementAt(11).Code),
+                                            new DataColumn(Certificate.ElementAt(12).Code),
+                                            new DataColumn(Certificate.ElementAt(13).Code),
+                                            new DataColumn(Certificate.ElementAt(14).Code),
+                                            new DataColumn(Certificate.ElementAt(15).Code),
+                                            new DataColumn(Certificate.ElementAt(16).Code),
+                                            new DataColumn(Certificate.ElementAt(17).Code),
+                                            new DataColumn(Certificate.ElementAt(18).Code),
+                                            new DataColumn(Certificate.ElementAt(19).Code),
+                                            new DataColumn(Certificate.ElementAt(20).Code),
+                                            new DataColumn(Certificate.ElementAt(21).Code),
+                                            new DataColumn(Certificate.ElementAt(22).Code),
+                                            new DataColumn(Certificate.ElementAt(23).Code),
+                                            new DataColumn(Certificate.ElementAt(24).Code),
+                                            new DataColumn(Certificate.ElementAt(25).Code),
+                                            new DataColumn(Certificate.ElementAt(26).Code),
+                                            new DataColumn(Certificate.ElementAt(27).Code),
+                                            new DataColumn("Total Skills"),
+                                            new DataColumn("Percentage"),
+                                            new DataColumn("Skills Points")
+                                            });
+
+            foreach(var i in list)
+            {
+                EmployeeProgressDetails emp = GetEmployeeDetails(i.Employee_ID);
+                
+                dt.Rows.Add(emp.EmpBadgeNo,emp.FullName,emp.Position,emp.HrcCell,emp.CurrentCell,emp.HrcSupervisor,emp.CurrentSupervisor
+                            );
+
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                //wb.Worksheets.Add(progress);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Employee's-Details.xlsx");
+                }
+            }
+           
+        }
+
     }
 }

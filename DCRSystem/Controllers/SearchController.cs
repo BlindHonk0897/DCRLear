@@ -158,7 +158,12 @@ namespace DCRSystem.Controllers
             model.EmployeeDCR_Vws = ldcr.EmployeeDCR_Vw.Where(emp => emp.HRCCell.Equals(Cell) && emp.Job_Status.ToUpper().Contains("CURRENT")).ToList(); 
             return model.EmployeeDCR_Vws;
         }
-
+        public List<EmployeeDCR_Vw> getEmployeeBySupervisor(String Supervisor)
+        {
+            PartialViewModel model = new PartialViewModel();
+            model.EmployeeDCR_Vws = ldcr.EmployeeDCR_Vw.Where(emp => emp.CurrentSupervisor.Equals(Supervisor) && emp.Job_Status.ToUpper().Contains("CURRENT")).ToList();
+            return model.EmployeeDCR_Vws;
+        }
         public List<EmployeeDCR_Vw> getEmployeeByRCertificates(String Certificate)
         {
             
@@ -270,7 +275,7 @@ namespace DCRSystem.Controllers
             model.allCells = ldcr.EmployeeDCR_Vw.Select(emp => emp.HRCCell).Distinct().ToList();
             model.Certifications = ldcr.Certifications.OrderBy(cert => cert.Code).ToList();
             model.allMedals = ldcr.Medals.ToList();
-           
+            
             if (Request.IsAjaxRequest())
             {
                 return PartialView(model); // Here must be return PartialView, not View.
@@ -333,6 +338,10 @@ namespace DCRSystem.Controllers
                     employees = getEmployeeByCell(data);
                 }
 
+                if (Type.ToString().ToUpper().Equals("BYSUPERVISOR"))
+                {
+                    employees = getEmployeeBySupervisor(data);
+                }
                 // wala pa neh
 
                 if (Type.ToString().ToUpper().Equals("BYMEDAL"))
@@ -350,6 +359,7 @@ namespace DCRSystem.Controllers
                     employees = getEmployeeByMonthAndYear(data,Month);
                 }
 
+                ViewBag.Employees = employees;
                 // kutob dire
                 ViewBag.EmpCount = employees.Count();
                 int pageSize = 10; // pagelist number of page
@@ -360,6 +370,7 @@ namespace DCRSystem.Controllers
             {
                 List<EmployeeDCR_Vw> employees = ldcr.EmployeeDCR_Vw.Where(emp => emp.Job_Status.ToUpper().Contains("CURRENT")).OrderBy(a => a.Last_Name).ToList();
                 ViewBag.EmpCount = employees.Count();
+                ViewBag.Employees = employees;
                 int pageSize = 10; // pagelist number of page
                 int pageNumber = (page ?? 1);
                 return View(employees.ToPagedList(pageNumber, pageSize));

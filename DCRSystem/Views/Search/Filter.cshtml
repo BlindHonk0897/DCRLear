@@ -124,6 +124,8 @@
         </div>
     </div>
 </div>
+@{ List<EmployeeDCR_Vw> employees = (List<EmployeeDCR_Vw>)ViewBag.Employees;}
+<a href="@Url.Action("ExportEmployeesToExcel","Data",new {type = ViewBag.Type ,data = ViewBag.Data ,month = ViewBag.Month})"><img src="~/Content/img/excel.png" width="25" height="25" />&nbsp;<font color="black">Export Results to Excel</font></a>
 <div class="row">
     <div class="col-md-12">
         <div class="box box-danger">

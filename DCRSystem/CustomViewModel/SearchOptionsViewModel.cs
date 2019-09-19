@@ -15,6 +15,7 @@ namespace DCRSystem.CustomViewModel
         public List<Medal> allMedals = new List<Medal>();
         public List<Filter> filters = new List<Filter>();
         public List<string> Choices = new List<string>();
+        //public List<E> MyProperty { get; set; }
         public string KeyName { get; set; }
 
     }

@@ -91,6 +91,16 @@
     }
 }
 
+@* BY MONTH AND YEAR*@
+@if (Model.KeyName.ToString().ToUpper().Equals("BYSUPERVISOR"))
+{
+    for (var i = 1990; i <= DateTime.Now.Year; i++)
+    {
+        var val = i.ToString() + "-" + Model.KeyName;
+        <option value="@val">@i</option>
+    }
+}
+
 
 
 
