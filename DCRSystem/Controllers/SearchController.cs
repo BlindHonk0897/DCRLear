@@ -289,7 +289,7 @@ namespace DCRSystem.Controllers
         public ActionResult Filter(int? page , String Type="", String data = "")
         {
 
-            SearchOptionsViewModel model = new SearchOptionsViewModel();
+            SearchOptionsViewModel model = new SearchOptionsViewModel();         
             model.filters = ldcr.Filters.ToList();
             var type = Type.Split('-');
             var Month = "";
